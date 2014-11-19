@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A52BCA7D-98E7-4870-AFB6-741E9FF74532}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimpleFixture.Tests</RootNamespace>
+    <AssemblyName>SimpleFixture.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>8e655386</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.8.0.0\lib\net45\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit">
+      <HintPath>..\packages\xunit.1.9.2\lib\net20\xunit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\ImportSomeInterface.cs" />
+    <Compile Include="Classes\ISomeInterface.cs" />
+    <Compile Include="Classes\PropertiesClass.cs" />
+    <Compile Include="Classes\SomeClass.cs" />
+    <Compile Include="FixtureTests\Complex\ComparerConventionTests.cs" />
+    <Compile Include="FixtureTests\Complex\DelegateFixtureTests.cs" />
+    <Compile Include="FixtureTests\Complex\DictionaryTests.cs" />
+    <Compile Include="FixtureTests\Complex\ListTests.cs" />
+    <Compile Include="FixtureTests\Complex\ReadOnlyCollectionTests.cs" />
+    <Compile Include="FixtureTests\Primitives\BoolFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\ByteFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\CharFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\DateTimeFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\DecimalFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\DoubleFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\EnumFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\IntFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\LongFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\SByteFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\ShortFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\UIntFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\ULongFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\UShortFixtureTests.cs" />
+    <Compile Include="FixtureTests\ReturnTests.cs" />
+    <Compile Include="MockTests\MoqTests.cs" />
+    <Compile Include="MockTests\NSubstituteTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleFixture.Moq\SimpleFixture.Moq.csproj">
+      <Project>{c97b9ad7-acf7-45f8-83b5-e14519592d68}</Project>
+      <Name>SimpleFixture.Moq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleFixture.NSubstitute\SimpleFixture.NSubstitute.csproj">
+      <Project>{8e289544-036f-415c-b963-bb5bc9f06d15}</Project>
+      <Name>SimpleFixture.NSubstitute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleFixture\SimpleFixture.csproj">
+      <Project>{acfd0b4c-9003-458b-9db3-9ba25cb448c2}</Project>
+      <Name>SimpleFixture</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

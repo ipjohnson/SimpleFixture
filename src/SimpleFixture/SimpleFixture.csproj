@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ACFD0B4C-9003-458B-9DB3-9BA25CB448C2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SimpleFixture</RootNamespace>
+    <AssemblyName>SimpleFixture</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Conventions\ArrayConvention.cs" />
+    <Compile Include="Conventions\BoolConvention.cs" />
+    <Compile Include="Conventions\ByteConvention.cs" />
+    <Compile Include="Conventions\CharConvention.cs" />
+    <Compile Include="Conventions\ComplexConvention.cs" />
+    <Compile Include="Conventions\DateTimeConvention.cs" />
+    <Compile Include="Conventions\DecimalConvention.cs" />
+    <Compile Include="Conventions\DelegateConvention.cs" />
+    <Compile Include="Conventions\DictionaryConvention.cs" />
+    <Compile Include="Conventions\DoubleConvention.cs" />
+    <Compile Include="Conventions\EnumConvention.cs" />
+    <Compile Include="Conventions\FilteredConvention.cs" />
+    <Compile Include="Conventions\IComparerConvention.cs" />
+    <Compile Include="Conventions\IEqualityComparerConvention.cs" />
+    <Compile Include="Conventions\IntConvention.cs" />
+    <Compile Include="Conventions\ListConvention.cs" />
+    <Compile Include="Conventions\LongConvention.cs" />
+    <Compile Include="Conventions\NamedStringConvention.cs" />
+    <Compile Include="Conventions\NullableConvention.cs" />
+    <Compile Include="Conventions\ReadOnlyCollectionConvention.cs" />
+    <Compile Include="Conventions\SByteConvention.cs" />
+    <Compile Include="Conventions\ShortConvention.cs" />
+    <Compile Include="Conventions\SimpleTypeConvention.cs" />
+    <Compile Include="Conventions\StringConvention.cs" />
+    <Compile Include="Conventions\UIntConvention.cs" />
+    <Compile Include="Conventions\ULongConvention.cs" />
+    <Compile Include="Conventions\UShortConvention.cs" />
+    <Compile Include="DataRequest.cs" />
+    <Compile Include="DataTemplates\PersonTemplate.cs" />
+    <Compile Include="DefaultFixtureConfiguration.cs" />
+    <Compile Include="DI\GContainer.cs" />
+    <Compile Include="DI\IGContainer.cs" />
+    <Compile Include="Fixture.cs" />
+    <Compile Include="IConvention.cs" />
+    <Compile Include="IFixtureConfiguration.cs" />
+    <Compile Include="Impl\CircularReferenceHandler.cs" />
+    <Compile Include="Impl\ConstraintHelper.cs" />
+    <Compile Include="Impl\ConstructorSelector.cs" />
+    <Compile Include="Impl\ConventionList.cs" />
+    <Compile Include="Impl\ConventionProvider.cs" />
+    <Compile Include="Impl\IConventionProvider.cs" />
+    <Compile Include="Impl\IRandomDataGeneratorService.cs" />
+    <Compile Include="Impl\TypeCreator.cs" />
+    <Compile Include="Impl\TypePopulator.cs" />
+    <Compile Include="ITypedConvention.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Impl\RandomDataGeneratorService.cs" />
+    <Compile Include="ReturnConfiguration.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
