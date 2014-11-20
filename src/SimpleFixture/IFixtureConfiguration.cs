@@ -26,9 +26,4 @@ namespace SimpleFixture
         /// </summary>
         int? ItemCount { get; }
     }
-
-    public interface IFixtureCustomization
-    {
-        void Customize(Fixture fixture);
-    }
 }

@@ -22,8 +22,8 @@ namespace SimpleFixture
         private void SetupDefaults()
         {
             ExportSingleton<IRandomDataGeneratorService>(g => new RandomDataGeneratorService());
+            ExportSingleton<IConstraintHelper>(g => new ConstraintHelper());
             Export<IConventionProvider>(g => new ConventionProvider());
-            Export<IConstraintHelper>(g => new ConstraintHelper());
             Export<IConventionList>(g => new ConventionList());
             Export<ITypePopulator>(g => new TypePopulator(g.Locate<IConstraintHelper>()));
             Export<ITypeCreator>(g => new TypeCreator(g.Locate<IConstructorSelector>(),g.Locate<IConstraintHelper>()));

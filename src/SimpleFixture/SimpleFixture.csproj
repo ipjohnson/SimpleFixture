@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Conventions\ArrayConvention.cs" />
     <Compile Include="Conventions\BoolConvention.cs" />
     <Compile Include="Conventions\ByteConvention.cs" />
@@ -54,7 +51,9 @@
     <Compile Include="Conventions\IntConvention.cs" />
     <Compile Include="Conventions\ListConvention.cs" />
     <Compile Include="Conventions\LongConvention.cs" />
-    <Compile Include="Conventions\NamedStringConvention.cs" />
+    <Compile Include="Conventions\Named\StringNamedConvention.Address.cs" />
+    <Compile Include="Conventions\Named\StringNamedConvention.cs" />
+    <Compile Include="Conventions\Named\StringNamedConvention.Person.cs" />
     <Compile Include="Conventions\NullableConvention.cs" />
     <Compile Include="Conventions\ReadOnlyCollectionConvention.cs" />
     <Compile Include="Conventions\SByteConvention.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="Fixture.cs" />
     <Compile Include="IConvention.cs" />
     <Compile Include="IFixtureConfiguration.cs" />
+    <Compile Include="IFixtureCustomization.cs" />
     <Compile Include="Impl\CircularReferenceHandler.cs" />
     <Compile Include="Impl\ConstraintHelper.cs" />
     <Compile Include="Impl\ConstructorSelector.cs" />

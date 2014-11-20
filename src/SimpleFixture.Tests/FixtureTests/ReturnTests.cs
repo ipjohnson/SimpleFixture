@@ -17,6 +17,8 @@ namespace SimpleFixture.Tests.FixtureTests
 
             fixture.Return(15);
 
+            var intValue = fixture.Generate<int>();
+
             Assert.Equal(15, fixture.Generate<int>());
         }
 

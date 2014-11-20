@@ -9,6 +9,9 @@ using SimpleFixture.Impl;
 
 namespace SimpleFixture
 {
+    /// <summary>
+    /// Testing fixture
+    /// </summary>
     public class Fixture : IEnumerable<object>
     {
         #region fields
@@ -18,6 +21,10 @@ namespace SimpleFixture
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="configuration"></param>
         public Fixture(IFixtureConfiguration configuration = null)
         {
             _configuration = configuration ?? new DefaultFixtureConfiguration();
@@ -34,6 +41,11 @@ namespace SimpleFixture
         #endregion
 
         #region Locate
+        /// <summary>
+        /// Creates a new instance of the specified type. It does not populate any properties
+        /// </summary>
+        /// <param name="type">type to create</param>
+        /// <returns>new instance</returns>
         public object Locate(Type type)
         {
             DataRequest request = new DataRequest(null, this, type, string.Empty, false, null, null);
@@ -41,6 +53,11 @@ namespace SimpleFixture
             return Generate(request);
         }
 
+        /// <summary>
+        /// Creates a new instance of T. It does not populate any properties
+        /// </summary>
+        /// <typeparam name="T">type to create</typeparam>
+        /// <returns>new instance</returns>
         public T Locate<T>()
         {
             return (T)Locate(typeof(T));
@@ -49,6 +66,11 @@ namespace SimpleFixture
 
         #region Generate
 
+        /// <summary>
+        /// Create a new instance of the requested type and populate all public writable properties
+        /// </summary>
+        /// <param name="request">data request</param>
+        /// <returns>new instance</returns>
         public object Generate(DataRequest request)
         {
             object returnValue;
@@ -83,6 +105,13 @@ namespace SimpleFixture
             throw new Exception("Could not construct type: " + request.RequestedType.FullName);
         }
 
+        /// <summary>
+        /// Generate a new instance of the specified type and populate public writable properties
+        /// </summary>
+        /// <param name="type">type to create</param>
+        /// <param name="name">name of the request</param>
+        /// <param name="constraints">constraints to apply to the request</param>
+        /// <returns>new instance</returns>
         public object Generate(Type type, string name = null, object constraints = null)
         {
             if (name == null)
@@ -95,6 +124,13 @@ namespace SimpleFixture
             return Generate(request);
         }
 
+        /// <summary>
+        /// Generate a new instance of T and populate public writable properties
+        /// </summary>
+        /// <typeparam name="T">type to create</typeparam>
+        /// <param name="name">request name</param>
+        /// <param name="constraints">constraint object</param>
+        /// <returns></returns>
         public T Generate<T>(string name = null, object constraints = null)
         {
             return (T)Generate(typeof(T), name, constraints);
@@ -104,6 +140,11 @@ namespace SimpleFixture
 
         #region Populate
 
+        /// <summary>
+        /// Populate writable properties on instance
+        /// </summary>
+        /// <param name="instance">instance to populate</param>
+        /// <param name="constraints">constraint object</param>
         public void Populate(object instance, object constraints = null)
         {
             if (instance == null)
@@ -122,6 +163,12 @@ namespace SimpleFixture
 
         #region Return
 
+        /// <summary>
+        /// Return the specified sequence
+        /// </summary>
+        /// <typeparam name="T">Type to return</typeparam>
+        /// <param name="returnValues">return values</param>
+        /// <returns>configuration object</returns>
         public ReturnConfiguration<T> Return<T>(params T[] returnValues)
         {
             if (returnValues == null || returnValues.Length == 0)
@@ -138,6 +185,12 @@ namespace SimpleFixture
             return new ReturnConfiguration<T>(convention);
         }
 
+        /// <summary>
+        /// Provide a function that will be invoked when T is need
+        /// </summary>
+        /// <typeparam name="T">type to return</typeparam>
+        /// <param name="returnFunc">return function</param>
+        /// <returns>configuration object</returns>
         public ReturnConfiguration<T> Return<T>(Func<T> returnFunc)
         {
             var convention = new FilteredConvention<T>(g => returnFunc());
@@ -145,6 +198,12 @@ namespace SimpleFixture
             return new ReturnConfiguration<T>(convention);
         }
 
+        /// <summary>
+        /// Provide a function that will be invoked when T is need
+        /// </summary>
+        /// <typeparam name="T">type to return</typeparam>
+        /// <param name="returnFunc">return function</param>
+        /// <returns>configuration object</returns>
         public ReturnConfiguration<T> Return<T>(Func<DataRequest, T> returnFunc)
         {
             var convention = new FilteredConvention<T>(returnFunc);
@@ -154,6 +213,11 @@ namespace SimpleFixture
         #endregion
 
         #region Add
+
+        /// <summary>
+        /// Add a convention to fixture
+        /// </summary>
+        /// <param name="convention">new convention</param>
         public void Add(IConvention convention)
         {
             var typedConvention = convention as ITypedConvention;
@@ -179,6 +243,10 @@ namespace SimpleFixture
             }
         }
 
+        /// <summary>
+        /// Add customization
+        /// </summary>
+        /// <param name="configuration"></param>
         public void Add(IFixtureCustomization configuration)
         {
             configuration.Customize(this);
@@ -186,11 +254,19 @@ namespace SimpleFixture
         #endregion
 
         #region Enumerator
+        /// <summary>
+        /// Get enumerator
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator<object> GetEnumerator()
         {
             return Enumerable.Empty<object>().GetEnumerator();
         }
 
+        /// <summary>
+        /// Get enumerator
+        /// </summary>
+        /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

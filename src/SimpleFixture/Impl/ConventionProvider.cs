@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleFixture.Conventions;
+using SimpleFixture.Conventions.Named;
 
 namespace SimpleFixture.Impl
 {
@@ -62,7 +63,10 @@ namespace SimpleFixture.Impl
 
         private IEnumerable<IConvention> ProvideNamedConventions(IFixtureConfiguration configuration)
         {
-            yield break;
+            IRandomDataGeneratorService dataGenerator = configuration.Locate<IRandomDataGeneratorService>();
+            IConstraintHelper helper = configuration.Locate<IConstraintHelper>();
+
+            yield return new StringNamedConvention(dataGenerator, helper);
         }
     }
 }
