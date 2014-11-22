@@ -34,6 +34,13 @@ namespace SimpleFixture
             return this;
         }
 
+        public ReturnConfiguration<T> WhenNamed(string name)
+        {
+            _convention.AddFilter(r => r.RequestName.ToLowerInvariant() == name.ToLowerInvariant());
+
+            return this;
+        }
+
         public ReturnConfiguration<T> WhenNamed(Func<string, bool> namedFunc)
         {
             _convention.AddFilter(r => namedFunc(r.RequestName));

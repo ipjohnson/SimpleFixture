@@ -26,7 +26,8 @@ namespace SimpleFixture
             ExportSingleton<IModelService>(g => new ModelService());
             Export<IConventionProvider>(g => new ConventionProvider());
             Export<IConventionList>(g => new ConventionList());
-            Export<ITypePopulator>(g => new TypePopulator(g.Locate<IConstraintHelper>()));
+            Export<ITypePropertySelector>(g => new TypePropertySelector(g.Locate<IConstraintHelper>()));
+            Export<ITypePopulator>(g => new TypePopulator(g.Locate<IConstraintHelper>(),g.Locate<ITypePropertySelector>()));
             Export<ITypeCreator>(g => new TypeCreator(g.Locate<IConstructorSelector>(),g.Locate<IConstraintHelper>()));
             Export<IConstructorSelector>(g => new ConstructorSelector());
             Export<ICircularReferenceHandler>(g => new CircularReferenceHandler());

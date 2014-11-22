@@ -14,39 +14,23 @@ namespace SimpleFixture.Impl
 
     public class TypePopulator : ITypePopulator
     {
+        private readonly ITypePropertySelector _propertySelector;
         private readonly IConstraintHelper _helper;
 
-        public TypePopulator(IConstraintHelper helper)
+        public TypePopulator(IConstraintHelper helper, ITypePropertySelector propertySelector)
         {
             _helper = helper;
+            _propertySelector = propertySelector;
         }
 
-        public void Populate(object instance, DataRequest request, ComplexModel model)
+        public virtual void Populate(object instance, DataRequest request, ComplexModel model)
         {
             if (instance == null)
             {
                 return;
             }
 
-            var skipProperties = new List<string>();
-
-            var skipPropertiesEnumerable = _helper.GetValue<IEnumerable<string>>(request.Constraints,
-                                                                        null,
-                                                                        "_skipProps",
-                                                                        "_skipProperties");
-
-            if (skipPropertiesEnumerable != null)
-            {
-                skipProperties.AddRange(skipPropertiesEnumerable);
-            }
-
-            foreach (PropertyInfo propertyInfo in instance.GetType()
-                                                    .GetRuntimeProperties()
-                                                    .Where(p => p.CanWrite &&
-                                                                p.SetMethod.IsPublic &&
-                                                               !p.SetMethod.IsStatic &&
-                                                                p.SetMethod.GetParameters().Count() == 1 &&
-                                                               !skipProperties.Contains(p.Name)))
+            foreach (PropertyInfo propertyInfo in _propertySelector.SelectProperties(instance, request, model))
             {
                 object propertyValue = _helper.GetValue<object>(request.Constraints, null, propertyInfo.Name);
 
@@ -78,14 +62,14 @@ namespace SimpleFixture.Impl
             }
         }
 
-        private DataRequest CreateDataRequestForProperty(PropertyInfo propertyInfo, DataRequest request)
+        protected virtual DataRequest CreateDataRequestForProperty(PropertyInfo propertyInfo, DataRequest request)
         {
-            return new DataRequest(request, 
-                                    request.Fixture, 
-                                    propertyInfo.PropertyType, 
-                                    propertyInfo.Name, 
-                                    true, 
-                                    request.Constraints, 
+            return new DataRequest(request,
+                                    request.Fixture,
+                                    propertyInfo.PropertyType,
+                                    propertyInfo.Name,
+                                    true,
+                                    request.Constraints,
                                     propertyInfo);
         }
     }
