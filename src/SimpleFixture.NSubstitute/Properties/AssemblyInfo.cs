@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SimpleFixture.NSubstitute")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("NSubstitute convention for SimpleFixture")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ian Johnson")]
 [assembly: AssemblyProduct("SimpleFixture.NSubstitute")]

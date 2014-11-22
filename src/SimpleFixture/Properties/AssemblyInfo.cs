@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SimpleFixture")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Test Fixture Framework for unit and integration testing.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ian Johnson")]
 [assembly: AssemblyProduct("SimpleFixture")]
