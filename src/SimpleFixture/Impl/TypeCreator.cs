@@ -9,13 +9,13 @@ namespace SimpleFixture.Impl
 {
     public interface ITypeCreator
     {
-        object CreateType(DataRequest request);
+        object CreateType(DataRequest request, ComplexModel model);
     }
 
     public class TypeCreator : ITypeCreator
     {
         private readonly IConstraintHelper _constraintHelper;
-        private IConstructorSelector _selector;
+        private readonly IConstructorSelector _selector;
 
         public TypeCreator(IConstructorSelector selector, IConstraintHelper constraintHelper)
         {
@@ -23,8 +23,13 @@ namespace SimpleFixture.Impl
             _constraintHelper = constraintHelper;
         }
 
-        public object CreateType(DataRequest request)
+        public object CreateType(DataRequest request, ComplexModel model)
         {
+            if (model.New != null)
+            {
+                return model.New(request);
+            }
+
             ConstructorInfo constructorInfo = _selector.SelectConstructor(request.RequestedType);
 
             if (constructorInfo == null)
@@ -46,8 +51,13 @@ namespace SimpleFixture.Impl
 
             foreach (ParameterInfo parameterInfo in method.GetParameters())
             {
-                object parameterValue = _constraintHelper.GetValue<object>(request.Constraints, null, parameterInfo.Name) ??
-                                        GetValueForParameter(parameterInfo, request);
+                object parameterValue = _constraintHelper.GetValue<object>(request.Constraints, null, parameterInfo.Name);
+
+                var newRequest = CreateDataRequestForParameter(parameterInfo, request);
+
+                parameterValue = parameterValue != null ? 
+                                 newRequest.Fixture.Behavior.Apply(newRequest, parameterValue) : 
+                                 newRequest.Fixture.Generate(newRequest);
 
                 if (parameterValue == null)
                 {
@@ -60,11 +70,16 @@ namespace SimpleFixture.Impl
             return method.Invoke(parameters.ToArray());
         }
 
-        private object GetValueForParameter(ParameterInfo parameterInfo, DataRequest request)
+        private DataRequest CreateDataRequestForParameter(ParameterInfo parameterInfo, DataRequest request)
         {
-            var newRequest = new DataRequest(request, request.Fixture, parameterInfo.ParameterType, parameterInfo.Name, request.Populate, request.Constraints, parameterInfo);
+            return new DataRequest(request,
+                                   request.Fixture,
+                                   parameterInfo.ParameterType,
+                                   parameterInfo.Name,
+                                   request.Populate,
+                                   request.Constraints,
+                                   parameterInfo);
 
-            return newRequest.Fixture.Generate(newRequest);
         }
     }
 }

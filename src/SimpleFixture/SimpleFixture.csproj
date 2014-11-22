@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SimpleFixture.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,8 +33,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SimpleFixture.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BehaviorCollection.cs" />
     <Compile Include="Conventions\ArrayConvention.cs" />
     <Compile Include="Conventions\BoolConvention.cs" />
     <Compile Include="Conventions\ByteConvention.cs" />
@@ -70,15 +73,19 @@
     <Compile Include="DI\IGContainer.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="IConvention.cs" />
+    <Compile Include="ICustomizeModel.cs" />
     <Compile Include="IFixtureConfiguration.cs" />
     <Compile Include="IFixtureCustomization.cs" />
     <Compile Include="Impl\CircularReferenceHandler.cs" />
+    <Compile Include="Impl\ComplexModel.cs" />
     <Compile Include="Impl\ConstraintHelper.cs" />
     <Compile Include="Impl\ConstructorSelector.cs" />
     <Compile Include="Impl\ConventionList.cs" />
     <Compile Include="Impl\ConventionProvider.cs" />
+    <Compile Include="Impl\CustomizeModel.cs" />
     <Compile Include="Impl\IConventionProvider.cs" />
     <Compile Include="Impl\IRandomDataGeneratorService.cs" />
+    <Compile Include="Impl\ModelService.cs" />
     <Compile Include="Impl\TypeCreator.cs" />
     <Compile Include="Impl\TypePopulator.cs" />
     <Compile Include="ITypedConvention.cs" />

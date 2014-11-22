@@ -23,6 +23,7 @@ namespace SimpleFixture
         {
             ExportSingleton<IRandomDataGeneratorService>(g => new RandomDataGeneratorService());
             ExportSingleton<IConstraintHelper>(g => new ConstraintHelper());
+            ExportSingleton<IModelService>(g => new ModelService());
             Export<IConventionProvider>(g => new ConventionProvider());
             Export<IConventionList>(g => new ConventionList());
             Export<ITypePopulator>(g => new TypePopulator(g.Locate<IConstraintHelper>()));

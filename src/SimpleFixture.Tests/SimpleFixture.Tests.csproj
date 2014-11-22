@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SimpleFixture.Tests.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
@@ -49,15 +50,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ImportSomeClass.cs" />
     <Compile Include="Classes\ImportSomeInterface.cs" />
     <Compile Include="Classes\ISomeInterface.cs" />
     <Compile Include="Classes\PropertiesClass.cs" />
     <Compile Include="Classes\SomeClass.cs" />
+    <Compile Include="FixtureTests\BehaviorTests.cs" />
     <Compile Include="FixtureTests\Complex\ComparerConventionTests.cs" />
     <Compile Include="FixtureTests\Complex\DelegateFixtureTests.cs" />
     <Compile Include="FixtureTests\Complex\DictionaryTests.cs" />
     <Compile Include="FixtureTests\Complex\ListTests.cs" />
     <Compile Include="FixtureTests\Complex\ReadOnlyCollectionTests.cs" />
+    <Compile Include="FixtureTests\CustomizeTests.cs" />
     <Compile Include="FixtureTests\Primitives\BoolFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\ByteFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\CharFixtureTests.cs" />

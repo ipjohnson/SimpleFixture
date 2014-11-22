@@ -13,13 +13,14 @@ namespace SimpleFixture.Conventions
         private readonly ITypeCreator _typeCreator;
         private readonly ITypePopulator _typePopulator;
         private readonly ICircularReferenceHandler _circularReferenceHandler;
+        private readonly IModelService _modelService;
 
         public ComplexConvention(IFixtureConfiguration configuration)
         {
-
             _typeCreator = configuration.Locate<ITypeCreator>();
             _typePopulator = configuration.Locate<ITypePopulator>();
             _circularReferenceHandler = configuration.Locate<ICircularReferenceHandler>();
+            _modelService = configuration.Locate<IModelService>();
         }
 
         public ConventionPriority Priority { get { return ConventionPriority.Last; } }
@@ -36,11 +37,13 @@ namespace SimpleFixture.Conventions
                 return Convention.NoValue;
             }
 
-            object returnValue = _typeCreator.CreateType(request);
+            var model = _modelService.GetModel(request.RequestedType);
+
+            object returnValue = _typeCreator.CreateType(request, model);
 
             if (request.Populate)
             {
-                _typePopulator.Populate(returnValue, request);
+                _typePopulator.Populate(returnValue, request, model);
             }
 
             return returnValue;

@@ -9,7 +9,7 @@ namespace SimpleFixture.Impl
 {
     public interface ITypePopulator
     {
-        void Populate(object instance, DataRequest request);
+        void Populate(object instance, DataRequest request, ComplexModel model);
     }
 
     public class TypePopulator : ITypePopulator
@@ -21,7 +21,7 @@ namespace SimpleFixture.Impl
             _helper = helper;
         }
 
-        public void Populate(object instance, DataRequest request)
+        public void Populate(object instance, DataRequest request, ComplexModel model)
         {
             if (instance == null)
             {
@@ -48,8 +48,26 @@ namespace SimpleFixture.Impl
                                                                 p.SetMethod.GetParameters().Count() == 1 &&
                                                                !skipProperties.Contains(p.Name)))
             {
-                object propertyValue = _helper.GetValue<object>(request.Constraints, null, propertyInfo.Name) ??
-                                       GetPropertyValue(propertyInfo, request);
+                object propertyValue = _helper.GetValue<object>(request.Constraints, null, propertyInfo.Name);
+
+                var newRequest = CreateDataRequestForProperty(propertyInfo, request);
+
+                if (model.SkipProperty(newRequest, propertyInfo))
+                {
+                    continue;
+                }
+
+                if (propertyValue != null)
+                {
+                    propertyValue = newRequest.Fixture.Behavior.Apply(newRequest, propertyValue);
+                }
+                else
+                {
+                    if (!model.GetPropertyValue(newRequest, propertyInfo, out propertyValue))
+                    {
+                        propertyValue = newRequest.Fixture.Generate(newRequest);
+                    }
+                }
 
                 if (propertyValue == null)
                 {
@@ -60,17 +78,15 @@ namespace SimpleFixture.Impl
             }
         }
 
-        private object GetPropertyValue(PropertyInfo propertyInfo, DataRequest request)
+        private DataRequest CreateDataRequestForProperty(PropertyInfo propertyInfo, DataRequest request)
         {
-            DataRequest newRequest = new DataRequest(request, 
-                                                     request.Fixture, 
-                                                     propertyInfo.PropertyType, 
-                                                     propertyInfo.Name, 
-                                                     true, 
-                                                     request.Constraints, 
-                                                     propertyInfo);
-
-            return newRequest.Fixture.Generate(newRequest);
+            return new DataRequest(request, 
+                                    request.Fixture, 
+                                    propertyInfo.PropertyType, 
+                                    propertyInfo.Name, 
+                                    true, 
+                                    request.Constraints, 
+                                    propertyInfo);
         }
     }
 }

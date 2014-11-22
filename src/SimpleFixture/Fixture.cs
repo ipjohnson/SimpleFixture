@@ -15,6 +15,7 @@ namespace SimpleFixture
     public class Fixture : IEnumerable<object>
     {
         #region fields
+        private BehaviorCollection _behavior; 
         private Dictionary<Type, IConventionList> _typedConventions;
         private IConventionList _conventions;
         private readonly IFixtureConfiguration _configuration;
@@ -34,10 +35,26 @@ namespace SimpleFixture
         #endregion
 
         #region Configuration
+
+        /// <summary>
+        /// Configuration for the fixture
+        /// </summary>
         public IFixtureConfiguration Configuration
         {
             get { return _configuration; }
         }
+        #endregion
+
+        #region Behaviors
+
+        /// <summary>
+        /// Allows you to apply a behavior to every object created by the fixture
+        /// </summary>
+        public BehaviorCollection Behavior
+        {
+            get { return _behavior; }
+        }
+
         #endregion
 
         #region Locate
@@ -73,36 +90,37 @@ namespace SimpleFixture
         /// <returns>new instance</returns>
         public object Generate(DataRequest request)
         {
-            object returnValue;
+            object returnValue = null;
             IConventionList conventionList;
 
             if (_typedConventions.TryGetValue(request.RequestedType, out conventionList))
             {
-                if (conventionList.TryGetValue(request, out returnValue))
-                {
-                    return returnValue;
-                }
+                conventionList.TryGetValue(request, out returnValue);
             }
 
-            if (request.RequestedType.IsConstructedGenericType)
+            if (returnValue == null && request.RequestedType.IsConstructedGenericType)
             {
                 Type openType = request.RequestedType.GetGenericTypeDefinition();
 
                 if (_typedConventions.TryGetValue(openType, out conventionList))
                 {
-                    if (conventionList.TryGetValue(request, out returnValue))
-                    {
-                        return returnValue;
-                    }
+                    conventionList.TryGetValue(request, out returnValue);
                 }
             }
 
-            if (_conventions.TryGetValue(request, out returnValue))
+            if (returnValue == null)
             {
-                return returnValue;
+                _conventions.TryGetValue(request, out returnValue);
             }
 
-            throw new Exception("Could not construct type: " + request.RequestedType.FullName);
+            if (returnValue == null)
+            {
+                throw new Exception("Could not construct type: " + request.RequestedType.FullName);
+            }
+
+            returnValue = _behavior.Apply(request, returnValue);
+
+            return returnValue;
         }
 
         /// <summary>
@@ -151,12 +169,13 @@ namespace SimpleFixture
             {
                 throw new ArgumentNullException("instance");
             }
+            var modelService = Configuration.Locate<IModelService>();
 
             var typePopulator = Configuration.Locate<ITypePopulator>();
 
             DataRequest request = new DataRequest(null, this, instance.GetType(), string.Empty, true, constraints, null);
 
-            typePopulator.Populate(instance, request);
+            typePopulator.Populate(instance, request, modelService.GetModel(instance.GetType()));
         }
 
         #endregion
@@ -253,6 +272,19 @@ namespace SimpleFixture
         }
         #endregion
 
+        #region Customize
+
+        public ICustomizeModel<T> Customize<T>()
+        {
+            var service = Configuration.Locate<IModelService>();
+
+            var model = service.GetModel(typeof(T));
+
+            return new CustomizeModel<T>(model);
+        }
+
+        #endregion
+
         #region Enumerator
         /// <summary>
         /// Get enumerator
@@ -280,6 +312,8 @@ namespace SimpleFixture
             _conventions = _configuration.Locate<IConventionList>();
 
             _typedConventions = new Dictionary<Type, IConventionList>();
+
+            _behavior = new BehaviorCollection();
 
             IConventionProvider conventionProvider = _configuration.Locate<IConventionProvider>();
 
