@@ -321,6 +321,8 @@ namespace SimpleFixture
             {
                 Add(providedConvention);
             }
+
+            Return(this);
         }
 
         #endregion

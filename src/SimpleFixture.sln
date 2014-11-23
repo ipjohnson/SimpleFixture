@@ -16,8 +16,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.NSubstitute",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.Moq", "SimpleFixture.Moq\SimpleFixture.Moq.csproj", "{C97B9AD7-ACF7-45F8-83B5-E14519592D68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.Selenium", "SimpleFixture.Selenium\SimpleFixture.Selenium.csproj", "{427790ED-CEF9-431F-8DAC-193A253A219D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,10 +38,6 @@ Global
 		{C97B9AD7-ACF7-45F8-83B5-E14519592D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C97B9AD7-ACF7-45F8-83B5-E14519592D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C97B9AD7-ACF7-45F8-83B5-E14519592D68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{427790ED-CEF9-431F-8DAC-193A253A219D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{427790ED-CEF9-431F-8DAC-193A253A219D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{427790ED-CEF9-431F-8DAC-193A253A219D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{427790ED-CEF9-431F-8DAC-193A253A219D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
