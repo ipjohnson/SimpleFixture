@@ -274,6 +274,11 @@ namespace SimpleFixture
 
         #region Customize
 
+        /// <summary>
+        /// Customize the creation of a particular type
+        /// </summary>
+        /// <typeparam name="T">type ot customize</typeparam>
+        /// <returns>customize object</returns>
         public ICustomizeModel<T> Customize<T>()
         {
             var service = Configuration.Locate<IModelService>();

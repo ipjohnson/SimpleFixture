@@ -36,11 +36,6 @@ namespace SimpleFixture.Impl
 
                 var newRequest = CreateDataRequestForProperty(propertyInfo, request);
 
-                if (model.SkipProperty(newRequest, propertyInfo))
-                {
-                    continue;
-                }
-
                 if (propertyValue != null)
                 {
                     propertyValue = newRequest.Fixture.Behavior.Apply(newRequest, propertyValue);
@@ -49,7 +44,16 @@ namespace SimpleFixture.Impl
                 {
                     if (!model.GetPropertyValue(newRequest, propertyInfo, out propertyValue))
                     {
+                        if (model.SkipProperty(newRequest, propertyInfo))
+                        {
+                            continue;
+                        }
+
                         propertyValue = newRequest.Fixture.Generate(newRequest);
+                    }
+                    else
+                    {
+                        propertyValue = newRequest.Fixture.Behavior.Apply(newRequest, propertyValue);
                     }
                 }
 

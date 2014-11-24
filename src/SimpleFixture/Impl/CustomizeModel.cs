@@ -8,15 +8,38 @@ using System.Threading.Tasks;
 
 namespace SimpleFixture.Impl
 {
+    /// <summary>
+    /// Object used to customize a model
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class CustomizeModel<T> : ICustomizeModel<T>
     {
         private readonly ComplexModel _complexModel;
 
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="complexModel"></param>
         public CustomizeModel(ComplexModel complexModel)
         {
             _complexModel = complexModel;
         }
 
+        /// <summary>
+        /// Provide function to create new instance of type
+        /// </summary>
+        /// <param name="newFunc">creation functions</param>
+        /// <returns>configuration object</returns>
+        public ICustomizeModel<T> New(Func<T> newFunc)
+        {
+            return New(r => newFunc());
+        }
+
+        /// <summary>
+        /// Provide customization on creating a new instance of T
+        /// </summary>
+        /// <param name="newFunc">create func</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> New(Func<DataRequest, T> newFunc)
         {
             _complexModel.New = r => newFunc(r);
@@ -24,6 +47,12 @@ namespace SimpleFixture.Impl
             return this;
         }
 
+        /// <summary>
+        /// Provide customize creation logic for T
+        /// </summary>
+        /// <typeparam name="TIn">type of in value</typeparam>
+        /// <param name="factory">factory</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> NewFactory<TIn>(Func<TIn, T> factory)
         {
             return New(r =>
@@ -34,6 +63,13 @@ namespace SimpleFixture.Impl
                        });
         }
 
+        /// <summary>
+        /// Provide customize creation logic for T
+        /// </summary>
+        /// <typeparam name="TIn1">Value type 1</typeparam>
+        /// <typeparam name="TIn2">Value type 2</typeparam>
+        /// <param name="factory">creatation logic</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> NewFactory<TIn1, TIn2>(Func<TIn1, TIn2, T> factory)
         {
             return New(r =>
@@ -46,6 +82,14 @@ namespace SimpleFixture.Impl
             });
         }
 
+        /// <summary>
+        /// Provide customize creation logic for T
+        /// </summary>
+        /// <typeparam name="TIn1">Value Type 1</typeparam>
+        /// <typeparam name="TIn2">Value Type 2</typeparam>
+        /// <typeparam name="TIn3">Value Type 3</typeparam>
+        /// <param name="factory">creation logic</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> NewFactory<TIn1, TIn2, TIn3>(Func<TIn1, TIn2, TIn3, T> factory)
         {
             return New(r =>
@@ -60,6 +104,15 @@ namespace SimpleFixture.Impl
             });
         }
 
+        /// <summary>
+        /// Provide customize creation logic for T
+        /// </summary>
+        /// <typeparam name="TIn1">Value Type 1</typeparam>
+        /// <typeparam name="TIn2">Value Type 1</typeparam>
+        /// <typeparam name="TIn3">Value Type 1</typeparam>
+        /// <typeparam name="TIn4">Value Type 1</typeparam>
+        /// <param name="factory">creation logic</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> NewFactory<TIn1, TIn2, TIn3, TIn4>(Func<TIn1, TIn2, TIn3, TIn4, T> factory)
         {
             return New(r =>
@@ -76,21 +129,37 @@ namespace SimpleFixture.Impl
             });
         }
 
-        public ICustomizeModel<T> New(Func<T> newFunc)
-        {
-            return New(r => newFunc());
-        }
-
+        /// <summary>
+        /// Set a property to a specific value on creation
+        /// </summary>
+        /// <typeparam name="TProp">property type</typeparam>
+        /// <param name="propertyFunc"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, TProp value)
         {
             return Set(propertyFunc, r => value);
         }
 
+        /// <summary>
+        /// Set a property to a specific value on creation
+        /// </summary>
+        /// <typeparam name="TProp">proeprty type to set</typeparam>
+        /// <param name="propertyFunc">property to set</param>
+        /// <param name="valueFunc">value function</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, Func<TProp> valueFunc)
         {
             return Set(propertyFunc, r => valueFunc());
         }
 
+        /// <summary>
+        /// Set a property to a specific value on creation
+        /// </summary>
+        /// <typeparam name="TProp">property type to set</typeparam>
+        /// <param name="propertyFunc">property to set</param>
+        /// <param name="valueFunc">value func</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, Func<DataRequest, TProp> valueFunc)
         {
             MemberExpression member = propertyFunc.Body as MemberExpression;
@@ -105,16 +174,34 @@ namespace SimpleFixture.Impl
             return this;
         }
 
+        /// <summary>
+        /// Set a value to a specific set of properties
+        /// </summary>
+        /// <param name="matchingFunc">matching function</param>
+        /// <param name="value">value to set</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> SetProperties(Func<PropertyInfo, bool> matchingFunc, object value)
         {
             return SetProperties(matchingFunc, (r, p) => value);
         }
 
+        /// <summary>
+        /// Set a value to a specific set of properties
+        /// </summary>
+        /// <param name="matchingFunc">matching function</param>
+        /// <param name="value">value to set</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> SetProperties(Func<PropertyInfo, bool> matchingFunc, Func<object> value)
         {
             return SetProperties(matchingFunc, (r, p) => value());
         }
 
+        /// <summary>
+        /// Set a value to a specific set of properties
+        /// </summary>
+        /// <param name="matchingFunc">matching function</param>
+        /// <param name="value">value set function</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> SetProperties(Func<PropertyInfo, bool> matchingFunc, Func<DataRequest, PropertyInfo, object> value)
         {
             _complexModel.AddPropertiesValue(matchingFunc,value);
@@ -122,6 +209,12 @@ namespace SimpleFixture.Impl
             return this;
         }
 
+        /// <summary>
+        /// Skip a specific property
+        /// </summary>
+        /// <typeparam name="TProp">property type that is being skipped</typeparam>
+        /// <param name="propertyFunc">property to skip</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> Skip<TProp>(Expression<Func<T, TProp>> propertyFunc)
         {
             MemberExpression member = propertyFunc.Body as MemberExpression;
@@ -136,11 +229,26 @@ namespace SimpleFixture.Impl
             return this;
         }
 
-        public ICustomizeModel<T> SkipProperties(Func<PropertyInfo, bool> matchingFunc)
+        /// <summary>
+        /// Specify a set of properties to skip
+        /// </summary>
+        /// <param name="matchingFunc">property matching function</param>
+        /// <returns>configuration object</returns>
+        public ICustomizeModel<T> SkipProperties(Func<PropertyInfo, bool> matchingFunc = null)
         {
-            return SkipProperties((r, p) => matchingFunc(p));
+            if (matchingFunc != null)
+            {
+                return SkipProperties((r, p) => matchingFunc(p));
+            }
+             
+            return SkipProperties((r, p) => true);
         }
 
+        /// <summary>
+        /// Specify properties to skip
+        /// </summary>
+        /// <param name="matchingFunc">property matching function</param>
+        /// <returns>configuration object</returns>
         public ICustomizeModel<T> SkipProperties(Func<DataRequest, PropertyInfo, bool> matchingFunc)
         {
             _complexModel.AddSkipMatchingProperty(matchingFunc);
@@ -148,6 +256,11 @@ namespace SimpleFixture.Impl
             return this;
         }
 
+        /// <summary>
+        /// Apply an action when creating instance
+        /// </summary>
+        /// <param name="applyAction"></param>
+        /// <returns></returns>
         public ICustomizeModel<T> Apply(Action<T> applyAction)
         {
             _complexModel.AddApply(o => applyAction((T)o));

@@ -22,11 +22,20 @@ namespace SimpleFixture
             _behaviors = new List<Func<DataRequest, object, object>>();
         }
 
+        /// <summary>
+        /// Add behavior that will be run against every object returned by the fixture.
+        /// </summary>
+        /// <param name="behavior"></param>
         public void Add(Func<DataRequest, object, object> behavior)
         {
             _behaviors.Add(behavior);
         }
 
+        /// <summary>
+        /// Add Behavior to be run on specified type
+        /// </summary>
+        /// <typeparam name="T">type of object to apply the behavior to</typeparam>
+        /// <param name="behavior"></param>
         public void Add<T>(Func<DataRequest, T, T> behavior)
         {
             Func<DataRequest, object, object> objectFunc =
