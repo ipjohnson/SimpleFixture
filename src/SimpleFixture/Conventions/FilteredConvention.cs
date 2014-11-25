@@ -10,15 +10,17 @@ namespace SimpleFixture.Conventions
     {
         private readonly List<Func<DataRequest, bool>> _filters = new List<Func<DataRequest, bool>>();
         private readonly Func<DataRequest, T> _valueFunc;
+        private readonly ConventionPriority _priority;
 
-        public FilteredConvention(Func<DataRequest, T>  valueFunc)
+        public FilteredConvention(Func<DataRequest, T>  valueFunc, ConventionPriority priority = ConventionPriority.High)
         {
             _valueFunc = valueFunc;
+            _priority = priority;
         }
 
         public override ConventionPriority Priority
         {
-            get { return ConventionPriority.Normal; }
+            get { return _priority; }
         }
 
         public void AddFilter(Func<DataRequest, bool> matchingFilter)

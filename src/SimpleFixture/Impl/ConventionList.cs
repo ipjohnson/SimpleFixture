@@ -21,11 +21,13 @@ namespace SimpleFixture.Impl
         {
             for (int i = 0; i < _conventions.Count; i++)
             {
-                if (_conventions[i].Priority >= convention.Priority)
+                if (convention.Priority > _conventions[i].Priority)
                 {
-                    _conventions.Insert(i,convention);
-                    return;
+                    continue;
                 }
+
+                _conventions.Insert(i,convention);
+                return;
             }
 
             _conventions.Add(convention);

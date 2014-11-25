@@ -177,6 +177,14 @@ namespace SimpleFixture.Conventions.Named
 
         #endregion
 
+        #region Username
+
+        #endregion
+
+        #region Password
+
+        #endregion
+
         #region Government Id
 
         protected virtual string GovernementIdConvention(DataRequest request)

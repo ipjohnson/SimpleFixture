@@ -15,8 +15,9 @@ namespace SimpleFixture
     public class Fixture : IEnumerable<object>
     {
         #region fields
-        private BehaviorCollection _behavior; 
-        private Dictionary<Type, IConventionList> _typedConventions;
+        private BehaviorCollection _behavior;
+        private TypedConventions _typedConventions;
+        private TypedConventions _returnConventions;
         private IConventionList _conventions;
         private readonly IFixtureConfiguration _configuration;
         #endregion
@@ -91,28 +92,9 @@ namespace SimpleFixture
         public object Generate(DataRequest request)
         {
             object returnValue = null;
-            IConventionList conventionList;
-
-            if (_typedConventions.TryGetValue(request.RequestedType, out conventionList))
-            {
-                conventionList.TryGetValue(request, out returnValue);
-            }
-
-            if (returnValue == null && request.RequestedType.IsConstructedGenericType)
-            {
-                Type openType = request.RequestedType.GetGenericTypeDefinition();
-
-                if (_typedConventions.TryGetValue(openType, out conventionList))
-                {
-                    conventionList.TryGetValue(request, out returnValue);
-                }
-            }
-
-            if (returnValue == null)
-            {
-                _conventions.TryGetValue(request, out returnValue);
-            }
-
+            
+            _conventions.TryGetValue(request, out returnValue);
+            
             if (returnValue == null)
             {
                 throw new Exception("Could not construct type: " + request.RequestedType.FullName);
@@ -199,7 +181,7 @@ namespace SimpleFixture
 
             var convention = new FilteredConvention<T>(g => returnValues[i++ % returnValues.Length]);
 
-            Add(convention);
+            _returnConventions.AddConvention(convention);
 
             return new ReturnConfiguration<T>(convention);
         }
@@ -214,6 +196,8 @@ namespace SimpleFixture
         {
             var convention = new FilteredConvention<T>(g => returnFunc());
 
+            _returnConventions.AddConvention(convention);
+
             return new ReturnConfiguration<T>(convention);
         }
 
@@ -226,6 +210,8 @@ namespace SimpleFixture
         public ReturnConfiguration<T> Return<T>(Func<DataRequest, T> returnFunc)
         {
             var convention = new FilteredConvention<T>(returnFunc);
+
+            _returnConventions.AddConvention(convention);
 
             return new ReturnConfiguration<T>(convention);
         }
@@ -243,18 +229,7 @@ namespace SimpleFixture
 
             if (typedConvention != null)
             {
-                IConventionList conventionList;
-
-                foreach (Type supportedType in typedConvention.SupportedTypes)
-                {
-                    if (!_typedConventions.TryGetValue(supportedType, out conventionList))
-                    {
-                        conventionList = _configuration.Locate<IConventionList>();
-                        _typedConventions[supportedType] = conventionList;
-                    }
-
-                    conventionList.AddConvention(convention);
-                }
+                _typedConventions.AddConvention(typedConvention);
             }
             else
             {
@@ -315,12 +290,18 @@ namespace SimpleFixture
         private void Initalize()
         {
             _conventions = _configuration.Locate<IConventionList>();
-
-            _typedConventions = new Dictionary<Type, IConventionList>();
-
+            
             _behavior = new BehaviorCollection();
 
             IConventionProvider conventionProvider = _configuration.Locate<IConventionProvider>();
+
+            _returnConventions = new TypedConventions(Configuration,ConventionPriority.First);
+
+            Add(_returnConventions);
+
+            _typedConventions = new TypedConventions(Configuration);
+
+            Add(_typedConventions);
 
             foreach (IConvention providedConvention in conventionProvider.ProvideConventions(Configuration))
             {
