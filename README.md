@@ -109,3 +109,13 @@ var email = fixture.Generate<string>("EmailAddress", constraints: new { domain =
 var addressLine1 = fixture.Generate<string>("AddressLine1");
 ```
 
+###Mocking
+
+Currently Moq and NSubstitute are supported allowing you to automatically mock any missing interfaces
+```C#
+// MoqFixture is in SimpleFixture.Moq
+var fixture = new MoqFixture();
+
+// SubFixture is in SimpleFixture.NSubstitute
+var fixture = new SubFixture();
+```
