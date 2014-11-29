@@ -22,10 +22,6 @@ namespace SimpleFixture.Impl
 
         char NextChar(char min = char.MinValue, char max = char.MaxValue);
 
-        /// <summary>
-        /// Next alpha character
-        /// </summary>
-        /// <returns></returns>
         char NextCharacter();
 
         byte NextByte(byte min = byte.MinValue, byte max = byte.MaxValue);
@@ -53,5 +49,9 @@ namespace SimpleFixture.Impl
         T NextEnum<T>();
 
         T NextInSet<T>(IEnumerable<T> set);
+
+        T NextT<T>(params T[] set);
+
+        IEnumerable<T> Randomize<T>(IEnumerable<T> set);
     }
 }

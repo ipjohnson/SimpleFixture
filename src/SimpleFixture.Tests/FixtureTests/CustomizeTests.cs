@@ -38,6 +38,50 @@ namespace SimpleFixture.Tests.FixtureTests
         }
 
         [Fact]
+        public void Fixture_CustomizeSkipProperty_ReturnsValueWithSkippedProperty()
+        {
+            var fixture = new Fixture();
+
+            fixture.Customize<PropertiesClass>().Skip(x => x.StringValue2);
+
+            var instance = fixture.Generate<PropertiesClass>();
+
+            Assert.NotNull(instance);
+            Assert.NotNull(instance.StringValue1);
+            Assert.Null(instance.StringValue2);
+        }
+
+        [Fact]
+        public void Fixture_CustomizeSkipProperties_ReturnsValueWithSkippedProperties()
+        {
+            var fixture = new Fixture();
+
+            fixture.Customize<PropertiesClass>().SkipProperties(p => p.PropertyType == typeof(string));
+
+            var instance = fixture.Generate<PropertiesClass>();
+
+            Assert.NotNull(instance);
+            Assert.Null(instance.StringValue1);
+            Assert.Null(instance.StringValue2);
+        }
+
+        [Fact]
+        public void Fixture_CustomizeApply_ReturnsValueWithApply()
+        {
+            var fixture = new Fixture();
+
+            PropertiesClass propertiesClass = null;
+
+            fixture.Customize<PropertiesClass>().Apply(x => propertiesClass = x);
+
+            var instance = fixture.Generate<PropertiesClass>();
+
+            Assert.NotNull(instance);
+            Assert.NotNull(propertiesClass);
+            Assert.Same(propertiesClass, instance);
+        }
+
+        [Fact]
         public void Fixture_CustomizeNewFactoryOneParam_GeneratePopulates()
         {
             var fixture = new Fixture();

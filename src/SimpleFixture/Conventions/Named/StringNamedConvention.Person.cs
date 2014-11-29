@@ -152,7 +152,7 @@ namespace SimpleFixture.Conventions.Named
 											"Spencer",
 											"Morgan",
 											"Freeman",
-											"O'Hara",
+											"OHara",
 											"Guster",
 											"Vick",
 											"Giles",
@@ -179,10 +179,46 @@ namespace SimpleFixture.Conventions.Named
 
         #region Username
 
+        protected virtual string UsernameConvention(DataRequest request)
+        {
+            string firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
+            string lastName = _helper.GetValue<string>(request.Constraints, null, "LastName", "Surname");
+
+            if (string.IsNullOrEmpty(firstName))
+            {
+                firstName = FirstNameConvention(request);
+            }
+
+            if (string.IsNullOrEmpty(lastName))
+            {
+                lastName = LastNameConvention(request);
+            }
+
+            return string.Format("{0}{1}", firstName[0], lastName);
+        }
+
         #endregion
 
         #region Password
 
+        protected virtual string PasswordConvention(DataRequest request)
+        {
+            string retunValue = null;
+
+            retunValue += _dataGenerator.NextT('!', '@', '#', '$', '.', '-', '=', '+');
+
+            retunValue += _dataGenerator.NextChar('A', 'Z');
+
+            retunValue += _dataGenerator.NextChar('a', 'z');
+
+            retunValue += _dataGenerator.NextChar('0', '9');
+
+            retunValue += _dataGenerator.NextString(StringType.AlphaNumeric);
+
+            retunValue = new string(_dataGenerator.Randomize(retunValue.ToCharArray()).ToArray());
+
+            return retunValue;
+        }
         #endregion
 
         #region Government Id
@@ -190,11 +226,37 @@ namespace SimpleFixture.Conventions.Named
         protected virtual string GovernementIdConvention(DataRequest request)
         {
             return string.Format("{0}-{1}-{2}",
-                                 _dataGenerator.NextString(StringType.Numeric, 3, 3), 
+                                 _dataGenerator.NextString(StringType.Numeric, 3, 3),
                                  _dataGenerator.NextString(StringType.Numeric, 2, 2),
                                  _dataGenerator.NextString(StringType.Numeric, 4, 4));
         }
 
         #endregion
+
+        protected virtual string EmailConvention(DataRequest request)
+        {
+            string firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
+            string lastName = _helper.GetValue<string>(request.Constraints, null, "LastName", "Surname");
+            string domain = _helper.GetValue<string>(request.Constraints, "none.com", "Domain");
+
+            if (string.IsNullOrEmpty(firstName))
+            {
+                firstName = FirstNameConvention(request);
+            }
+
+            if (string.IsNullOrEmpty(lastName))
+            {
+                lastName = LastNameConvention(request);
+            }
+
+            return string.Format("{0}.{1}@{2}", firstName, lastName, domain);
+        }
+
+        protected virtual string PhoneNumberConvention(DataRequest arg)
+        {
+            return string.Format("{0}-{1}-{2}", _dataGenerator.NextString(StringType.Numeric, 3, 3),
+                                                _dataGenerator.NextString(StringType.Numeric, 3, 3),
+                                                _dataGenerator.NextString(StringType.Numeric, 4, 4));
+        }
     }
 }

@@ -47,13 +47,21 @@ namespace SimpleFixture.Conventions.Named
 
             AddConvention(FirstNameConvention, "FirstName", "MiddleName");
             AddConvention(LastNameConvention, "LastName", "Surname");
+            AddConvention(UsernameConvention,"Username");
+            AddConvention(PasswordConvention,"Password");
+            AddConvention(EmailConvention,"Email","EmailAddress","EmailAddr");
             AddConvention(GovernementIdConvention, "GovernmentId", "SSN", "SocialSecurityNumber");
+            AddConvention(PhoneNumberConvention, "Phone", "PhoneNumber", "CellPhone", "CellPhoneNumber", "MobilePhone", "MobilePhoneNumber", "HomePhone", "HomePhoneNumber","WorkPhone","WorkPhoneNumber");
 
-            AddConvention(AddressLineOneConvention, "AddressLine", "AddressLine1", "AddressLineOne", "AddrLine1");
+            AddConvention(AddressLineOneConvention,"Address", "AddressLine", "AddressLine1", "AddressLineOne", "AddrLine1");
             AddConvention(AddressLineTwoConvention, "AddressLine2", "AddressLineTwo", "AddrLine2");
+            AddConvention(CityConvention, "City");
+            AddConvention(StateConvention, "State", "StateProvince");
+            AddConvention(StateAbbreviation, "StateAbbreviation");
             AddConvention(PostalCodeConvention, "PostalCode", "ZipCode", "Zip");
+            AddConvention(CountryConvention, "Country");
         }
-        
+
         private void AddConvention(Func<DataRequest, string> stringFunc, params string[] names)
         {
             foreach (string name in names)

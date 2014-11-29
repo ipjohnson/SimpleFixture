@@ -96,6 +96,30 @@ namespace SimpleFixture.Impl
             return list.Any() ? list[NextInt(0, list.Count)] : default(T);
         }
 
+        public T NextT<T>(params T[] set)
+        {
+            return NextInSet(set);
+        }
+
+        public IEnumerable<T> Randomize<T>(IEnumerable<T> set)
+        {
+            List<T> list = new List<T>(set);
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                int indexSrc = _random.Next(0, list.Count);
+                int indexDst = _random.Next(0, list.Count);
+
+                T source = list[indexSrc];
+                T dest = list[indexDst];
+
+                list[indexDst] = source;
+                list[indexSrc] = dest;
+            }
+
+            return list;
+        }
+
         public string NextString(StringType stringType = StringType.MostCharacter, int min = 5, int max = 16)
         {
             switch (stringType)

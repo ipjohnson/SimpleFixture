@@ -86,7 +86,7 @@
     <Compile Include="FixtureTests\ReturnTests.cs" />
     <Compile Include="MockTests\MoqTests.cs" />
     <Compile Include="MockTests\NSubstituteTests.cs" />
-    <Compile Include="FixtureTests\NamedConventions\AddressConventionTests.cs" />
+    <Compile Include="FixtureTests\NamedConventions\AddressStringConventionTests.cs" />
     <Compile Include="FixtureTests\NamedConventions\PersonStringConventionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

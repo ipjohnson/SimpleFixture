@@ -46,6 +46,8 @@ namespace SimpleFixture.Conventions
                 _typePopulator.Populate(returnValue, request, model);
             }
 
+            model.Apply(returnValue);
+
             return returnValue;
         }
     }

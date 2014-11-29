@@ -14,7 +14,7 @@ namespace SimpleFixture.Tests.Classes
 
         public string StringValue1 { get; set; }
 
-        public string SetingValue2 { get; set; }
+        public string StringValue2 { get; set; }
     }
 
     public class PropertiesClass2
@@ -25,6 +25,6 @@ namespace SimpleFixture.Tests.Classes
 
         public string StringValue1 { get; set; }
 
-        public string SetingValue2 { get; set; }
+        public string StringValue2 { get; set; }
     }
 }

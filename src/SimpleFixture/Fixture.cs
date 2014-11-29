@@ -309,6 +309,7 @@ namespace SimpleFixture
             }
 
             Return(this);
+            Return(_configuration.Locate<IRandomDataGeneratorService>());
         }
 
         #endregion

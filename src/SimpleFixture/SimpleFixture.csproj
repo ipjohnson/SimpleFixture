@@ -67,7 +67,6 @@
     <Compile Include="Conventions\ULongConvention.cs" />
     <Compile Include="Conventions\UShortConvention.cs" />
     <Compile Include="DataRequest.cs" />
-    <Compile Include="DataTemplates\PersonTemplate.cs" />
     <Compile Include="DefaultFixtureConfiguration.cs" />
     <Compile Include="DI\GContainer.cs" />
     <Compile Include="DI\IGContainer.cs" />
