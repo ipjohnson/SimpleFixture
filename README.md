@@ -1,7 +1,7 @@
 SimpleFixture
 =============
 
-SimpleFixture is a portable class library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases
+SimpleFixture is a portable class library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases.
 
 * Locate instance - Creates a new instance of the requested type. It does not populate public properies. 
 ```C#
@@ -51,7 +51,7 @@ fixture.Return(1).For<SomeClass>();
 int i = 1;
 fixture.Return(() => i++).WhenNamed(n => n.EndsWith("Id"));
 
-// return SomeString when matchingMetho returns true
+// return SomeString when matchingMethod returns true
 fixture.Return("SomeString").WhenMatching(matchingMethod);
 ```
 
