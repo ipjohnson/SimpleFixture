@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+  <metadata>
+    <id>SimpleFixture.NSubstitute</id>
+    <version>$version$</version>
+    <title>SimpleFixture.NSubstitute</title>
+    <authors>Ian Johnson</authors>
+    <owners>Ian Johnson</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NSubstitute convention for SimpleFixture</description>
+    <copyright>Copyright ©  2014</copyright>
+    <dependencies>
+      <dependency id="NSubstitute" version="1.8.0.0" />
+      <dependency id="SimpleFixture" version="$version$"/>
+    </dependencies>
+  </metadata>
+</package>
