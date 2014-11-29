@@ -57,7 +57,7 @@ fixture.Return("SomeString").WhenMatching(matchingMethod);
 
 ###Constraints
 
-Sometimes it's useful to have more control over generate random primitive types such as int, double, DateTime. The generate method takes a constraints object allowing to specify min,max, and other options.
+Sometimes it's useful to have more control over how an object is created. The generate method takes a constraints object allowing to specify min,max, and other options.
 ```C#
 // Generate an int between 10 and 100
 var intValue = fixture.Generate<int>(constraints: new { min = 10, max = 100 });
