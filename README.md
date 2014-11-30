@@ -97,7 +97,7 @@ var fixture = new Fixture();
 // generate a first name
 var firstName = fixture.Generate<string>("FirstName");
 
-// gernate a last name
+// generate a last name
 var lastName = fixture.Generate<string>("LastName");
 
 // generate a random password with 1 Upper, 1 Lower, 1 Special character and a minimium of 8 characters
