@@ -29,10 +29,10 @@ It's useful sometimes to control what values are returned from the fixture. The 
 ```C#
 var fixture = new Fixture();
 
-// return the value 1 when ever an int it needed
+// return the value 1 whenever an int is needed
 fixture.Return(1);
 
-// return the sequence 1, 2, 3, 1, 2, 3 when satisfying and the request for an int 
+// return the sequence 1, 2, 3, 1, 2, 3 when an int is requested 
 fixture.Return(1, 2, 3);
 
 // return incrementing sequence when an int is requested.
@@ -51,8 +51,9 @@ fixture.Return(1).For<SomeClass>();
 int i = 1;
 fixture.Return(() => i++).WhenNamed(n => n.EndsWith("Id"));
 
-// return SomeString when matchingMethod returns true
-fixture.Return("SomeString").WhenMatching(matchingMethod);
+// return "SomeString" for SomeClass and matchingMethod returns true
+fixture.Return("SomeString").For<SomeClass>().WhenMatching(matchingMethod);
+
 ```
 
 ###Constraints
