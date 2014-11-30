@@ -3,19 +3,19 @@ SimpleFixture
 
 SimpleFixture is a portable class library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases.
 
-* *Locate* - Creates a new instance of the requested type. It does not populate public properies. 
+* **Locate** - Creates a new instance of the requested type. It does not populate public properies. 
 ```C#
 var fixture = new Fixture();
 
 var instance = fixture.Locate<SomeClass>();
 ```
-* *Populate* - Populate all public properties with randomly created data for a given instance
+* **Populate** - Populate all public properties with randomly created data for a given instance
 ```C#
 var fixture = new Fixture();
 
 fixture.Populate<SomeClass>(instance);
 ```
-* *Generate* - Create a new instance of a given type and populate all public properties.
+* **Generate** - Create a new instance of a given type and populate all public properties.
 ```C#
 var fixture = new Fixture();
 
