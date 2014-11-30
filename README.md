@@ -13,7 +13,7 @@ var instance = fixture.Locate<SomeClass>();
 ```C#
 var fixture = new Fixture();
 
-fixture.Populate<SomeClass>(instance);
+fixture.Populate(instance);
 ```
 * **Generate** - Create a new instance of a given type and populate all public properties.
 ```C#
