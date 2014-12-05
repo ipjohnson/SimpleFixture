@@ -8,6 +8,9 @@ using SimpleFixture.DI;
 
 namespace SimpleFixture
 {
+    /// <summary>
+    /// Configuration interface for SimpleFixture. Only implement this interface if you want to change the internal worksings of SimpleFixture
+    /// </summary>
     public interface IFixtureConfiguration : IGContainer
     {
         /// <summary>
