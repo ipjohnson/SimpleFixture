@@ -24,7 +24,7 @@ namespace SimpleFixture
             ParentRequest = parentRequest;
             Fixture = fixture;
             RequestedType = requestedType;
-            RequestName = requestName;
+            RequestName = requestName ?? "";
             Populate = populate;
             Constraints = constraints;
             ExtraInfo = extraInfo;
