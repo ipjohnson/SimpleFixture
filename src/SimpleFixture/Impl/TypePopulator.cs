@@ -62,7 +62,7 @@ namespace SimpleFixture.Impl
                     throw new Exception("Could not create type " + propertyInfo.PropertyType.FullName);
                 }
 
-                propertyInfo.SetValue(instance, propertyValue);
+                propertyInfo.SetMethod.Invoke(instance, new []{ propertyValue});
             }
         }
 

@@ -43,7 +43,7 @@ namespace SimpleFixture.Impl
             else
             {
                 PropertyInfo propInfo = null;
-                
+
                 foreach (string propertyName in propertyNames)
                 {
                     propInfo = constraintValue.GetType().GetRuntimeProperties().FirstOrDefault(
@@ -57,7 +57,7 @@ namespace SimpleFixture.Impl
 
                 if (propInfo != null)
                 {
-                    returnValue = (TProp)propInfo.GetValue(constraintValue);
+                    returnValue = (TProp)propInfo.GetMethod.Invoke(constraintValue, new object[] { });
                 }
             }
 
