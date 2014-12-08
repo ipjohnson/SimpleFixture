@@ -24,10 +24,11 @@ namespace SimpleFixture
             ExportSingleton<IRandomDataGeneratorService>(g => new RandomDataGeneratorService());
             ExportSingleton<IConstraintHelper>(g => new ConstraintHelper());
             ExportSingleton<IModelService>(g => new ModelService());
+            Export<IPropertySetter>(g => new PropertySetter());
             Export<IConventionProvider>(g => new ConventionProvider());
             Export<IConventionList>(g => new ConventionList());
             Export<ITypePropertySelector>(g => new TypePropertySelector(g.Locate<IConstraintHelper>()));
-            Export<ITypePopulator>(g => new TypePopulator(g.Locate<IConstraintHelper>(),g.Locate<ITypePropertySelector>()));
+            Export<ITypePopulator>(g => new TypePopulator(g.Locate<IConstraintHelper>(),g.Locate<ITypePropertySelector>(), g.Locate<IPropertySetter>()));
             Export<ITypeCreator>(g => new TypeCreator(g.Locate<IConstructorSelector>(),g.Locate<IConstraintHelper>()));
             Export<IConstructorSelector>(g => new ConstructorSelector());
             Export<ICircularReferenceHandler>(g => new CircularReferenceHandler());

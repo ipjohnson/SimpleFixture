@@ -85,6 +85,7 @@
     <Compile Include="Impl\IConventionProvider.cs" />
     <Compile Include="Impl\IRandomDataGeneratorService.cs" />
     <Compile Include="Impl\ModelService.cs" />
+    <Compile Include="Impl\PropertySetter.cs" />
     <Compile Include="Impl\TypeCreator.cs" />
     <Compile Include="Impl\TypedConventions.cs" />
     <Compile Include="Impl\TypePopulator.cs" />

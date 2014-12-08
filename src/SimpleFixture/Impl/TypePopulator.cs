@@ -14,13 +14,15 @@ namespace SimpleFixture.Impl
 
     public class TypePopulator : ITypePopulator
     {
+        private readonly IPropertySetter _setter;
         private readonly ITypePropertySelector _propertySelector;
         private readonly IConstraintHelper _helper;
 
-        public TypePopulator(IConstraintHelper helper, ITypePropertySelector propertySelector)
+        public TypePopulator(IConstraintHelper helper, ITypePropertySelector propertySelector, IPropertySetter setter)
         {
             _helper = helper;
             _propertySelector = propertySelector;
+            _setter = setter;
         }
 
         public virtual void Populate(object instance, DataRequest request, ComplexModel model)
@@ -62,7 +64,7 @@ namespace SimpleFixture.Impl
                     throw new Exception("Could not create type " + propertyInfo.PropertyType.FullName);
                 }
 
-                propertyInfo.SetMethod.Invoke(instance, new []{ propertyValue});
+                _setter.SetProperty(propertyInfo, instance, propertyValue);
             }
         }
 
