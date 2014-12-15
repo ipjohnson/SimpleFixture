@@ -33,6 +33,9 @@
     <DocumentationFile>bin\Release\SimpleFixture.Tests.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FakeItEasy">
+      <HintPath>..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -84,6 +87,7 @@
     <Compile Include="FixtureTests\Primitives\ULongFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\UShortFixtureTests.cs" />
     <Compile Include="FixtureTests\ReturnTests.cs" />
+    <Compile Include="MockTests\FakeTests.cs" />
     <Compile Include="MockTests\MoqTests.cs" />
     <Compile Include="MockTests\NSubstituteTests.cs" />
     <Compile Include="FixtureTests\NamedConventions\AddressStringConventionTests.cs" />
@@ -91,6 +95,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SimpleFixture.FakeItEasy\SimpleFixture.FakeItEasy.csproj">
+      <Project>{53e18a47-a54f-44e8-80fa-8f308477f2bc}</Project>
+      <Name>SimpleFixture.FakeItEasy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SimpleFixture.Moq\SimpleFixture.Moq.csproj">
       <Project>{c97b9ad7-acf7-45f8-83b5-e14519592d68}</Project>
       <Name>SimpleFixture.Moq</Name>

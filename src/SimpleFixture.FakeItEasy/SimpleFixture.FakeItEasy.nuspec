@@ -1,18 +1,18 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
-    <id>SimpleFixture.Moq</id>
+    <id>SimpleFixture.FakeItEasy</id>
     <version>$version$</version>
-    <title>SimpleFixture.Moq</title>
+    <title>SimpleFixture.FakeItEasy</title>
     <authors>Ian Johnson</authors>
     <owners>Ian Johnson</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Moq convention for SimpleFixture</description>
+    <description>FakeItEasy convention for SimpleFixture</description>
     <releaseNotes>$releaseNotes$</releaseNotes>
     <copyright>Copyright ©  2015</copyright>
-    <tags>Moq Test Fixture Data Generation</tags>
+    <tags>FakeItEasy Test Fixture Data Generation</tags>
     <dependencies>
-      <dependency id="Moq" version="4.2.1409.1722" />
+      <dependency id="FakeItEasy" version="1.25.1" />
       <dependency id="SimpleFixture" version="$version$"/>
     </dependencies>
   </metadata>
