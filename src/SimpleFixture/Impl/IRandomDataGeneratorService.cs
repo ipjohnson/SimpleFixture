@@ -12,6 +12,7 @@ namespace SimpleFixture.Impl
         Alpha,
         AlphaNumeric,
         Numeric,
+        LoremIpsum
     }
 
     public interface IRandomDataGeneratorService

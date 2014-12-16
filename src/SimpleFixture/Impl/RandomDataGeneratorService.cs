@@ -133,10 +133,15 @@ namespace SimpleFixture.Impl
                 case StringType.Numeric:
                     return BuildString(_numericCharacters, min, max);
 
+                case StringType.LoremIpsum:
+                    return BuildLoremIpsum(min, max);
+
                 default:
                     return BuildString(_allCharacters, min, max);
             }
         }
+
+        
 
         public double NextDouble(double min = Double.MinValue, double max = Double.MaxValue)
         {
@@ -274,5 +279,34 @@ namespace SimpleFixture.Impl
 
             _allCharacters = list;
         }
+
+        private string BuildLoremIpsum(int min, int max)
+        {
+            int totalLength = NextInt(min, max);
+
+            StringBuilder builder = new StringBuilder(_loremIpsum);
+            
+            while (builder.Length < totalLength)
+            {
+                builder.AppendLine();
+
+                builder.Append(_loremIpsum);
+            }
+
+            builder.Length = totalLength;
+
+            return builder.ToString();
+        }
+
+        private const string _loremIpsum =
+@"Lorem ipsum dolor sit amet, mea tincidunt argumentum ea, libris deleniti scripserit est ut. Putent prodesset constituto an has. Mei regione repudiandae dissentiunt an. Sit ut idque utroque pertinacia, ei duo iusto indoctum. Hinc laoreet at sit. Mea dicat veritus in, ius zril suscipiantur ei.
+
+Quo ei amet affert doctus, ei epicurei ullamcorper has. Inermis graecis sententiae vix no. Suas erat error et sed, ad vis esse dolor aperiam. Ex sea melius fabulas appellantur, cum reque maluisset ei.
+
+Ut aliquam persequeris interpretaris qui, solet saepe concludaturque sea cu. Eu option convenire pertinacia has. Ei decore cotidieque vix, ne quis graeco disputando nec. Falli exerci id pro. Ut diam legere posidonium per, at unum dolore commune eam, omnesque intellegam qui et. Pri nullam alienum honestatis et, te mazim instructior sit.
+
+Sit in nibh officiis. Sed ne sapientem constituam, ut eam illum doctus, no pro ceteros ponderum. In mundi appareat gubergren usu. Duo ea doctus adolescens definiebas. Posse erroribus sit et.
+
+Id has nihil libris atomorum, mea et ridens labore. Integre maluisset ea vix, idque legimus eos ex. An mei saepe possit fastidii, no vix veniam posidonium, eum in eros vide. Te sed mundi deseruisse, eum quem inimicus definitiones in. Legimus recteque elaboraret in sed, ei veniam verterem accusamus sit, te admodum tractatos est. Per et alii platonem, ut his platonem praesent mnesarchum.";
     }
 }
