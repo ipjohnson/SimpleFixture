@@ -49,17 +49,19 @@ namespace SimpleFixture.Conventions.Named
             AddConvention(LastNameConvention, "LastName", "Surname");
             AddConvention(UsernameConvention,"Username");
             AddConvention(PasswordConvention,"Password");
+            AddConvention(HeightConvention,"Height");
+            AddConvention(WeightConvention,"Weight");
             AddConvention(EmailConvention,"Email","EmailAddress","EmailAddr");
             AddConvention(GovernementIdConvention, "GovernmentId", "SSN", "SocialSecurityNumber");
             AddConvention(PhoneNumberConvention, "Phone", "PhoneNumber", "CellPhone", "CellPhoneNumber", "MobilePhone", "MobilePhoneNumber", "HomePhone", "HomePhoneNumber","WorkPhone","WorkPhoneNumber");
 
-            AddConvention(AddressLineOneConvention,"Address", "AddressLine", "AddressLine1", "AddressLineOne", "AddrLine1");
-            AddConvention(AddressLineTwoConvention, "AddressLine2", "AddressLineTwo", "AddrLine2");
-            AddConvention(CityConvention, "City");
+            AddConvention(AddressLineOneConvention,"Address", "AddressLine", "AddressLine1", "AddressLineOne", "AddrLine1", "HomeAddress1", "MailingAddress2");
+            AddConvention(AddressLineTwoConvention, "AddressLine2", "AddressLineTwo", "AddrLine2", "HomeAddress2", "MailingAddress2");
+            AddConvention(CityConvention, "City", "HomeCity", "MailingCity");
             AddConvention(StateConvention, "State", "StateProvince");
             AddConvention(StateAbbreviation, "StateAbbreviation");
-            AddConvention(PostalCodeConvention, "PostalCode", "ZipCode", "Zip");
-            AddConvention(CountryConvention, "Country");
+            AddConvention(PostalCodeConvention, "PostalCode", "ZipCode", "Zip", "HomeZip", "MailingZip");
+            AddConvention(CountryConvention, "Country", "HomeCountry","MailingCountry");
         }
 
         private void AddConvention(Func<DataRequest, string> stringFunc, params string[] names)

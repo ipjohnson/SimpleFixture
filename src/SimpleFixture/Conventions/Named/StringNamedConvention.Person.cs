@@ -233,6 +233,23 @@ namespace SimpleFixture.Conventions.Named
 
         #endregion
 
+        #region Height
+
+        protected virtual string HeightConvention(DataRequest request)
+        {
+            return _dataGenerator.NextInt(min: 106, max: 250).ToString();
+        }
+        #endregion
+
+        #region Weight
+
+        protected virtual string WeightConvention(DataRequest request)
+        {
+            return _dataGenerator.NextInt(20, 180).ToString();
+        }
+
+        #endregion
+
         protected virtual string EmailConvention(DataRequest request)
         {
             string firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
