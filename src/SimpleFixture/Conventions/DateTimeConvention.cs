@@ -49,7 +49,7 @@ namespace SimpleFixture.Conventions
 
             var timeSpan = max.Value.Subtract(min.Value);
 
-            return min.Value.AddSeconds(_dataGenerator.NextDouble(0, timeSpan.Seconds));
+            return min.Value.AddSeconds(_dataGenerator.NextDouble(0, timeSpan.TotalSeconds));
         }
     }
 }
