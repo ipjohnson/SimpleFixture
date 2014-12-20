@@ -9,9 +9,9 @@ namespace SimpleFixture.FakeItEasy
 {
     public class FakeFixture : Fixture
     {
-        public FakeFixture(IFixtureConfiguration configuration = null, bool fakeSingleton = true) : base(configuration)
+        public FakeFixture(IFixtureConfiguration configuration = null, bool defaultSingleton = true) : base(configuration)
         {
-            Add(new FakeConvention(fakeSingleton));
+            Add(new FakeConvention(defaultSingleton));
         }
         
         public T Fake<T>(Action<T> arrange = null, Action<IFakeOptionsBuilder<T>> options = null, bool? singleton = null)

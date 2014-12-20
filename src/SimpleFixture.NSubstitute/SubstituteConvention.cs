@@ -4,13 +4,20 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using SimpleFixture.Impl;
 using NSub = NSubstitute;
 
 namespace SimpleFixture.NSubstitute
 {
     public class SubstituteConvention : IConvention
     {
+        private readonly bool _defaultSingleton;
         private readonly Dictionary<Type, object> _substituted = new Dictionary<Type, object>();
+
+        public SubstituteConvention(bool defaultSingleton)
+        {
+            _defaultSingleton = defaultSingleton;
+        }
 
         public ConventionPriority Priority
         {
@@ -24,12 +31,28 @@ namespace SimpleFixture.NSubstitute
                 return Convention.NoValue;
             }
 
-            object returnValue;
+            object returnValue = null;
+            var helper = request.Fixture.Configuration.Locate<IConstraintHelper>();
 
-            if (!_substituted.TryGetValue(request.RequestedType, out returnValue))
+            bool? singleton = helper.GetValue<bool?>(request.Constraints, null, "fakeSingleton");
+
+            if (!singleton.HasValue)
             {
-                returnValue = NSub.Substitute.For(new[] { request.RequestedType }, new object[0]);
+                singleton = _defaultSingleton;
+            }
 
+            if (singleton.Value)
+            {
+                if (_substituted.TryGetValue(request.RequestedType, out returnValue))
+                {
+                    return returnValue;
+                }
+            }
+            
+            returnValue = NSub.Substitute.For(new[] { request.RequestedType }, new object[0]);
+
+            if(singleton.Value)
+            {
                 _substituted[request.RequestedType] = returnValue;
             }
 

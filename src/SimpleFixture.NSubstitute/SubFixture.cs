@@ -8,14 +8,32 @@ namespace SimpleFixture.NSubstitute
 {
     public class SubFixture : Fixture
     {
-        public SubFixture(IFixtureConfiguration configuration = null) : base(configuration)
+        public SubFixture(IFixtureConfiguration configuration = null, bool defaultSingleton = true)
+            : base(configuration)
         {
-            Add(new SubstituteConvention());
+            Add(new SubstituteConvention(defaultSingleton));
         }
 
-        public void Substitute<T>(Action<T> substituteAction)
+        /// <summary>
+        /// Substitute for a particular type, by default substitute types are treated as singletons
+        /// </summary>
+        /// <typeparam name="T">Type to substitute</typeparam>
+        /// <param name="substituteAction">arrange</param>
+        /// <param name="singleton">singleton</param>
+        /// <returns>new substituted type</returns>
+        public T Substitute<T>(Action<T> substituteAction = null, bool? singleton = null)
         {
-            substituteAction(Locate<T>());
+            T returnValue = Generate<T>(constraints: new
+                                                     {
+                                                         fakeSingleton = singleton
+                                                     });
+
+            if (substituteAction != null)
+            {
+                substituteAction(returnValue);
+            }
+
+            return returnValue;
         }
     }
 }

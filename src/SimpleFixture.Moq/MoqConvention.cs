@@ -5,12 +5,19 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Moq;
+using SimpleFixture.Impl;
 
 namespace SimpleFixture.Moq
 {
     public class MoqConvention : IConvention
     {
-        private readonly Dictionary<Type,Mock> _mocks = new Dictionary<Type, Mock>(); 
+        private bool _defaultSingleton;
+        private readonly Dictionary<Type, Mock> _mocks = new Dictionary<Type, Mock>();
+
+        public MoqConvention(bool defaultSingleton)
+        {
+            _defaultSingleton = defaultSingleton;
+        }
 
         public ConventionPriority Priority
         {
@@ -19,7 +26,7 @@ namespace SimpleFixture.Moq
 
         public object GenerateData(DataRequest request)
         {
-            if (request.RequestedType.GetTypeInfo().IsInterface || 
+            if (request.RequestedType.GetTypeInfo().IsInterface ||
                 request.RequestedType.GetTypeInfo().IsAbstract)
             {
                 return ProcessInterfaceRequest(request);
@@ -36,16 +43,21 @@ namespace SimpleFixture.Moq
 
         private object ProcessMockRequest(DataRequest request)
         {
+            bool singleton = GetMoqSingleton(request);
+
             Mock mockObject;
 
-            if (_mocks.TryGetValue(request.RequestedType, out mockObject))
+            if (singleton && _mocks.TryGetValue(request.RequestedType, out mockObject))
             {
                 return mockObject;
             }
 
             mockObject = (Mock)Activator.CreateInstance(request.RequestedType);
 
-            _mocks[request.RequestedType] = mockObject;
+            if (singleton)
+            {
+                _mocks[request.RequestedType] = mockObject;
+            }
 
             return mockObject;
         }
@@ -55,17 +67,35 @@ namespace SimpleFixture.Moq
             Type mockedType = typeof(Mock<>).GetTypeInfo().MakeGenericType(request.RequestedType);
 
             Mock mockObject;
+            bool singleton = GetMoqSingleton(request);
 
-            if (_mocks.TryGetValue(mockedType, out mockObject))
+            if (singleton && _mocks.TryGetValue(mockedType, out mockObject))
             {
                 return mockObject.Object;
             }
 
             mockObject = (Mock)Activator.CreateInstance(mockedType);
 
-            _mocks[mockedType] = mockObject;
+            if (singleton)
+            {
+                _mocks[mockedType] = mockObject;
+            }
 
             return mockObject.Object;
+        }
+
+        private bool GetMoqSingleton(DataRequest request)
+        {
+            var helper = request.Fixture.Configuration.Locate<IConstraintHelper>();
+
+            bool? singleton = helper.GetValue<bool?>(request.Constraints, null, "moqSingleton");
+
+            if (!singleton.HasValue)
+            {
+                singleton = _defaultSingleton;
+            }
+
+            return singleton.Value;
         }
     }
 }
