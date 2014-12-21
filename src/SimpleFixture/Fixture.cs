@@ -92,9 +92,9 @@ namespace SimpleFixture
         public object Generate(DataRequest request)
         {
             object returnValue = null;
-            
+
             _conventions.TryGetValue(request, out returnValue);
-            
+
             if (returnValue == null)
             {
                 throw new Exception("Could not construct type: " + request.RequestedType.FullName);
@@ -134,6 +134,32 @@ namespace SimpleFixture
         public T Generate<T>(string name = null, object constraints = null)
         {
             return (T)Generate(typeof(T), name, constraints);
+        }
+
+        #endregion
+
+        #region Freeze
+
+        /// <summary>
+        /// Generate a new value and add it to the Fixture as a Return
+        /// </summary>
+        /// <typeparam name="T">type to generate</typeparam>
+        /// <param name="requestName">request name</param>
+        /// <param name="constraints">constraints for generate</param>
+        /// <param name="value">action to specify when to use the froozen value (value: i => i.For&lt;T&gt;)</param>
+        /// <returns>new T</returns>
+        public T Freeze<T>(string requestName = null, object constraints = null, Action<ReturnConfiguration<T>> value = null)
+        {
+            T returnValue = Generate<T>(requestName, constraints);
+
+            ReturnConfiguration<T> returnStatement = Return(returnValue);
+
+            if (value != null)
+            {
+                value(returnStatement);
+            }
+
+            return returnValue;
         }
 
         #endregion
@@ -290,12 +316,12 @@ namespace SimpleFixture
         private void Initalize()
         {
             _conventions = _configuration.Locate<IConventionList>();
-            
+
             _behavior = new BehaviorCollection();
 
             IConventionProvider conventionProvider = _configuration.Locate<IConventionProvider>();
 
-            _returnConventions = new TypedConventions(Configuration,ConventionPriority.First);
+            _returnConventions = new TypedConventions(Configuration, ConventionPriority.First);
 
             Add(_returnConventions);
 
