@@ -10,7 +10,7 @@
     <description>Moq convention for SimpleFixture</description>
     <releaseNotes>$releaseNotes$</releaseNotes>
     <copyright>Copyright ©  2015</copyright>
-    <tags>Moq Test Fixture Data Generation</tags>
+    <tags>Moq Test Fixture SimpleFixture Data Generation</tags>
     <dependencies>
       <dependency id="Moq" version="4.2.1409.1722" />
       <dependency id="SimpleFixture" version="$version$"/>

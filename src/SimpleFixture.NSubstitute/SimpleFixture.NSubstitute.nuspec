@@ -10,7 +10,7 @@
     <description>NSubstitute convention for SimpleFixture</description>
     <releaseNotes>$releaseNotes$</releaseNotes>
     <copyright>Copyright ©  2015</copyright>
-    <tags>NSubstitute Test Fixture Data Generation</tags>
+    <tags>NSubstitute SimpleFixture Test Fixture Data Generation</tags>
     <dependencies>
       <dependency id="NSubstitute" version="1.8.0.0" />
       <dependency id="SimpleFixture" version="$version$"/>

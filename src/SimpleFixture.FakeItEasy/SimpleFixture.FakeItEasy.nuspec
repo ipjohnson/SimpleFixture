@@ -10,7 +10,7 @@
     <description>FakeItEasy convention for SimpleFixture</description>
     <releaseNotes>$releaseNotes$</releaseNotes>
     <copyright>Copyright ©  2015</copyright>
-    <tags>FakeItEasy Test Fixture Data Generation</tags>
+    <tags>FakeItEasy Test Fixture SimpleFixture Data Generation</tags>
     <dependencies>
       <dependency id="FakeItEasy" version="1.25.1" />
       <dependency id="SimpleFixture" version="$version$"/>

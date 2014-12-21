@@ -9,7 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Test fixture framework for unit and integration testing.</description>
     <releaseNotes>$releaseNotes$</releaseNotes>
-    <copyright>Copyright ©  201r</copyright>
+    <copyright>Copyright ©  2015</copyright>
     <tags>Test Fixture Data Generation</tags>
     <dependencies />
   </metadata>
