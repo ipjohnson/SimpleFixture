@@ -111,7 +111,7 @@ var addressLine1 = fixture.Generate<string>("AddressLine1");
 ```
 
 ###Freeze
-Similar to Autofac there is a Freeze method that Generates a new instance and sets it as a Return value.
+Similar to Autofixture there is a Freeze method that Generates a new instance and sets it as a Return value.
 
 ```C#
 // Generate random int and set it as a Return
