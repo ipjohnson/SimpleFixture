@@ -123,7 +123,7 @@ int randomInt = fixture.Freeze<int>(value: i => i.For<SomeClass>());
 ```
 
 ###Behavior
-Behavior allows you to apply cross cutting logic to all objects created by the fixture. Behavior allows you to apply a behavior to every object created or only specific types.
+Behavior allows you to apply cross cutting logic to all objects created by the fixture. You can apply your logic to all objects or just to specific types.
 
 ```C#
 // Execute SomeMethod on every object that is created by the fixture
