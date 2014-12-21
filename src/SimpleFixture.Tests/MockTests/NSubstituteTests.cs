@@ -37,7 +37,7 @@ namespace SimpleFixture.Tests.MockTests
         }
 
         [Fact]
-        public void SubFixture_SubstituteNonSingleton_ReturnsCorrectImplementations()
+        public void SubFixture_SubstituteDefaultSingleton_ReturnsCorrectImplementations()
         {
             var fixture = new SubFixture(defaultSingleton: true);
 
@@ -60,5 +60,42 @@ namespace SimpleFixture.Tests.MockTests
             Assert.Equal(20, fixture.Locate<ISomeInterface>().SomeIntMethod());
         }
 
+        [Fact]
+        public void SubFixture_SubstituteDefaultSingletonFalse_ReturnsCorrectImplementations()
+        {
+            var fixture = new SubFixture(defaultSingleton: false);
+
+            var instance = fixture.Substitute<ISomeInterface>(s => s.SomeIntMethod().Returns(10));
+
+            Assert.NotNull(instance);
+
+            var instance2 = fixture.Substitute<ISomeInterface>(s => s.SomeIntMethod().Returns(15));
+
+            Assert.NotNull(instance2);
+
+            Assert.Equal(0, fixture.Locate<ISomeInterface>().SomeIntMethod());
+
+            Assert.Equal(15, instance2.SomeIntMethod());
+
+            Assert.Equal(10, instance.SomeIntMethod());
+
+            Assert.Equal(0, fixture.Locate<ISomeInterface>().SomeIntMethod());
+        }
+
+        [Fact]
+        public void SubFixture_SubstituteDefaultSingletonFalseAndSingleton_ReturnsSingleton()
+        {
+            var fixture = new SubFixture(defaultSingleton: false);
+
+            fixture.Substitute<ISomeInterface>(s => s.SomeIntMethod().Returns(20), singleton: true);
+
+            var instance = fixture.Substitute<ISomeInterface>(s => s.SomeIntMethod().Returns(10));
+
+            Assert.NotNull(instance);
+
+            Assert.Equal(10, instance.SomeIntMethod());
+
+            Assert.Equal(20, fixture.Substitute<ISomeInterface>(singleton: true).SomeIntMethod());
+        }
     }
 }

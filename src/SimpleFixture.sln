@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture", "SimpleFixture\SimpleFixture.csproj", "{ACFD0B4C-9003-458B-9DB3-9BA25CB448C2}"
 EndProject
@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{EAC70679-8D1F-4B07-B5E7-D0DB36013DE1}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
+		SimpleFixture.Tests\MockTests\packages.config = SimpleFixture.Tests\MockTests\packages.config
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.NSubstitute", "SimpleFixture.NSubstitute\SimpleFixture.NSubstitute.csproj", "{8E289544-036F-415C-B963-BB5BC9F06D15}"

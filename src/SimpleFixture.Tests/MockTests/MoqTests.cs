@@ -61,5 +61,45 @@ namespace SimpleFixture.Tests.MockTests
 
             Assert.Equal(20, fixture.Locate<ISomeInterface>().SomeIntMethod());
         }
+
+        [Fact]
+        public void MoqFixture_MockDefaultSingletonFalse_ReturnsCorrectInstance()
+        {
+            var fixture = new MoqFixture(defaultSingleton: false);
+
+            var mock1 = fixture.Mock<ISomeInterface>(m => m.Setup(x => x.SomeIntMethod()).Returns(10));
+
+            Assert.NotNull(mock1);
+
+            var mock2 = fixture.Mock<ISomeInterface>(m => m.Setup(x => x.SomeIntMethod()).Returns(15));
+
+            Assert.NotNull(mock2);
+            
+            Assert.Equal(0, fixture.Locate<ISomeInterface>().SomeIntMethod());
+
+            Assert.Equal(15, mock2.Object.SomeIntMethod());
+
+            Assert.Equal(10, mock1.Object.SomeIntMethod());
+
+            Assert.Equal(0, fixture.Locate<ISomeInterface>().SomeIntMethod());
+        }
+
+        [Fact]
+        public void MoqFixture_MockDefaultSingletonFalseAndSingleton_ReturnsSingleton()
+        {
+            var fixture = new MoqFixture(defaultSingleton: false);
+
+            fixture.Mock<ISomeInterface>(m => m.Setup(x => x.SomeIntMethod()).Returns(20), singleton: true);
+
+            var mock1 = fixture.Mock<ISomeInterface>(m => m.Setup(x => x.SomeIntMethod()).Returns(10));
+
+            Assert.NotNull(mock1);
+
+            Assert.Equal(20, fixture.Mock<ISomeInterface>(singleton: true).Object.SomeIntMethod());
+
+            Assert.Equal(10, mock1.Object.SomeIntMethod());
+
+            Assert.Equal(20, fixture.Mock<ISomeInterface>(singleton: true).Object.SomeIntMethod());
+        }
     }
 }
