@@ -53,6 +53,32 @@ namespace SimpleFixture.Tests.FixtureTests
 
             Assert.Equal(1, behaviorCalled);
         }
+
+        [Fact]
+        public void Fixture_BehaviorWhen_AppliesCorrectly()
+        {
+            var fixture = new Fixture();
+
+            bool apply = false;
+            int behaviorCalled = 0;
+
+            fixture.Behavior.Add<SomeClass>((r, o) =>
+                                            {
+                                                behaviorCalled++;
+                                                return o;
+                                            })
+                                            .When((r,o) => apply);
+
+            var instance = fixture.Generate<SomeClass>();
+
+            Assert.Equal(0, behaviorCalled);
+
+            apply = true;
+
+            instance = fixture.Generate<SomeClass>();
+
+            Assert.Equal(1, behaviorCalled);
+        }
         #endregion
     }
 }
