@@ -111,7 +111,7 @@ var addressLine1 = fixture.Generate<string>("AddressLine1");
 ```
 
 ###Freeze
-Similar to Autofac there is a Freeze method that Generates a new instance and sets it as a Return value.
+Similar to Autofixture there is a Freeze method that Generates a new instance and sets it as a Return value.
 
 ```C#
 // Generate random int and set it as a Return
@@ -123,7 +123,7 @@ int randomInt = fixture.Freeze<int>(value: i => i.For<SomeClass>());
 ```
 
 ###Behavior
-Behavior allows you to apply cross cutting logic to all objects created by the fixture. Behavior allows you to apply a behavior to every object created or only specific types.
+Behavior allows you to apply cross cutting logic to all objects created by the fixture. You can apply your logic to all objects or just to specific types.
 
 ```C#
 // Execute SomeMethod on every object that is created by the fixture
