@@ -55,7 +55,7 @@ namespace SimpleFixture.Conventions.Named
             AddConvention(GovernementIdConvention, "GovernmentId", "SSN", "SocialSecurityNumber");
             AddConvention(PhoneNumberConvention, "Phone", "PhoneNumber", "CellPhone", "CellPhoneNumber", "MobilePhone", "MobilePhoneNumber", "HomePhone", "HomePhoneNumber","WorkPhone","WorkPhoneNumber");
 
-            AddConvention(AddressLineOneConvention,"Address", "AddressLine", "AddressLine1", "AddressLineOne", "AddrLine1", "HomeAddress1", "MailingAddress2");
+            AddConvention(AddressLineOneConvention,"Address", "AddressLine", "AddressLine1", "AddressLineOne", "AddrLine1", "HomeAddress1", "MailingAddress1");
             AddConvention(AddressLineTwoConvention, "AddressLine2", "AddressLineTwo", "AddrLine2", "HomeAddress2", "MailingAddress2");
             AddConvention(CityConvention, "City", "HomeCity", "MailingCity");
             AddConvention(StateConvention, "State", "StateProvince");
