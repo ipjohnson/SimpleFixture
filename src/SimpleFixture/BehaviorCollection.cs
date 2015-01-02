@@ -92,7 +92,6 @@ namespace SimpleFixture
             return whenFilter;
         }
 
-
         /// <summary>
         /// Apply all the behaviors in the collection to an instance
         /// </summary>
