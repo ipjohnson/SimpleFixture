@@ -243,6 +243,30 @@ namespace SimpleFixture
         }
         #endregion
 
+        #region Export
+        
+        /// <summary>
+        /// Export specific implementation as an interface, you must call As after
+        /// </summary>
+        /// <typeparam name="T">Type being exported</typeparam>
+        /// <returns></returns>
+        public ExportAs<T> Export<T>()
+        {
+            return new ExportAs<T>(this, false);
+        }
+
+        /// <summary>
+        /// Export specific implemantion as a singleton interface, you must call As after
+        /// </summary>
+        /// <typeparam name="T">type being exported</typeparam>
+        /// <returns></returns>
+        public ExportAs<T> ExportSingleton<T>()
+        {
+            return new ExportAs<T>(this, true);   
+        }
+
+        #endregion
+
         #region Add
 
         /// <summary>

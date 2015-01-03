@@ -70,6 +70,7 @@
     <Compile Include="DefaultFixtureConfiguration.cs" />
     <Compile Include="DI\GContainer.cs" />
     <Compile Include="DI\IGContainer.cs" />
+    <Compile Include="ExportAs.cs" />
     <Compile Include="Fixture.cs" />
     <Compile Include="IConvention.cs" />
     <Compile Include="ICustomizeModel.cs" />
