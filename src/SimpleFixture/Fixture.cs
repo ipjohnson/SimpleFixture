@@ -59,14 +59,17 @@ namespace SimpleFixture
         #endregion
 
         #region Locate
+
         /// <summary>
         /// Creates a new instance of the specified type. It does not populate any properties
         /// </summary>
         /// <param name="type">type to create</param>
+        /// <param name="requestName"></param>
+        /// <param name="constraints"></param>
         /// <returns>new instance</returns>
-        public object Locate(Type type)
+        public object Locate(Type type, string requestName = null, object constraints = null)
         {
-            DataRequest request = new DataRequest(null, this, type, string.Empty, false, null, null);
+            DataRequest request = new DataRequest(null, this, type, requestName, false, constraints, null);
 
             return Generate(request);
         }
@@ -76,9 +79,9 @@ namespace SimpleFixture
         /// </summary>
         /// <typeparam name="T">type to create</typeparam>
         /// <returns>new instance</returns>
-        public T Locate<T>()
+        public T Locate<T>(string requestName = null, object constraints = null)
         {
-            return (T)Locate(typeof(T));
+            return (T)Locate(typeof(T), requestName, constraints);
         }
         #endregion
 
