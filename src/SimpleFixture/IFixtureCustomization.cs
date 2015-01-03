@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SimpleFixture
 {
     /// <summary>
-    /// Objects implementing this interface can be used to customize a fixture
+    /// This interface allows you to package a set of customization for reuse. 
     /// </summary>
     public interface IFixtureCustomization
     {
