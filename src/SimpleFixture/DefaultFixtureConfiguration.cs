@@ -8,8 +8,14 @@ using SimpleFixture.Impl;
 
 namespace SimpleFixture
 {
+    /// <summary>
+    /// Default configuration for Fixture
+    /// </summary>
     public class DefaultFixtureConfiguration : GContainer, IFixtureConfiguration
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public DefaultFixtureConfiguration()
         {
             UseDefaultConventions = true;
@@ -34,10 +40,19 @@ namespace SimpleFixture
             Export<ICircularReferenceHandler>(g => new CircularReferenceHandler());
         }
 
+        /// <summary>
+        /// Use default conventions, true by default
+        /// </summary>
         public bool UseDefaultConventions { get; set; }
 
+        /// <summary>
+        /// Use named conventions, true by default
+        /// </summary>
         public bool UseNamedConventions { get; set; }
 
+        /// <summary>
+        /// Item count controls the how many instances should be constructed when populating enumerables
+        /// </summary>
         public int? ItemCount { get; set; }
     }
 }
