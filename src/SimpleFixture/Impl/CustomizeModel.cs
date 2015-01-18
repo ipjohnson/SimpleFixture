@@ -26,20 +26,20 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Provide function to create new instance of type
+        /// Provide a function for creating a new instance of T
         /// </summary>
-        /// <param name="newFunc">creation functions</param>
-        /// <returns>configuration object</returns>
+        /// <param name="newFunc">function to create new T</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> New(Func<T> newFunc)
         {
             return New(r => newFunc());
         }
 
         /// <summary>
-        /// Provide customization on creating a new instance of T
+        /// Provide a function for creating a new instance of T
         /// </summary>
-        /// <param name="newFunc">create func</param>
-        /// <returns>configuration object</returns>
+        /// <param name="newFunc">delegate that accepts a data request and returns T</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> New(Func<DataRequest, T> newFunc)
         {
             _complexModel.New = r => newFunc(r);
@@ -48,11 +48,11 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Provide customize creation logic for T
+        /// Provide function for creating a new instance of T that depends on TIn
         /// </summary>
-        /// <typeparam name="TIn">type of in value</typeparam>
-        /// <param name="factory">factory</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TIn">type for dependency</typeparam>
+        /// <param name="factory">new factory that takes TIn</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> NewFactory<TIn>(Func<TIn, T> factory)
         {
             return New(r =>
@@ -64,12 +64,12 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Provide customize creation logic for T
+        /// Provide function for creating a new instance of T that depends on TIn1 and TIn2
         /// </summary>
-        /// <typeparam name="TIn1">Value type 1</typeparam>
-        /// <typeparam name="TIn2">Value type 2</typeparam>
-        /// <param name="factory">creatation logic</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TIn1">first dependency type</typeparam>
+        /// <typeparam name="TIn2">second dependency type</typeparam>
+        /// <param name="factory">new factory that takes TIn1 and TIn2</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> NewFactory<TIn1, TIn2>(Func<TIn1, TIn2, T> factory)
         {
             return New(r =>
@@ -83,13 +83,13 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Provide customize creation logic for T
+        /// Provide function for creating a new instance of T that depends on TIn1, TIn2, and TIn3
         /// </summary>
-        /// <typeparam name="TIn1">Value Type 1</typeparam>
-        /// <typeparam name="TIn2">Value Type 2</typeparam>
-        /// <typeparam name="TIn3">Value Type 3</typeparam>
-        /// <param name="factory">creation logic</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TIn1">first dependency type</typeparam>
+        /// <typeparam name="TIn2">second dependency type</typeparam>
+        /// <typeparam name="TIn3">third dependency type</typeparam>
+        /// <param name="factory">new factory that takes TIn1, TIn2, and TIn3</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> NewFactory<TIn1, TIn2, TIn3>(Func<TIn1, TIn2, TIn3, T> factory)
         {
             return New(r =>
@@ -105,14 +105,14 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Provide customize creation logic for T
+        /// Provide function for creating a new instance of T that depends on TIn1, TIn2, TIn3, and TIn4
         /// </summary>
-        /// <typeparam name="TIn1">Value Type 1</typeparam>
-        /// <typeparam name="TIn2">Value Type 1</typeparam>
-        /// <typeparam name="TIn3">Value Type 1</typeparam>
-        /// <typeparam name="TIn4">Value Type 1</typeparam>
-        /// <param name="factory">creation logic</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TIn1">first dependency type</typeparam>
+        /// <typeparam name="TIn2">second dependency type</typeparam>
+        /// <typeparam name="TIn3">third dependency type</typeparam>
+        /// <typeparam name="TIn4">fourth dependency type</typeparam>
+        /// <param name="factory">new factory that takes TIn1, TIn2, TIn3, and TIn4</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> NewFactory<TIn1, TIn2, TIn3, TIn4>(Func<TIn1, TIn2, TIn3, TIn4, T> factory)
         {
             return New(r =>
@@ -130,36 +130,36 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Set a property to a specific value on creation
+        /// Set a value for a particular property on T
         /// </summary>
-        /// <typeparam name="TProp">property type</typeparam>
-        /// <param name="propertyFunc"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <typeparam name="TProp">type of property to set</typeparam>
+        /// <param name="propertyFunc">method to specify property (x => x.PropertyName)</param>
+        /// <param name="value">value to use when setting property</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, TProp value)
         {
             return Set(propertyFunc, r => value);
         }
 
         /// <summary>
-        /// Set a property to a specific value on creation
+        /// Set a value for a particular property on T
         /// </summary>
-        /// <typeparam name="TProp">proeprty type to set</typeparam>
-        /// <param name="propertyFunc">property to set</param>
-        /// <param name="valueFunc">value function</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TProp">type of property to set</typeparam>
+        /// <param name="propertyFunc">method to specify property (x => x.PropertyName)</param>
+        /// <param name="valueFunc">function to provide value</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, Func<TProp> valueFunc)
         {
             return Set(propertyFunc, r => valueFunc());
         }
 
         /// <summary>
-        /// Set a property to a specific value on creation
+        /// Set a value for a particular property on T
         /// </summary>
-        /// <typeparam name="TProp">property type to set</typeparam>
-        /// <param name="propertyFunc">property to set</param>
-        /// <param name="valueFunc">value func</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TProp">type of property to set</typeparam>
+        /// <param name="propertyFunc">method to specify property (x => x.PropertyName)</param>
+        /// <param name="valueFunc">function to provide value</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, Func<DataRequest, TProp> valueFunc)
         {
             MemberExpression member = propertyFunc.Body as MemberExpression;
@@ -175,33 +175,33 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Set a value to a specific set of properties
+        /// Set a specific value into a set of Properties specified by the matching func
         /// </summary>
-        /// <param name="matchingFunc">matching function</param>
-        /// <param name="value">value to set</param>
-        /// <returns>configuration object</returns>
+        /// <param name="matchingFunc">property matching func</param>
+        /// <param name="value">property value</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> SetProperties(Func<PropertyInfo, bool> matchingFunc, object value)
         {
             return SetProperties(matchingFunc, (r, p) => value);
         }
 
         /// <summary>
-        /// Set a value to a specific set of properties
+        /// Set a specific value into a set of Properties specified by the matching func
         /// </summary>
-        /// <param name="matchingFunc">matching function</param>
-        /// <param name="value">value to set</param>
-        /// <returns>configuration object</returns>
+        /// <param name="matchingFunc">property matching func</param>
+        /// <param name="value">func to be used to provide value</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> SetProperties(Func<PropertyInfo, bool> matchingFunc, Func<object> value)
         {
             return SetProperties(matchingFunc, (r, p) => value());
         }
 
         /// <summary>
-        /// Set a value to a specific set of properties
+        /// Set a specific value into a set of Properties specified by the matching func
         /// </summary>
-        /// <param name="matchingFunc">matching function</param>
-        /// <param name="value">value set function</param>
-        /// <returns>configuration object</returns>
+        /// <param name="matchingFunc">property matching func</param>
+        /// <param name="value">func to be used to provide value</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> SetProperties(Func<PropertyInfo, bool> matchingFunc, Func<DataRequest, PropertyInfo, object> value)
         {
             _complexModel.AddPropertiesValue(matchingFunc,value);
@@ -210,11 +210,11 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Skip a specific property
+        /// Skip a particular property from being populated
         /// </summary>
-        /// <typeparam name="TProp">property type that is being skipped</typeparam>
-        /// <param name="propertyFunc">property to skip</param>
-        /// <returns>configuration object</returns>
+        /// <typeparam name="TProp">property type</typeparam>
+        /// <param name="propertyFunc">property expression</param>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> Skip<TProp>(Expression<Func<T, TProp>> propertyFunc)
         {
             MemberExpression member = propertyFunc.Body as MemberExpression;
@@ -230,10 +230,10 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Specify a set of properties to skip
+        /// Skip a particular set of properties
         /// </summary>
         /// <param name="matchingFunc">property matching function</param>
-        /// <returns>configuration object</returns>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> SkipProperties(Func<PropertyInfo, bool> matchingFunc = null)
         {
             if (matchingFunc != null)
@@ -245,10 +245,10 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Specify properties to skip
+        /// Skip a particular set of properties
         /// </summary>
         /// <param name="matchingFunc">property matching function</param>
-        /// <returns>configuration object</returns>
+        /// <returns>customization instance</returns>
         public ICustomizeModel<T> SkipProperties(Func<DataRequest, PropertyInfo, bool> matchingFunc)
         {
             _complexModel.AddSkipMatchingProperty(matchingFunc);
@@ -257,10 +257,10 @@ namespace SimpleFixture.Impl
         }
 
         /// <summary>
-        /// Apply an action when creating instance
+        /// Apply a piece of logic to each instance being created
         /// </summary>
-        /// <param name="applyAction"></param>
-        /// <returns></returns>
+        /// <param name="applyAction">apply function</param>
+        /// <returns>customization instanc</returns>
         public ICustomizeModel<T> Apply(Action<T> applyAction)
         {
             _complexModel.AddApply(o => applyAction((T)o));
