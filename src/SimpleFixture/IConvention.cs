@@ -14,7 +14,7 @@ namespace SimpleFixture
         /// <summary>
         /// Value to return instead of null
         /// </summary>
-        public static object NoValue = new object();
+        public readonly static object NoValue = new object();
     }
 
     /// <summary>
