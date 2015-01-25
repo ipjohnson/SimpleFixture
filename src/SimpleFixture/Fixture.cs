@@ -244,6 +244,22 @@ namespace SimpleFixture
 
             return new ReturnConfiguration<T>(convention);
         }
+
+        /// <summary>
+        /// Return a set of T as an IEnumerable&lt;T&gt;
+        /// </summary>
+        /// <typeparam name="T">T Type for IEnumerable</typeparam>
+        /// <param name="set">set of T</param>
+        /// <returns>configuration object</returns>
+        public ReturnConfiguration<IEnumerable<T>> ReturnIEnumerable<T>(params T[] set)
+        {
+            var convention = new FilteredConvention<IEnumerable<T>>(request => set);
+
+            _returnConventions.AddConvention(convention);
+
+            return new ReturnConfiguration<IEnumerable<T>>(convention);
+        }
+
         #endregion
 
         #region Export
