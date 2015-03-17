@@ -105,5 +105,19 @@ namespace SimpleFixture.Tests.FixtureTests
 
             Assert.NotEqual(15, fixture.Generate<int>());
         }
+
+        [Fact]
+        public void Fixture_ReturnForOutOfOrder_GenerateCorrectValue()
+        {
+            var fixture = new Fixture();
+
+            fixture.Return(10).For<PropertiesClass>();
+            fixture.Return(5);
+
+            var propClass = fixture.Generate<PropertiesClass>();
+
+            Assert.NotNull(propClass);
+            Assert.Equal(10,propClass.IntValue1);
+        }
     }
 }

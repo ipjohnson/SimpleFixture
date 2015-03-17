@@ -21,7 +21,7 @@ namespace SimpleFixture.Conventions.Named
 
         public override ConventionPriority Priority
         {
-            get { return ConventionPriority.Low; }
+            get { return ConventionPriority.Last; }
         }
 
         public override object GenerateData(DataRequest request)

@@ -46,6 +46,17 @@ namespace SimpleFixture
         /// </summary>
         Last
     }
+
+    /// <summary>
+    /// Event args for when priority changes
+    /// </summary>
+    public class PriorityChangedEventArgs : EventArgs
+    {
+        /// <summary>
+        /// Priority
+        /// </summary>
+        public ConventionPriority Priority;
+    }
     
     /// <summary>
     /// Convention for satisifying a data request
@@ -56,6 +67,11 @@ namespace SimpleFixture
         /// Prioirity the convention should be looked at
         /// </summary>
         ConventionPriority Priority { get; }
+
+        /// <summary>
+        /// Priorit changed event
+        /// </summary>
+        event EventHandler<PriorityChangedEventArgs> PriorityChanged; 
 
         /// <summary>
         /// Generate data for the request, return Convention.NoValue if the convention has no value to provide

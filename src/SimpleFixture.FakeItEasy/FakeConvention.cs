@@ -25,6 +25,8 @@ namespace SimpleFixture.FakeItEasy
             get { return ConventionPriority.Last; }
         }
 
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+
         public object GenerateData(DataRequest request)
         {
             if (!request.RequestedType.IsInterface)

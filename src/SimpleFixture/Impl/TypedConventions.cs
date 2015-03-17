@@ -56,6 +56,11 @@ namespace SimpleFixture.Impl
         public ConventionPriority Priority { get; protected set; }
 
         /// <summary>
+        /// Priorit changed event
+        /// </summary>
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+
+        /// <summary>
         /// Generate data for the request
         /// </summary>
         /// <param name="request">data request</param>

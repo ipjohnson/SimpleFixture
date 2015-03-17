@@ -24,6 +24,7 @@ namespace SimpleFixture.Conventions
         }
 
         public ConventionPriority Priority { get { return ConventionPriority.Last; } }
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
         public object GenerateData(DataRequest request)
         {

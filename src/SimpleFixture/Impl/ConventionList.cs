@@ -19,18 +19,15 @@ namespace SimpleFixture.Impl
 
         public void AddConvention(IConvention convention)
         {
-            for (int i = 0; i < _conventions.Count; i++)
-            {
-                if (convention.Priority > _conventions[i].Priority)
+            InternalAddConvention(convention);
+
+            convention.PriorityChanged += 
+                (sender, args) =>
                 {
-                    continue;
-                }
+                    _conventions.Remove(convention);
 
-                _conventions.Insert(i,convention);
-                return;
-            }
-
-            _conventions.Add(convention);
+                    InternalAddConvention(convention);
+                };
         }
 
         public bool TryGetValue(DataRequest dataRequest, out object value)
@@ -54,6 +51,22 @@ namespace SimpleFixture.Impl
             }
 
             return returnValue;
+        }
+
+        private void InternalAddConvention(IConvention convention)
+        {
+            for (int i = 0; i < _conventions.Count; i++)
+            {
+                if (convention.Priority > _conventions[i].Priority)
+                {
+                    continue;
+                }
+
+                _conventions.Insert(i, convention);
+                return;
+            }
+
+            _conventions.Add(convention);
         }
     }
 }

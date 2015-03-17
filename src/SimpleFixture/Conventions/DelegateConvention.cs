@@ -15,6 +15,8 @@ namespace SimpleFixture.Conventions
             get { return ConventionPriority.Low; }
         }
 
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+
         public object GenerateData(DataRequest request)
         {
             if (typeof(MulticastDelegate).GetTypeInfo().IsAssignableFrom(request.RequestedType.GetTypeInfo()))

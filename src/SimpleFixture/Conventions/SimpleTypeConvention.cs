@@ -21,6 +21,11 @@ namespace SimpleFixture.Conventions
         }
 
         /// <summary>
+        /// Priorit changed event
+        /// </summary>
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+
+        /// <summary>
         /// Generate date for the request, return Constrain.NoValue instead of null
         /// </summary>
         /// <param name="request">data request</param>
@@ -33,6 +38,18 @@ namespace SimpleFixture.Conventions
         public virtual IEnumerable<Type> SupportedTypes
         {
             get { yield return typeof(T); }
+        }
+
+        /// <summary>
+        /// Raise priority changed event
+        /// </summary>
+        /// <param name="priority"></param>
+        protected void RaisePriorityChanged(ConventionPriority priority)
+        {
+            if (PriorityChanged != null)
+            {
+                PriorityChanged(this,new PriorityChangedEventArgs{ Priority = priority});
+            }
         }
     }
 }

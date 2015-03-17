@@ -23,6 +23,8 @@ namespace SimpleFixture.Conventions
 		    get { return ConventionPriority.Low; }
 	    }
 
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+
         public object GenerateData(DataRequest request)
         {
 			if(request.RequestedType.GetTypeInfo().IsEnum)
