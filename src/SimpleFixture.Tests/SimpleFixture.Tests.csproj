@@ -86,6 +86,7 @@
     <Compile Include="FixtureTests\Primitives\ShortFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\UIntFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\ULongFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\UriFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\UShortFixtureTests.cs" />
     <Compile Include="FixtureTests\ReturnTests.cs" />
     <Compile Include="MockTests\FakeTests.cs" />

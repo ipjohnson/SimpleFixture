@@ -65,6 +65,7 @@
     <Compile Include="Conventions\StringConvention.cs" />
     <Compile Include="Conventions\UIntConvention.cs" />
     <Compile Include="Conventions\ULongConvention.cs" />
+    <Compile Include="Conventions\UriConvention.cs" />
     <Compile Include="Conventions\UShortConvention.cs" />
     <Compile Include="DataRequest.cs" />
     <Compile Include="DefaultFixtureConfiguration.cs" />

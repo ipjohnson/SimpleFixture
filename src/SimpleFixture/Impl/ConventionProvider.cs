@@ -47,6 +47,7 @@ namespace SimpleFixture.Impl
             yield return new StringConvention(dataGenerator, helper);
             yield return new UIntConvention(dataGenerator, helper);
             yield return new ULongConvention(dataGenerator, helper);
+            yield return new UriConvention(helper);
             yield return new UShortConvention(dataGenerator, helper);
 
             yield return new ComplexConvention(configuration);
