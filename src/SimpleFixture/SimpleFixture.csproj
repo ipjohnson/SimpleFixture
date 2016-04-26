@@ -54,6 +54,9 @@
     <Compile Include="Conventions\IntConvention.cs" />
     <Compile Include="Conventions\ListConvention.cs" />
     <Compile Include="Conventions\LongConvention.cs" />
+    <Compile Include="Conventions\Named\BaseNamedConvention.cs" />
+    <Compile Include="Conventions\Named\DoubleNamedConvention.cs" />
+    <Compile Include="Conventions\Named\IntNamedConvention.cs" />
     <Compile Include="Conventions\Named\StringNamedConvention.Address.cs" />
     <Compile Include="Conventions\Named\StringNamedConvention.cs" />
     <Compile Include="Conventions\Named\StringNamedConvention.Person.cs" />
