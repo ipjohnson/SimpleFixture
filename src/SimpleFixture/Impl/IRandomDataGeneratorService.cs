@@ -45,6 +45,10 @@ namespace SimpleFixture.Impl
 
         decimal NextDecimal(decimal? min = null, decimal? max = null);
 
+        DateTime NextDateTime(DateTime? min = null, DateTime? max = null);
+
+        TimeSpan NextTimeSpan(TimeSpan? min = null, TimeSpan? max = null);
+
 	    object NextEnum(Type enumType);
 
         T NextEnum<T>();

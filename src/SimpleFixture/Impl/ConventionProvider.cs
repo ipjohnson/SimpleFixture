@@ -45,6 +45,7 @@ namespace SimpleFixture.Impl
             yield return new SByteConvention(dataGenerator, helper);
             yield return new ShortConvention(dataGenerator, helper);
             yield return new StringConvention(dataGenerator, helper);
+            yield return new TimeSpanConvention(dataGenerator, helper);
             yield return new UIntConvention(dataGenerator, helper);
             yield return new ULongConvention(dataGenerator, helper);
             yield return new UriConvention(helper);

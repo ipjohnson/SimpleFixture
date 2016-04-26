@@ -42,11 +42,26 @@ namespace SimpleFixture.Impl
 
 		public long NextLong(long min = long.MinValue, long max = long.MaxValue)
         {
+            if(min == long.MinValue && max == long.MaxValue)
+            {
+                if(NextBool())
+                {
+                    return (long)(_random.NextDouble() * max);
+                }
+
+                return (long)(_random.NextDouble() * min);
+            }
+
             return (long)((_random.NextDouble() * (max - min)) + min);
         }
 
 		public ulong NextULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
         {
+            if (min == ulong.MinValue && max == ulong.MaxValue)
+            {
+                return (ulong)(_random.NextDouble() * max);                
+            }
+
             return (ulong)((_random.NextDouble() * (max - min)) + min);
         }
 
@@ -140,9 +155,7 @@ namespace SimpleFixture.Impl
                     return BuildString(_allCharacters, min, max);
             }
         }
-
         
-
         public double NextDouble(double min = Double.MinValue, double max = Double.MaxValue)
         {
             double range = max - min;
@@ -188,6 +201,40 @@ namespace SimpleFixture.Impl
 	    public short NextShort(short min = short.MinValue, short max = short.MaxValue)
         {
             return Convert.ToInt16((int)((_random.NextDouble() * (max - min)) + min));
+        }
+
+        public DateTime NextDateTime(DateTime? min = default(DateTime?), DateTime? max = default(DateTime?))
+        {
+            if(!min.HasValue)
+            {
+                min = DateTime.MinValue;
+            }
+
+            if(!max.HasValue)
+            {
+                max = DateTime.MaxValue;
+            }
+
+            long ticks = NextLong(min.Value.Ticks, max.Value.Ticks);
+
+            return new DateTime(ticks);
+        }
+
+        public TimeSpan NextTimeSpan(TimeSpan? min = default(TimeSpan?), TimeSpan? max = default(TimeSpan?))
+        {
+            if (!min.HasValue)
+            {
+                min = TimeSpan.MinValue;
+            }
+
+            if (!max.HasValue)
+            {
+                max = TimeSpan.MaxValue;
+            }
+
+            long ticks = NextLong(min.Value.Ticks, max.Value.Ticks);
+
+            return new TimeSpan(ticks);
         }
 
         private string BuildString(List<char> characters, int min, int max)

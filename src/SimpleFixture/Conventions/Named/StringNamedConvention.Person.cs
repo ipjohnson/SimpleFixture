@@ -467,6 +467,12 @@ namespace SimpleFixture.Conventions.Named
 
         #endregion
 
+
+        private string DateOfBirthConvention(DataRequest arg)
+        {
+            return _dataGenerator.NextDateTime(DateTime.Today.AddYears(-100), DateTime.Today).ToString("MM/dd/yyyy");
+        }
+
         protected virtual string EmailConvention(DataRequest request)
         {
             string firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");

@@ -71,7 +71,14 @@ namespace SimpleFixture.Impl
                 return (TProp)returnValue;
             }
 
-            return (TProp)Convert.ChangeType(returnValue, typeof(TProp));
+            try
+            {
+                return (TProp)Convert.ChangeType(returnValue, typeof(TProp));
+            }
+            catch(Exception)
+            {
+                return defualtValue;
+            }
         }
     }
 }
