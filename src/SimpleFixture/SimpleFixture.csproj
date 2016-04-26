@@ -55,8 +55,6 @@
     <Compile Include="Conventions\ListConvention.cs" />
     <Compile Include="Conventions\LongConvention.cs" />
     <Compile Include="Conventions\Named\BaseNamedConvention.cs" />
-    <Compile Include="Conventions\Named\DoubleNamedConvention.cs" />
-    <Compile Include="Conventions\Named\IntNamedConvention.cs" />
     <Compile Include="Conventions\Named\StringNamedConvention.Address.cs" />
     <Compile Include="Conventions\Named\StringNamedConvention.cs" />
     <Compile Include="Conventions\Named\StringNamedConvention.Person.cs" />
@@ -66,6 +64,7 @@
     <Compile Include="Conventions\ShortConvention.cs" />
     <Compile Include="Conventions\SimpleTypeConvention.cs" />
     <Compile Include="Conventions\StringConvention.cs" />
+    <Compile Include="Conventions\TimeSpanConvention.cs" />
     <Compile Include="Conventions\UIntConvention.cs" />
     <Compile Include="Conventions\ULongConvention.cs" />
     <Compile Include="Conventions\UriConvention.cs" />
