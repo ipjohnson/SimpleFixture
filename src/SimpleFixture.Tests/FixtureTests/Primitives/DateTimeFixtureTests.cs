@@ -73,6 +73,7 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
             Assert.NotNull(array);
             Assert.True(array.Length == 0);
         }
+
         #endregion
 
         #region Min/Max Tests
