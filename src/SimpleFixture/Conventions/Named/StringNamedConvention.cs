@@ -22,7 +22,7 @@ namespace SimpleFixture.Conventions.Named
             AddConvention(PasswordConvention,"Password");
             AddConvention(HeightConvention,"Height");
             AddConvention(WeightConvention,"Weight");
-            AddConvention(DateOfBirthConvention, "DateOfBirth", "DOB");
+            AddConvention(DateOfBirthConvention, "DateOfBirth", "DOB","Date");
             AddConvention(EmailConvention,"Email","EmailAddress","EmailAddr");
             AddConvention(GovernementIdConvention, "GovernmentId", "SSN", "SocialSecurityNumber");
             AddConvention(PhoneNumberConvention, "Phone", "PhoneNumber", "CellPhone", "CellPhoneNumber", "MobilePhone", "MobilePhoneNumber", "HomePhone", "HomePhoneNumber","WorkPhone","WorkPhoneNumber");
