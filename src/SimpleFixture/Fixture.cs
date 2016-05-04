@@ -275,6 +275,17 @@ namespace SimpleFixture
         }
 
         /// <summary>
+        /// Export a type as something
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TExport"></typeparam>
+        /// <returns></returns>
+        public ReturnConfiguration<TExport> ExportAs<T,TExport>() where T : TExport
+        {
+            return new ExportAs<T>(this, false).As<TExport>();
+        }
+
+        /// <summary>
         /// Export specific implemantion as a singleton interface, you must call As after
         /// </summary>
         /// <typeparam name="T">type being exported</typeparam>
@@ -282,6 +293,17 @@ namespace SimpleFixture
         public ExportAs<T> ExportSingleton<T>()
         {
             return new ExportAs<T>(this, true);   
+        }
+
+        /// <summary>
+        /// Export specific implemantion as a singleton interface
+        /// </summary>
+        /// <typeparam name="T">type being exported</typeparam>
+        /// <typeparam name="TExport">exporting interface</typeparam>
+        /// <returns></returns>
+        public ReturnConfiguration<TExport> ExportSingletonAs<T, TExport>() where T : TExport
+        {
+            return new ExportAs<T>(this, true).As<TExport>();
         }
 
         #endregion
