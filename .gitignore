@@ -3,3 +3,15 @@
 ################################################################################
 
 /Output/Tests
+*.suo
+/src/packages
+/src/SimpleFixture/bin/Debug
+/src/SimpleFixture/obj/Debug
+/src/SimpleFixture.FakeItEasy/bin/Debug
+/src/SimpleFixture.FakeItEasy/obj/Debug
+/src/SimpleFixture.Moq/bin/Debug
+/src/SimpleFixture.Moq/obj/Debug
+/src/SimpleFixture.NSubstitute/bin/Debug
+/src/SimpleFixture.NSubstitute/obj/Debug
+/src/SimpleFixture.Tests/bin/Debug
+/src/SimpleFixture.Tests/obj/Debug
