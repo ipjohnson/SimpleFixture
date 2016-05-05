@@ -29,8 +29,10 @@ namespace SimpleFixture.Conventions
 
             char minValue = _helper.GetValue(request.Constraints, char.MinValue, "min", "minvalue");
             char maxValue = _helper.GetValue(request.Constraints, char.MaxValue, "max", "maxvalue");
+            
+            MinMaxValue<char> minMax = _helper.GetMinMax(request, minValue, maxValue);
 
-            return _dataGenerator.NextChar(minValue, maxValue);
+            return _dataGenerator.NextChar(minMax.Min, minMax.Max);
         }
     }
 }

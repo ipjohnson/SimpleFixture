@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleFixture.Impl;
+using System.Reflection;
 
 namespace SimpleFixture.Conventions.Named
 {
@@ -34,6 +35,61 @@ namespace SimpleFixture.Conventions.Named
             AddConvention(StateAbbreviation, "StateAbbreviation");
             AddConvention(PostalCodeConvention, "PostalCode", "ZipCode", "Zip", "HomeZip", "MailingZip");
             AddConvention(CountryConvention, "Country", "HomeCountry","MailingCountry");
+        }
+
+        public override object GenerateData(DataRequest request)
+        {
+            var returnValue =  base.GenerateData(request);
+
+            if(returnValue == Convention.NoValue && request.ExtraInfo is MemberInfo)
+            {
+                var memberInfo = (MemberInfo)request.ExtraInfo;
+
+                foreach (var attribute in memberInfo.GetCustomAttributes())
+                {
+                    string attributeName = attribute.GetType().Name;
+
+                    switch(attributeName)
+                    {
+                        case "EmailAddressAttribute":
+                            returnValue = EmailConvention(request);
+                            break;
+                        case "PhoneAttribute":
+                            returnValue = PhoneNumberConvention(request);
+                            break;
+                        case "UrlAttribute":
+                            var uriConvention = new UriConvention(_helper);
+
+                            returnValue = uriConvention.GenerateData(request).ToString();
+                            break;                           
+                    }
+                }
+            }
+
+            if(returnValue is string && request.ExtraInfo is MemberInfo)
+            {
+                var stringValue = (string)returnValue;
+                var memberInfo = (MemberInfo)request.ExtraInfo;
+
+                var stringLengthAttr = memberInfo.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == "StringLengthAttribute");
+
+                if(stringLengthAttr != null)
+                {
+                    var minLength = (int)stringLengthAttr.GetType().GetRuntimeProperty("MinLength").GetValue(stringLengthAttr);
+                    var maxLength = (int)stringLengthAttr.GetType().GetRuntimeProperty("MaxLength").GetValue(stringLengthAttr);
+
+                    if(stringValue.Length < minLength)
+                    {
+                        returnValue = new string('1', minLength - stringValue.Length) + stringValue;
+                    }
+                    else if(stringValue.Length > maxLength)
+                    {
+                        returnValue = stringValue.Substring(0, maxLength);
+                    }
+                }
+            }
+
+            return returnValue;
         }
     }
 }

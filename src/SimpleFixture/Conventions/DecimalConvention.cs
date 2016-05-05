@@ -30,7 +30,9 @@ namespace SimpleFixture.Conventions
             decimal min = _helper.GetValue(request.Constraints, decimal.MinValue, "min", "minValue");
             decimal max = _helper.GetValue(request.Constraints, decimal.MaxValue, "max", "maxValue");
 
-            return _dataGenerator.NextDecimal(min, max);
+            MinMaxValue<decimal> minMax = _helper.GetMinMax(request, min, max);
+
+            return _dataGenerator.NextDecimal(minMax.Min, minMax.Max);
         }
     }
 }

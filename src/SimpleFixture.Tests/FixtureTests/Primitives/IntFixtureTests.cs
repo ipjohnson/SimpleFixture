@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SimpleFixture.Conventions;
 using Xunit;
+using SimpleFixture.Tests.Classes;
 
 namespace SimpleFixture.Tests.FixtureTests.Primitives
 {
@@ -124,6 +125,17 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
                 Assert.True(value >= min);
                 Assert.True(value <= max);
             }
+        }
+
+        [Fact]
+        public void Fixture_GenerateIntWithRangeAttribute_ReturnsValueInRange()
+        {
+            var fixture = new Fixture();
+
+            var rangedClass = fixture.Generate<RangedClass>();
+
+            Assert.NotNull(rangedClass);
+            Assert.InRange(rangedClass.IntValue, 100, 200);
         }
         #endregion
     }

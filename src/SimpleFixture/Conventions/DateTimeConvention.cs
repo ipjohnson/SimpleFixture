@@ -46,10 +46,12 @@ namespace SimpleFixture.Conventions
             {
                 max = min.Value.AddYears(100);
             }
+            
+            MinMaxValue<DateTime> minMax = _helper.GetMinMax(request, min.Value, max.Value);
 
-            var timeSpan = max.Value.Subtract(min.Value);
+            var timeSpan = minMax.Max.Subtract(minMax.Min);
 
-            return min.Value.AddSeconds(_dataGenerator.NextDouble(0, timeSpan.TotalSeconds));
+            return minMax.Min.AddSeconds(_dataGenerator.NextDouble(0, timeSpan.TotalSeconds));
         }
     }
 }

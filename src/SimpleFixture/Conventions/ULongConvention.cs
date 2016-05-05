@@ -30,7 +30,9 @@ namespace SimpleFixture.Conventions
 			ulong minValue = _constraintHelper.GetValue(request.Constraints, ulong.MinValue, "min", "minValue");
 			ulong maxValue = _constraintHelper.GetValue(request.Constraints, ulong.MaxValue, "max", "maxValue");
 
-			return _dataGenerator.NextULong(minValue, maxValue);
+            MinMaxValue<ulong> minMax = _constraintHelper.GetMinMax(request, minValue, maxValue);
+
+            return _dataGenerator.NextULong(minMax.Min, minMax.Max);
         }
     }
 }

@@ -29,8 +29,10 @@ namespace SimpleFixture.Conventions
 
             byte minValue = _helper.GetValue(request.Constraints, byte.MinValue, "min", "minvalue");
             byte maxValue = _helper.GetValue(request.Constraints, byte.MaxValue, "max", "maxvalue");
+            
+            MinMaxValue<byte> minMax = _helper.GetMinMax(request, minValue, maxValue);
 
-            return _dataGenerator.NextByte(minValue, maxValue);
+            return _dataGenerator.NextByte(minMax.Min, minMax.Max);
         }
     }
 }

@@ -30,7 +30,9 @@ namespace SimpleFixture.Conventions
             TimeSpan min = _helper.GetValue(request.Constraints, TimeSpan.MinValue, "min", "minValue");
             TimeSpan max = _helper.GetValue(request.Constraints, TimeSpan.MaxValue, "max", "maxValue");
 
-            return _dataGenerator.NextTimeSpan(min, max);
+            MinMaxValue<TimeSpan> minMax = _helper.GetMinMax(request, min, max);
+
+            return _dataGenerator.NextTimeSpan(minMax.Min, minMax.Max);
         }
     }
 }

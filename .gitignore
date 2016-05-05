@@ -15,3 +15,5 @@
 /src/SimpleFixture.NSubstitute/obj/Debug
 /src/SimpleFixture.Tests/bin/Debug
 /src/SimpleFixture.Tests/obj/Debug
+/src/SimpleFixture.xUnit/bin/Debug
+/src/SimpleFixture.xUnit/obj/Debug

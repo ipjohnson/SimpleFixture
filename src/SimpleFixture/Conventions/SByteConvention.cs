@@ -30,7 +30,9 @@ namespace SimpleFixture.Conventions
             sbyte minValue = _helper.GetValue(request.Constraints, sbyte.MinValue, "min", "minvalue");
             sbyte maxValue = _helper.GetValue(request.Constraints, sbyte.MaxValue, "max", "maxvalue");
 
-            return _dataGenerator.NextSByte(minValue, maxValue);
+            MinMaxValue<sbyte> minMax = _helper.GetMinMax(request, minValue, maxValue);
+
+            return _dataGenerator.NextSByte(minMax.Min, minMax.Max);
         }
     }
 }

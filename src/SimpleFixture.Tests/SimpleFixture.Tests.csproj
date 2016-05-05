@@ -44,6 +44,7 @@
       <HintPath>..\packages\NSubstitute.1.8.0.0\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -72,9 +73,11 @@
     <Compile Include="Classes\ImportSomeInterface.cs" />
     <Compile Include="Classes\ISomeInterface.cs" />
     <Compile Include="Classes\PropertiesClass.cs" />
+    <Compile Include="Classes\RangedClass.cs" />
     <Compile Include="Classes\SomeClass.cs" />
     <Compile Include="FixtureTests\BehaviorTests.cs" />
     <Compile Include="FixtureTests\Complex\ComparerConventionTests.cs" />
+    <Compile Include="FixtureTests\Complex\ComplexConstraintTests.cs" />
     <Compile Include="FixtureTests\Complex\DelegateFixtureTests.cs" />
     <Compile Include="FixtureTests\Complex\DictionaryTests.cs" />
     <Compile Include="FixtureTests\Complex\ListTests.cs" />

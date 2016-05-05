@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.Moq", "Simple
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.FakeItEasy", "SimpleFixture.FakeItEasy\SimpleFixture.FakeItEasy.csproj", "{53E18A47-A54F-44E8-80FA-8F308477F2BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFixture.xUnit", "SimpleFixture.xUnit\SimpleFixture.xUnit.csproj", "{ACD535BF-4530-4CF2-90CA-BC1EA2C18B3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{53E18A47-A54F-44E8-80FA-8F308477F2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E18A47-A54F-44E8-80FA-8F308477F2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53E18A47-A54F-44E8-80FA-8F308477F2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD535BF-4530-4CF2-90CA-BC1EA2C18B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD535BF-4530-4CF2-90CA-BC1EA2C18B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD535BF-4530-4CF2-90CA-BC1EA2C18B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD535BF-4530-4CF2-90CA-BC1EA2C18B3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,7 +30,9 @@ namespace SimpleFixture.Conventions
             int minValue = _constraintHelper.GetValue(request.Constraints, int.MinValue, "min", "minValue");
             int maxValue = _constraintHelper.GetValue(request.Constraints, int.MaxValue, "max", "maxValue");
 
-            return _dataGenerator.NextInt(minValue, maxValue);
+            MinMaxValue<int> minMax = _constraintHelper.GetMinMax(request, minValue, maxValue);
+
+            return _dataGenerator.NextInt(minMax.Min, minMax.Max);
         }
     }
 }

@@ -7,13 +7,55 @@ using System.Threading.Tasks;
 
 namespace SimpleFixture.Impl
 {
+    public class MinMaxValue<T>
+    {
+        public T Min { get; set; }
+
+        public T Max { get; set; }
+    }
+
     public interface IConstraintHelper
     {
         TProp GetValue<TProp>(object constraintValue, TProp defualtValue, params string[] propertyNames);
+
+        MinMaxValue<T> GetMinMax<T>(DataRequest request, T min, T max) where T : IComparable;
     }
 
     public class ConstraintHelper : IConstraintHelper
     {
+        public MinMaxValue<T> GetMinMax<T>(DataRequest request, T min, T max) where T : IComparable
+        {
+            MinMaxValue<T> returnValue = new MinMaxValue<T> { Min = min, Max = max };
+
+            var memberInfo = request.ExtraInfo as MemberInfo;
+
+            if(memberInfo != null)
+            {
+                var attribute = memberInfo.GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
+
+                if(attribute != null)
+                {
+                    var minProperty = attribute.GetType().GetRuntimeProperty("Minimum");
+                    var maxProperty = attribute.GetType().GetRuntimeProperty("Maximum");
+                    
+                    T localMin = (T)Convert.ChangeType( minProperty.GetValue(attribute), typeof(T));
+                    T localMax = (T)Convert.ChangeType(maxProperty.GetValue(attribute), typeof(T));
+
+                    if(localMax.CompareTo(returnValue.Max) < 0)
+                    {
+                        returnValue.Max = localMax;
+                    }
+
+                    if(localMin.CompareTo(returnValue.Min) > 0)
+                    {
+                        returnValue.Min = localMin;
+                    }
+                }
+            }
+
+            return returnValue;
+        }
+
         public TProp GetValue<TProp>(object constraintValue, TProp defualtValue, params string[] propertyNames)
         {
             if (constraintValue == null)
