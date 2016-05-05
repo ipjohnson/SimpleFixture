@@ -36,6 +36,11 @@
     <DocumentationFile>bin\Release\SimpleFixture.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DataConfigurationAttribute.cs" />
+    <Compile Include="Attributes\FixtureInitializationAttribute.cs" />
+    <Compile Include="Attributes\FreezeAttribute.cs" />
+    <Compile Include="Attributes\GenerateAttribute.cs" />
+    <Compile Include="Attributes\LocateAttribute.cs" />
     <Compile Include="BehaviorCollection.cs" />
     <Compile Include="Conventions\ArrayConvention.cs" />
     <Compile Include="Conventions\BoolConvention.cs" />
