@@ -103,6 +103,7 @@
     <Compile Include="FixtureTests\Primitives\LongFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\SByteFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\ShortFixtureTests.cs" />
+    <Compile Include="FixtureTests\Primitives\StringFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\TimeSpanTests.cs" />
     <Compile Include="FixtureTests\Primitives\UIntFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\ULongFixtureTests.cs" />

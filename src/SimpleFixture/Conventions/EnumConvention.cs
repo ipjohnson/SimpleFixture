@@ -12,7 +12,6 @@ namespace SimpleFixture.Conventions
     {
 		private readonly IRandomDataGeneratorService _dataGenerator;
 
-
 		public EnumConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper constraintHelper)
         {
             _dataGenerator = dataGenerator;

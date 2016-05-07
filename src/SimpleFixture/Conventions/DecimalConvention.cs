@@ -10,14 +10,14 @@ namespace SimpleFixture.Conventions
     public class DecimalConvention : SimpleTypeConvention<decimal>
     {
         private readonly IRandomDataGeneratorService _dataGenerator;
-        private readonly IConstraintHelper _helper;
+        private readonly IConstraintHelper _constraintHelper;
 
         public static decimal LocateValue = 5;
 
         public DecimalConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper constraintHelper)
         {
             _dataGenerator = dataGenerator;
-            _helper = constraintHelper;
+            _constraintHelper = constraintHelper;
         }
 
         public override object GenerateData(DataRequest request)
@@ -27,10 +27,15 @@ namespace SimpleFixture.Conventions
                 return LocateValue;
             }
 
-            decimal min = _helper.GetValue(request.Constraints, decimal.MinValue, "min", "minValue");
-            decimal max = _helper.GetValue(request.Constraints, decimal.MaxValue, "max", "maxValue");
+            MinMaxValue<decimal> minMax = _constraintHelper.GetMinMax(request, decimal.MinValue, decimal.MaxValue);
 
-            MinMaxValue<decimal> minMax = _helper.GetMinMax(request, min, max);
+            minMax.Min = _constraintHelper.GetValue(request.Constraints, minMax.Min, "min", "minValue");
+            minMax.Max = _constraintHelper.GetValue(request.Constraints, minMax.Max, "max", "maxValue");
+
+            if (minMax.Min.CompareTo(minMax.Max) > 0)
+            {
+                minMax.Min = minMax.Max;
+            }
 
             return _dataGenerator.NextDecimal(minMax.Min, minMax.Max);
         }

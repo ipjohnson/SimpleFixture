@@ -10,14 +10,14 @@ namespace SimpleFixture.Conventions
     public class DoubleConvention : SimpleTypeConvention<double>
     {
         private readonly IRandomDataGeneratorService _dataGenerator;
-        private readonly IConstraintHelper _helper;
+        private readonly IConstraintHelper _constraintHelper;
 
         public static double LocateValue = 5;
 
         public DoubleConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper constraintHelper)
         {
             _dataGenerator = dataGenerator;
-            _helper = constraintHelper;
+            _constraintHelper = constraintHelper;
         }
 
         public override object GenerateData(DataRequest request)
@@ -26,11 +26,16 @@ namespace SimpleFixture.Conventions
             {
                 return LocateValue;
             }
+            
+            MinMaxValue<double> minMax = _constraintHelper.GetMinMax(request, double.MinValue, double.MaxValue);
 
-            double min = _helper.GetValue(request.Constraints, double.MinValue, "min", "minValue");
-            double max = _helper.GetValue(request.Constraints, double.MaxValue, "max", "maxValue");
+            minMax.Min = _constraintHelper.GetValue(request.Constraints, minMax.Min, "min", "minValue");
+            minMax.Max = _constraintHelper.GetValue(request.Constraints, minMax.Max, "max", "maxValue");
 
-            MinMaxValue<double> minMax = _helper.GetMinMax(request, min, max);
+            if (minMax.Min.CompareTo(minMax.Max) > 0)
+            {
+                minMax.Min = minMax.Max;
+            }
 
             return _dataGenerator.NextDouble(minMax.Min, minMax.Max);
         }

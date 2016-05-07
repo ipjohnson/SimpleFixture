@@ -27,10 +27,15 @@ namespace SimpleFixture.Conventions
                 return LocateValue;
             }
 
-			short minValue = _constraintHelper.GetValue(request.Constraints, short.MinValue, "min", "minValue");
-			short maxValue = _constraintHelper.GetValue(request.Constraints, short.MaxValue, "max", "maxValue");
+            MinMaxValue<short> minMax = _constraintHelper.GetMinMax(request, short.MinValue, short.MaxValue);
 
-            MinMaxValue<short> minMax = _constraintHelper.GetMinMax(request, minValue, maxValue);
+            minMax.Min = _constraintHelper.GetValue(request.Constraints, minMax.Min, "min", "minValue");
+            minMax.Max = _constraintHelper.GetValue(request.Constraints, minMax.Max, "max", "maxValue");
+
+            if (minMax.Min.CompareTo(minMax.Max) > 0)
+            {
+                minMax.Min = minMax.Max;
+            }
 
             return _dataGenerator.NextShort(minMax.Min, minMax.Max);
         }

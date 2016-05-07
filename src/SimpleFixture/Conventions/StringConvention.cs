@@ -27,16 +27,29 @@ namespace SimpleFixture.Conventions
             {
                 return LocateValue;
             }
-
-            int minLength = _constraintHelper.GetValue(request.Constraints, 5, "min", "minlength");
-            int maxLength = _constraintHelper.GetValue(request.Constraints, 16, "max", "maxlength");
-            MinMaxValue<int> lengthMinMax = new MinMaxValue<int> { Max = maxLength, Min = minLength };
+            MinMaxValue<int> lengthMinMax;
 
             if (request.ExtraInfo is MemberInfo)
             {
-                lengthMinMax = GetMemberInfoStringLength(request.ExtraInfo as MemberInfo,minLength, maxLength );
-            }
+                lengthMinMax = GetMemberInfoStringLength(request.ExtraInfo as MemberInfo);
 
+                if(lengthMinMax.Min < 0)
+                {
+                    lengthMinMax.Min = 5;
+                }
+                if(lengthMinMax.Max == int.MaxValue)
+                {
+                    lengthMinMax.Max = 16;
+                }
+            }
+            else
+            {
+                lengthMinMax = new MinMaxValue<int> { Min = 5, Max = 16 };
+            }            
+
+            lengthMinMax.Min = _constraintHelper.GetValue(request.Constraints, lengthMinMax.Min, "min", "minlength");
+            lengthMinMax.Max = _constraintHelper.GetValue(request.Constraints, lengthMinMax.Max, "max", "maxlength");
+            
             string prefix = _constraintHelper.GetValue(request.Constraints, string.Empty, "prefix", "pre", "seed");
 
             if (!string.IsNullOrEmpty(prefix))
@@ -55,12 +68,12 @@ namespace SimpleFixture.Conventions
 
             StringType stringType = _constraintHelper.GetValue(request.Constraints, StringType.MostCharacter, "stringType", "Type");
 
-            return prefix + _dataGenerator.NextString(stringType, minLength, maxLength) + postfix;
+            return prefix + _dataGenerator.NextString(stringType, lengthMinMax.Min, lengthMinMax.Max) + postfix;
         }
 
-        private MinMaxValue<int> GetMemberInfoStringLength(MemberInfo memberInfo, int minLength, int maxLength)
+        private MinMaxValue<int> GetMemberInfoStringLength(MemberInfo memberInfo)
         {
-            MinMaxValue<int> returnValue = new MinMaxValue<int> { Min = minLength, Max = maxLength };
+            MinMaxValue<int> returnValue = new MinMaxValue<int> { Min = -1, Max = int.MaxValue };
 
             var attribute = memberInfo.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == "StringLengthAttribute");
 
