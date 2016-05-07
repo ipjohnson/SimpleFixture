@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SimpleFixture.xUnit.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleFixture\SimpleFixture.csproj">
