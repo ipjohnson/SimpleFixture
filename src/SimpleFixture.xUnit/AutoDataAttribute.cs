@@ -1,4 +1,5 @@
 ﻿using SimpleFixture.Attributes;
+using SimpleFixture.xUnit.Impl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -194,7 +195,26 @@ namespace SimpleFixture.xUnit
 
         private Fixture CreateFixture(MethodInfo testMethod)
         {
-            return new Fixture();
+            Fixture fixture;
+            var attribute = ReflectionHelper.GetAttribute<FixtureCreationAttribute>(testMethod);
+
+            if(attribute != null)
+            {
+                fixture = attribute.CreateFixture();
+            }
+            else
+            {
+                fixture = new Fixture();
+            }
+
+            var initializeAttribute = ReflectionHelper.GetAttribute<FixtureInitializationAttribute>(testMethod);
+
+            if(initializeAttribute != null)
+            {
+                initializeAttribute.Initialize(fixture);
+            }
+
+            return fixture;
         }
     }
 }
