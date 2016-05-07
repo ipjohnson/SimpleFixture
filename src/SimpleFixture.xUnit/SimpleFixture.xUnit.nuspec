@@ -13,6 +13,9 @@
     <releaseNotes>$releaseNotes$</releaseNotes>
     <copyright>Copyright ©  2016</copyright>
     <tags>Test Fixture Data Generation SimpleFixture xUnit</tags>
-    <dependencies />
+    <dependencies>
+      <dependency id="xunit" version="2.1.0" />
+      <dependency id="SimpleFixture" version="$version$"/>
+    </dependencies>
   </metadata>
 </package>
