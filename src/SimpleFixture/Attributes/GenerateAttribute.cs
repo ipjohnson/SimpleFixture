@@ -8,10 +8,10 @@ namespace SimpleFixture.Attributes
 {
     public class GenerateAttribute : Attribute
     {
-        public object Min { get; set; }
+        public virtual object Min { get; set; }
 
-        public object Max { get; set; }
+        public virtual object Max { get; set; }
 
-        public string ConstraintName { get; set; }
+        public virtual string ConstraintName { get; set; }
     }
 }

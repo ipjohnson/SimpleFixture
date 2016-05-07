@@ -37,6 +37,14 @@
     <Reference Include="FakeItEasy">
       <HintPath>..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
+    <Reference Include="FluentAssertions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.5.0\lib\net45\FluentAssertions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentAssertions.Core, Version=4.5.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentAssertions.4.5.0\lib\net45\FluentAssertions.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
     </Reference>
@@ -107,6 +115,7 @@
     <Compile Include="FixtureTests\NamedConventions\AddressStringConventionTests.cs" />
     <Compile Include="FixtureTests\NamedConventions\PersonStringConventionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="xUnitTests\AutoDataAttributeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimpleFixture.FakeItEasy\SimpleFixture.FakeItEasy.csproj">
@@ -120,6 +129,10 @@
     <ProjectReference Include="..\SimpleFixture.NSubstitute\SimpleFixture.NSubstitute.csproj">
       <Project>{8e289544-036f-415c-b963-bb5bc9f06d15}</Project>
       <Name>SimpleFixture.NSubstitute</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleFixture.xUnit\SimpleFixture.xUnit.csproj">
+      <Project>{acd535bf-4530-4cf2-90ca-bc1ea2c18b3d}</Project>
+      <Name>SimpleFixture.xUnit</Name>
     </ProjectReference>
     <ProjectReference Include="..\SimpleFixture\SimpleFixture.csproj">
       <Project>{acfd0b4c-9003-458b-9db3-9ba25cb448c2}</Project>

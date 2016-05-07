@@ -48,6 +48,28 @@ namespace SimpleFixture
         }
 
         /// <summary>
+        /// Use return value for specific parent types
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public ReturnConfiguration<T> For(Type type)
+        {
+            _convention.AddFilter(r =>
+            {
+                if (r.ParentRequest != null &&
+                    type.GetTypeInfo()
+                        .IsAssignableFrom(r.ParentRequest.RequestedType.GetTypeInfo()))
+                {
+                    return true;
+                }
+
+                return false;
+            });
+
+            return this;
+        }
+
+        /// <summary>
         /// Filter based on name (Parameter name or Property name)
         /// </summary>
         /// <param name="name">name to match exactly</param>

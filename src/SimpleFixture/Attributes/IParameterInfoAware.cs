@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SimpleFixture.Attributes
 {
-    public abstract class FixtureInitializationAttribute : Attribute
+    public interface IParameterInfoAware
     {
-        public abstract void Initialize(Fixture fixture);
+        ParameterInfo Parameter { get; set; }
     }
 }

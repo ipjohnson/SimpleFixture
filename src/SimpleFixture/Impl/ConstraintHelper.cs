@@ -26,27 +26,35 @@ namespace SimpleFixture.Impl
         public MinMaxValue<T> GetMinMax<T>(DataRequest request, T min, T max) where T : IComparable
         {
             MinMaxValue<T> returnValue = new MinMaxValue<T> { Min = min, Max = max };
+            Attribute attribute = null;
 
             var memberInfo = request.ExtraInfo as MemberInfo;
-
-            if(memberInfo != null)
+            
+            if (memberInfo != null)
             {
-                var attribute = memberInfo.GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
+                attribute = memberInfo.GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
+            }
+            else if(request.ExtraInfo is ParameterInfo)
+            {
+                attribute = ((ParameterInfo)request.ExtraInfo).GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
+            }
 
-                if(attribute != null)
+            if (attribute != null)
+            {
+                var minProperty = attribute.GetType().GetRuntimeProperty("Minimum");
+                var maxProperty = attribute.GetType().GetRuntimeProperty("Maximum");
+
+                if (minProperty != null && maxProperty != null)
                 {
-                    var minProperty = attribute.GetType().GetRuntimeProperty("Minimum");
-                    var maxProperty = attribute.GetType().GetRuntimeProperty("Maximum");
-                    
-                    T localMin = (T)Convert.ChangeType( minProperty.GetValue(attribute), typeof(T));
+                    T localMin = (T)Convert.ChangeType(minProperty.GetValue(attribute), typeof(T));
                     T localMax = (T)Convert.ChangeType(maxProperty.GetValue(attribute), typeof(T));
 
-                    if(localMax.CompareTo(returnValue.Max) < 0)
+                    if (localMax.CompareTo(returnValue.Max) < 0)
                     {
                         returnValue.Max = localMax;
                     }
 
-                    if(localMin.CompareTo(returnValue.Min) > 0)
+                    if (localMin.CompareTo(returnValue.Min) > 0)
                     {
                         returnValue.Min = localMin;
                     }
@@ -117,7 +125,7 @@ namespace SimpleFixture.Impl
             {
                 return (TProp)Convert.ChangeType(returnValue, typeof(TProp));
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return defualtValue;
             }

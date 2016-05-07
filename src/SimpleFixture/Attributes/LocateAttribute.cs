@@ -8,6 +8,6 @@ namespace SimpleFixture.Attributes
 {
     public class LocateAttribute : Attribute
     {
-        public object Value { get; set; }
+        public virtual object Value { get; set; }
     }
 }
