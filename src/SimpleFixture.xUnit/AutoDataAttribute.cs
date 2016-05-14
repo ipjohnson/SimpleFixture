@@ -207,10 +207,10 @@ namespace SimpleFixture.xUnit
                 fixture = new Fixture();
             }
 
-            var initializeAttribute = ReflectionHelper.GetAttribute<FixtureInitializationAttribute>(testMethod);
+            var initializeAttributes = ReflectionHelper.GetAttributes<FixtureInitializationAttribute>(testMethod);
 
-            if(initializeAttribute != null)
-            {
+            foreach(var initializeAttribute in initializeAttributes)
+            {                
                 initializeAttribute.Initialize(fixture);
             }
 
