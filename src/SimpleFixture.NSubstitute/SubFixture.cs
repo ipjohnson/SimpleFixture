@@ -28,10 +28,7 @@ namespace SimpleFixture.NSubstitute
                                                          fakeSingleton = singleton
                                                      });
 
-            if (substituteAction != null)
-            {
-                substituteAction(returnValue);
-            }
+            substituteAction?.Invoke(returnValue);
 
             return returnValue;
         }

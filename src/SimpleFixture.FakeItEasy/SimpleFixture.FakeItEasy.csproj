@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="FakeConvention.cs" />
     <Compile Include="FakeFixture.cs" />
+    <Compile Include="LanguageExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

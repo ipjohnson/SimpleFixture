@@ -44,8 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LanguageExtensions.cs" />
     <Compile Include="MoqConvention.cs" />
     <Compile Include="MoqFixture.cs" />
+    <Compile Include="MoqFixtureInitializeAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

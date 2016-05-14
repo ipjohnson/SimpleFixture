@@ -22,10 +22,7 @@ namespace SimpleFixture.FakeItEasy
                                                          builderOptions = options
                                                      });
 
-            if (arrange != null)
-            {
-                arrange(returnValue);
-            }
+            arrange?.Invoke(returnValue);
 
             return returnValue;
         }
