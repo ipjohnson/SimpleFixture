@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -29,12 +30,12 @@ namespace SimpleFixture.Impl
             Attribute attribute = null;
 
             var memberInfo = request.ExtraInfo as MemberInfo;
-            
+
             if (memberInfo != null)
             {
                 attribute = memberInfo.GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
             }
-            else if(request.ExtraInfo is ParameterInfo)
+            else if (request.ExtraInfo is ParameterInfo)
             {
                 attribute = ((ParameterInfo)request.ExtraInfo).GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
             }
@@ -60,7 +61,7 @@ namespace SimpleFixture.Impl
                     }
                 }
             }
-            
+
             return returnValue;
         }
 
@@ -89,6 +90,23 @@ namespace SimpleFixture.Impl
                         break;
                     }
                 }
+
+                if (returnValue == null)
+                {
+                    var values = dictionary.FirstOrDefault(
+                            kvp => string.Compare(kvp.Key, "_Values", StringComparison.CurrentCultureIgnoreCase) == 0);
+
+                    if (values.Value is IEnumerable)
+                    {
+                        foreach (var value in values.Value as IEnumerable)
+                        {
+                            if (typeof(TProp).GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
+                            {
+                                returnValue = value;
+                            }
+                        }
+                    }
+                }
             }
             else
             {
@@ -108,6 +126,28 @@ namespace SimpleFixture.Impl
                 if (propInfo != null)
                 {
                     returnValue = (TProp)propInfo.GetMethod.Invoke(constraintValue, new object[] { });
+                }
+
+                if(returnValue == null)
+                {
+                    propInfo = constraintValue.GetType().GetRuntimeProperties().FirstOrDefault(
+                        p => string.Compare(p.Name, "_Values", StringComparison.CurrentCultureIgnoreCase) == 0);
+
+                    if(propInfo != null)
+                    {
+                        var values = propInfo.GetValue(constraintValue) as IEnumerable;
+                        
+                        if(values != null)
+                        {
+                            foreach (var value in values)
+                            {
+                                if (typeof(TProp).GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
+                                {
+                                    returnValue = value;
+                                }
+                            }
+                        }                           
+                    }
                 }
             }
 

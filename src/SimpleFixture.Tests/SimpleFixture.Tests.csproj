@@ -90,6 +90,7 @@
     <Compile Include="FixtureTests\Complex\DictionaryTests.cs" />
     <Compile Include="FixtureTests\Complex\ListTests.cs" />
     <Compile Include="FixtureTests\Complex\ReadOnlyCollectionTests.cs" />
+    <Compile Include="FixtureTests\ConstraintTests.cs" />
     <Compile Include="FixtureTests\CustomizeTests.cs" />
     <Compile Include="FixtureTests\FreezeTests.cs" />
     <Compile Include="FixtureTests\Primitives\BoolFixtureTests.cs" />

@@ -43,7 +43,15 @@ namespace SimpleFixture.xUnit
                     continue;
                 }
 
-                foreach(var attribute in parameter.GetCustomAttributes())
+                parameterValue = ProvideValueForParameter(fixture, parameter);
+
+                if(parameterValue != null)
+                {
+                    returnParameters.Add(parameterValue);
+                    continue;
+                }
+
+                foreach (var attribute in parameter.GetCustomAttributes())
                 {
                     var methodAware = attribute as IMethodInfoAware;
 
@@ -112,6 +120,11 @@ namespace SimpleFixture.xUnit
             }
 
             yield return returnParameters.ToArray();
+        }
+
+        protected virtual object ProvideValueForParameter(Fixture fixture, ParameterInfo parameter)
+        {
+            return null;
         }
 
         private object GenerateValue(Fixture fixture, ParameterInfo parameter, GenerateAttribute generateAttribute)
