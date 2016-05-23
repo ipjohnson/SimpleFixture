@@ -68,6 +68,11 @@ var dateValue = fixture.Generate<DateTime>(constraints: new { min = dateMin, max
 
 // Set property SomeProperty to value 123 for any int property named SomeProperty
 var instance = fixture.Generate<SomeClass>(constraints: new { SomeProperty = 123 });
+
+// _Values allows you to provide values based on type rather than on name
+var someClass = new SomeClass { IntValue = 50, StringValue = "Test" };
+var instance = fixture.Generate<ImportSomeClass>(constraints: new { _Values = new[] { someClass } });
+Assert.Same(someClass, instance.SomeClass);
 ```
 
 ###Customization
