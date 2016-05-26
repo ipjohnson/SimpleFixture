@@ -19,6 +19,8 @@ namespace SimpleFixture.Impl
     {
         TProp GetValue<TProp>(object constraintValue, TProp defualtValue, params string[] propertyNames);
 
+        object GetUnTypedValue(Type valueType, object constraintValue, object defualtValue, params string[] propertyNames);
+
         MinMaxValue<T> GetMinMax<T>(DataRequest request, T min, T max) where T : IComparable;
     }
 
@@ -65,7 +67,7 @@ namespace SimpleFixture.Impl
             return returnValue;
         }
 
-        public TProp GetValue<TProp>(object constraintValue, TProp defualtValue, params string[] propertyNames)
+        public object GetUnTypedValue(Type type, object constraintValue, object defualtValue, params string[] propertyNames)
         {
             if (constraintValue == null)
             {
@@ -100,7 +102,7 @@ namespace SimpleFixture.Impl
                     {
                         foreach (var value in values.Value as IEnumerable)
                         {
-                            if (typeof(TProp).GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
+                            if (type.GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
                             {
                                 returnValue = value;
                             }
@@ -125,28 +127,28 @@ namespace SimpleFixture.Impl
 
                 if (propInfo != null)
                 {
-                    returnValue = (TProp)propInfo.GetMethod.Invoke(constraintValue, new object[] { });
+                    returnValue = propInfo.GetMethod.Invoke(constraintValue, new object[] { });
                 }
 
-                if(returnValue == null)
+                if (returnValue == null)
                 {
                     propInfo = constraintValue.GetType().GetRuntimeProperties().FirstOrDefault(
                         p => string.Compare(p.Name, "_Values", StringComparison.CurrentCultureIgnoreCase) == 0);
 
-                    if(propInfo != null)
+                    if (propInfo != null)
                     {
                         var values = propInfo.GetValue(constraintValue) as IEnumerable;
-                        
-                        if(values != null)
+
+                        if (values != null)
                         {
                             foreach (var value in values)
                             {
-                                if (typeof(TProp).GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
+                                if (type.GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
                                 {
                                     returnValue = value;
                                 }
                             }
-                        }                           
+                        }
                     }
                 }
             }
@@ -156,19 +158,24 @@ namespace SimpleFixture.Impl
                 return defualtValue;
             }
 
-            if (typeof(TProp).GetTypeInfo().IsAssignableFrom(returnValue.GetType().GetTypeInfo()))
+            if (type.GetTypeInfo().IsAssignableFrom(returnValue.GetType().GetTypeInfo()))
             {
-                return (TProp)returnValue;
+                return returnValue;
             }
 
             try
             {
-                return (TProp)Convert.ChangeType(returnValue, typeof(TProp));
+                return Convert.ChangeType(returnValue, type);
             }
             catch (Exception)
             {
                 return defualtValue;
             }
+        }
+
+        public TProp GetValue<TProp>(object constraintValue, TProp defualtValue, params string[] propertyNames)
+        {
+            return (TProp)GetUnTypedValue(typeof(TProp), constraintValue, defualtValue, propertyNames);
         }
     }
 }

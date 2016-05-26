@@ -51,7 +51,7 @@ namespace SimpleFixture.Impl
 
             foreach (ParameterInfo parameterInfo in method.GetParameters())
             {
-                object parameterValue = _constraintHelper.GetValue<object>(request.Constraints, null, parameterInfo.Name);
+                object parameterValue = _constraintHelper.GetUnTypedValue(parameterInfo.ParameterType, request.Constraints, null, parameterInfo.Name);
 
                 var newRequest = CreateDataRequestForParameter(parameterInfo, request);
 
