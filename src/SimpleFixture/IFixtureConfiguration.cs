@@ -28,5 +28,15 @@ namespace SimpleFixture
         /// If null then the convention is free to do what it wants
         /// </summary>
         int? ItemCount { get; }
+
+        /// <summary>
+        /// Populate public properties
+        /// </summary>
+        bool PopulateProperties { get; }
+
+        /// <summary>
+        /// Populate public fields
+        /// </summary>
+        bool PopulateFields { get; }
     }
 }

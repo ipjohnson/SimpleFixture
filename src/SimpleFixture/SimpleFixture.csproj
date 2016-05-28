@@ -94,12 +94,14 @@
     <Compile Include="Impl\ConventionList.cs" />
     <Compile Include="Impl\ConventionProvider.cs" />
     <Compile Include="Impl\CustomizeModel.cs" />
+    <Compile Include="Impl\FieldSetter.cs" />
     <Compile Include="Impl\IConventionProvider.cs" />
     <Compile Include="Impl\IRandomDataGeneratorService.cs" />
     <Compile Include="Impl\ModelService.cs" />
     <Compile Include="Impl\PropertySetter.cs" />
     <Compile Include="Impl\TypeCreator.cs" />
     <Compile Include="Impl\TypedConventions.cs" />
+    <Compile Include="Impl\TypeFieldSelector.cs" />
     <Compile Include="Impl\TypePopulator.cs" />
     <Compile Include="Impl\TypePropertySelector.cs" />
     <Compile Include="ITypedConvention.cs" />
