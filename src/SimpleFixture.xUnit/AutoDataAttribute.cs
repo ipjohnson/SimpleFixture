@@ -127,7 +127,7 @@ namespace SimpleFixture.xUnit
             return null;
         }
 
-        private object GenerateValue(Fixture fixture, ParameterInfo parameter, GenerateAttribute generateAttribute)
+        protected virtual object GenerateValue(Fixture fixture, ParameterInfo parameter, GenerateAttribute generateAttribute)
         {
             object min = null;
             object max = null;
@@ -148,7 +148,7 @@ namespace SimpleFixture.xUnit
             return fixture.Generate(new DataRequest(null,fixture,parameter.ParameterType,constraintName,true,new { min, max }, parameter));
         }
 
-        private object LocateValue(Fixture fixture, ParameterInfo parameter, LocateAttribute locateAttribute)
+        protected virtual object LocateValue(Fixture fixture, ParameterInfo parameter, LocateAttribute locateAttribute)
         {
             if( locateAttribute.Value != null)
             {
@@ -158,14 +158,14 @@ namespace SimpleFixture.xUnit
             return fixture.Locate(parameter.ParameterType, parameter.Name);
         }
 
-        private object FreezeValue(Fixture fixture, ParameterInfo parameter, FreezeAttribute freezeAttribute)
+        protected virtual object FreezeValue(Fixture fixture, ParameterInfo parameter, FreezeAttribute freezeAttribute)
         {
             var closedMethod = _freezeMethod.MakeGenericMethod(parameter.ParameterType);
 
             return closedMethod.Invoke(this, new object[] { fixture, parameter, freezeAttribute });
         }
 
-        private T Freeze<T>(Fixture fixture, ParameterInfo parameter, FreezeAttribute freezeAttribute)
+        protected virtual T Freeze<T>(Fixture fixture, ParameterInfo parameter, FreezeAttribute freezeAttribute)
         {            
             T value;
 
@@ -206,7 +206,7 @@ namespace SimpleFixture.xUnit
             return value;
         }
 
-        private Fixture CreateFixture(MethodInfo testMethod)
+        protected virtual Fixture CreateFixture(MethodInfo testMethod)
         {
             Fixture fixture;
             var attribute = ReflectionHelper.GetAttribute<FixtureCreationAttribute>(testMethod);
