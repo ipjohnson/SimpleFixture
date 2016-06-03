@@ -19,6 +19,7 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
             var ranged = fixture.Generate<RangedClass>();
             
             ranged.TestString.Length.Should().BeInRange(50, 100);
+            ranged.FirstName.All(char.IsLetter).Should().BeTrue();
         }
     }
 }

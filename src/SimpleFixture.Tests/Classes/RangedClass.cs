@@ -14,5 +14,8 @@ namespace SimpleFixture.Tests.Classes
 
         [StringLength(100, MinimumLength = 50)]
         public string TestString { get; set; }
+
+        [StringLength(100)]
+        public string FirstName { get; set; }
     }
 }

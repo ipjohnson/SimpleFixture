@@ -75,16 +75,26 @@ namespace SimpleFixture.Conventions.Named
 
                 if(stringLengthAttr != null)
                 {
-                    var minLength = (int)stringLengthAttr.GetType().GetRuntimeProperty("MinLength").GetValue(stringLengthAttr);
-                    var maxLength = (int)stringLengthAttr.GetType().GetRuntimeProperty("MaxLength").GetValue(stringLengthAttr);
+                    var minProperty = stringLengthAttr.GetType().GetRuntimeProperty("MinimumLength");
+                    var maxProperty = stringLengthAttr.GetType().GetRuntimeProperty("MaximumLength");
+                    
+                    if (minProperty != null)
+                    {
+                        int minLength = (int)minProperty.GetValue(stringLengthAttr);
 
-                    if(stringValue.Length < minLength)
-                    {
-                        returnValue = new string('1', minLength - stringValue.Length) + stringValue;
+                        if (stringValue.Length < minLength)
+                        {
+                            returnValue = new string('1', minLength - stringValue.Length) + stringValue;
+                        }
                     }
-                    else if(stringValue.Length > maxLength)
+                    if (maxProperty != null)
                     {
-                        returnValue = stringValue.Substring(0, maxLength);
+                        int maxLength = (int)maxProperty.GetValue(stringLengthAttr);
+
+                        if (stringValue.Length > maxLength)
+                        {
+                            returnValue = stringValue.Substring(0, maxLength);
+                        }
                     }
                 }
             }

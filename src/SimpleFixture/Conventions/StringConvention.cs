@@ -82,17 +82,24 @@ namespace SimpleFixture.Conventions
                 var minProperty = attribute.GetType().GetRuntimeProperty("MinimumLength");
                 var maxProperty = attribute.GetType().GetRuntimeProperty("MaximumLength");
 
-                int localMin = (int)minProperty.GetValue(attribute);
-                int localMax = (int)maxProperty.GetValue(attribute);
+                if(minProperty != null)
+                { 
+                    int localMin = (int)minProperty.GetValue(attribute);
 
-                if (localMax.CompareTo(returnValue.Max) < 0)
-                {
-                    returnValue.Max = localMax;
+                    if (localMin.CompareTo(returnValue.Min) > 0)
+                    {
+                        returnValue.Min = localMin;
+                    }
                 }
 
-                if (localMin.CompareTo(returnValue.Min) > 0)
+                if (maxProperty != null)
                 {
-                    returnValue.Min = localMin;
+                    int localMax = (int)maxProperty.GetValue(attribute);
+
+                    if (localMax.CompareTo(returnValue.Max) < 0)
+                    {
+                        returnValue.Max = localMax;
+                    }
                 }
             }
 
