@@ -55,6 +55,22 @@ fixture.Return(() => i++).WhenNamed(n => n.EndsWith("Id"));
 fixture.Return("SomeString").For<SomeClass>().WhenMatching(matchingMethod);
 
 ```
+###Export
+Similar to a depenedency injection container you can specify an implementation for a particular interface
+
+```C#
+var fixture = new Fixture();
+
+// Export one class at a time
+fixture.Export<SomeClass,ISomeInterface>();
+var instance = fixture.Locate<ISomeInterface>();
+Assert.InstanceOf<SomeClass>(instance);
+
+// Export all classes located in the same assmelby as SomeClass
+fixture.ExportAllByInterface().FromAssemblyContaining<SomeClass>();
+var instance = fixture.Locate<ISomeInterface>();
+Assert.InstanceOf<SomeClass>(instance);
+```
 
 ###Constraints
 
