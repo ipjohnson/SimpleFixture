@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleFixture.Conventions;
+using SimpleFixture.Impl;
 
 namespace SimpleFixture
 {
@@ -15,14 +16,16 @@ namespace SimpleFixture
     public class ReturnConfiguration<T>
     {
         private readonly FilteredConvention<T> _convention;
-
+        private readonly Fixture _fixture;
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="convention">filter convention</param>
-        public ReturnConfiguration(FilteredConvention<T> convention)
+        /// <param name="fixture"></param>
+        public ReturnConfiguration(FilteredConvention<T> convention, Fixture fixture)
         {
             _convention = convention;
+            _fixture = fixture;
         }
 
         /// <summary>
@@ -103,6 +106,19 @@ namespace SimpleFixture
             _convention.AddFilter(matchingFunc);
 
             return this;
+        }
+
+        /// <summary>
+        /// Customize the export
+        /// </summary>
+        /// <returns></returns>
+        public ICustomizeModel<T> Customize()
+        {
+            var service = _fixture.Configuration.Locate<IModelService>();
+
+            var model = service.GetModel(typeof(T));
+
+            return new CustomizeModel<T>(model);
         }
     }
 }

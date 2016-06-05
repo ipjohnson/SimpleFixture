@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Attributes\DataConfigurationAttribute.cs" />
     <Compile Include="Attributes\FixtureCreationAttribute.cs" />
+    <Compile Include="Attributes\FixtureCustomizationAttribute.cs" />
     <Compile Include="Attributes\FixtureInitializationAttribute.cs" />
     <Compile Include="Attributes\FreezeAttribute.cs" />
     <Compile Include="Attributes\GenerateAttribute.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="DI\IGContainer.cs" />
     <Compile Include="ExportAs.cs" />
     <Compile Include="Fixture.cs" />
+    <Compile Include="FromConfiguration.cs" />
     <Compile Include="IConvention.cs" />
     <Compile Include="ICustomizeModel.cs" />
     <Compile Include="IFixtureConfiguration.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Impl\ConventionList.cs" />
     <Compile Include="Impl\ConventionProvider.cs" />
     <Compile Include="Impl\CustomizeModel.cs" />
+    <Compile Include="Impl\ExportAllByInterfaceConvention.cs" />
     <Compile Include="Impl\FieldSetter.cs" />
     <Compile Include="Impl\IConventionProvider.cs" />
     <Compile Include="Impl\IRandomDataGeneratorService.cs" />

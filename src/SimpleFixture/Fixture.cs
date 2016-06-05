@@ -15,11 +15,11 @@ namespace SimpleFixture
     public class Fixture : IEnumerable<object>
     {
         #region fields
-        private BehaviorCollection _behavior;
-        private TypedConventions _typedConventions;
-        private TypedConventions _returnConventions;
-        private IConventionList _conventions;
-        private readonly IFixtureConfiguration _configuration;
+        protected readonly BehaviorCollection _behavior;
+        protected readonly TypedConventions _typedConventions;
+        protected readonly TypedConventions _returnConventions;
+        protected readonly IConventionList _conventions;
+        protected readonly IFixtureConfiguration _configuration;
         #endregion
 
         #region Constructor
@@ -30,6 +30,14 @@ namespace SimpleFixture
         public Fixture(IFixtureConfiguration configuration = null)
         {
             _configuration = configuration ?? new DefaultFixtureConfiguration();
+
+            _conventions = _configuration.Locate<IConventionList>();
+
+            _behavior = new BehaviorCollection();
+
+            _returnConventions = new TypedConventions(Configuration, ConventionPriority.First);
+
+            _typedConventions = new TypedConventions(Configuration);
 
             Initalize();
         }
@@ -212,7 +220,7 @@ namespace SimpleFixture
 
             _returnConventions.AddConvention(convention);
 
-            return new ReturnConfiguration<T>(convention);
+            return new ReturnConfiguration<T>(convention, this);
         }
 
         /// <summary>
@@ -227,7 +235,7 @@ namespace SimpleFixture
 
             _returnConventions.AddConvention(convention);
 
-            return new ReturnConfiguration<T>(convention);
+            return new ReturnConfiguration<T>(convention, this);
         }
 
         /// <summary>
@@ -242,7 +250,7 @@ namespace SimpleFixture
 
             _returnConventions.AddConvention(convention);
 
-            return new ReturnConfiguration<T>(convention);
+            return new ReturnConfiguration<T>(convention, this);
         }
 
         /// <summary>
@@ -257,7 +265,7 @@ namespace SimpleFixture
 
             _returnConventions.AddConvention(convention);
 
-            return new ReturnConfiguration<IEnumerable<T>>(convention);
+            return new ReturnConfiguration<IEnumerable<T>>(convention, this);
         }
 
         #endregion
@@ -304,6 +312,14 @@ namespace SimpleFixture
         public ReturnConfiguration<TExport> ExportSingletonAs<T, TExport>() where T : TExport
         {
             return new ExportAs<T>(this, true).As<TExport>();
+        }
+
+        /// <summary>
+        /// Export a set of types by interface
+        /// </summary>
+        public FromConfiguration ExportAllByInterface()
+        {
+            return new FromConfiguration(this);
         }
 
         #endregion
@@ -379,27 +395,21 @@ namespace SimpleFixture
         #region Non Public Members
 
         private void Initalize()
-        {
-            _conventions = _configuration.Locate<IConventionList>();
-
-            _behavior = new BehaviorCollection();
-
-            IConventionProvider conventionProvider = _configuration.Locate<IConventionProvider>();
-
-            _returnConventions = new TypedConventions(Configuration, ConventionPriority.First);
-
+        {            
             Add(_returnConventions);
 
-            _typedConventions = new TypedConventions(Configuration);
-
             Add(_typedConventions);
+
+            IConventionProvider conventionProvider = _configuration.Locate<IConventionProvider>();
 
             foreach (IConvention providedConvention in conventionProvider.ProvideConventions(Configuration))
             {
                 Add(providedConvention);
             }
 
-            Return(this);
+            // using specific type incase it's inheritance
+            Return<Fixture>(this);
+
             Return(_configuration.Locate<IRandomDataGeneratorService>());
         }
 

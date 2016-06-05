@@ -77,10 +77,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BulkExportClasses.cs" />
     <Compile Include="Classes\FieldClass.cs" />
+    <Compile Include="Classes\IBulkExportInterface.cs" />
     <Compile Include="Classes\ImportSomeClass.cs" />
     <Compile Include="Classes\ImportSomeInterface.cs" />
     <Compile Include="Classes\ISomeInterface.cs" />
+    <Compile Include="Classes\NestedNamespace\NestedBulkExports.cs" />
     <Compile Include="Classes\PropertiesClass.cs" />
     <Compile Include="Classes\RangedClass.cs" />
     <Compile Include="Classes\SomeClass.cs" />
@@ -94,6 +97,7 @@
     <Compile Include="FixtureTests\Complex\ReadOnlyCollectionTests.cs" />
     <Compile Include="FixtureTests\ConstraintTests.cs" />
     <Compile Include="FixtureTests\CustomizeTests.cs" />
+    <Compile Include="FixtureTests\ExportTests.cs" />
     <Compile Include="FixtureTests\FreezeTests.cs" />
     <Compile Include="FixtureTests\Primitives\BoolFixtureTests.cs" />
     <Compile Include="FixtureTests\Primitives\ByteFixtureTests.cs" />
