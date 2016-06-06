@@ -26,4 +26,9 @@ namespace SimpleFixture.Tests.Classes
     {
         T GetT();
     }
+
+    public interface IMultipleTypeGenericBulkInterface<T1,T2>
+    {
+        T1 Get();
+    }
 }

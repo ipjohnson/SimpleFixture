@@ -38,4 +38,12 @@ namespace SimpleFixture.Tests.Classes
             return default(T);
         }
     }
+
+    public class MultipleTypeGenericBulk<T2, T1> : IMultipleTypeGenericBulkInterface<T1, T2>
+    {
+        public T1 Get()
+        {
+            return default(T1);
+        }
+    }
 }
