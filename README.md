@@ -62,7 +62,7 @@ Similar to a depenedency injection container you can specify an implementation f
 var fixture = new Fixture();
 
 // Export one class at a time
-fixture.Export<SomeClass,ISomeInterface>();
+fixture.ExportAs<SomeClass, ISomeInterface>();
 var instance = fixture.Locate<ISomeInterface>();
 Assert.InstanceOf<SomeClass>(instance);
 
