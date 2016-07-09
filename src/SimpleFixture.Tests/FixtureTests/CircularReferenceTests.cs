@@ -11,14 +11,6 @@ namespace SimpleFixture.Tests.FixtureTests
     public class CircularReferenceTests
     {
         [Fact]
-        public void Fixture_CircularReferenceHandling_MaxDepth_Throws()
-        {
-            var fixture = new Fixture();
-
-            Assert.ThrowsAny<Exception>(() => fixture.Generate<Order>());
-        }
-
-        [Fact]
         public void Fixture_CircularRefenceHandling_MaxDepth_WithSkip()
         {
             var fixture = new Fixture();
