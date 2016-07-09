@@ -45,23 +45,9 @@ namespace SimpleFixture.Conventions
 
         private object GetReadOnlyList<TValue>(DataRequest request)
         {
-            List<TValue> returnValue = new List<TValue>();
+            var newRequest = new DataRequest(request, typeof(List<TValue>));
 
-            if (request.Populate)
-            {
-                int count = request.Fixture.Configuration.ItemCount.HasValue
-                    ? request.Fixture.Configuration.ItemCount.Value
-                    : request.Fixture.Configuration.Locate<IRandomDataGeneratorService>().NextInt(5, 10);
-
-                for (int i = 0; i < count; i++)
-                {
-                    DataRequest newRequest = new DataRequest(request, typeof(TValue));
-
-                    TValue newValue = (TValue)newRequest.Fixture.Generate(newRequest);
-
-                    returnValue.Add(newValue);
-                }
-            }
+            List<TValue> returnValue = newRequest.Fixture.Generate(newRequest) as List<TValue>;
 
             return new ReadOnlyCollection<TValue>(returnValue);
         }

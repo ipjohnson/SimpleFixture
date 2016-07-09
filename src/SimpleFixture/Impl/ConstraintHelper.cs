@@ -48,7 +48,7 @@ namespace SimpleFixture.Impl
         /// <param name="defaultValue"></param>
         /// <param name="propertyNames"></param>
         /// <returns></returns>
-        object GetUnTypedValue(Type valueType, object constraintValue, object defaultValue, params string[] propertyNames);
+        bool GetUnTypedValue(out object value, Type valueType, object constraintValue, object defaultValue, params string[] propertyNames);
 
         /// <summary>
         /// Get min max for data request
@@ -119,20 +119,23 @@ namespace SimpleFixture.Impl
             return returnValue;
         }
 
-        public object GetUnTypedValue(Type type, object constraintValue, object defaultValue, params string[] propertyNames)
+        public bool GetUnTypedValue(out object value, Type type, object constraintValue, object defaultValue, params string[] propertyNames)
         {
+            bool returnValue = false;
+            value = defaultValue;
+
             if (constraintValue == null)
             {
-                return defaultValue;
+                return returnValue;
             }
-
-            object returnValue = null;
-
+                        
             var valueProvider = constraintValue as IConstraintValueProvider;
 
             if(valueProvider != null)
             {
-                returnValue = valueProvider.ProvideValue(type, defaultValue, propertyNames);
+                value = valueProvider.ProvideValue(type, defaultValue, propertyNames);
+
+                returnValue = value != null;
             }
             else
             {
@@ -142,29 +145,31 @@ namespace SimpleFixture.Impl
                 {
                     foreach (string propertyName in propertyNames)
                     {
-                        var value =
+                        var keyValuePair =
                             dictionary.FirstOrDefault(
                                 kvp => string.Compare(kvp.Key, propertyName, StringComparison.CurrentCultureIgnoreCase) == 0);
 
-                        if (!value.Equals(default(KeyValuePair<string, object>)))
+                        if (!keyValuePair.Equals(default(KeyValuePair<string, object>)))
                         {
-                            returnValue = value.Value;
+                            value = keyValuePair.Value;
+                            returnValue = true;
                             break;
                         }
                     }
 
-                    if (returnValue == null)
+                    if (!returnValue)
                     {
                         var values = dictionary.FirstOrDefault(
                                 kvp => string.Compare(kvp.Key, "_Values", StringComparison.CurrentCultureIgnoreCase) == 0);
 
                         if (values.Value is IEnumerable)
                         {
-                            foreach (var value in values.Value as IEnumerable)
+                            foreach (var enumerable in values.Value as IEnumerable)
                             {
-                                if (type.GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
+                                if (type.GetTypeInfo().IsAssignableFrom(enumerable.GetType().GetTypeInfo()))
                                 {
-                                    returnValue = value;
+                                    value = enumerable;
+                                    returnValue = true;
                                 }
                             }
                         }
@@ -187,10 +192,11 @@ namespace SimpleFixture.Impl
 
                     if (propInfo != null)
                     {
-                        returnValue = propInfo.GetMethod.Invoke(constraintValue, new object[] { });
+                        value = propInfo.GetMethod.Invoke(constraintValue, new object[] { });
+                        returnValue = true;
                     }
 
-                    if (returnValue == null)
+                    if (!returnValue)
                     {
                         propInfo = constraintValue.GetType().GetRuntimeProperties().FirstOrDefault(
                             p => string.Compare(p.Name, "_Values", StringComparison.CurrentCultureIgnoreCase) == 0);
@@ -201,11 +207,13 @@ namespace SimpleFixture.Impl
 
                             if (values != null)
                             {
-                                foreach (var value in values)
+                                foreach (var enumerable in values)
                                 {
-                                    if (type.GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
+                                    if (enumerable != null &&
+                                        type.GetTypeInfo().IsAssignableFrom(enumerable.GetType().GetTypeInfo()))
                                     {
-                                        returnValue = value;
+                                        value = enumerable;
+                                        returnValue = true;
                                     }
                                 }
                             }
@@ -214,29 +222,33 @@ namespace SimpleFixture.Impl
                 }
             }
 
-            if (returnValue == null)
-            {
-                return defaultValue;
-            }
-
-            if (type.GetTypeInfo().IsAssignableFrom(returnValue.GetType().GetTypeInfo()))
+            if (!returnValue || value == null)
             {
                 return returnValue;
             }
 
-            try
+            if (!type.GetTypeInfo().IsAssignableFrom(value.GetType().GetTypeInfo()))
             {
-                return Convert.ChangeType(returnValue, type);
+                try
+                {
+                    value = Convert.ChangeType(value, type);
+                }
+                catch (Exception)
+                {
+                    value = defaultValue;
+                    returnValue = value != null;
+                }
             }
-            catch (Exception)
-            {
-                return defaultValue;
-            }
+
+            return returnValue;
         }
 
         public TProp GetValue<TProp>(object constraintValue, TProp defaultValue, params string[] propertyNames)
         {
-            return (TProp)GetUnTypedValue(typeof(TProp), constraintValue, defaultValue, propertyNames);
+            object value;
+            GetUnTypedValue(out value, typeof(TProp), constraintValue, defaultValue, propertyNames);
+
+            return (TProp)value;
         }
     }
 }

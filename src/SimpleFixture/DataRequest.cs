@@ -7,6 +7,32 @@ using System.Threading.Tasks;
 namespace SimpleFixture
 {
     /// <summary>
+    /// Used to explain 
+    /// </summary>
+    public enum DependencyType
+    {
+        /// <summary>
+        /// This is the root of the object request
+        /// </summary>
+        Root,
+
+        /// <summary>
+        /// Request is being used to satify a property
+        /// </summary> 
+        PropertyDependency,
+
+        /// <summary>
+        /// Request is being used to satify a constructor
+        /// </summary>
+        ConstructorDependency,
+
+        /// <summary>
+        /// Unknown 
+        /// </summary>
+        Unknown,
+    }
+
+    /// <summary>
     /// Object representing a data request
     /// </summary>
     public class DataRequest
@@ -19,6 +45,7 @@ namespace SimpleFixture
         public DataRequest(DataRequest parentRequest, Type requestedType) : this(parentRequest,
                                                                                  parentRequest.Fixture,
                                                                                  requestedType,
+                                                                                 parentRequest.DependencyType,
                                                                                  parentRequest.RequestName,
                                                                                  parentRequest.Populate,
                                                                                  parentRequest.Constraints,
@@ -33,15 +60,17 @@ namespace SimpleFixture
         /// <param name="parentRequest">parent request</param>
         /// <param name="fixture">fixture this request is associated with</param>
         /// <param name="requestedType">type being requested</param>
+        /// <param name="dependencyType">dependency type</param>
         /// <param name="requestName">request name for this request</param>
         /// <param name="populate">populate properties</param>
         /// <param name="constraints">constraints object</param>
         /// <param name="extraInfo">extra info (PropertyInfo or ParameterInfo)</param>
-        public DataRequest(DataRequest parentRequest, Fixture fixture, Type requestedType, string requestName, bool populate, object constraints, object extraInfo)
+        public DataRequest(DataRequest parentRequest, Fixture fixture, Type requestedType, DependencyType dependencyType, string requestName, bool populate, object constraints, object extraInfo)
         {
             ParentRequest = parentRequest;
             Fixture = fixture;
             RequestedType = requestedType;
+            DependencyType = dependencyType;
             RequestName = requestName ?? "";
             Populate = populate;
             Constraints = constraints;
@@ -71,6 +100,11 @@ namespace SimpleFixture
         public Type RequestedType { get; private set; }
 
         /// <summary>
+        /// Dependency Type
+        /// </summary>
+        public DependencyType DependencyType { get; private set; }
+
+        /// <summary>
         /// Populate public properties
         /// </summary>
         public bool Populate { get; private set; }
@@ -89,5 +123,10 @@ namespace SimpleFixture
         /// Request Depth
         /// </summary>
         public int RequestDepth { get; private set; }
+        
+        /// <summary>
+        /// Instance of object
+        /// </summary>
+        public object Instance { get; set; }
     }
 }

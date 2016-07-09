@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ipjohnson/SimpleFixture</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Test fixture framework for unit and integration testing.</description>
-    <releaseNotes>$releaseNotes$</releaseNotes>
+    <releaseNotes>This release enhances the </releaseNotes>
     <copyright>Copyright ©  2015</copyright>
     <tags>Test Fixture Data Generation</tags>
     <dependencies />

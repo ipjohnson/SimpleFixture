@@ -14,6 +14,16 @@ namespace SimpleFixture
     public class DefaultFixtureConfiguration : GContainer, IFixtureConfiguration
     {
         /// <summary>
+        /// Configuration with circular reference handling set to AutoWire
+        /// </summary>
+        public static DefaultFixtureConfiguration AutoWire => new DefaultFixtureConfiguration { CircularReferenceHandling = CircularReferenceHandlingAlgorithm.AutoWire };
+
+        /// <summary>
+        /// Configuration with circular refernce handling set to omit
+        /// </summary>
+        public static DefaultFixtureConfiguration OmitCircularReferences => new DefaultFixtureConfiguration { CircularReferenceHandling = CircularReferenceHandlingAlgorithm.OmitCircularReferences };
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         public DefaultFixtureConfiguration()
@@ -25,6 +35,8 @@ namespace SimpleFixture
             PopulateProperties = true;
 
             PopulateFields = false;
+
+            CircularReferenceHandling = CircularReferenceHandlingAlgorithm.MaxDepth;
 
             SetupDefaults();
         }
@@ -38,10 +50,10 @@ namespace SimpleFixture
             Export<IFieldSetter>(g => new FieldSetter());
             Export<IConventionProvider>(g => new ConventionProvider());
             Export<IConventionList>(g => new ConventionList());
-            Export<ITypeCreator>(g => new TypeCreator(g.Locate<IConstructorSelector>(), g.Locate<IConstraintHelper>()));
+            Export<ITypeCreator>(g => new TypeCreator(this, g.Locate<IConstructorSelector>(), g.Locate<IConstraintHelper>()));
             Export<IConstructorSelector>(g => new ConstructorSelector());
             Export<ICircularReferenceHandler>(g => new CircularReferenceHandler());
-            Export<ITypePropertySelector>(g => new TypePropertySelector(g.Locate<IConstraintHelper>()));
+            Export<ITypePropertySelector>(g => new TypePropertySelector(this, g.Locate<IConstraintHelper>()));
             Export<ITypeFieldSelector>(g => new TypeFieldSelector(g.Locate<IConstraintHelper>()));
             Export<ITypePopulator>(g => new TypePopulator(this,
                                                           g.Locate<IConstraintHelper>(),
@@ -75,5 +87,10 @@ namespace SimpleFixture
         /// Populate public fields
         /// </summary>
         public bool PopulateFields { get; set; }
+
+        /// <summary>
+        /// Configure how to handle circular references
+        /// </summary>
+        public CircularReferenceHandlingAlgorithm CircularReferenceHandling { get; set; }
     }
 }

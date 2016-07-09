@@ -9,6 +9,28 @@ using SimpleFixture.DI;
 namespace SimpleFixture
 {
     /// <summary>
+    /// 
+    /// </summary>
+    public enum CircularReferenceHandlingAlgorithm
+    {
+        /// <summary>
+        /// Throws an exception when a max depth is reached, this is the original algorithm
+        /// </summary>
+        MaxDepth,
+
+        /// <summary>
+        /// Omit circular properties, skips properties that are circular and returns empty collections when circular
+        /// </summary>
+        OmitCircularProperties,
+
+        /// <summary>
+        /// Autowire circular references, if a parent in the object graph can be used it will be
+        /// </summary>
+        AutoWire,
+        OmitCircularReferences,
+    }
+
+    /// <summary>
     /// Configuration interface for SimpleFixture. Only implement this interface if you want to change the internal worksings of SimpleFixture
     /// </summary>
     public interface IFixtureConfiguration : IGContainer
@@ -38,5 +60,10 @@ namespace SimpleFixture
         /// Populate public fields
         /// </summary>
         bool PopulateFields { get; }
+
+        /// <summary>
+        /// How to handle circular references
+        /// </summary>
+        CircularReferenceHandlingAlgorithm CircularReferenceHandling { get; }
     }
 }

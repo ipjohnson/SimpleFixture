@@ -10,6 +10,7 @@ namespace SimpleFixture.Conventions
 {
     public class ComplexConvention : IConvention
     {
+        private readonly IFixtureConfiguration _configuration;
         private readonly ITypeCreator _typeCreator;
         private readonly ITypePopulator _typePopulator;
         private readonly ICircularReferenceHandler _circularReferenceHandler;
@@ -17,6 +18,7 @@ namespace SimpleFixture.Conventions
 
         public ComplexConvention(IFixtureConfiguration configuration)
         {
+            _configuration = configuration;
             _typeCreator = configuration.Locate<ITypeCreator>();
             _typePopulator = configuration.Locate<ITypePopulator>();
             _circularReferenceHandler = configuration.Locate<ICircularReferenceHandler>();
@@ -24,11 +26,13 @@ namespace SimpleFixture.Conventions
         }
 
         public ConventionPriority Priority { get { return ConventionPriority.Last; } }
+
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
         public object GenerateData(DataRequest request)
         {
-            if (request.RequestDepth > 100)
+            if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.MaxDepth &&
+                request.RequestDepth > 100)
             {
                 return _circularReferenceHandler.HandleCircularReference(request);
             }
@@ -41,6 +45,8 @@ namespace SimpleFixture.Conventions
             var model = _modelService.GetModel(request.RequestedType);
 
             object returnValue = _typeCreator.CreateType(request, model);
+
+            request.Instance = returnValue;
 
             if (request.Populate)
             {

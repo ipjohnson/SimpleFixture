@@ -64,7 +64,7 @@ namespace SimpleFixture.Impl
                     _isSingleton[concreteType] = isSingleton;
                 }
 
-                var newRequest = new DataRequest(request.ParentRequest, request.Fixture, concreteType, request.RequestName, request.Populate, request.Constraints, request.ExtraInfo);
+                var newRequest = new DataRequest(request.ParentRequest, request.Fixture, concreteType,request.DependencyType, request.RequestName, request.Populate, request.Constraints, request.ExtraInfo);
 
                 value = request.Fixture.Generate(newRequest);
 

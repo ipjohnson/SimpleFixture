@@ -47,15 +47,40 @@ namespace SimpleFixture.Impl
             {
                 foreach (PropertyInfo propertyInfo in _propertySelector.SelectProperties(instance, request, model))
                 {
-                    object propertyValue = _helper.GetUnTypedValue(propertyInfo.PropertyType, request.Constraints, null, propertyInfo.Name);
+                    object propertyValue = null;
+
+                    if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.AutoWire)
+                    {
+                        var currentRequest = request;
+                        var requestTypeInfo = propertyInfo.PropertyType.GetTypeInfo();
+
+                        while (currentRequest != null)
+                        {
+                            if (requestTypeInfo.IsAssignableFrom(currentRequest.RequestedType.GetTypeInfo()))
+                            {
+                                propertyValue = currentRequest.Instance;
+                                break;
+                            }
+
+                            currentRequest = currentRequest.ParentRequest;
+                        }                        
+                    }
 
                     var newRequest = CreateDataRequestForProperty(propertyInfo, request);
+                    
+                    bool foundProperty = false;
 
-                    if (propertyValue != null)
+                    if (propertyValue == null)
                     {
-                        propertyValue = newRequest.Fixture.Behavior.Apply(newRequest, propertyValue);
+                        foundProperty = _helper.GetUnTypedValue(out propertyValue, propertyInfo.PropertyType, request.Constraints, null, propertyInfo.Name);
+
+                        if (propertyValue != null)
+                        {
+                            propertyValue = newRequest.Fixture.Behavior.Apply(newRequest, propertyValue);
+                        }
                     }
-                    else
+
+                    if(!foundProperty && propertyValue == null)
                     {
                         if (!model.GetPropertyValue(newRequest, propertyInfo, out propertyValue))
                         {
@@ -72,7 +97,7 @@ namespace SimpleFixture.Impl
                         }
                     }
 
-                    if (propertyValue == null)
+                    if (!foundProperty && propertyValue == null)
                     {
                         throw new Exception("Could not create type " + propertyInfo.PropertyType.FullName);
                     }
@@ -85,7 +110,8 @@ namespace SimpleFixture.Impl
             {
                 foreach (var fieldInfo in _fieldSelector.SelectFields(instance, request, model))
                 {
-                    object propertyValue = _helper.GetUnTypedValue(fieldInfo.FieldType, request.Constraints, null, fieldInfo.Name);
+                    object propertyValue;
+                    var foundValue = _helper.GetUnTypedValue(out propertyValue, fieldInfo.FieldType, request.Constraints, null, fieldInfo.Name);
 
                     var newRequest = CreateDataRequestForField(fieldInfo, request);
 
@@ -93,12 +119,12 @@ namespace SimpleFixture.Impl
                     {
                         propertyValue = newRequest.Fixture.Behavior.Apply(newRequest, propertyValue);
                     }
-                    else
+                    else if(!foundValue)
                     {
                         propertyValue = newRequest.Fixture.Generate(newRequest);
                     }
 
-                    if (propertyValue == null)
+                    if (!foundValue && propertyValue == null)
                     {
                         throw new Exception("Could not create type " + fieldInfo.FieldType.FullName);
                     }
@@ -113,6 +139,7 @@ namespace SimpleFixture.Impl
             return new DataRequest(request,
                                     request.Fixture,
                                     propertyInfo.PropertyType,
+                                    DependencyType.PropertyDependency,
                                     propertyInfo.Name,
                                     true,
                                     request.Constraints,
@@ -124,6 +151,7 @@ namespace SimpleFixture.Impl
             return new DataRequest(request,
                                     request.Fixture,
                                     fieldInfo.FieldType,
+                                    DependencyType.PropertyDependency,
                                     fieldInfo.Name,
                                     true,
                                     request.Constraints,

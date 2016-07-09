@@ -55,7 +55,7 @@ namespace SimpleFixture.Impl
 
             yield return new ArrayConvention();
             yield return new DictionaryConvention();
-            yield return new ListConvention();
+            yield return new ListConvention(configuration);
             yield return new ReadOnlyCollectionConvention();
             yield return new IComparerConvention();
             yield return new IEqualityComparerConvention();

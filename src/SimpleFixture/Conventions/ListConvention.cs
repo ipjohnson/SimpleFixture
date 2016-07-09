@@ -10,6 +10,13 @@ namespace SimpleFixture.Conventions
 {
     public class ListConvention : ITypedConvention
     {
+        private IFixtureConfiguration _configuration;
+
+        public ListConvention(IFixtureConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public ConventionPriority Priority
         {
             get { return ConventionPriority.Last; }
@@ -21,6 +28,45 @@ namespace SimpleFixture.Conventions
         {
             if (request.RequestedType.IsConstructedGenericType)
             {
+                if (_configuration.CircularReferenceHandling != CircularReferenceHandlingAlgorithm.MaxDepth)
+                {
+                    bool circular = false;
+                    object circularInstance = null;
+                    var currentRequest = request;
+                    var requestTypeInfo = request.RequestedType.GenericTypeArguments.First().GetTypeInfo();
+
+                    while (currentRequest != null)
+                    {
+                        if (currentRequest.Instance != null &&
+                           requestTypeInfo.IsAssignableFrom(currentRequest.RequestedType.GetTypeInfo()))
+                        {
+                            circularInstance = currentRequest.Instance;
+                            circular = true;
+                            break;
+                        }
+
+                        currentRequest = currentRequest.ParentRequest;
+                    }
+
+                    if (circular)
+                    {
+                        if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularProperties)
+                        {
+
+                        }
+                        else if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.AutoWire)
+                        {
+
+                            MethodInfo getListWithValueMethodInfo =
+                                GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetListWithValue");
+
+                            MethodInfo closedGetMethod = getListWithValueMethodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+
+                            return closedGetMethod.Invoke(this, new object[] { circularInstance });
+                        }
+                    }
+                }
+
                 MethodInfo methodInfo =
                     GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetList");
 
@@ -30,6 +76,11 @@ namespace SimpleFixture.Conventions
             }
 
             return Convention.NoValue;
+        }
+
+        private object GetListWithValue<TValue>(TValue value)
+        {
+            return new List<TValue> { value };
         }
 
         private object GetList<TValue>(DataRequest request)

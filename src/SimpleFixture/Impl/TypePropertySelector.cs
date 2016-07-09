@@ -14,10 +14,12 @@ namespace SimpleFixture.Impl
 
     public class TypePropertySelector : ITypePropertySelector
     {
+        private IFixtureConfiguration _configuration;
         private IConstraintHelper _helper;
 
-        public TypePropertySelector(IConstraintHelper helper)
+        public TypePropertySelector(IFixtureConfiguration configuration, IConstraintHelper helper)
         {
+            _configuration = configuration;
             _helper = helper;
         }
 
@@ -35,13 +37,47 @@ namespace SimpleFixture.Impl
                 skipProperties.AddRange(skipPropertiesEnumerable);
             }
 
-            return instance.GetType()
-                           .GetRuntimeProperties()
-                           .Where(p => p.CanWrite &&
-                                       p.SetMethod.IsPublic &&
-                                      !p.SetMethod.IsStatic &&
-                                       p.SetMethod.GetParameters().Count() == 1 &&
-                                      !skipProperties.Contains(p.Name));
+            var returnProperties = instance.GetType()
+                                    .GetRuntimeProperties()
+                                    .Where(p => p.CanWrite &&
+                                                p.SetMethod.IsPublic &&
+                                               !p.SetMethod.IsStatic &&
+                                                p.SetMethod.GetParameters().Count() == 1 &&
+                                               !skipProperties.Contains(p.Name));
+
+            if(request.ParentRequest != null &&
+                _configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularProperties)
+            {
+                returnProperties = CheckForCircularProperties(request, returnProperties);
+            }
+
+            return returnProperties;
+        }
+
+        private IEnumerable<PropertyInfo> CheckForCircularProperties(DataRequest request, IEnumerable<PropertyInfo> returnProperties)
+        {
+            var requestTypeInfo = request.RequestedType.GetTypeInfo();
+            bool circular = false;
+
+            foreach (var propertyInfo in returnProperties)
+            {
+                var currentRequest = request;
+
+                while (currentRequest != null)
+                {
+                    if (currentRequest.Instance != null &&
+                       requestTypeInfo.IsAssignableFrom(currentRequest.RequestedType.GetTypeInfo()))
+                    {
+                        circular = true;
+                        break;
+                    }
+                }
+
+                if (!circular)
+                {
+                    yield return propertyInfo;
+                }
+            }
         }
     }
 }

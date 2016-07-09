@@ -44,6 +44,7 @@ namespace SimpleFixture
                                        DataRequest newRequest = new DataRequest(r.ParentRequest,
                                            _fixture,
                                            typeof(T),
+                                           r.DependencyType,
                                            r.RequestName,
                                            r.Populate,
                                            r.Constraints,

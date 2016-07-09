@@ -112,7 +112,7 @@ namespace SimpleFixture.xUnit
                     if(!found)
                     {
                         parameterValue = 
-                            fixture.Generate(new DataRequest(null, fixture, parameter.ParameterType, parameter.Name, true, null, parameter));
+                            fixture.Generate(new DataRequest(null, fixture, parameter.ParameterType, DependencyType.Root, parameter.Name, true, null, parameter));
                     }
                 }
 
@@ -145,7 +145,7 @@ namespace SimpleFixture.xUnit
                 constraintName = parameter.Name;
             }
 
-            return fixture.Generate(new DataRequest(null,fixture,parameter.ParameterType,constraintName,true,new { min, max }, parameter));
+            return fixture.Generate(new DataRequest(null,fixture,parameter.ParameterType, DependencyType.Root, constraintName,true,new { min, max }, parameter));
         }
 
         protected virtual object LocateValue(Fixture fixture, ParameterInfo parameter, LocateAttribute locateAttribute)

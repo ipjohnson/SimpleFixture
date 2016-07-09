@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BulkExportClasses.cs" />
+    <Compile Include="Classes\CircularClasses.cs" />
     <Compile Include="Classes\FieldClass.cs" />
     <Compile Include="Classes\IBulkExportInterface.cs" />
     <Compile Include="Classes\ImportSomeClass.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Classes\RangedClass.cs" />
     <Compile Include="Classes\SomeClass.cs" />
     <Compile Include="FixtureTests\BehaviorTests.cs" />
+    <Compile Include="FixtureTests\CircularReferenceTests.cs" />
     <Compile Include="FixtureTests\Complex\ComparerConventionTests.cs" />
     <Compile Include="FixtureTests\Complex\ComplexConstraintTests.cs" />
     <Compile Include="FixtureTests\Complex\DelegateFixtureTests.cs" />

@@ -77,7 +77,7 @@ namespace SimpleFixture
         /// <returns>new instance</returns>
         public object Locate(Type type, string requestName = null, object constraints = null)
         {
-            DataRequest request = new DataRequest(null, this, type, requestName, false, constraints, null);
+            DataRequest request = new DataRequest(null, this, type, DependencyType.Root, requestName, false, constraints, null);
 
             return Generate(request);
         }
@@ -130,7 +130,7 @@ namespace SimpleFixture
                 name = string.Empty;
             }
 
-            DataRequest request = new DataRequest(null, this, type, name, true, constraints, null);
+            DataRequest request = new DataRequest(null, this, type, DependencyType.Root, name, true, constraints, null);
 
             return Generate(request);
         }
@@ -192,7 +192,7 @@ namespace SimpleFixture
 
             var typePopulator = Configuration.Locate<ITypePopulator>();
 
-            DataRequest request = new DataRequest(null, this, instance.GetType(), string.Empty, true, constraints, null);
+            DataRequest request = new DataRequest(null, this, instance.GetType(), DependencyType.Root, string.Empty, true, constraints, null);
 
             typePopulator.Populate(instance, request, modelService.GetModel(instance.GetType()));
         }
