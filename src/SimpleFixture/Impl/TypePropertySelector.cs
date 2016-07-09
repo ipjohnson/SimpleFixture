@@ -46,7 +46,7 @@ namespace SimpleFixture.Impl
                                                !skipProperties.Contains(p.Name));
 
             if(request.ParentRequest != null &&
-                _configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularProperties)
+                _configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularReferences)
             {
                 returnProperties = CheckForCircularProperties(request, returnProperties);
             }

@@ -50,7 +50,7 @@ namespace SimpleFixture.Conventions
 
                     if (circular)
                     {
-                        if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularProperties)
+                        if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularReferences)
                         {
 
                         }

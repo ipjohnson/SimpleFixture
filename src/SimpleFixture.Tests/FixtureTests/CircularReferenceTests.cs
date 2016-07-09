@@ -10,71 +10,79 @@ namespace SimpleFixture.Tests.FixtureTests
 {
     public class CircularReferenceTests
     {
-        //[Fact]
-        //public void Fixture_CircularRefenceHandling_MaxDepth_WithSkip()
-        //{
-        //    var fixture = new Fixture();
+        [Fact]
+        public void Fixture_CircularReferenceHandling_MaxDepth_Throws()
+        {
+            var fixture = new Fixture();
 
-        //    var order = fixture.Generate<Order>(constraints: new { _skipProperties = new[] { "Order" } });
+            Assert.ThrowsAny<Exception>(() => fixture.Generate<Order>());
+        }
 
-        //    Assert.NotNull(order);
-        //    Assert.NotNull(order.Administration);
-        //    Assert.Null(order.Administration.Order);
-        //}
+        [Fact]
+        public void Fixture_CircularRefenceHandling_MaxDepth_WithSkip()
+        {
+            var fixture = new Fixture();
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_MaxDepth_AssignNull()
-        //{
-        //    var fixture = new Fixture();
+            var order = fixture.Generate<Order>(constraints: new { _skipProperties = new[] { "Order" } });
 
-        //    var order = fixture.Generate<Order>(constraints: new { Administration = (Administration)null });
+            Assert.NotNull(order);
+            Assert.NotNull(order.Administration);
+            Assert.Null(order.Administration.Order);
+        }
 
-        //    Assert.NotNull(order);
-        //    Assert.Null(order.Administration);
-        //}
+        [Fact]
+        public void Fixture_CircularReferenceHandling_MaxDepth_AssignNull()
+        {
+            var fixture = new Fixture();
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_MaxDepth_HandWire()
-        //{
-        //    var fixture = new Fixture();
+            var order = fixture.Generate<Order>(constraints: new { Administration = (Administration)null });
 
-        //    fixture.Return<ICollection<Order>>(request =>
-        //    {
-        //        var rootRequest = request;
+            Assert.NotNull(order);
+            Assert.Null(order.Administration);
+        }
 
-        //        while(rootRequest.ParentRequest != null)
-        //        {
-        //            rootRequest = rootRequest.ParentRequest;
-        //        }
+        [Fact]
+        public void Fixture_CircularReferenceHandling_MaxDepth_HandWire()
+        {
+            var fixture = new Fixture();
 
-        //        return new List<Order> { rootRequest.Instance as Order };
-        //    });
+            fixture.Return<ICollection<Order>>(request =>
+            {
+                var rootRequest = request;
 
-        //    var order = fixture.Generate<Order>();
+                while (rootRequest.ParentRequest != null)
+                {
+                    rootRequest = rootRequest.ParentRequest;
+                }
 
-        //    Assert.NotNull(order);
-        //    Assert.NotNull(order.Administration);
-        //    Assert.NotNull(order.Administration.Order);
-        //    Assert.Equal(1, order.Administration.Order.Count);
-        //    Assert.Same(order, order.Administration.Order.First());
-        //}
+                return new List<Order> { rootRequest.Instance as Order };
+            });
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_AutoWire_WithComplexList()
-        //{
-        //    var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
+            var order = fixture.Generate<Order>();
 
-        //    var administration = fixture.Generate<Administration>();
+            Assert.NotNull(order);
+            Assert.NotNull(order.Administration);
+            Assert.NotNull(order.Administration.Order);
+            Assert.Equal(1, order.Administration.Order.Count);
+            Assert.Same(order, order.Administration.Order.First());
+        }
 
-        //    Assert.NotNull(administration);
-        //    Assert.NotNull(administration.Order);
-        //    Assert.True(administration.Order.Count > 0);
+        [Fact]
+        public void Fixture_CircularReferenceHandling_AutoWire_WithComplexList()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
 
-        //    foreach(var order in administration.Order)
-        //    {
-        //        Assert.Same(administration, order.Administration);
-        //    }
-        //}
+            var administration = fixture.Generate<Administration>();
+
+            Assert.NotNull(administration);
+            Assert.NotNull(administration.Order);
+            Assert.True(administration.Order.Count > 0);
+
+            foreach (var order in administration.Order)
+            {
+                Assert.Same(administration, order.Administration);
+            }
+        }
 
         [Fact]
         public void Fixture_CircularReferenceHandling_AutoWire_WithNestedList()
@@ -122,7 +130,8 @@ namespace SimpleFixture.Tests.FixtureTests
             var parent = fixture.Generate<ParentClass>();
 
             Assert.NotNull(parent);
-            Assert.Null(parent.ChildClass);
+            Assert.NotNull(parent.ChildClass);
+            Assert.Null(parent.ChildClass.ParentClass);
         }
     }
 }

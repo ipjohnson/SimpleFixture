@@ -21,13 +21,12 @@ namespace SimpleFixture
         /// <summary>
         /// Omit circular properties, skips properties that are circular and returns empty collections when circular
         /// </summary>
-        OmitCircularProperties,
+        OmitCircularReferences,
 
         /// <summary>
         /// Autowire circular references, if a parent in the object graph can be used it will be
         /// </summary>
         AutoWire,
-        OmitCircularReferences,
     }
 
     /// <summary>
