@@ -69,60 +69,60 @@ namespace SimpleFixture.Tests.FixtureTests
         //    Assert.NotNull(administration);
         //    Assert.NotNull(administration.Order);
         //    Assert.True(administration.Order.Count > 0);
-            
+
         //    foreach(var order in administration.Order)
         //    {
         //        Assert.Same(administration, order.Administration);
         //    }
         //}
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_AutoWire_WithNestedList()
-        //{
-        //    var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
+        [Fact]
+        public void Fixture_CircularReferenceHandling_AutoWire_WithNestedList()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
 
-        //    var order = fixture.Generate<Order>();
+            var order = fixture.Generate<Order>();
 
-        //    Assert.NotNull(order);
-        //    Assert.NotNull(order.Administration);
-        //    Assert.NotNull(order.Administration.Order);
-        //    Assert.Equal(1, order.Administration.Order.Count);
-        //    Assert.Same(order, order.Administration.Order.First());
-        //}
+            Assert.NotNull(order);
+            Assert.NotNull(order.Administration);
+            Assert.NotNull(order.Administration.Order);
+            Assert.Equal(1, order.Administration.Order.Count);
+            Assert.Same(order, order.Administration.Order.First());
+        }
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_AutoWire_ParentChild()
-        //{
-        //    var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
+        [Fact]
+        public void Fixture_CircularReferenceHandling_AutoWire_ParentChild()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
 
-        //    var parent = fixture.Generate<ParentClass>();
+            var parent = fixture.Generate<ParentClass>();
 
-        //    Assert.NotNull(parent);
-        //    Assert.NotNull(parent.ChildClass);
-        //    Assert.Same(parent, parent.ChildClass.ParentClass);
-        //}
+            Assert.NotNull(parent);
+            Assert.NotNull(parent.ChildClass);
+            Assert.Same(parent, parent.ChildClass.ParentClass);
+        }
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_AutoWire_ParentChild_WithInterface()
-        //{
-        //    var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
+        [Fact]
+        public void Fixture_CircularReferenceHandling_AutoWire_ParentChild_WithInterface()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
 
-        //    var parent = fixture.Generate<ParentInterfaceClass>();
+            var parent = fixture.Generate<ParentInterfaceClass>();
 
-        //    Assert.NotNull(parent);
-        //    Assert.NotNull(parent.Child);
-        //    Assert.Same(parent, parent.Child.Parent);
-        //}
+            Assert.NotNull(parent);
+            Assert.NotNull(parent.Child);
+            Assert.Same(parent, parent.Child.Parent);
+        }
 
-        //[Fact]
-        //public void Fixture_CircularReferenceHandling_Omit()
-        //{
-        //    var fixture = new Fixture(DefaultFixtureConfiguration.OmitCircularReferences);
+        [Fact]
+        public void Fixture_CircularReferenceHandling_Omit()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.OmitCircularReferences);
 
-        //    var parent = fixture.Generate<ParentClass>();
+            var parent = fixture.Generate<ParentClass>();
 
-        //    Assert.NotNull(parent);
-        //    Assert.Null(parent.ChildClass);
-        //}
+            Assert.NotNull(parent);
+            Assert.Null(parent.ChildClass);
+        }
     }
 }
