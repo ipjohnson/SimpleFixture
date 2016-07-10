@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ipjohnson/SimpleFixture</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Provides DataAttribute for xUnit using SimpleFixture</description>
-    <releaseNotes>$releaseNotes$</releaseNotes>
+    <releaseNotes>This release enhances circular reference handling options</releaseNotes>
     <copyright>Copyright ©  2016</copyright>
     <tags>Test Fixture Data Generation SimpleFixture xUnit</tags>
     <dependencies>

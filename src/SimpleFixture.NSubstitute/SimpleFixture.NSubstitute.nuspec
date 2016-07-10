@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ipjohnson/SimpleFixture</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>NSubstitute convention for SimpleFixture</description>
-    <releaseNotes>$releaseNotes$</releaseNotes>
+    <releaseNotes>This release enhances circular reference handling options</releaseNotes>
     <copyright>Copyright ©  2015</copyright>
     <tags>NSubstitute SimpleFixture Test Fixture Data Generation</tags>
     <dependencies>
