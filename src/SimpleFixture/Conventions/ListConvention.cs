@@ -52,7 +52,12 @@ namespace SimpleFixture.Conventions
                     {
                         if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularReferences)
                         {
+                            MethodInfo getListWithValueMethodInfo =
+                                GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetListEmpty");
 
+                            MethodInfo closedGetMethod = getListWithValueMethodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+
+                            return closedGetMethod.Invoke(this, new object[0]);
                         }
                         else if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.AutoWire)
                         {
@@ -81,6 +86,11 @@ namespace SimpleFixture.Conventions
         private object GetListWithValue<TValue>(TValue value)
         {
             return new List<TValue> { value };
+        }
+
+        private object GetListEmpty<TValue>()
+        {
+            return new List<TValue>();
         }
 
         private object GetList<TValue>(DataRequest request)

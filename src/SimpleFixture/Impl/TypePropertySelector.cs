@@ -55,22 +55,23 @@ namespace SimpleFixture.Impl
         }
 
         private IEnumerable<PropertyInfo> CheckForCircularProperties(DataRequest request, IEnumerable<PropertyInfo> returnProperties)
-        {
-            var requestTypeInfo = request.RequestedType.GetTypeInfo();
-            bool circular = false;
-
+        {            
             foreach (var propertyInfo in returnProperties)
             {
+                var propertyInfoTypeInfo = propertyInfo.PropertyType.GetTypeInfo();
+                bool circular = false;
                 var currentRequest = request;
 
                 while (currentRequest != null)
                 {
                     if (currentRequest.Instance != null &&
-                       requestTypeInfo.IsAssignableFrom(currentRequest.RequestedType.GetTypeInfo()))
+                       propertyInfoTypeInfo.IsAssignableFrom(currentRequest.RequestedType.GetTypeInfo()))
                     {
                         circular = true;
                         break;
                     }
+
+                    currentRequest = currentRequest.ParentRequest;
                 }
 
                 if (!circular)

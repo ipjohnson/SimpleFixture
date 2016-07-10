@@ -1,5 +1,5 @@
 environment:
-  release_version: 1.5.0
+  release_version: 1.5.1
 version: $(release_version).{build}
 assembly_info:
   patch: true

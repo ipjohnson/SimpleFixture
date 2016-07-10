@@ -133,5 +133,44 @@ namespace SimpleFixture.Tests.FixtureTests
             Assert.NotNull(parent.ChildClass);
             Assert.Null(parent.ChildClass.ParentClass);
         }
+        
+        [Fact]
+        public void Fixture_CircularReferenceHandling_OmitWithNested()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.OmitCircularReferences);
+
+            var order = fixture.Generate<Order>();
+
+
+        }
+
+        [Fact]
+        public void Fixture_CircularReferenceHandling_Omit_ButRestOfChildGenerated()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.OmitCircularReferences);
+
+            var parent = fixture.Generate<Order>();
+
+            Assert.NotNull(parent);
+            Assert.NotNull(parent.Administration);
+            Assert.NotNull(parent.Administration.Order);
+            Assert.Equal(0, parent.Administration.Order.Count);
+            Assert.NotEqual<Guid>(parent.Administration.Id, default(Guid));
+        }
+
+        [Fact]
+        public void Fixture_CircularReferenceHandling_MatchIdProperties()
+        {
+            var fixture = new Fixture(DefaultFixtureConfiguration.AutoWire);
+
+            fixture.Customize<Order>().Apply(o => o.AdministrationId = o.Administration.Id);
+
+            var parent = fixture.Generate<Order>();
+
+            Assert.NotNull(parent);
+            Assert.NotNull(parent.Administration);
+            Assert.NotNull(parent.Administration.Order);
+            Assert.Equal<Guid>(parent.Administration.Id, parent.AdministrationId);
+        }
     }
 }
