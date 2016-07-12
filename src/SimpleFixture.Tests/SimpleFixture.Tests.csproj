@@ -140,10 +140,6 @@
       <Project>{8e289544-036f-415c-b963-bb5bc9f06d15}</Project>
       <Name>SimpleFixture.NSubstitute</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SimpleFixture.xUnit\SimpleFixture.xUnit.csproj">
-      <Project>{acd535bf-4530-4cf2-90ca-bc1ea2c18b3d}</Project>
-      <Name>SimpleFixture.xUnit</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SimpleFixture\SimpleFixture.csproj">
       <Project>{acfd0b4c-9003-458b-9db3-9ba25cb448c2}</Project>
       <Name>SimpleFixture</Name>
