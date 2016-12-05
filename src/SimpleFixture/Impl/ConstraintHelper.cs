@@ -87,11 +87,11 @@ namespace SimpleFixture.Impl
 
             if (memberInfo != null)
             {
-                attribute = memberInfo.GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
+                attribute = memberInfo.GetCustomAttributes(true).OfType<Attribute>().FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
             }
             else if (request.ExtraInfo is ParameterInfo)
             {
-                attribute = ((ParameterInfo)request.ExtraInfo).GetCustomAttributes(true).FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
+                attribute = ((ParameterInfo)request.ExtraInfo).GetCustomAttributes(true).OfType<Attribute>().FirstOrDefault(a => a.GetType().Name == "RangeAttribute");
             }
 
             if (attribute != null)

@@ -1,16 +1,38 @@
 environment:
-  release_version: 2.0.0
-version: $(release_version).{build}
+  build_version: 2.0.0   
+  COVERALLS_REPO_TOKEN:
+    secure: ckLaW2+gTIqUpr2Z8vP2kUgrT/9XhSj3eqnCXD6izyKo9l9oFeZcIIced+RzBjuo
+version: $(build_version)-{build}
+configuration: Release
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
-  assembly_version: '{version}'
-  assembly_file_version: '{version}'
-  assembly_informational_version: '$(release_version)-Beta{build}'
+  assembly_version: '$(build_version).0'
+  assembly_file_version: '$(build_version).{build}'
+  assembly_informational_version: '$(build_version)-Beta{build}'
 before_build:
-- cmd: nuget restore src/SimpleFixture.sln
+ - cmd: cd src/SimpleFixture.Moq/
+ - cmd: dotnet restore
+ - cmd: cd ../SimpleFixture.NSubstitute/
+ - cmd: dotnet restore
+ - cmd: cd ../SimpleFixture.xUnit/
+ - cmd: dotnet restore
+ - cmd: ../../tests/SimpleFixture.Tests/
+ - cmd: dotnet restore
+ - cmd: cd ../../
 build:
-  project: src/SimpleFixture.sln
+  project: SimpleFixture.sln
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal
+after_build:
+- cmd: dotnet pack src/SimpleFixture/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.Moq/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.NSubstitute/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.xUnit/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
+test_script:
+- cmd: cd tests/SimpleFixture.Tests/
+- cmd: CodeCoverageAppVeyor.cmd
+artifacts:
+- path: SimpleFixture*.nupkg
+  name: SimpleFixture

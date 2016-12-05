@@ -2,13 +2,14 @@
   "version": "2.0.0-*",
 
   "dependencies": {
-    "SimpleFixture": "2.0.0-*",
-    "xunit": "2.2.0-beta4-build3444",
-    "NETStandard.Library": "1.6.0"
+    "Moq": "4.6.38-alpha",
+    "NETStandard.Library": "1.6.0",
+    "SimpleFixture": "2.0.0-*"
   },
 
   "frameworks": {
-    "netstandard1.0": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
     },
     "net45": {
       "frameworkAssemblies": {
