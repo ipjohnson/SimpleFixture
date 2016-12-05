@@ -17,7 +17,7 @@ before_build:
  - cmd: dotnet restore
  - cmd: cd ../SimpleFixture.xUnit/
  - cmd: dotnet restore
- - cmd: ../../tests/SimpleFixture.Tests/
+ - cmd: cd ../../tests/SimpleFixture.Tests/
  - cmd: dotnet restore
  - cmd: cd ../../
 build:
