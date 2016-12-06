@@ -238,7 +238,7 @@ namespace SimpleFixture.Impl
         /// <param name="min">min double</param>
         /// <param name="max">max double</param>
         /// <returns>random double</returns>
-        public double NextDouble(double min = Double.MinValue, double max = Double.MaxValue)
+        public double NextDouble(double min = double.MinValue, double max = double.MaxValue)
         {
             var range = max - min;
 
@@ -270,7 +270,7 @@ namespace SimpleFixture.Impl
         /// <param name="min">min character</param>
         /// <param name="max">max character</param>
         /// <returns>random character</returns>
-        public char NextChar(char min = Char.MinValue, char max = Char.MaxValue)
+        public char NextChar(char min = char.MinValue, char max = char.MaxValue)
         {
             return Convert.ToChar((int)((_random.NextDouble() * (max - min)) + min));
         }
@@ -290,7 +290,7 @@ namespace SimpleFixture.Impl
         /// <param name="min">min byte value</param>
         /// <param name="max">max byte value</param>
         /// <returns>random byte</returns>
-        public byte NextByte(byte min = Byte.MinValue, byte max = Byte.MaxValue)
+        public byte NextByte(byte min = byte.MinValue, byte max = byte.MaxValue)
         {
             return Convert.ToByte((int)((_random.NextDouble() * (max - min)) + min));
         }
@@ -301,7 +301,7 @@ namespace SimpleFixture.Impl
         /// <param name="min">min sbyte</param>
         /// <param name="max">max sbyte</param>
         /// <returns>random sbyte</returns>
-        public sbyte NextSByte(sbyte min = SByte.MinValue, sbyte max = SByte.MaxValue)
+        public sbyte NextSByte(sbyte min = sbyte.MinValue, sbyte max = sbyte.MaxValue)
 		{
 			return Convert.ToSByte((int)((_random.NextDouble() * (max - min)) + min));
 	    }
