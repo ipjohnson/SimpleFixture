@@ -56,7 +56,7 @@ namespace SimpleFixture.Impl
             foreach (var propertyInfo in returnProperties)
             {
                 var propertyInfoTypeInfo = propertyInfo.PropertyType.GetTypeInfo();
-                bool circular = false;
+                var circular = false;
                 var currentRequest = request;
 
                 while (currentRequest != null)

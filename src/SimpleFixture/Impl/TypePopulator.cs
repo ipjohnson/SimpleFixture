@@ -41,7 +41,7 @@ namespace SimpleFixture.Impl
 
             if (_configuration.PopulateProperties)
             {
-                foreach (PropertyInfo propertyInfo in _propertySelector.SelectProperties(instance, request, model))
+                foreach (var propertyInfo in _propertySelector.SelectProperties(instance, request, model))
                 {
                     object propertyValue = null;
 
@@ -64,7 +64,7 @@ namespace SimpleFixture.Impl
 
                     var newRequest = CreateDataRequestForProperty(propertyInfo, request);
                     
-                    bool foundProperty = false;
+                    var foundProperty = false;
 
                     if (propertyValue == null)
                     {

@@ -18,9 +18,9 @@ namespace SimpleFixture.Conventions.Named
                 InitializeFirstNames();
             }
 
-            string sex = _helper.GetValue(request.Constraints, "sex", "gender");
+            var sex = _helper.GetValue(request.Constraints, "sex", "gender");
 
-            bool isGirl = false;
+            var isGirl = false;
 
             switch (sex.ToLowerInvariant())
             {
@@ -396,8 +396,8 @@ namespace SimpleFixture.Conventions.Named
 
         protected virtual string UsernameConvention(DataRequest request)
         {
-            string firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
-            string lastName = _helper.GetValue<string>(request.Constraints, null, "LastName", "Surname");
+            var firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
+            var lastName = _helper.GetValue<string>(request.Constraints, null, "LastName", "Surname");
 
             if (string.IsNullOrEmpty(firstName))
             {
@@ -473,9 +473,9 @@ namespace SimpleFixture.Conventions.Named
 
         protected virtual string EmailConvention(DataRequest request)
         {
-            string firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
-            string lastName = _helper.GetValue<string>(request.Constraints, null, "LastName", "Surname");
-            string domain = _helper.GetValue<string>(request.Constraints, "none.com", "Domain");
+            var firstName = _helper.GetValue<string>(request.Constraints, null, "FirstName");
+            var lastName = _helper.GetValue<string>(request.Constraints, null, "LastName", "Surname");
+            var domain = _helper.GetValue<string>(request.Constraints, "none.com", "Domain");
 
             if (string.IsNullOrEmpty(firstName))
             {

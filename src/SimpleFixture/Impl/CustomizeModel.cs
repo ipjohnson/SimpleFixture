@@ -158,7 +158,7 @@ namespace SimpleFixture.Impl
         /// <returns>customization instance</returns>
         public ICustomizeModel<T> Set<TProp>(Expression<Func<T, TProp>> propertyFunc, Func<DataRequest, TProp> valueFunc)
         {
-            MemberExpression member = propertyFunc.Body as MemberExpression;
+            var member = propertyFunc.Body as MemberExpression;
 
             if (member == null)
             {
@@ -213,7 +213,7 @@ namespace SimpleFixture.Impl
         /// <returns>customization instance</returns>
         public ICustomizeModel<T> Skip<TProp>(Expression<Func<T, TProp>> propertyFunc)
         {
-            MemberExpression member = propertyFunc.Body as MemberExpression;
+            var member = propertyFunc.Body as MemberExpression;
 
             if (member == null)
             {

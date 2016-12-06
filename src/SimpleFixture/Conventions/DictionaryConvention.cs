@@ -19,10 +19,10 @@ namespace SimpleFixture.Conventions
 
                 if (openType == typeof(IDictionary<,>) || openType == typeof(Dictionary<,>))
                 {
-                    MethodInfo methodInfo =
+                    var methodInfo =
                         GetType().GetRuntimeMethods().First(m => m.Name == "GetDictionary");
 
-                    MethodInfo closedMethod = methodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+                    var closedMethod = methodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
 
                     return closedMethod.Invoke(this, new object[] { request });
                 }
@@ -33,14 +33,14 @@ namespace SimpleFixture.Conventions
 
         private object GetDictionary<TKey, TValue>(DataRequest request)
         {
-            DataRequest newRequest = new DataRequest(request, typeof(IEnumerable<KeyValuePair<TKey,TValue>>));
+            var newRequest = new DataRequest(request, typeof(IEnumerable<KeyValuePair<TKey,TValue>>));
 
-            IEnumerable<KeyValuePair<TKey, TValue>> values =
+            var values =
                 (IEnumerable<KeyValuePair<TKey, TValue>>)request.Fixture.Generate(newRequest);
 
-            Dictionary<TKey,TValue> returnValues = new Dictionary<TKey, TValue>();
+            var returnValues = new Dictionary<TKey, TValue>();
 
-            foreach (KeyValuePair<TKey, TValue> keyValuePair in values)
+            foreach (var keyValuePair in values)
             {
                 returnValues[keyValuePair.Key] = keyValuePair.Value;
             }

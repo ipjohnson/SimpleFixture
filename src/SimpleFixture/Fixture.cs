@@ -70,7 +70,7 @@ namespace SimpleFixture
         /// <returns>new instance</returns>
         public object Locate(Type type, string requestName = null, object constraints = null)
         {
-            DataRequest request = new DataRequest(null, this, type, DependencyType.Root, requestName, false, constraints, null);
+            var request = new DataRequest(null, this, type, DependencyType.Root, requestName, false, constraints, null);
 
             return Generate(request);
         }
@@ -123,7 +123,7 @@ namespace SimpleFixture
                 name = string.Empty;
             }
 
-            DataRequest request = new DataRequest(null, this, type, DependencyType.Root, name, true, constraints, null);
+            var request = new DataRequest(null, this, type, DependencyType.Root, name, true, constraints, null);
 
             return Generate(request);
         }
@@ -154,9 +154,9 @@ namespace SimpleFixture
         /// <returns>new T</returns>
         public T Freeze<T>(string requestName = null, object constraints = null, Action<ReturnConfiguration<T>> value = null)
         {
-            T returnValue = Generate<T>(requestName, constraints);
+            var returnValue = Generate<T>(requestName, constraints);
 
-            ReturnConfiguration<T> returnStatement = Return(returnValue);
+            var returnStatement = Return(returnValue);
 
             if (value != null)
             {
@@ -185,7 +185,7 @@ namespace SimpleFixture
 
             var typePopulator = Configuration.Locate<ITypePopulator>();
 
-            DataRequest request = new DataRequest(null, this, instance.GetType(), DependencyType.Root, string.Empty, true, constraints, null);
+            var request = new DataRequest(null, this, instance.GetType(), DependencyType.Root, string.Empty, true, constraints, null);
 
             typePopulator.Populate(instance, request, modelService.GetModel(instance.GetType()));
         }
@@ -207,7 +207,7 @@ namespace SimpleFixture
                 throw new ArgumentNullException("returnValues", "you must provide at least one value");
             }
 
-            int i = 0;
+            var i = 0;
 
             var convention = new FilteredConvention<T>(g => returnValues[i++ % returnValues.Length]);
 
@@ -393,9 +393,9 @@ namespace SimpleFixture
 
             Add(_typedConventions);
 
-            IConventionProvider conventionProvider = _configuration.Locate<IConventionProvider>();
+            var conventionProvider = _configuration.Locate<IConventionProvider>();
 
-            foreach (IConvention providedConvention in conventionProvider.ProvideConventions(Configuration))
+            foreach (var providedConvention in conventionProvider.ProvideConventions(Configuration))
             {
                 Add(providedConvention);
             }

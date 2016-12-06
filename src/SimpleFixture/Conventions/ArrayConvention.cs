@@ -27,9 +27,9 @@ namespace SimpleFixture.Conventions
 
         private T[] GetArray<T>(DataRequest request)
         {
-            DataRequest newRequest = new DataRequest(request, typeof(IEnumerable<T>));
+            var newRequest = new DataRequest(request, typeof(IEnumerable<T>));
 
-            IEnumerable<T> enumerable = (IEnumerable<T>) request.Fixture.Generate(newRequest);
+            var enumerable = (IEnumerable<T>) request.Fixture.Generate(newRequest);
 
             return enumerable.ToArray();
         }

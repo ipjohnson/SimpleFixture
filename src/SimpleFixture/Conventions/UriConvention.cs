@@ -21,8 +21,8 @@ namespace SimpleFixture.Conventions
                 return LocateValue;
             }
 
-            string domain = _constraintHelper.GetValue(request.Constraints, "google.com", "uriDomain");
-            string scheme = _constraintHelper.GetValue(request.Constraints, "http", "uriScheme");
+            var domain = _constraintHelper.GetValue(request.Constraints, "google.com", "uriDomain");
+            var scheme = _constraintHelper.GetValue(request.Constraints, "http", "uriScheme");
 
             return new Uri(string.Format("{0}://{1}", scheme, domain));
         }

@@ -60,7 +60,7 @@ namespace SimpleFixture.Tests.FixtureTests.NamedConventions
         public void Fixture_GenerateEmailWithFirstName_ReturnsGoodValue()
         {
             var fixture = new Fixture();
-            string firstName = "TestName";
+            var firstName = "TestName";
 
             var value = fixture.Generate<string>("Email", new { firstName });
 
@@ -73,7 +73,7 @@ namespace SimpleFixture.Tests.FixtureTests.NamedConventions
         public void Fixture_GenerateEmailWithLastName_ReturnsGoodValue()
         {
             var fixture = new Fixture();
-            string lastName = "TestName";
+            var lastName = "TestName";
 
             var value = fixture.Generate<string>("Email", new { lastName });
 
@@ -85,8 +85,8 @@ namespace SimpleFixture.Tests.FixtureTests.NamedConventions
         public void Fixture_GenerateEmailWithBothFirstAndLastName_ReturnsGoodValue()
         {
             var fixture = new Fixture();
-            string firstName = "TestFirstName";
-            string lastName = "TestLastName";
+            var firstName = "TestFirstName";
+            var lastName = "TestLastName";
 
             var value = fixture.Generate<string>("Email", new { firstName, lastName });
 
@@ -100,9 +100,9 @@ namespace SimpleFixture.Tests.FixtureTests.NamedConventions
         public void Fixture_GenerateEmailWithBothFirstAndLastNameAndDomain_ReturnsGoodValue()
         {
             var fixture = new Fixture();
-            string firstName = "TestFirstName";
-            string lastName = "TestLastName";
-            string domain = "TestDomain.com";
+            var firstName = "TestFirstName";
+            var lastName = "TestLastName";
+            var domain = "TestDomain.com";
 
             var value = fixture.Generate<string>("Email", new { firstName, lastName, domain });
 

@@ -11,7 +11,7 @@ namespace SimpleFixture.Tests.FixtureTests
         {
             var fixture = new Fixture();
 
-            int behaviorCalled = 0;
+            var behaviorCalled = 0;
 
             fixture.Behavior.Add((r, o) => { behaviorCalled++; return o; });
 
@@ -25,7 +25,7 @@ namespace SimpleFixture.Tests.FixtureTests
         {
             var fixture = new Fixture();
 
-            int behaviorCalled = 0;
+            var behaviorCalled = 0;
 
             fixture.Behavior.Add((r, o) => { behaviorCalled++; return o; });
 
@@ -40,7 +40,7 @@ namespace SimpleFixture.Tests.FixtureTests
         {
             var fixture = new Fixture();
 
-            int behaviorCalled = 0;
+            var behaviorCalled = 0;
 
             fixture.Behavior.Add<SomeClass>((r, o) => { behaviorCalled++; return o; });
 
@@ -54,8 +54,8 @@ namespace SimpleFixture.Tests.FixtureTests
         {
             var fixture = new Fixture();
 
-            bool apply = false;
-            int behaviorCalled = 0;
+            var apply = false;
+            var behaviorCalled = 0;
 
             fixture.Behavior.Add<SomeClass>((r, o) =>
                                             {

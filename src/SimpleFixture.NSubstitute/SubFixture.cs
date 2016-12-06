@@ -19,7 +19,7 @@ namespace SimpleFixture.NSubstitute
         /// <returns>new substituted type</returns>
         public T Substitute<T>(Action<T> substituteAction = null, bool? singleton = null)
         {
-            T returnValue = Generate<T>(constraints: new
+            var returnValue = Generate<T>(constraints: new
                                                      {
                                                          fakeSingleton = singleton
                                                      });

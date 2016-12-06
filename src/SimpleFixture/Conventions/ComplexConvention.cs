@@ -40,7 +40,7 @@ namespace SimpleFixture.Conventions
 
             var model = _modelService.GetModel(request.RequestedType);
 
-            object returnValue = _typeCreator.CreateType(request, model);
+            var returnValue = _typeCreator.CreateType(request, model);
 
             request.Instance = returnValue;
 

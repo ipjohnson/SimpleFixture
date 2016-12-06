@@ -36,13 +36,13 @@ namespace SimpleFixture.xUnit
         /// is represented by a single object array.</returns>
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
-            Fixture fixture = CreateFixture(testMethod);
-            List<object> returnParameters = new List<object>();
-            List<object> externalParameters = new List<object>(_parameters);
+            var fixture = CreateFixture(testMethod);
+            var returnParameters = new List<object>();
+            var externalParameters = new List<object>(_parameters);
 
             foreach(var parameter in testMethod.GetParameters())
             {
-                bool found = false;
+                var found = false;
                 object parameterValue = null;
 
                 if(parameter.ParameterType == typeof(Fixture))

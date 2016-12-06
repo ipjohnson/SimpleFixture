@@ -28,17 +28,17 @@ namespace SimpleFixture.Conventions
 
         private T BuildMethod<T>(DataRequest request)
         {
-            Type delegateType = typeof(T);
-            MethodInfo method = delegateType.GetTypeInfo().GetDeclaredMethod("Invoke");
+            var delegateType = typeof(T);
+            var method = delegateType.GetTypeInfo().GetDeclaredMethod("Invoke");
 
             if (method == null)
             {
                 throw new Exception("Wrong type not delegate " + typeof(T).FullName);
             }
 
-            List<ParameterExpression> parameters = new List<ParameterExpression>();
+            var parameters = new List<ParameterExpression>();
 
-            foreach (ParameterInfo parameterInfo in method.GetParameters())
+            foreach (var parameterInfo in method.GetParameters())
             {
                 parameters.Add(Expression.Parameter(parameterInfo.ParameterType, parameterInfo.Name));
             }

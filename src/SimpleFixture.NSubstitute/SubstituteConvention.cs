@@ -30,7 +30,7 @@ namespace SimpleFixture.NSubstitute
             object returnValue = null;
             var helper = request.Fixture.Configuration.Locate<IConstraintHelper>();
 
-            bool? singleton = helper.GetValue<bool?>(request.Constraints, null, "fakeSingleton");
+            var singleton = helper.GetValue<bool?>(request.Constraints, null, "fakeSingleton");
 
             if (!singleton.HasValue)
             {

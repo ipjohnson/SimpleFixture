@@ -79,9 +79,9 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
         {
             var fixture = new Fixture();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                DateTime min = new DateTime(2050, 1, 1);
+                var min = new DateTime(2050, 1, 1);
 
                 var value = fixture.Generate<DateTime>(constraints: new { min });
 
@@ -94,9 +94,9 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
         {
             var fixture = new Fixture();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                DateTime max = new DateTime(2050, 1, 1);
+                var max = new DateTime(2050, 1, 1);
 
                 var value = fixture.Generate<DateTime>(constraints: new { max });
 
@@ -109,10 +109,10 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
         {
             var fixture = new Fixture();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                DateTime min = new DateTime(2050, 1, 1);
-                DateTime max = new DateTime(2052, 1, 1);
+                var min = new DateTime(2050, 1, 1);
+                var max = new DateTime(2052, 1, 1);
 
                 var value = fixture.Generate<DateTime>(constraints: new { min, max });
 

@@ -27,7 +27,7 @@ namespace SimpleFixture.Conventions.Named
 
         protected virtual string AddressLineTwoConvention(DataRequest request)
         {
-            string typeOfLocation = _dataGenerator.NextBool() ? "Unit" : "Apt";
+            var typeOfLocation = _dataGenerator.NextBool() ? "Unit" : "Apt";
 
             return string.Format("{0} {1}", typeOfLocation, _dataGenerator.NextInt(1, 10000));
         }

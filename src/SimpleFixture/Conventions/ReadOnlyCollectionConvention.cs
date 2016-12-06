@@ -16,10 +16,10 @@ namespace SimpleFixture.Conventions
         {
             if (request.RequestedType.IsConstructedGenericType)
             {
-                MethodInfo methodInfo =
+                var methodInfo =
                     GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetReadOnlyList");
 
-                MethodInfo closedMethod = methodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+                var closedMethod = methodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
 
                 return closedMethod.Invoke(this, new object[] { request });
             }
@@ -41,7 +41,7 @@ namespace SimpleFixture.Conventions
         {
             var newRequest = new DataRequest(request, typeof(List<TValue>));
 
-            List<TValue> returnValue = newRequest.Fixture.Generate(newRequest) as List<TValue>;
+            var returnValue = newRequest.Fixture.Generate(newRequest) as List<TValue>;
 
             return new ReadOnlyCollection<TValue>(returnValue);
         }

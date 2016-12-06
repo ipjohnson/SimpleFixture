@@ -6,7 +6,7 @@ namespace SimpleFixture.NSubstitute
     {
         public static T Substitute<T>(this Fixture fixture, Action<T> substituteAction = null, bool? singleton = null)
         {
-            T returnValue = fixture.Generate<T>(constraints: new
+            var returnValue = fixture.Generate<T>(constraints: new
             {
                 fakeSingleton = singleton
             });

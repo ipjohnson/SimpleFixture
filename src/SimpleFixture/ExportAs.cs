@@ -35,7 +35,7 @@
                                            return (TExport)_singleton;
                                        }
 
-                                       DataRequest newRequest = new DataRequest(r.ParentRequest,
+                                       var newRequest = new DataRequest(r.ParentRequest,
                                            _fixture,
                                            typeof(T),
                                            r.DependencyType,
@@ -44,7 +44,7 @@
                                            r.Constraints,
                                            r.ExtraInfo);
 
-                                       TExport returnValue = (TExport)r.Fixture.Generate(newRequest);
+                                       var returnValue = (TExport)r.Fixture.Generate(newRequest);
 
                                        if (_isSingleton)
                                        {

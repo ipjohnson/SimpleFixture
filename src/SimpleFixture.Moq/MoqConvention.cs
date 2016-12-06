@@ -39,7 +39,7 @@ namespace SimpleFixture.Moq
 
         private object ProcessMockRequest(DataRequest request)
         {
-            bool singleton = GetMoqSingleton(request);
+            var singleton = GetMoqSingleton(request);
 
             Mock mockObject;
 
@@ -60,10 +60,10 @@ namespace SimpleFixture.Moq
 
         private object ProcessInterfaceRequest(DataRequest request)
         {
-            Type mockedType = typeof(Mock<>).GetTypeInfo().MakeGenericType(request.RequestedType);
+            var mockedType = typeof(Mock<>).GetTypeInfo().MakeGenericType(request.RequestedType);
 
             Mock mockObject;
-            bool singleton = GetMoqSingleton(request);
+            var singleton = GetMoqSingleton(request);
 
             if (singleton && _mocks.TryGetValue(mockedType, out mockObject))
             {
@@ -84,7 +84,7 @@ namespace SimpleFixture.Moq
         {
             var helper = request.Fixture.Configuration.Locate<IConstraintHelper>();
 
-            bool? singleton = helper.GetValue<bool?>(request.Constraints, null, "moqSingleton");
+            var singleton = helper.GetValue<bool?>(request.Constraints, null, "moqSingleton");
 
             if (!singleton.HasValue)
             {

@@ -8,7 +8,7 @@ namespace SimpleFixture.Impl
     {
         public IEnumerable<IConvention> ProvideConventions(IFixtureConfiguration configuration)
         {
-            List<IConvention> conventions = new List<IConvention>();
+            var conventions = new List<IConvention>();
 
             if (configuration.UseDefaultConventions)
             {
@@ -25,8 +25,8 @@ namespace SimpleFixture.Impl
 
         private IEnumerable<IConvention> ProvideDefaultConventions(IFixtureConfiguration configuration)
         {
-            IRandomDataGeneratorService dataGenerator = configuration.Locate<IRandomDataGeneratorService>();
-            IConstraintHelper helper = configuration.Locate<IConstraintHelper>();
+            var dataGenerator = configuration.Locate<IRandomDataGeneratorService>();
+            var helper = configuration.Locate<IConstraintHelper>();
 
             yield return new BoolConvention(dataGenerator);
             yield return new ByteConvention(dataGenerator, helper);
@@ -61,8 +61,8 @@ namespace SimpleFixture.Impl
 
         private IEnumerable<IConvention> ProvideNamedConventions(IFixtureConfiguration configuration)
         {
-            IRandomDataGeneratorService dataGenerator = configuration.Locate<IRandomDataGeneratorService>();
-            IConstraintHelper helper = configuration.Locate<IConstraintHelper>();
+            var dataGenerator = configuration.Locate<IRandomDataGeneratorService>();
+            var helper = configuration.Locate<IConstraintHelper>();
 
             yield return new StringNamedConvention(dataGenerator, helper);
         }

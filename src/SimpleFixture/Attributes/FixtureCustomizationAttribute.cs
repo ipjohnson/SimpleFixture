@@ -15,7 +15,7 @@ namespace SimpleFixture.Attributes
         {
             foreach (var type in _types)
             {
-                object initializer = fixture.Locate(type);
+                var initializer = fixture.Locate(type);
 
                 if (initializer is IConvention)
                 {

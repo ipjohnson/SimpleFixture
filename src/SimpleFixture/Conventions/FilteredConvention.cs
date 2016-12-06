@@ -44,7 +44,7 @@ namespace SimpleFixture.Conventions
 
         public override object GenerateData(DataRequest request)
         {
-            foreach (Func<DataRequest, bool> filter in _filters)
+            foreach (var filter in _filters)
             {
                 if (!filter(request))
                 {

@@ -28,13 +28,13 @@ namespace SimpleFixture.Impl
 
         public bool TryGetValue(DataRequest dataRequest, out object value)
         {
-            bool returnValue = false;
+            var returnValue = false;
 
             value = null;
 
-            foreach (IConvention convention in _conventions)
+            foreach (var convention in _conventions)
             {
-                object newValue = convention.GenerateData(dataRequest);
+                var newValue = convention.GenerateData(dataRequest);
 
                 if (newValue == Convention.NoValue)
                 {
@@ -51,7 +51,7 @@ namespace SimpleFixture.Impl
 
         private void InternalAddConvention(IConvention convention)
         {
-            for (int i = 0; i < _conventions.Count; i++)
+            for (var i = 0; i < _conventions.Count; i++)
             {
                 if (convention.Priority > _conventions[i].Priority)
                 {

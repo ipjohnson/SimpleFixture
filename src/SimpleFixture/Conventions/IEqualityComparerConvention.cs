@@ -20,9 +20,9 @@ namespace SimpleFixture.Conventions
         {
             if (request.RequestedType.IsConstructedGenericType)
             {
-                Type closedType = typeof(EqualityComparer<>).MakeGenericType(request.RequestedType.GenericTypeArguments[0]);
+                var closedType = typeof(EqualityComparer<>).MakeGenericType(request.RequestedType.GenericTypeArguments[0]);
 
-                PropertyInfo defualtProperty = closedType.GetRuntimeProperty("Default");
+                var defualtProperty = closedType.GetRuntimeProperty("Default");
 
                 return defualtProperty.GetValue(null);
             }

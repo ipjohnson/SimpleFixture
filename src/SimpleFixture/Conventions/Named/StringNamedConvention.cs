@@ -43,7 +43,7 @@ namespace SimpleFixture.Conventions.Named
 
                 foreach (var attribute in memberInfo.GetCustomAttributes())
                 {
-                    string attributeName = attribute.GetType().Name;
+                    var attributeName = attribute.GetType().Name;
 
                     switch(attributeName)
                     {
@@ -76,7 +76,7 @@ namespace SimpleFixture.Conventions.Named
                     
                     if (minProperty != null)
                     {
-                        int minLength = (int)minProperty.GetValue(stringLengthAttr);
+                        var minLength = (int)minProperty.GetValue(stringLengthAttr);
 
                         if (stringValue.Length < minLength)
                         {
@@ -85,7 +85,7 @@ namespace SimpleFixture.Conventions.Named
                     }
                     if (maxProperty != null)
                     {
-                        int maxLength = (int)maxProperty.GetValue(stringLengthAttr);
+                        var maxLength = (int)maxProperty.GetValue(stringLengthAttr);
 
                         if (stringValue.Length > maxLength)
                         {

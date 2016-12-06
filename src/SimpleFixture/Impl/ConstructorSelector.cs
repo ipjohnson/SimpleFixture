@@ -14,11 +14,11 @@ namespace SimpleFixture.Impl
     {
         public ConstructorInfo SelectConstructor(Type type)
         {
-            List<ConstructorInfo> constructors = new List<ConstructorInfo>();
+            var constructors = new List<ConstructorInfo>();
 
-            int maxParameters = -1;
+            var maxParameters = -1;
 
-            List<ConstructorInfo> allConstructors = new List<ConstructorInfo>(type.GetTypeInfo()
+            var allConstructors = new List<ConstructorInfo>(type.GetTypeInfo()
                                                  .DeclaredConstructors
                                                  .Where(c => c.IsPublic && !c.IsStatic));
 
@@ -26,7 +26,7 @@ namespace SimpleFixture.Impl
                                                                          x.GetParameters().Length));
 
 
-            foreach (ConstructorInfo info in allConstructors)
+            foreach (var info in allConstructors)
             {
                 if (info.GetParameters().Count() < maxParameters)
                 {

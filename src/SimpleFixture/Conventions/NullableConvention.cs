@@ -13,7 +13,7 @@ namespace SimpleFixture.Conventions
             if (request.RequestedType.IsConstructedGenericType &&
                 request.RequestedType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
-                DataRequest newRequest = new DataRequest(request, request.RequestedType.GenericTypeArguments[0]);
+                var newRequest = new DataRequest(request, request.RequestedType.GenericTypeArguments[0]);
 
                 return newRequest.Fixture.Generate(newRequest);
             }

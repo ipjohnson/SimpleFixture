@@ -35,7 +35,7 @@ namespace SimpleFixture.Impl
             
             IConventionList conventionList;
 
-            foreach (Type supportedType in typedConvention.SupportedTypes)
+            foreach (var supportedType in typedConvention.SupportedTypes)
             {
                 if (!_typedConventions.TryGetValue(supportedType, out conventionList))
                 {
@@ -79,7 +79,7 @@ namespace SimpleFixture.Impl
 
             if (returnValue == null && request.RequestedType.IsConstructedGenericType)
             {
-                Type openType = request.RequestedType.GetGenericTypeDefinition();
+                var openType = request.RequestedType.GetGenericTypeDefinition();
 
                 if (_typedConventions.TryGetValue(openType, out conventionList))
                 {

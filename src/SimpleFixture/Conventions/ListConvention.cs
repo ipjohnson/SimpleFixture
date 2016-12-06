@@ -25,7 +25,7 @@ namespace SimpleFixture.Conventions
             {
                 if (_configuration.CircularReferenceHandling != CircularReferenceHandlingAlgorithm.MaxDepth)
                 {
-                    bool circular = false;
+                    var circular = false;
                     object circularInstance = null;
                     var currentRequest = request;
                     var requestTypeInfo = request.RequestedType.GenericTypeArguments.First().GetTypeInfo();
@@ -47,30 +47,30 @@ namespace SimpleFixture.Conventions
                     {
                         if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.OmitCircularReferences)
                         {
-                            MethodInfo getListWithValueMethodInfo =
+                            var getListWithValueMethodInfo =
                                 GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetListEmpty");
 
-                            MethodInfo closedGetMethod = getListWithValueMethodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+                            var closedGetMethod = getListWithValueMethodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
 
                             return closedGetMethod.Invoke(this, new object[0]);
                         }
                         else if (_configuration.CircularReferenceHandling == CircularReferenceHandlingAlgorithm.AutoWire)
                         {
 
-                            MethodInfo getListWithValueMethodInfo =
+                            var getListWithValueMethodInfo =
                                 GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetListWithValue");
 
-                            MethodInfo closedGetMethod = getListWithValueMethodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+                            var closedGetMethod = getListWithValueMethodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
 
                             return closedGetMethod.Invoke(this, new object[] { circularInstance });
                         }
                     }
                 }
 
-                MethodInfo methodInfo =
+                var methodInfo =
                     GetType().GetTypeInfo().DeclaredMethods.First(m => m.Name == "GetList");
 
-                MethodInfo closedMethod = methodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
+                var closedMethod = methodInfo.MakeGenericMethod(request.RequestedType.GenericTypeArguments);
 
                 return closedMethod.Invoke(this, new object[] { request });
             }
@@ -90,19 +90,19 @@ namespace SimpleFixture.Conventions
 
         private object GetList<TValue>(DataRequest request)
         {
-            List<TValue> returnValue = new List<TValue>();
+            var returnValue = new List<TValue>();
 
             if (request.Populate)
             {
-                int count = request.Fixture.Configuration.ItemCount.HasValue
+                var count = request.Fixture.Configuration.ItemCount.HasValue
                     ? request.Fixture.Configuration.ItemCount.Value
                     : request.Fixture.Configuration.Locate<IRandomDataGeneratorService>().NextInt(5, 10);
 
-                for (int i = 0; i < count; i++)
+                for (var i = 0; i < count; i++)
                 {
-                    DataRequest newRequest = new DataRequest(request, typeof(TValue));
+                    var newRequest = new DataRequest(request, typeof(TValue));
 
-                    TValue newValue = (TValue)newRequest.Fixture.Generate(newRequest);
+                    var newValue = (TValue)newRequest.Fixture.Generate(newRequest);
 
                     returnValue.Add(newValue);
                 }

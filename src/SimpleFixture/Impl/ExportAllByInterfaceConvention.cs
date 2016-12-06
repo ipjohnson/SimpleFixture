@@ -35,7 +35,7 @@ namespace SimpleFixture.Impl
 
             Initialize();
 
-            Type concreteType = FindConcreteType(request);
+            var concreteType = FindConcreteType(request);
 
             if (concreteType != null)
             {
@@ -103,11 +103,11 @@ namespace SimpleFixture.Impl
 
                                     if (openTestType == genericType)
                                     {
-                                        bool matched = true;
-                                        List<Tuple<Type, int>> genericParameters = new List<Tuple<Type, int>>();
+                                        var matched = true;
+                                        var genericParameters = new List<Tuple<Type, int>>();
                                         var implementedInterfaceParameters = implementedInterface.GetTypeInfo().GenericTypeArguments;
 
-                                        for (int i = 0; i < genericArgs.Length; i++)
+                                        for (var i = 0; i < genericArgs.Length; i++)
                                         {
                                             var matchedParameter = openParameters.First(t => t == implementedInterfaceParameters[i]);
 

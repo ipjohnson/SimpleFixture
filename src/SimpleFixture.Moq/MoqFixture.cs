@@ -20,7 +20,7 @@ namespace SimpleFixture.Moq
         /// <returns>new mock</returns>
         public Mock<T> Mock<T>(Action<Mock<T>> mockAction = null, bool? singleton = null) where T : class
         {
-            Mock<T> returnValue = Generate<Mock<T>>(constraints: new
+            var returnValue = Generate<Mock<T>>(constraints: new
             {
                 moqSingleton = singleton
             });

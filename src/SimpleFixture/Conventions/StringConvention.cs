@@ -46,7 +46,7 @@ namespace SimpleFixture.Conventions
             lengthMinMax.Min = _constraintHelper.GetValue(request.Constraints, lengthMinMax.Min, "min", "minlength");
             lengthMinMax.Max = _constraintHelper.GetValue(request.Constraints, lengthMinMax.Max, "max", "maxlength");
             
-            string prefix = _constraintHelper.GetValue(request.Constraints, string.Empty, "prefix", "pre", "seed");
+            var prefix = _constraintHelper.GetValue(request.Constraints, string.Empty, "prefix", "pre", "seed");
 
             if (!string.IsNullOrEmpty(prefix))
             {
@@ -54,7 +54,7 @@ namespace SimpleFixture.Conventions
                 lengthMinMax.Max -= prefix.Length;
             }
 
-            string postfix = _constraintHelper.GetValue(request.Constraints, string.Empty, "postfix", "post");
+            var postfix = _constraintHelper.GetValue(request.Constraints, string.Empty, "postfix", "post");
 
             if (!string.IsNullOrEmpty(postfix))
             {
@@ -62,14 +62,14 @@ namespace SimpleFixture.Conventions
                 lengthMinMax.Max -= postfix.Length;
             }
 
-            StringType stringType = _constraintHelper.GetValue(request.Constraints, StringType.MostCharacter, "stringType", "Type");
+            var stringType = _constraintHelper.GetValue(request.Constraints, StringType.MostCharacter, "stringType", "Type");
 
             return prefix + _dataGenerator.NextString(stringType, lengthMinMax.Min, lengthMinMax.Max) + postfix;
         }
 
         private MinMaxValue<int> GetMemberInfoStringLength(MemberInfo memberInfo)
         {
-            MinMaxValue<int> returnValue = new MinMaxValue<int> { Min = -1, Max = int.MaxValue };
+            var returnValue = new MinMaxValue<int> { Min = -1, Max = int.MaxValue };
 
             var attribute = memberInfo.GetCustomAttributes().FirstOrDefault(a => a.GetType().Name == "StringLengthAttribute");
 
@@ -80,7 +80,7 @@ namespace SimpleFixture.Conventions
 
                 if(minProperty != null)
                 { 
-                    int localMin = (int)minProperty.GetValue(attribute);
+                    var localMin = (int)minProperty.GetValue(attribute);
 
                     if (localMin.CompareTo(returnValue.Min) > 0)
                     {
@@ -90,7 +90,7 @@ namespace SimpleFixture.Conventions
 
                 if (maxProperty != null)
                 {
-                    int localMax = (int)maxProperty.GetValue(attribute);
+                    var localMax = (int)maxProperty.GetValue(attribute);
 
                     if (localMax.CompareTo(returnValue.Max) < 0)
                     {

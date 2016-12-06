@@ -4,20 +4,37 @@ using System.Collections.Generic;
 
 namespace SimpleFixture.Conventions.Named
 {
+    /// <summary>
+    /// Base convention for type populating using names
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public abstract class BaseNamedConvention<T> : SimpleTypeConvention<T>
     {
         private Dictionary<string, Func<DataRequest, T>> _nameConventions;
         protected readonly IRandomDataGeneratorService _dataGenerator;
         protected readonly IConstraintHelper _helper;
 
-        public BaseNamedConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper helper)
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="dataGenerator"></param>
+        /// <param name="helper"></param>
+        protected BaseNamedConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper helper)
         {
             _dataGenerator = dataGenerator;
             _helper = helper;
         }
-        
+
+        /// <summary>
+        /// Priority for the convention, last by default
+        /// </summary>
         public override ConventionPriority Priority => ConventionPriority.Last;
 
+        /// <summary>
+        /// Generate date for the request, return Constrain.NoValue instead of null
+        /// </summary>
+        /// <param name="request">data request</param>
+        /// <returns>generated data</returns>
         public override object GenerateData(DataRequest request)
         {
             if (_nameConventions == null)
@@ -28,16 +45,16 @@ namespace SimpleFixture.Conventions.Named
             }
 
             Func<DataRequest, T> stringFunc;
-            string requestName = request.RequestName;
+            var requestName = request.RequestName;
 
             if (_nameConventions.TryGetValue(request.RequestName.ToLowerInvariant(), out stringFunc))
             {
                 return stringFunc(request);
             }
 
-            bool allUpper = true;
+            var allUpper = true;
 
-            foreach (char c in requestName)
+            foreach (var c in requestName)
             {
                 if (char.IsLower(c))
                 {
@@ -50,9 +67,9 @@ namespace SimpleFixture.Conventions.Named
                 return Convention.NoValue;
             }
 
-            int lastUpper = 0;
+            var lastUpper = 0;
 
-            for (int i = 1; i < requestName.Length; i++)
+            for (var i = 1; i < requestName.Length; i++)
             {
                 if (char.IsUpper(requestName[i]))
                 {
@@ -62,14 +79,14 @@ namespace SimpleFixture.Conventions.Named
                         continue;
                     }
 
-                    string leftString = requestName.Substring(0, i - 1);
+                    var leftString = requestName.Substring(0, i - 1);
 
                     if (_nameConventions.TryGetValue(leftString.ToLowerInvariant(), out stringFunc))
                     {
                         return stringFunc(request);
                     }
 
-                    string rightString = requestName.Substring(i);
+                    var rightString = requestName.Substring(i);
 
                     if (_nameConventions.TryGetValue(rightString.ToLowerInvariant(), out stringFunc))
                     {
@@ -81,14 +98,22 @@ namespace SimpleFixture.Conventions.Named
             return Convention.NoValue;
         }
 
+        /// <summary>
+        /// Add convention func for set of names
+        /// </summary>
+        /// <param name="stringFunc">convention</param>
+        /// <param name="names">names</param>
         protected void AddConvention(Func<DataRequest, T> stringFunc, params string[] names)
         {
-            foreach (string name in names)
+            foreach (var name in names)
             {
                 _nameConventions[name.ToLowerInvariant()] = stringFunc;
             }
         }
 
+        /// <summary>
+        /// Initialze convention
+        /// </summary>
         protected abstract void Initialize();
     }
 }

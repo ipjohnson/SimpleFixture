@@ -29,7 +29,7 @@ namespace SimpleFixture.Impl
                 return model.New(request);
             }
 
-            ConstructorInfo constructorInfo = _selector.SelectConstructor(request.RequestedType);
+            var constructorInfo = _selector.SelectConstructor(request.RequestedType);
 
             if (constructorInfo == null)
             {
@@ -46,9 +46,9 @@ namespace SimpleFixture.Impl
 
         private object InjectConstructor(ConstructorInfo method, DataRequest request)
         {
-            List<object> parameters = new List<object>();
+            var parameters = new List<object>();
 
-            foreach (ParameterInfo parameterInfo in method.GetParameters())
+            foreach (var parameterInfo in method.GetParameters())
             {
                 object parameterValue = null;
 
@@ -69,7 +69,7 @@ namespace SimpleFixture.Impl
                     }
                 }
 
-                bool foundValue = false;
+                var foundValue = false;
                 var newRequest = CreateDataRequestForParameter(parameterInfo, request);
 
                 if (parameterValue == null)

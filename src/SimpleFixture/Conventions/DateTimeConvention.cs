@@ -23,8 +23,8 @@ namespace SimpleFixture.Conventions
                 return LocateValue;
             }
 
-            DateTime? min = _helper.GetValue<DateTime?>(request.Constraints, null, "min", "minDate");
-            DateTime? max = _helper.GetValue<DateTime?>(request.Constraints, null, "max", "maxDate");
+            var min = _helper.GetValue<DateTime?>(request.Constraints, null, "min", "minDate");
+            var max = _helper.GetValue<DateTime?>(request.Constraints, null, "max", "maxDate");
 
             if (!min.HasValue)
             {
@@ -43,7 +43,7 @@ namespace SimpleFixture.Conventions
                 max = min.Value.AddYears(100);
             }
             
-            MinMaxValue<DateTime> minMax = _helper.GetMinMax(request, min.Value, max.Value);
+            var minMax = _helper.GetMinMax(request, min.Value, max.Value);
 
             var timeSpan = minMax.Max.Subtract(minMax.Min);
 

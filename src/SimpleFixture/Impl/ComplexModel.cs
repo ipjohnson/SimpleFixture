@@ -69,7 +69,7 @@ namespace SimpleFixture.Impl
         {
             if (_applyActions != null)
             {
-                foreach (Action<object> applyAction in _applyActions)
+                foreach (var applyAction in _applyActions)
                 {
                     applyAction(instance);
                 }
@@ -103,7 +103,7 @@ namespace SimpleFixture.Impl
 
             if (_propertyValues != null)
             {
-                foreach (Tuple<string, Func<DataRequest, object>> propertyValue in _propertyValues)
+                foreach (var propertyValue in _propertyValues)
                 {
                     if (info.Name.ToLowerInvariant() == propertyValue.Item1.ToLowerInvariant())
                     {
@@ -119,7 +119,7 @@ namespace SimpleFixture.Impl
 
             if (_propertiesValue != null)
             {
-                foreach (Tuple<Func<PropertyInfo, bool>, Func<DataRequest, PropertyInfo, object>> tuple in _propertiesValue)
+                foreach (var tuple in _propertiesValue)
                 {
                     if (tuple.Item1(info))
                     {

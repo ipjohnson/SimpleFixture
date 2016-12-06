@@ -25,7 +25,7 @@ namespace SimpleFixture
         /// <param name="behavior"></param>
         public void Add(Func<DataRequest, object, object> behavior)
         {
-            WhenFilter<object> when = new WhenFilter<object>();
+            var when = new WhenFilter<object>();
 
             _behaviors.Add((r, o) =>
                            {
@@ -45,7 +45,7 @@ namespace SimpleFixture
         /// <param name="behavior"></param>
         public WhenFilter<T> Add<T>(Func<DataRequest, T, T> behavior)
         {
-            WhenFilter<T> when = new WhenFilter<T>();
+            var when = new WhenFilter<T>();
 
             Func<DataRequest, object, object> objectFunc =
                 (r, o) =>
@@ -70,7 +70,7 @@ namespace SimpleFixture
         /// <param name="behavior"></param>
         public WhenFilter<T> Add<T>(Action<T> behavior)
         {
-            WhenFilter<T> whenFilter = new WhenFilter<T>();
+            var whenFilter = new WhenFilter<T>();
 
             Func<DataRequest, object, object> objectFunc =
                 (r, o) =>
@@ -96,7 +96,7 @@ namespace SimpleFixture
         /// <returns>instance</returns>
         public object Apply(DataRequest request, object instance)
         {
-            foreach (Func<DataRequest, object, object> behavior in _behaviors)
+            foreach (var behavior in _behaviors)
             {
                 instance = behavior(request, instance);
             }
@@ -171,7 +171,7 @@ namespace SimpleFixture
                 return true;
             }
 
-            foreach (Func<DataRequest, T, bool> filter in _filters)
+            foreach (var filter in _filters)
             {
                 if (!filter(request, instance))
                 {

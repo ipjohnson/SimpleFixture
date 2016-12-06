@@ -78,7 +78,7 @@ namespace SimpleFixture.Impl
 
             try
             {
-                decimal range = max.Value - min.Value;
+                var range = max.Value - min.Value;
 
                 return range * (decimal)_random.NextDouble() + min.Value;
             }
@@ -105,7 +105,7 @@ namespace SimpleFixture.Impl
 
         public T NextInSet<T>(IEnumerable<T> set)
         {
-            List<T> list = new List<T>(set);
+            var list = new List<T>(set);
 
             return list.Any() ? list[NextInt(0, list.Count)] : default(T);
         }
@@ -117,15 +117,15 @@ namespace SimpleFixture.Impl
 
         public IEnumerable<T> Randomize<T>(IEnumerable<T> set)
         {
-            List<T> list = new List<T>(set);
+            var list = new List<T>(set);
 
-            for (int i = 0; i < list.Count; i++)
+            for (var i = 0; i < list.Count; i++)
             {
-                int indexSrc = _random.Next(0, list.Count);
-                int indexDst = _random.Next(0, list.Count);
+                var indexSrc = _random.Next(0, list.Count);
+                var indexDst = _random.Next(0, list.Count);
 
-                T source = list[indexSrc];
-                T dest = list[indexDst];
+                var source = list[indexSrc];
+                var dest = list[indexDst];
 
                 list[indexDst] = source;
                 list[indexSrc] = dest;
@@ -157,7 +157,7 @@ namespace SimpleFixture.Impl
         
         public double NextDouble(double min = Double.MinValue, double max = Double.MaxValue)
         {
-            double range = max - min;
+            var range = max - min;
 
             if (double.IsInfinity(range))
             {
@@ -214,7 +214,7 @@ namespace SimpleFixture.Impl
                 max = DateTime.MaxValue;
             }
 
-            long ticks = NextLong(min.Value.Ticks, max.Value.Ticks);
+            var ticks = NextLong(min.Value.Ticks, max.Value.Ticks);
 
             return new DateTime(ticks);
         }
@@ -231,18 +231,18 @@ namespace SimpleFixture.Impl
                 max = TimeSpan.MaxValue;
             }
 
-            long ticks = NextLong(min.Value.Ticks, max.Value.Ticks);
+            var ticks = NextLong(min.Value.Ticks, max.Value.Ticks);
 
             return new TimeSpan(ticks);
         }
 
         private string BuildString(List<char> characters, int min, int max)
         {
-            StringBuilder builder = new StringBuilder();
-            int length = _random.Next(min, max);
-            int totalCharacters = characters.Count;
+            var builder = new StringBuilder();
+            var length = _random.Next(min, max);
+            var totalCharacters = characters.Count;
 
-            for (int i = 0; i < length; i++)
+            for (var i = 0; i < length; i++)
             {
                 builder.Append(characters[_random.Next(0, totalCharacters)]);
             }
@@ -252,14 +252,14 @@ namespace SimpleFixture.Impl
 
         private void SetupAlphaCharacters()
         {
-            List<char> list = new List<char>();
+            var list = new List<char>();
 
-            for (char i = 'a'; i <= 'z'; i++)
+            for (var i = 'a'; i <= 'z'; i++)
             {
                 list.Add(i);
             }
 
-            for (char i = 'A'; i <= 'Z'; i++)
+            for (var i = 'A'; i <= 'Z'; i++)
             {
                 list.Add(i);
             }
@@ -269,9 +269,9 @@ namespace SimpleFixture.Impl
 
         private void SetupNumericCharacters()
         {
-            List<char> list = new List<char>();
+            var list = new List<char>();
 
-            for (char i = '0'; i <= '9'; i++)
+            for (var i = '0'; i <= '9'; i++)
             {
                 list.Add(i);
             }
@@ -281,7 +281,7 @@ namespace SimpleFixture.Impl
 
         private void SetupAlphaNumericCharacters()
         {
-            List<char> list = new List<char>(_alphaCharacters);
+            var list = new List<char>(_alphaCharacters);
 
             list.AddRange(_numericCharacters);
 
@@ -290,7 +290,7 @@ namespace SimpleFixture.Impl
 
         private void SetupAllCharacters()
         {
-            List<char> list = new List<char>
+            var list = new List<char>
                               {
                                   '!',
                                   '@',
@@ -328,9 +328,9 @@ namespace SimpleFixture.Impl
 
         private string BuildLoremIpsum(int min, int max)
         {
-            int totalLength = NextInt(min, max);
+            var totalLength = NextInt(min, max);
 
-            StringBuilder builder = new StringBuilder(_loremIpsum);
+            var builder = new StringBuilder(_loremIpsum);
             
             while (builder.Length < totalLength)
             {

@@ -27,7 +27,7 @@ namespace SimpleFixture.DI
         /// <param name="exportFunc">export func</param>
         public void ExportSingleton<T>(Func<GContainer, T> exportFunc)
         {
-            T tValue = default (T);
+            var tValue = default (T);
 
             Func<GContainer, T> singletonFunc = 
                 g =>
@@ -57,7 +57,7 @@ namespace SimpleFixture.DI
                 throw new Exception("Could not locate type: " + typeof(T).FullName);
             }
 
-            Func<GContainer, T> exportFunc = objectFunc as Func<GContainer, T>;
+            var exportFunc = objectFunc as Func<GContainer, T>;
 
             if (exportFunc == null)
             {

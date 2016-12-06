@@ -77,9 +77,9 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
         {
             var fixture = new Fixture();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                sbyte min = (sbyte)i;
+                var min = (sbyte)i;
 
                 var value = fixture.Generate<sbyte>(constraints: new { min });
 
@@ -92,9 +92,9 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
         {
             var fixture = new Fixture();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                sbyte max = (sbyte)(i + 10);
+                var max = (sbyte)(i + 10);
 
                 var value = fixture.Generate<sbyte>(constraints: new { max });
 
@@ -107,10 +107,10 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
         {
             var fixture = new Fixture();
 
-            for (int i = 0; i < 100; i++)
+            for (var i = 0; i < 100; i++)
             {
-                sbyte min = (sbyte)i;
-                sbyte max = (sbyte)(min + 10);
+                var min = (sbyte)i;
+                var max = (sbyte)(min + 10);
 
                 var value = fixture.Generate<sbyte>(constraints: new { min, max });
 

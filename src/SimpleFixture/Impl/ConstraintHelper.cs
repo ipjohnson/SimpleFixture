@@ -78,7 +78,7 @@ namespace SimpleFixture.Impl
     {
         public MinMaxValue<T> GetMinMax<T>(DataRequest request, T min, T max) where T : IComparable
         {
-            MinMaxValue<T> returnValue = new MinMaxValue<T> { Min = min, Max = max };
+            var returnValue = new MinMaxValue<T> { Min = min, Max = max };
             Attribute attribute = null;
 
             var memberInfo = request.ExtraInfo as MemberInfo;
@@ -99,8 +99,8 @@ namespace SimpleFixture.Impl
 
                 if (minProperty != null && maxProperty != null)
                 {
-                    T localMin = (T)Convert.ChangeType(minProperty.GetValue(attribute), typeof(T));
-                    T localMax = (T)Convert.ChangeType(maxProperty.GetValue(attribute), typeof(T));
+                    var localMin = (T)Convert.ChangeType(minProperty.GetValue(attribute), typeof(T));
+                    var localMax = (T)Convert.ChangeType(maxProperty.GetValue(attribute), typeof(T));
 
                     if (localMax.CompareTo(returnValue.Max) < 0)
                     {
@@ -119,7 +119,7 @@ namespace SimpleFixture.Impl
 
         public bool GetUnTypedValue(out object value, Type type, object constraintValue, object defaultValue, params string[] propertyNames)
         {
-            bool returnValue = false;
+            var returnValue = false;
             value = defaultValue;
 
             if (constraintValue == null)
@@ -137,11 +137,11 @@ namespace SimpleFixture.Impl
             }
             else
             {
-                IEnumerable<KeyValuePair<string, object>> dictionary = constraintValue as IEnumerable<KeyValuePair<string, object>>;
+                var dictionary = constraintValue as IEnumerable<KeyValuePair<string, object>>;
 
                 if (dictionary != null)
                 {
-                    foreach (string propertyName in propertyNames)
+                    foreach (var propertyName in propertyNames)
                     {
                         var keyValuePair =
                             dictionary.FirstOrDefault(
@@ -177,7 +177,7 @@ namespace SimpleFixture.Impl
                 {
                     PropertyInfo propInfo = null;
 
-                    foreach (string propertyName in propertyNames)
+                    foreach (var propertyName in propertyNames)
                     {
                         propInfo = constraintValue.GetType().GetRuntimeProperties().FirstOrDefault(
                             p => string.Compare(p.Name, propertyName, StringComparison.CurrentCultureIgnoreCase) == 0);
