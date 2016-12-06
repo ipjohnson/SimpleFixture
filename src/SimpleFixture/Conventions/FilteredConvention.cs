@@ -18,10 +18,7 @@ namespace SimpleFixture.Conventions
             _priority = priority;
         }
 
-        public override ConventionPriority Priority
-        {
-            get { return _priority; }
-        }
+        public override ConventionPriority Priority => _priority;
 
         public void AddFilter(Func<DataRequest, bool> matchingFilter)
         {

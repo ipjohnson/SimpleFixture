@@ -9,10 +9,7 @@ namespace SimpleFixture.Conventions
 {
     public class ArrayConvention : IConvention
     {
-        public ConventionPriority Priority
-        {
-            get { return ConventionPriority.Low; }
-        }
+        public ConventionPriority Priority => ConventionPriority.Low;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 

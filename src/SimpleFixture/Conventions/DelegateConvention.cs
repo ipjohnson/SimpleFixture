@@ -10,10 +10,7 @@ namespace SimpleFixture.Conventions
 {
     public class DelegateConvention : IConvention
     {
-        public ConventionPriority Priority
-        {
-            get { return ConventionPriority.Low; }
-        }
+        public ConventionPriority Priority => ConventionPriority.Low;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 

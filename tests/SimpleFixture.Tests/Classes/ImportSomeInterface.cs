@@ -15,9 +15,6 @@ namespace SimpleFixture.Tests.Classes
             _someInterface = someInterface;
         }
 
-        public int SomeValue
-        {
-            get { return _someInterface.SomeIntMethod(); }
-        }
+        public int SomeValue => _someInterface.SomeIntMethod();
     }
 }

@@ -25,7 +25,7 @@ namespace SimpleFixture.Conventions
             _modelService = configuration.Locate<IModelService>();
         }
 
-        public ConventionPriority Priority { get { return ConventionPriority.Last; } }
+        public ConventionPriority Priority => ConventionPriority.Last;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 

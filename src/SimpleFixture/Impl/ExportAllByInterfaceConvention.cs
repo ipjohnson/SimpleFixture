@@ -20,7 +20,7 @@ namespace SimpleFixture.Impl
             _types = types.ToArray();
         }
 
-        public ConventionPriority Priority { get { return ConventionPriority.Low; } }
+        public ConventionPriority Priority => ConventionPriority.Low;
 
         public Func<Type, Type, bool> AsSingleton { get; set; }
 

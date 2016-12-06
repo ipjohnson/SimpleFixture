@@ -15,10 +15,7 @@ namespace SimpleFixture.Conventions
         /// <summary>
         /// Priority for the convention, last by default
         /// </summary>
-        public virtual ConventionPriority Priority
-        {
-            get { return ConventionPriority.Last; }
-        }
+        public virtual ConventionPriority Priority => ConventionPriority.Last;
 
         /// <summary>
         /// Priorit changed event

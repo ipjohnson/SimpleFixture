@@ -19,10 +19,7 @@ namespace SimpleFixture.Conventions.Named
             _helper = helper;
         }
         
-        public override ConventionPriority Priority
-        {
-            get { return ConventionPriority.Last; }
-        }
+        public override ConventionPriority Priority => ConventionPriority.Last;
 
         public override object GenerateData(DataRequest request)
         {

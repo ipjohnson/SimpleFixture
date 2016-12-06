@@ -19,10 +19,7 @@ namespace SimpleFixture.NSubstitute
             _defaultSingleton = defaultSingleton;
         }
 
-        public ConventionPriority Priority
-        {
-            get { return ConventionPriority.Last; }
-        }
+        public ConventionPriority Priority => ConventionPriority.Last;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 

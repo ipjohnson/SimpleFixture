@@ -15,9 +15,6 @@ namespace SimpleFixture.Tests.Classes
             _someClass = someClass;
         }
 
-        public SomeClass SomeClass
-        {
-            get { return _someClass; }
-        }
+        public SomeClass SomeClass => _someClass;
     }
 }

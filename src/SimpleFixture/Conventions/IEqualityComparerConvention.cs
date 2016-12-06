@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 
 namespace SimpleFixture.Conventions
 {
+    /// <summary>
+    /// Convention for  IEqualityComparer
+    /// </summary>
     public class IEqualityComparerConvention : ITypedConvention
     {
-        public ConventionPriority Priority
-        {
-            get { return ConventionPriority.Last; }
-        }
+        /// <summary>
+        /// Prioirity the convention should be looked at
+        /// </summary>
+        public ConventionPriority Priority => ConventionPriority.Last;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 

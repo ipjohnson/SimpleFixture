@@ -17,10 +17,7 @@ namespace SimpleFixture.Conventions
             _dataGenerator = dataGenerator;
         }
 
-	    public ConventionPriority Priority
-	    {
-		    get { return ConventionPriority.Low; }
-	    }
+	    public ConventionPriority Priority => ConventionPriority.Low;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 

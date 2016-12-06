@@ -48,10 +48,8 @@ namespace SimpleFixture
         /// <summary>
         /// Configuration for the fixture
         /// </summary>
-        public IFixtureConfiguration Configuration
-        {
-            get { return _configuration; }
-        }
+        public IFixtureConfiguration Configuration => _configuration;
+
         #endregion
 
         #region Behaviors
@@ -59,10 +57,7 @@ namespace SimpleFixture
         /// <summary>
         /// Allows you to apply a behavior to every object created by the fixture
         /// </summary>
-        public BehaviorCollection Behavior
-        {
-            get { return _behavior; }
-        }
+        public BehaviorCollection Behavior => _behavior;
 
         #endregion
 

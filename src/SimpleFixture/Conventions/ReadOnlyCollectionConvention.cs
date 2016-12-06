@@ -11,10 +11,7 @@ namespace SimpleFixture.Conventions
 {
     public class ReadOnlyCollectionConvention : ITypedConvention
     {
-        public ConventionPriority Priority
-        {
-            get { return ConventionPriority.Last; }
-        }
+        public ConventionPriority Priority => ConventionPriority.Last;
 
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
