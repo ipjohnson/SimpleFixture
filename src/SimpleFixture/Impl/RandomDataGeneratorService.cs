@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SimpleFixture.Impl
 {
+    /// <summary>
+    /// Class for generating random data
+    /// </summary>
     public class RandomDataGeneratorService : IRandomDataGeneratorService
     {
         private readonly Random _random = new Random();
@@ -13,6 +16,9 @@ namespace SimpleFixture.Impl
         private List<char> _alphaNumericCharacters;
         private List<char> _alphaCharacters;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public RandomDataGeneratorService()
         {
             SetupAlphaCharacters();
@@ -24,22 +30,46 @@ namespace SimpleFixture.Impl
             SetupAllCharacters();
         }
 
-		public ushort NextUShort(ushort min = ushort.MinValue, ushort max = ushort.MaxValue)
+        /// <summary>
+        /// Next random ushort
+        /// </summary>
+        /// <param name="min">min ushort</param>
+        /// <param name="max">max ushort</param>
+        /// <returns>random ushort</returns>
+        public ushort NextUShort(ushort min = ushort.MinValue, ushort max = ushort.MaxValue)
         {
             return Convert.ToUInt16((int)((_random.NextDouble() * (max - min)) + min));
         }
 
+        /// <summary>
+        /// Next random int
+        /// </summary>
+        /// <param name="min">min int</param>
+        /// <param name="max">max int</param>
+        /// <returns>random int</returns>
         public int NextInt(int min = int.MinValue, int max = int.MaxValue)
         {
             return _random.Next(min, max);
         }
 
-		public uint NextUInt(uint min = uint.MinValue, uint max = uint.MaxValue)
+        /// <summary>
+        /// Next random unit
+        /// </summary>
+        /// <param name="min">min unit</param>
+        /// <param name="max">max uint</param>
+        /// <returns>random uint</returns>
+        public uint NextUInt(uint min = uint.MinValue, uint max = uint.MaxValue)
         {
             return (uint)((_random.NextDouble() * (max - min)) + min);
         }
 
-		public long NextLong(long min = long.MinValue, long max = long.MaxValue)
+        /// <summary>
+        /// Next random long
+        /// </summary>
+        /// <param name="min">min long</param>
+        /// <param name="max">max long</param>
+        /// <returns>random long</returns>
+        public long NextLong(long min = long.MinValue, long max = long.MaxValue)
         {
             if(min == long.MinValue && max == long.MaxValue)
             {
@@ -54,7 +84,13 @@ namespace SimpleFixture.Impl
             return (long)((_random.NextDouble() * (max - min)) + min);
         }
 
-		public ulong NextULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
+        /// <summary>
+        /// Next random ulong
+        /// </summary>
+        /// <param name="min">min ulon</param>
+        /// <param name="max">max ulong</param>
+        /// <returns>random ulong</returns>
+        public ulong NextULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
         {
             if (min == ulong.MinValue && max == ulong.MaxValue)
             {
@@ -64,6 +100,12 @@ namespace SimpleFixture.Impl
             return (ulong)((_random.NextDouble() * (max - min)) + min);
         }
 
+        /// <summary>
+        /// Next random decimal
+        /// </summary>
+        /// <param name="min">min decimal</param>
+        /// <param name="max">max decimal</param>
+        /// <returns>random decimal</returns>
         public decimal NextDecimal(decimal? min = null, decimal? max = null)
         {
             if (!min.HasValue)
@@ -93,16 +135,32 @@ namespace SimpleFixture.Impl
             }
         }
 
-	    public object NextEnum(Type enumType)
+        /// <summary>
+        /// Next random enum value
+        /// </summary>
+        /// <param name="enumType">type of enum</param>
+        /// <returns>enum</returns>
+        public object NextEnum(Type enumType)
 	    {
 		    return NextInSet(Enum.GetValues(enumType).Cast<object>());
 	    }
 
-	    public T NextEnum<T>()
+        /// <summary>
+        /// Next random enum 
+        /// </summary>
+        /// <typeparam name="T">type of enum</typeparam>
+        /// <returns>random enum</returns>
+        public T NextEnum<T>()
         {
             return NextInSet(Enum.GetValues(typeof(T)).Cast<T>());
         }
 
+        /// <summary>
+        /// Next random value in set
+        /// </summary>
+        /// <typeparam name="T">type of set</typeparam>
+        /// <param name="set">set</param>
+        /// <returns></returns>
         public T NextInSet<T>(IEnumerable<T> set)
         {
             var list = new List<T>(set);
@@ -110,11 +168,23 @@ namespace SimpleFixture.Impl
             return list.Any() ? list[NextInt(0, list.Count)] : default(T);
         }
 
+        /// <summary>
+        /// Next random value in set
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="set">set</param>
+        /// <returns>random value</returns>
         public T NextT<T>(params T[] set)
         {
             return NextInSet(set);
         }
 
+        /// <summary>
+        /// Randomize a set of values
+        /// </summary>
+        /// <typeparam name="T">value type</typeparam>
+        /// <param name="set">set</param>
+        /// <returns>randomized set</returns>
         public IEnumerable<T> Randomize<T>(IEnumerable<T> set)
         {
             var list = new List<T>(set);
@@ -134,6 +204,13 @@ namespace SimpleFixture.Impl
             return list;
         }
 
+        /// <summary>
+        /// Generate the next string
+        /// </summary>
+        /// <param name="stringType">type of string to return</param>
+        /// <param name="min">min string length</param>
+        /// <param name="max">max string length</param>
+        /// <returns>random string</returns>
         public string NextString(StringType stringType = StringType.MostCharacter, int min = 5, int max = 16)
         {
             switch (stringType)
@@ -154,7 +231,13 @@ namespace SimpleFixture.Impl
                     return BuildString(_allCharacters, min, max);
             }
         }
-        
+
+        /// <summary>
+        /// Next random double
+        /// </summary>
+        /// <param name="min">min double</param>
+        /// <param name="max">max double</param>
+        /// <returns>random double</returns>
         public double NextDouble(double min = Double.MinValue, double max = Double.MaxValue)
         {
             var range = max - min;
@@ -172,36 +255,74 @@ namespace SimpleFixture.Impl
             return _random.NextDouble() * (range) + min;
         }
 
+        /// <summary>
+        /// Next random bool
+        /// </summary>
+        /// <returns>random bool</returns>
         public bool NextBool()
         {
             return _random.Next() % 2 == 0;
         }
 
+        /// <summary>
+        /// Next random char
+        /// </summary>
+        /// <param name="min">min character</param>
+        /// <param name="max">max character</param>
+        /// <returns>random character</returns>
         public char NextChar(char min = Char.MinValue, char max = Char.MaxValue)
         {
             return Convert.ToChar((int)((_random.NextDouble() * (max - min)) + min));
         }
 
+        /// <summary>
+        /// Next random alpha character
+        /// </summary>
+        /// <returns>random character</returns>
         public char NextCharacter()
         {
             return _alphaCharacters[NextInt(0, _alphaCharacters.Count)];
         }
 
+        /// <summary>
+        /// Next random byte
+        /// </summary>
+        /// <param name="min">min byte value</param>
+        /// <param name="max">max byte value</param>
+        /// <returns>random byte</returns>
         public byte NextByte(byte min = Byte.MinValue, byte max = Byte.MaxValue)
         {
             return Convert.ToByte((int)((_random.NextDouble() * (max - min)) + min));
         }
 
-	    public sbyte NextSByte(sbyte min = SByte.MinValue, sbyte max = SByte.MaxValue)
+        /// <summary>
+        /// Next random signed byte
+        /// </summary>
+        /// <param name="min">min sbyte</param>
+        /// <param name="max">max sbyte</param>
+        /// <returns>random sbyte</returns>
+        public sbyte NextSByte(sbyte min = SByte.MinValue, sbyte max = SByte.MaxValue)
 		{
 			return Convert.ToSByte((int)((_random.NextDouble() * (max - min)) + min));
 	    }
 
-	    public short NextShort(short min = short.MinValue, short max = short.MaxValue)
+        /// <summary>
+        /// Next random short
+        /// </summary>
+        /// <param name="min">min short</param>
+        /// <param name="max">max short</param>
+        /// <returns>random short</returns>
+        public short NextShort(short min = short.MinValue, short max = short.MaxValue)
         {
             return Convert.ToInt16((int)((_random.NextDouble() * (max - min)) + min));
         }
 
+        /// <summary>
+        /// Next random date time
+        /// </summary>
+        /// <param name="min">min datetime</param>
+        /// <param name="max">max datetime</param>
+        /// <returns>random datetime</returns>
         public DateTime NextDateTime(DateTime? min = default(DateTime?), DateTime? max = default(DateTime?))
         {
             if(!min.HasValue)
@@ -219,6 +340,12 @@ namespace SimpleFixture.Impl
             return new DateTime(ticks);
         }
 
+        /// <summary>
+        /// Next random timespan
+        /// </summary>
+        /// <param name="min">min timespan</param>
+        /// <param name="max">max timespan</param>
+        /// <returns>random timespan</returns>
         public TimeSpan NextTimeSpan(TimeSpan? min = default(TimeSpan?), TimeSpan? max = default(TimeSpan?))
         {
             if (!min.HasValue)
@@ -236,7 +363,14 @@ namespace SimpleFixture.Impl
             return new TimeSpan(ticks);
         }
 
-        private string BuildString(List<char> characters, int min, int max)
+        /// <summary>
+        /// Build random string
+        /// </summary>
+        /// <param name="characters">character list</param>
+        /// <param name="min">min string length</param>
+        /// <param name="max">max string length</param>
+        /// <returns></returns>
+        protected virtual string BuildString(List<char> characters, int min, int max)
         {
             var builder = new StringBuilder();
             var length = _random.Next(min, max);
@@ -250,7 +384,10 @@ namespace SimpleFixture.Impl
             return builder.ToString();
         }
 
-        private void SetupAlphaCharacters()
+        /// <summary>
+        /// Setup alpha character set
+        /// </summary>
+        protected virtual void SetupAlphaCharacters()
         {
             var list = new List<char>();
 
@@ -267,7 +404,10 @@ namespace SimpleFixture.Impl
             _alphaCharacters = list;
         }
 
-        private void SetupNumericCharacters()
+        /// <summary>
+        /// Setup numeric character set
+        /// </summary>
+        protected virtual void SetupNumericCharacters()
         {
             var list = new List<char>();
 
@@ -279,7 +419,11 @@ namespace SimpleFixture.Impl
             _numericCharacters = list;
         }
 
-        private void SetupAlphaNumericCharacters()
+
+        /// <summary>
+        /// Setup alpha numeric characters
+        /// </summary>
+        protected virtual void SetupAlphaNumericCharacters()
         {
             var list = new List<char>(_alphaCharacters);
 
@@ -288,7 +432,10 @@ namespace SimpleFixture.Impl
             _alphaNumericCharacters = list;
         }
 
-        private void SetupAllCharacters()
+        /// <summary>
+        /// Setup a list of call charactes
+        /// </summary>
+        protected virtual void SetupAllCharacters()
         {
             var list = new List<char>
                               {
@@ -326,17 +473,23 @@ namespace SimpleFixture.Impl
             _allCharacters = list;
         }
 
-        private string BuildLoremIpsum(int min, int max)
+        /// <summary>
+        /// Build a lorem ipsum string
+        /// </summary>
+        /// <param name="min">min string size</param>
+        /// <param name="max">max string size</param>
+        /// <returns>random string</returns>
+        protected virtual string BuildLoremIpsum(int min, int max)
         {
             var totalLength = NextInt(min, max);
 
-            var builder = new StringBuilder(_loremIpsum);
+            var builder = new StringBuilder(LoremIpsum);
             
             while (builder.Length < totalLength)
             {
                 builder.AppendLine();
 
-                builder.Append(_loremIpsum);
+                builder.Append(LoremIpsum);
             }
 
             builder.Length = totalLength;
@@ -344,7 +497,7 @@ namespace SimpleFixture.Impl
             return builder.ToString();
         }
 
-        private const string _loremIpsum =
+        public const string LoremIpsum =
 @"Lorem ipsum dolor sit amet, mea tincidunt argumentum ea, libris deleniti scripserit est ut. Putent prodesset constituto an has. Mei regione repudiandae dissentiunt an. Sit ut idque utroque pertinacia, ei duo iusto indoctum. Hinc laoreet at sit. Mea dicat veritus in, ius zril suscipiantur ei.
 
 Quo ei amet affert doctus, ei epicurei ullamcorper has. Inermis graecis sententiae vix no. Suas erat error et sed, ad vis esse dolor aperiam. Ex sea melius fabulas appellantur, cum reque maluisset ei.
