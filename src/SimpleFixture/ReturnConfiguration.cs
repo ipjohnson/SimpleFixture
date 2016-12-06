@@ -53,6 +53,8 @@ namespace SimpleFixture
         /// <returns></returns>
         public ReturnConfiguration<T> For(Type type)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+
             _convention.AddFilter(r =>
             {
                 if (r.ParentRequest != null &&
@@ -75,7 +77,9 @@ namespace SimpleFixture
         /// <returns>return configuration</returns>
         public ReturnConfiguration<T> WhenNamed(string name)
         {
-            _convention.AddFilter(r => r.RequestName.ToLowerInvariant() == name.ToLowerInvariant());
+            if (name == null) throw new ArgumentNullException(nameof(name));
+
+            _convention.AddFilter(r => string.Equals(r.RequestName, name, StringComparison.CurrentCultureIgnoreCase));
 
             return this;
         }
@@ -87,6 +91,8 @@ namespace SimpleFixture
         /// <returns>return configuration</returns>
         public ReturnConfiguration<T> WhenNamed(Func<string, bool> namedFunc)
         {
+            if (namedFunc == null) throw new ArgumentNullException(nameof(namedFunc));
+
             _convention.AddFilter(r => namedFunc(r.RequestName));
 
             return this;
@@ -99,6 +105,8 @@ namespace SimpleFixture
         /// <returns>return configuration</returns>
         public ReturnConfiguration<T> WhenMatching(Func<DataRequest, bool> matchingFunc)
         {
+            if (matchingFunc == null) throw new ArgumentNullException(nameof(matchingFunc));
+
             _convention.AddFilter(matchingFunc);
 
             return this;

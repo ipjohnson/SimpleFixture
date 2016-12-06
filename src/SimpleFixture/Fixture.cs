@@ -70,6 +70,8 @@ namespace SimpleFixture
         /// <returns>new instance</returns>
         public object Locate(Type type, string requestName = null, object constraints = null)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+
             var request = new DataRequest(null, this, type, DependencyType.Root, requestName, false, constraints, null);
 
             return Generate(request);
@@ -95,6 +97,8 @@ namespace SimpleFixture
         /// <returns>new instance</returns>
         public object Generate(DataRequest request)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+
             object returnValue = null;
 
             _conventions.TryGetValue(request, out returnValue);
@@ -118,6 +122,8 @@ namespace SimpleFixture
         /// <returns>new instance</returns>
         public object Generate(Type type, string name = null, object constraints = null)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+
             if (name == null)
             {
                 name = string.Empty;
@@ -158,10 +164,7 @@ namespace SimpleFixture
 
             var returnStatement = Return(returnValue);
 
-            if (value != null)
-            {
-                value(returnStatement);
-            }
+            value?.Invoke(returnStatement);
 
             return returnValue;
         }
@@ -181,6 +184,7 @@ namespace SimpleFixture
             {
                 throw new ArgumentNullException(nameof(instance));
             }
+
             var modelService = Configuration.Locate<IModelService>();
 
             var typePopulator = Configuration.Locate<ITypePopulator>();
@@ -241,6 +245,7 @@ namespace SimpleFixture
         /// <returns>configuration object</returns>
         public ReturnConfiguration<T> Return<T>(Func<DataRequest, T> returnFunc)
         {
+            if (returnFunc == null) throw new ArgumentNullException(nameof(returnFunc));
             var convention = new FilteredConvention<T>(returnFunc);
 
             _returnConventions.AddConvention(convention);
@@ -256,6 +261,8 @@ namespace SimpleFixture
         /// <returns>configuration object</returns>
         public ReturnConfiguration<IEnumerable<T>> ReturnIEnumerable<T>(params T[] set)
         {
+            if (set == null) throw new ArgumentNullException(nameof(set));
+            
             var convention = new FilteredConvention<IEnumerable<T>>(request => set);
 
             _returnConventions.AddConvention(convention);
@@ -327,6 +334,8 @@ namespace SimpleFixture
         /// <param name="convention">new convention</param>
         public void Add(IConvention convention)
         {
+            if (convention == null) throw new ArgumentNullException(nameof(convention));
+
             var typedConvention = convention as ITypedConvention;
 
             if (typedConvention != null)
@@ -345,6 +354,8 @@ namespace SimpleFixture
         /// <param name="configuration"></param>
         public void Add(IFixtureCustomization configuration)
         {
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
             configuration.Customize(this);
         }
         #endregion
