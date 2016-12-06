@@ -224,6 +224,8 @@ namespace SimpleFixture
         /// <returns>configuration object</returns>
         public ReturnConfiguration<T> Return<T>(Func<T> returnFunc)
         {
+            if (returnFunc == null) throw new ArgumentNullException(nameof(returnFunc));
+
             var convention = new FilteredConvention<T>(g => returnFunc());
 
             _returnConventions.AddConvention(convention);

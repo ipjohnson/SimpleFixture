@@ -1,4 +1,5 @@
-﻿using SimpleFixture.Tests.Classes;
+﻿using System;
+using SimpleFixture.Tests.Classes;
 using Xunit;
 
 namespace SimpleFixture.Tests.FixtureTests
@@ -113,6 +114,22 @@ namespace SimpleFixture.Tests.FixtureTests
 
             Assert.NotNull(propClass);
             Assert.Equal(10,propClass.IntValue1);
+        }
+
+        [Fact]
+        public void Fixture_Return_Null_Throws_Exception()
+        {
+            var fixture = new Fixture();
+
+            Assert.Throws<ArgumentNullException>(() => fixture.Return((PropertiesClass[])null));
+        }
+
+        [Fact]
+        public void Fixture_Return_Func_Null_Throws_Exception()
+        {
+            var fixture = new Fixture();
+
+            Assert.Throws<ArgumentNullException>(() => fixture.Return((Func<PropertiesClass>)null));
         }
     }
 }
