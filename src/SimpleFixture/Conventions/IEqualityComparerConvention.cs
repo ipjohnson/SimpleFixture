@@ -7,6 +7,7 @@ namespace SimpleFixture.Conventions
     /// <summary>
     /// Convention for  IEqualityComparer
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public class IEqualityComparerConvention : ITypedConvention
     {
         /// <summary>
@@ -14,8 +15,16 @@ namespace SimpleFixture.Conventions
         /// </summary>
         public ConventionPriority Priority => ConventionPriority.Last;
 
+        /// <summary>
+        /// Priorit changed event
+        /// </summary>
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
+        /// <summary>
+        /// Generate data for the request, return Convention.NoValue if the convention has no value to provide
+        /// </summary>
+        /// <param name="request">data request</param>
+        /// <returns>generated data value</returns>
         public object GenerateData(DataRequest request)
         {
             if (request.RequestedType.IsConstructedGenericType)
@@ -30,6 +39,9 @@ namespace SimpleFixture.Conventions
             return Convention.NoValue;
         }
 
+        /// <summary>
+        /// Types the convention supports
+        /// </summary>
         public IEnumerable<Type> SupportedTypes
         {
             get { yield return typeof(IEqualityComparer<>); }

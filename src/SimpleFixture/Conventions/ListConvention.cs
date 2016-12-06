@@ -6,19 +6,37 @@ using SimpleFixture.Impl;
 
 namespace SimpleFixture.Conventions
 {
+    /// <summary>
+    /// Convention for creating lists
+    /// </summary>
     public class ListConvention : ITypedConvention
     {
-        private IFixtureConfiguration _configuration;
+        private readonly IFixtureConfiguration _configuration;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="configuration"></param>
         public ListConvention(IFixtureConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Prioirity the convention should be looked at
+        /// </summary>
         public ConventionPriority Priority => ConventionPriority.Last;
 
+        /// <summary>
+        /// Priorit changed event
+        /// </summary>
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
+        /// <summary>
+        /// Generate data for the request, return Convention.NoValue if the convention has no value to provide
+        /// </summary>
+        /// <param name="request">data request</param>
+        /// <returns>generated data value</returns>
         public object GenerateData(DataRequest request)
         {
             if (request.RequestedType.IsConstructedGenericType)
@@ -78,6 +96,20 @@ namespace SimpleFixture.Conventions
             return Convention.NoValue;
         }
 
+        /// <summary>
+        /// Types the convention supports
+        /// </summary>
+        public IEnumerable<Type> SupportedTypes
+        {
+            get
+            {
+                yield return typeof(IEnumerable<>);
+                yield return typeof(ICollection<>);
+                yield return typeof(IList<>);
+                yield return typeof(List<>);
+            }
+        }
+
         private object GetListWithValue<TValue>(TValue value)
         {
             return new List<TValue> { value };
@@ -111,15 +143,5 @@ namespace SimpleFixture.Conventions
             return returnValue;
         }
 
-        public IEnumerable<Type> SupportedTypes
-        {
-            get
-            {
-                yield return typeof(IEnumerable<>);
-                yield return typeof(ICollection<>);
-                yield return typeof(IList<>);
-                yield return typeof(List<>);
-            }
-        }
     }
 }

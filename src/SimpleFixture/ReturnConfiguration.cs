@@ -111,18 +111,5 @@ namespace SimpleFixture
 
             return this;
         }
-
-        /// <summary>
-        /// Customize the export
-        /// </summary>
-        /// <returns></returns>
-        public ICustomizeModel<T> Customize()
-        {
-            var service = _fixture.Configuration.Locate<IModelService>();
-
-            var model = service.GetModel(typeof(T));
-
-            return new CustomizeModel<T>(model);
-        }
     }
 }

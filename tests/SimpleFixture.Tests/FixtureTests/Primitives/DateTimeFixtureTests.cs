@@ -120,6 +120,19 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
                 Assert.True(value <= max);
             }
         }
+
+        [Fact]
+        public void Fixture_GenerateDateTime_Min_Greater_Than_Max()
+        {
+            var fixture = new Fixture();
+
+            var currentDate = DateTime.Today;
+
+            var value = fixture.Generate<DateTime>(constraints: new { min = currentDate.AddDays(1), max = currentDate });
+
+            Assert.Equal(currentDate, value);
+
+        }
         #endregion
     }
 }

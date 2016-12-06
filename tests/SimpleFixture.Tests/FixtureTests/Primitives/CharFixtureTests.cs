@@ -118,6 +118,16 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
                 Assert.True(value <= max);
             }
         }
+
+        [Fact]
+        public void Fixture_GenerateChar_Min_Greater_Than_Max()
+        {
+            var fixture = new Fixture();
+
+            var value = fixture.Generate<char>(constraints: new { min = 'E', max = 'D' });
+
+            Assert.Equal('D', value);
+        }
         #endregion
     }
 }

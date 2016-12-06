@@ -69,8 +69,6 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
             Assert.True(array.Length == 0);
         }
         #endregion
-
-
     }
 }
 

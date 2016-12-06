@@ -29,5 +29,16 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
             Assert.NotNull(timestamp);
             Assert.InRange(timestamp, constraint.min, constraint.max);
         }
+
+
+        [Fact]
+        public void Fixture_LocateTimeSpan_Min_Greater_Than_Max()
+        {
+            var fixture = new Fixture();
+            var constraint = new { min = new TimeSpan(11000), max = new TimeSpan(10000) };
+            var timestamp = fixture.Generate<TimeSpan>(constraints: constraint);
+
+            Assert.Equal(new TimeSpan(10000), timestamp);
+        }
     }
 }

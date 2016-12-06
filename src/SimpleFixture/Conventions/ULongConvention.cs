@@ -2,19 +2,35 @@
 
 namespace SimpleFixture.Conventions
 {
+    /// <summary>
+    /// Convention for creating ulong
+    /// </summary>
     public class ULongConvention : SimpleTypeConvention<ulong>
     {
 		private readonly IConstraintHelper _constraintHelper;
         private readonly IRandomDataGeneratorService _dataGenerator;
 
+        /// <summary>
+        /// value returned for locate
+        /// </summary>
         public static ulong LocateValue = 5;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="dataGenerator"></param>
+        /// <param name="constraintHelper"></param>
 		public ULongConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper constraintHelper)
         {
             _dataGenerator = dataGenerator;
             _constraintHelper = constraintHelper;
         }
 
+        /// <summary>
+        /// Generate data for the request, return Constrain.NoValue instead of null
+        /// </summary>
+        /// <param name="request">data request</param>
+        /// <returns>generated data</returns>
         public override object GenerateData(DataRequest request)
         {
 			if (!request.Populate)

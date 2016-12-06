@@ -4,19 +4,35 @@ using System.Reflection;
 
 namespace SimpleFixture.Conventions
 {
+    /// <summary>
+    /// Convention for creating string value
+    /// </summary>
     public class StringConvention : SimpleTypeConvention<string>
     {
         private readonly IConstraintHelper _constraintHelper;
         private readonly IRandomDataGeneratorService _dataGenerator;
 
+        /// <summary>
+        /// value returned for lcoate
+        /// </summary>
         public static string LocateValue = "String";
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="dataGenerator"></param>
+        /// <param name="constraintHelper"></param>
         public StringConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper constraintHelper)
         {
             _dataGenerator = dataGenerator;
             _constraintHelper = constraintHelper;
         }
-        
+
+        /// <summary>
+        /// Generate data for the request, return Constrain.NoValue instead of null
+        /// </summary>
+        /// <param name="request">data request</param>
+        /// <returns>generated data</returns>
         public override object GenerateData(DataRequest request)
         {
             if (!request.Populate)
@@ -63,6 +79,11 @@ namespace SimpleFixture.Conventions
             }
 
             var stringType = _constraintHelper.GetValue(request.Constraints, StringType.MostCharacter, "stringType", "Type");
+
+            if (lengthMinMax.Min > lengthMinMax.Max)
+            {
+                lengthMinMax.Min = lengthMinMax.Max;
+            }
 
             return prefix + _dataGenerator.NextString(stringType, lengthMinMax.Min, lengthMinMax.Max) + postfix;
         }

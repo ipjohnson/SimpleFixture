@@ -92,7 +92,7 @@ namespace SimpleFixture.Impl
             {
                 var newRequest1 = new DataRequest(r, typeof(TIn1));
                 var newRequest2 = new DataRequest(r, typeof(TIn2));
-                var newRequest3 = new DataRequest(r, typeof(TIn2));
+                var newRequest3 = new DataRequest(r, typeof(TIn3));
                 
                 return factory((TIn1)newRequest1.Fixture.Generate(newRequest1),
                                (TIn2)newRequest2.Fixture.Generate(newRequest2),

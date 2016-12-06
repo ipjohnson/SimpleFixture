@@ -126,7 +126,7 @@ namespace SimpleFixture
         /// </summary>
         /// <param name="matchingFunc">property matching function</param>
         /// <returns>customization instance</returns>
-        ICustomizeModel<T> SkipProperties(Func<PropertyInfo, bool> matchingFunc);
+        ICustomizeModel<T> SkipProperties(Func<PropertyInfo, bool> matchingFunc = null);
 
         /// <summary>
         /// Skip a particular set of properties

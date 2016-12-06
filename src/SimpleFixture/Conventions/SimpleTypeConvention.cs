@@ -20,7 +20,7 @@ namespace SimpleFixture.Conventions
         public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
         /// <summary>
-        /// Generate date for the request, return Constrain.NoValue instead of null
+        /// Generate data for the request, return Constrain.NoValue instead of null
         /// </summary>
         /// <param name="request">data request</param>
         /// <returns>generated data</returns>

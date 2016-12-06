@@ -136,7 +136,7 @@ namespace SimpleFixture.Tests.FixtureTests
             var propClass = fixture.Generate<PropertiesClass>();
 
             Assert.NotNull(propClass);
-            Assert.Equal(10,propClass.IntValue1);
+            Assert.Equal(10, propClass.IntValue1);
         }
 
         [Fact]
@@ -153,6 +153,37 @@ namespace SimpleFixture.Tests.FixtureTests
             var fixture = new Fixture();
 
             Assert.Throws<ArgumentNullException>(() => fixture.Return((Func<PropertiesClass>)null));
+        }
+
+        [Fact]
+        public void Fixture_Return_When_String_Null_Throws_Exception()
+        {
+            var fixture = new Fixture();
+
+            Assert.Throws<ArgumentNullException>(() => fixture.Return(10).WhenNamed((string)null));
+        }
+
+        [Fact]
+        public void Fixture_Return_When_Func_Null_Throws_Exception()
+        {
+            var fixture = new Fixture();
+
+            Assert.Throws<ArgumentNullException>(() => fixture.Return(10).WhenNamed((Func<string, bool>)null));
+        }
+
+        [Fact]
+        public void Fixture_Return_Coustomize()
+        {
+            var fixture = new Fixture();
+
+            fixture.Return(() => new SomeClass { StringValue = "HelloWorld"})
+                .For(typeof(ImportSomeClass));
+
+            var instance = fixture.Generate<ImportSomeClass>();
+
+            Assert.NotNull(instance);
+            Assert.NotNull(instance.SomeClass);
+            Assert.Equal("HelloWorld", instance.SomeClass.StringValue);
         }
     }
 }
