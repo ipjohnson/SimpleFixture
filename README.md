@@ -167,3 +167,6 @@ var fixture = new SubFixture();
 // FakeFixture is in SimpleFixture.FakeItEasy
 var fixture = new FakeFixture();
 ```
+
+###Builds
+[![Build status](https://ci.appveyor.com/api/projects/status/6ml6ubwk7v8u4h9m?svg=true)](https://ci.appveyor.com/project/ipjohnson/simplefixture) [![Coverage Status](https://coveralls.io/repos/github/ipjohnson/SimpleFixture/badge.svg?branch=master)](https://coveralls.io/github/ipjohnson/SimpleFixture?branch=master)
