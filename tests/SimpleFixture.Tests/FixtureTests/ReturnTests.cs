@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SimpleFixture.Tests.Classes;
 using Xunit;
 
@@ -26,6 +27,28 @@ namespace SimpleFixture.Tests.FixtureTests
             fixture.Return(15);
 
             Assert.Equal(15, fixture.Locate<int>());
+        }
+
+
+        [Fact]
+        public void Fixture_Return_Enumerable_Int_LocateCorrectValue()
+        {
+            var fixture = new Fixture();
+
+            fixture.ReturnIEnumerable(1, 2, 3, 4, 5);
+
+            var instance = fixture.Locate<ImportEnumerableClass>();
+
+            Assert.NotNull(instance);
+
+            var array = instance.IntValues.ToArray();
+
+            Assert.Equal(5, array.Length);
+            Assert.Equal(1, array[0]);
+            Assert.Equal(2, array[1]);
+            Assert.Equal(3, array[2]);
+            Assert.Equal(4, array[3]);
+            Assert.Equal(5, array[4]);
         }
 
         [Fact]
