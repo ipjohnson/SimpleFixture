@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using SimpleFixture.Conventions.Named;
-using SimpleFixture.Impl;
 using Xunit;
 
 namespace SimpleFixture.Tests.FixtureTests.NamedConventions

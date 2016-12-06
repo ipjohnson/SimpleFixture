@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using FakeItEasy;
-using FakeItEasy.Creation;
-using SimpleFixture.Impl;
-
-namespace SimpleFixture.FakeItEasy
+﻿namespace SimpleFixture.FakeItEasy
 {
     //public class FakeConvention : IConvention
     //{

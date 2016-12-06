@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FakeItEasy;
-using SimpleFixture.FakeItEasy;
-using SimpleFixture.Tests.Classes;
-using Xunit;
-
-namespace SimpleFixture.Tests.MockTests
+﻿namespace SimpleFixture.Tests.MockTests
 {
     public class FakeTests
     {

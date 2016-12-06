@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using NSubstitute;
-using SimpleFixture.Moq;
-using SimpleFixture.NSubstitute;
+﻿using SimpleFixture.Moq;
 using SimpleFixture.Tests.Classes;
 using Xunit;
 

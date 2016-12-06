@@ -1,10 +1,6 @@
 ﻿using SimpleFixture.Tests.Classes;
 using SimpleFixture.Tests.Classes.NestedNamespace;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace SimpleFixture.Tests.FixtureTests
