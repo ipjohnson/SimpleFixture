@@ -179,7 +179,7 @@ namespace SimpleFixture
         {
             if (instance == null)
             {
-                throw new ArgumentNullException("instance");
+                throw new ArgumentNullException(nameof(instance));
             }
             var modelService = Configuration.Locate<IModelService>();
 
@@ -204,7 +204,7 @@ namespace SimpleFixture
         {
             if (returnValues == null || returnValues.Length == 0)
             {
-                throw new ArgumentNullException("returnValues", "you must provide at least one value");
+                throw new ArgumentNullException(nameof(returnValues), "you must provide at least one value");
             }
 
             var i = 0;
