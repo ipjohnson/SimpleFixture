@@ -51,5 +51,8 @@
         "System.Xml.XDocument": ""
       }
     }
+  },
+  "buildOptions": {
+    "xmlDoc": true
   }
 }

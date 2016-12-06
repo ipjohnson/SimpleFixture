@@ -19,5 +19,8 @@
         "System.Xml.Linq": ""
       }
     }
+  },
+  "buildOptions": {
+    "xmlDoc": true
   }
 }
