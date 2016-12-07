@@ -2,8 +2,16 @@
 
 namespace SimpleFixture.NSubstitute
 {
+    /// <summary>
+    /// Fixture using NSubstitute
+    /// </summary>
     public class SubFixture : Fixture
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="defaultSingleton"></param>
         public SubFixture(IFixtureConfiguration configuration = null, bool defaultSingleton = true)
             : base(configuration)
         {

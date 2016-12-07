@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Xunit;
 
 namespace SimpleFixture.Tests.FixtureTests.NamedConventions
@@ -19,6 +20,68 @@ namespace SimpleFixture.Tests.FixtureTests.NamedConventions
 
             Assert.NotNull(value);
             Assert.True(value.All(c => char.IsLetter(c) || c == '\'' || c == '-'));
+        }
+
+        [Fact]
+        public void Fixture_GenerateFirstName_Sex_Girl()
+        {
+            var fixture = new Fixture();
+
+            var value = fixture.Generate<string>("FirstName", constraints: new { sex = "female" });
+
+            Assert.NotNull(value);
+            Assert.True(value.All(c => char.IsLetter(c) || c == '\'' || c == '-'));
+        }
+
+        [Fact]
+        public void Fixture_GenerateFirstName_Sex_Boy()
+        {
+            var fixture = new Fixture();
+
+            var value = fixture.Generate<string>("FirstName", constraints: new { sex = "male"});
+
+            Assert.NotNull(value);
+            Assert.True(value.All(c => char.IsLetter(c) || c == '\'' || c == '-'));
+        }
+
+        [Fact]
+        public void Fixture_GenerateHeight_ReturnsGoodValue()
+        {
+            var fixture = new Fixture();
+
+            var value = fixture.Generate<string>("Height");
+
+            int intValue;
+
+            Assert.NotNull(value);
+            Assert.True(int.TryParse(value, out intValue));
+        }
+
+
+        [Fact]
+        public void Fixture_GenerateWeight_ReturnsGoodValue()
+        {
+            var fixture = new Fixture();
+
+            var value = fixture.Generate<string>("Weight");
+
+            int intValue;
+
+            Assert.NotNull(value);
+            Assert.True(int.TryParse(value, out intValue));
+        }
+
+        [Fact]
+        public void Fixture_GenerateDob_ReturnsGoodValue()
+        {
+            var fixture = new Fixture();
+
+            var value = fixture.Generate<string>("DateOfBirth");
+
+            DateTime date;
+
+            Assert.NotNull(value);
+            Assert.True(DateTime.TryParse(value, out date));
         }
 
         #endregion

@@ -3,8 +3,16 @@ using Moq;
 
 namespace SimpleFixture.Moq
 {
+    /// <summary>
+    /// Fixture that uses Moq
+    /// </summary>
     public class MoqFixture : Fixture
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="defaultSingleton"></param>
         public MoqFixture(IFixtureConfiguration configuration = null, bool defaultSingleton = true)
             : base(configuration)
         {

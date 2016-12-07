@@ -3,12 +3,16 @@ using System;
 
 namespace SimpleFixture.Moq
 {
+    /// <summary>
+    /// Language extensions
+    /// </summary>
     public static class LanguageExtensions
     {
         /// <summary>
         /// Mock a specific object, by default mocks are treated as singletons
         /// </summary>
         /// <typeparam name="T">type to mock</typeparam>
+        /// <param name="fixture"></param>
         /// <param name="mockAction">action to apply to the mock</param>
         /// <param name="singleton">should it be a singleton</param>
         /// <returns>new mock</returns>
@@ -19,10 +23,7 @@ namespace SimpleFixture.Moq
                 moqSingleton = singleton
             });
 
-            if (mockAction != null)
-            {
-                mockAction(returnValue);
-            }
+            mockAction?.Invoke(returnValue);
 
             return returnValue;
         }
