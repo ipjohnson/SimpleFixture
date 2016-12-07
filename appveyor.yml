@@ -1,7 +1,7 @@
 environment:
   build_version: 2.0.0   
   COVERALLS_REPO_TOKEN:
-    secure: ckLaW2+gTIqUpr2Z8vP2kUgrT/9XhSj3eqnCXD6izyKo9l9oFeZcIIced+RzBjuo
+    secure: y0rSDEqwr4qPrtlqBPN+nuJ7XqeO2fvwjx88kYMriIiXmS/m3cBYBWYQ99SsWeQH
 version: $(build_version)-{build}
 configuration: Release
 assembly_info:
