@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using SimpleFixture.NSubstitute;
 using SimpleFixture.Tests.Classes;
+using SimpleFixture.xUnit;
 using Xunit;
 
 namespace SimpleFixture.Tests.MockTests
@@ -91,6 +92,16 @@ namespace SimpleFixture.Tests.MockTests
             Assert.Equal(10, instance.SomeIntMethod());
 
             Assert.Equal(20, fixture.Substitute<ISomeInterface>(singleton: true).SomeIntMethod());
+        }
+
+        [Theory]
+        [AutoData]
+        [SubFixtureInitialize]
+        public void SubFixtureInitializeAttribute(ISomeInterface someInterface)
+        {
+            someInterface.SomeIntMethod().Returns(15);
+
+            Assert.Equal(15, someInterface.SomeIntMethod());
         }
     }
 }

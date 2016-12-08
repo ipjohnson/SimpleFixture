@@ -1,6 +1,9 @@
-﻿using SimpleFixture.Moq;
+﻿using NSubstitute;
+using SimpleFixture.Moq;
 using SimpleFixture.Tests.Classes;
+using SimpleFixture.xUnit;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace SimpleFixture.Tests.MockTests
 {
@@ -66,7 +69,7 @@ namespace SimpleFixture.Tests.MockTests
             var mock2 = fixture.Mock<ISomeInterface>(m => m.Setup(x => x.SomeIntMethod()).Returns(15));
 
             Assert.NotNull(mock2);
-            
+
             Assert.Equal(0, fixture.Locate<ISomeInterface>().SomeIntMethod());
 
             Assert.Equal(15, mock2.Object.SomeIntMethod());
@@ -92,6 +95,16 @@ namespace SimpleFixture.Tests.MockTests
             Assert.Equal(10, mock1.Object.SomeIntMethod());
 
             Assert.Equal(20, fixture.Mock<ISomeInterface>(singleton: true).Object.SomeIntMethod());
+        }
+
+        [Theory]
+        [AutoData]
+        [MoqFixtureInitialize]
+        public void MoqFixtureInitializeAttribute_Test(ISomeInterface someInterface)
+        {
+            someInterface.SomeIntMethod().Returns(15);
+
+            Assert.Equal(15, someInterface.SomeIntMethod());
         }
     }
 }
