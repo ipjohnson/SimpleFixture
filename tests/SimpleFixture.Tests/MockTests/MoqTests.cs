@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using Moq;
+using NSubstitute;
 using SimpleFixture.Moq;
 using SimpleFixture.Tests.Classes;
 using SimpleFixture.xUnit;
@@ -100,11 +101,11 @@ namespace SimpleFixture.Tests.MockTests
         [Theory]
         [AutoData]
         [MoqFixtureInitialize]
-        public void MoqFixtureInitializeAttribute_Test(ISomeInterface someInterface)
+        public void MoqFixtureInitializeAttribute_Test(Mock<ISomeInterface> someInterface)
         {
-            someInterface.SomeIntMethod().Returns(15);
+            someInterface.Setup(s => s.SomeIntMethod()).Returns(15);
 
-            Assert.Equal(15, someInterface.SomeIntMethod());
+            Assert.Equal(15, someInterface.Object.SomeIntMethod());
         }
     }
 }
