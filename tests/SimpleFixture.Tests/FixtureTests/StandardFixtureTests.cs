@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SimpleFixture.Tests.Classes;
 using Xunit;
 
 namespace SimpleFixture.Tests.FixtureTests
@@ -38,6 +40,32 @@ namespace SimpleFixture.Tests.FixtureTests
 
             Assert.NotNull(instance);
             Assert.NotEqual(0, instance.IntValue);
+        }
+
+        [Fact]
+        public void Fixture_Null_Reference_Test()
+        {
+            var fixture = new Fixture();
+
+            Assert.Throws<ArgumentNullException>(() => fixture.Generate(null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Generate((Type)null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Locate((Type)null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Populate(null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Return((Func<DataRequest, ISomeInterface>) null));
+            Assert.Throws<ArgumentNullException>(() => fixture.ReturnIEnumerable((ISomeInterface[])null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Add((IConvention) null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Add((IFixtureCustomization)null));
+        }
+
+        [Fact]
+        public void Fixture_IEnumerable()
+        {
+            var fixture = new Fixture();
+
+            foreach (var variable in (IEnumerable) fixture)
+            {
+                
+            }
         }
     }
 }
