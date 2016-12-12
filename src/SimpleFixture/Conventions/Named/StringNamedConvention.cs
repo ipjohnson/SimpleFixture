@@ -4,13 +4,23 @@ using System.Reflection;
 
 namespace SimpleFixture.Conventions.Named
 {
+    /// <summary>
+    /// Provides strings based on name conventions
+    /// </summary>
     public partial class StringNamedConvention : BaseNamedConvention<string>
     {
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="dataGenerator"></param>
+        /// <param name="helper"></param>
         public StringNamedConvention(IRandomDataGeneratorService dataGenerator, IConstraintHelper helper) : base(dataGenerator,helper)
         {
         }
         
+        /// <summary>
+        /// Initialize
+        /// </summary>
         protected override void Initialize()
         {
             AddConvention(FirstNameConvention, "FirstName", "MiddleName");
