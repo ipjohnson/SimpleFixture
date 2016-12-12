@@ -74,6 +74,22 @@ namespace SimpleFixture.Tests.FixtureTests.Complex
             Assert.Equal(15, instance.SomeClass.IntValue);
         }
 
+        public delegate ImportSomeClass ImportSomeClass2Func(string stringValue);
+
+        [Fact]
+        public void Fixture_Locate_Delegate_One_Arg()
+        {
+            var fixture = new Fixture();
+
+            var func = fixture.Generate<ImportSomeClass2Func>(constraints: new { intValue = 20});
+
+            var instance = func("Hello");
+
+            Assert.NotNull(instance);
+            Assert.Equal("Hello", instance.SomeClass.StringValue);
+            Assert.Equal(20, instance.SomeClass.IntValue);
+        }
+
         #endregion
     }
 }
