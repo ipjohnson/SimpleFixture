@@ -1,10 +1,8 @@
 ﻿using Moq;
-using NSubstitute;
 using SimpleFixture.Moq;
 using SimpleFixture.Tests.Classes;
 using SimpleFixture.xUnit;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace SimpleFixture.Tests.MockTests
 {

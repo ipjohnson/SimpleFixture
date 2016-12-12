@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using SimpleFixture.Conventions;
-using SimpleFixture.Impl;
 
 namespace SimpleFixture
 {
