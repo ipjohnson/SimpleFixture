@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using SimpleFixture.Impl;
 
 namespace SimpleFixture.Conventions
 {
@@ -11,6 +12,17 @@ namespace SimpleFixture.Conventions
     /// </summary>
     public class DelegateConvention : IConvention
     {
+        private readonly IConstraintHelper _constraintHelper;
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="constraintHelper"></param>
+        public DelegateConvention(IConstraintHelper constraintHelper)
+        {
+            _constraintHelper = constraintHelper;
+        }
+
         /// <summary>
         /// Prioirity the convention should be looked at
         /// </summary>
@@ -66,8 +78,16 @@ namespace SimpleFixture.Conventions
 
             var getMethod = GetType().GetRuntimeMethods().First(m => m.Name == "GetValueFunc");
 
+            var parameterNameArray = parameters.Select(p => p.Name).ToArray();
+
+            var parameterValueArray = Expression.NewArrayInit(typeof(object), 
+                    parameters.Select(e => e.Type == typeof(object) ? (Expression)e : Expression.Convert(e, typeof(object))));
+
             return Expression.Lambda<T>(Expression.Call(getMethod.MakeGenericMethod(method.ReturnType),
-                                        Expression.Constant(request))).Compile();
+                                        Expression.Constant(request),
+                                        Expression.Constant(parameterNameArray),
+                                        parameterValueArray),
+                                        parameters.ToArray()).Compile();
 
         }
 
@@ -76,9 +96,43 @@ namespace SimpleFixture.Conventions
 
         }
 
-        private static TValue GetValueFunc<TValue>(DataRequest request)
+        private static TValue GetValueFunc<TValue>(DataRequest request, string[] parameterNames, object[] values)
         {
-            var newRequest = new DataRequest(request, typeof(TValue));
+            IDictionary<string, object> constraintValues = null;
+
+            if (request.Constraints != null)
+            {
+                constraintValues = request.Constraints as IDictionary<string, object>;
+
+                if (constraintValues == null)
+                {
+                    constraintValues = new Dictionary<string, object>();
+
+                    foreach (var property in request.Constraints.GetType().GetRuntimeProperties())
+                    {
+                        if (!property.CanRead ||
+                            !property.GetMethod.IsPublic ||
+                            property.GetMethod.IsStatic)
+                        {
+                            continue;
+                        }
+
+                        constraintValues[property.Name] = property.GetValue(request.Constraints);
+                    }
+                }
+            }
+
+            if (constraintValues == null)
+            {
+                constraintValues = new Dictionary<string, object>();
+            }
+            
+            for (int i = 0; i < parameterNames.Length && i < values.Length; i++)
+            {
+                constraintValues[parameterNames[i]] = values[i];
+            }
+            
+            var newRequest = new DataRequest(request, request.Fixture, typeof(TValue), DependencyType.Unknown, "", request.Populate, constraintValues, null);
 
             return (TValue)newRequest.Fixture.Generate(newRequest);
         }

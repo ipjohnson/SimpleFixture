@@ -103,5 +103,27 @@ namespace SimpleFixture.Tests.MockTests
 
             Assert.Equal(15, someInterface.SomeIntMethod());
         }
+
+
+        public interface ISomeOtherInterface
+        {
+
+        }
+
+        public delegate bool FilterDelegate(ISomeOtherInterface otherInterface);
+
+        public class SomeImportingClass
+        {
+            public FilterDelegate DelegateValue { get; set; }
+        }
+
+        [Theory]
+        [AutoData]
+        [SubFixtureInitialize]
+        public void SubFixtureInitializeAttribute(SomeImportingClass someImportingClass)
+        {
+            Assert.NotNull(someImportingClass);
+            Assert.NotNull(someImportingClass.DelegateValue);
+        }
     }
 }

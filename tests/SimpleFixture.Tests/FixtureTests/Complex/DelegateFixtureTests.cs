@@ -1,5 +1,6 @@
 ﻿using System;
 using SimpleFixture.Conventions;
+using SimpleFixture.Tests.Classes;
 using Xunit;
 
 namespace SimpleFixture.Tests.FixtureTests.Complex
@@ -56,6 +57,23 @@ namespace SimpleFixture.Tests.FixtureTests.Complex
 
             func(5);
         }
+
+        public delegate ImportSomeClass ImportSomeClassFunc(string stringValue, int intValue); 
+
+        [Fact]
+        public void Fixture_Locate_Delegate()
+        {
+            var fixture = new Fixture();
+
+            var func = fixture.Generate<ImportSomeClassFunc>();
+
+            var instance = func("Hello", 15);
+
+            Assert.NotNull(instance);
+            Assert.Equal("Hello", instance.SomeClass.StringValue);
+            Assert.Equal(15, instance.SomeClass.IntValue);
+        }
+
         #endregion
     }
 }
