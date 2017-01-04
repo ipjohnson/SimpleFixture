@@ -7,7 +7,13 @@
   "frameworks": {
     "netstandard1.0": {
       "dependencies": {
-        "NETStandard.Library": "1.6.0"
+        "System.Collections": "4.3.0",
+        "System.Linq": "4.3.0",
+        "System.Linq.Expressions": "4.3.0",
+        "System.Runtime": "4.3.0",
+        "System.Runtime.Extensions": "4.3.0",
+        "System.Reflection": "4.3.0",
+        "System.Reflection.Extensions": "4.3.0"
       }
     },
     "net45": {
@@ -27,11 +33,8 @@
         "System.Core": "",
         "System.Diagnostics.Debug": "",
         "System.Dynamic.Runtime": "",
-        "System.Globalization": "",
-        "System.IO": "",
         "System.Linq": "",
         "System.Linq.Expressions": "",
-        "System.ObjectModel": "",
         "System.Reflection": "",
         "System.Reflection.Extensions": "",
         "System.Resources.ResourceManager": "",
@@ -39,16 +42,7 @@
         "System.Runtime.Extensions": "",
         "System.Reflection.Primitives": "",
         "System.Runtime.Serialization": "",
-        "System.Runtime.Serialization.Primitives": "",
-        "System.Text.Encoding": "",
-        "System.Text.Encoding.Extensions": "",
-        "System.Text.RegularExpressions": "",
-        "System.Threading": "",
-        "System.Threading.Tasks": "",
-        "System.Xml": "",
-        "System.Xml.Linq": "",
-        "System.Xml.ReaderWriter": "",
-        "System.Xml.XDocument": ""
+        "System.Runtime.Serialization.Primitives": ""
       }
     }
   },
