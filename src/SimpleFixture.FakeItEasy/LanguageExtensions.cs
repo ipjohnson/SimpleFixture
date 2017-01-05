@@ -1,18 +1,21 @@
-﻿namespace SimpleFixture.FakeItEasy
+﻿using FakeItEasy;
+using System;
+
+namespace SimpleFixture.FakeItEasy
 {
     public static class LanguageExtensions
     {
-        //public static T Fake<T>(this Fixture fixture, Action<T> arrange = null, Action<IFakeOptionsBuilder<T>> options = null, bool? singleton = null)
-        //{
-        //    T returnValue = fixture.Generate<T>(constraints: new
-        //    {
-        //        fakeSingleton = singleton,
-        //        builderOptions = options
-        //    });
+        public static T Fake<T>(this Fixture fixture, Action<T> arrange = null, Action<FakeOptionsBuilder<T>> options = null, bool? singleton = null)
+        {
+            T returnValue = fixture.Generate<T>(constraints: new
+            {
+                fakeSingleton = singleton,
+                builderOptions = options
+            });
 
-        //    arrange?.Invoke(returnValue);
+            arrange?.Invoke(returnValue);
 
-        //    return returnValue;
-        //}
+            return returnValue;
+        }
     }
 }

@@ -1,66 +1,72 @@
-﻿namespace SimpleFixture.FakeItEasy
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using FakeItEasy;
+using FakeItEasy.Creation;
+using SimpleFixture.Impl;
+
+namespace SimpleFixture.FakeItEasy
 {
-    //public class FakeConvention : IConvention
-    //{
-        //private readonly Dictionary<Type, object> _singletons;
-        //private readonly bool _defaultSingletons = true;
+    public class FakeConvention : IConvention
+    {
+        private readonly Dictionary<Type, object> _singletons;
+        private readonly bool _defaultSingletons = true;
 
-        //public FakeConvention(bool fakeSingleton = true)
-        //{
-        //    _defaultSingletons = fakeSingleton;
-        //    _singletons = new Dictionary<Type, object>();
-        //}
+        public FakeConvention(bool fakeSingleton = true)
+        {
+            _defaultSingletons = fakeSingleton;
+            _singletons = new Dictionary<Type, object>();
+        }
 
-        //public ConventionPriority Priority
-        //{
-        //    get { return ConventionPriority.Last; }
-        //}
+        public ConventionPriority Priority
+        {
+            get { return ConventionPriority.Last; }
+        }
 
-        //public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
+        public event EventHandler<PriorityChangedEventArgs> PriorityChanged;
 
-        //public object GenerateData(DataRequest request)
-        //{
-        //    if (!request.RequestedType.IsInterface)
-        //    {
-        //        return Convention.NoValue;
-        //    }
+        public object GenerateData(DataRequest request)
+        {
+            if (!request.RequestedType.GetTypeInfo().IsInterface)
+            {
+                return Convention.NoValue;
+            }
 
-        //    object returnValue = null;
-        //    var helper = request.Fixture.Configuration.Locate<IConstraintHelper>();
+            object returnValue = null;
+            var helper = request.Fixture.Configuration.Locate<IConstraintHelper>();
 
-        //    bool? singleton = helper.GetValue<bool?>(request.Constraints, null, "fakeSingleton");
-            
-        //    if (!singleton.HasValue)
-        //    {
-        //        singleton = _defaultSingletons;
-        //    }
+            bool? singleton = helper.GetValue<bool?>(request.Constraints, null, "fakeSingleton");
 
-        //    if (singleton.Value)
-        //    {
-        //        if (_singletons.TryGetValue(request.RequestedType, out returnValue))
-        //        {
-        //            return returnValue;
-        //        }
-        //    }
+            if (!singleton.HasValue)
+            {
+                singleton = _defaultSingletons;
+            }
 
-        //    var method = GetType().GetMethod("GenerateClosedFake",BindingFlags.Instance | BindingFlags.NonPublic).MakeGenericMethod(request.RequestedType);
+            if (singleton.Value)
+            {
+                if (_singletons.TryGetValue(request.RequestedType, out returnValue))
+                {
+                    return returnValue;
+                }
+            }
 
-        //    returnValue = method.Invoke(this, new object[] { request, helper });
+            var method = GetType().GetMethod("GenerateClosedFake", BindingFlags.Instance | BindingFlags.NonPublic).MakeGenericMethod(request.RequestedType);
 
-        //    if (singleton.Value)
-        //    {
-        //        _singletons[request.RequestedType] = returnValue;
-        //    }
+            returnValue = method.Invoke(this, new object[] { request, helper });
 
-        //    return returnValue;
-        //}
+            if (singleton.Value)
+            {
+                _singletons[request.RequestedType] = returnValue;
+            }
 
-        //private T GenerateClosedFake<T>(DataRequest request, IConstraintHelper helper)
-        //{
-        //    Action<IFakeOptionsBuilder<T>> options = 
-        //        helper.GetValue<Action<IFakeOptionsBuilder<T>>>(request.Constraints, null, "builderOptions");
+            return returnValue;
+        }
 
-        //    return options != null ? A.Fake(options) : A.Fake<T>();
-        //}
-    //}
+        private T GenerateClosedFake<T>(DataRequest request, IConstraintHelper helper)
+        {
+            Action<IFakeOptions<T>> options = helper.GetValue<Action<IFakeOptions<T>>>(request.Constraints, null, "builderOptions");
+
+            return options != null ? A.Fake(options) : A.Fake<T>();
+        }
+    }
 }
