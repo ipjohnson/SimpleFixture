@@ -11,7 +11,11 @@ assembly_info:
   assembly_file_version: '$(build_version).{build}'
   assembly_informational_version: '$(build_version)-Beta{build}'
 before_build:
- - cmd: cd src/SimpleFixture.Moq/
+ - cmd: cd src/SimpleFixture/
+ - cmd: dotnet restore
+ - cmd: cd ../SimpleFixture.FakeItEasy/
+ - cmd: dotnet restore
+ - cmd: cd ../SimpleFixture.Moq/
  - cmd: dotnet restore
  - cmd: cd ../SimpleFixture.NSubstitute/
  - cmd: dotnet restore
@@ -26,10 +30,11 @@ build:
   publish_nuget_symbols: true
   verbosity: minimal
 after_build:
-- cmd: dotnet pack src/SimpleFixture/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
-- cmd: dotnet pack src/SimpleFixture.Moq/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
-- cmd: dotnet pack src/SimpleFixture.NSubstitute/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
-- cmd: dotnet pack src/SimpleFixture.xUnit/project.json -o . -c Release --version-suffix Beta%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.FakeItEasy/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.Moq/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.NSubstitute/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.xUnit/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
 test_script:
 - cmd: cd tests/SimpleFixture.Tests/
 - cmd: CodeCoverageAppVeyor.cmd
