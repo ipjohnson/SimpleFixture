@@ -13,7 +13,12 @@ nuget install OpenCover -Version 4.6.519 -OutputDirectory ..\..\tools
 nuget install coveralls.net -Version 0.412.0 -OutputDirectory ..\..\tools
 
 REM Run code coverage analysis  
-%opencover% -oldStyle -register:user -target:%dotnet% -output:%coveragefile% -targetargs:%targetargs% -filter:%filter% -skipautoprops -hideskipped:All
+%opencover% -oldStyle -returntargetcode -register:user -target:%dotnet% -output:%coveragefile% -targetargs:%targetargs% -filter:%filter% -skipautoprops -hideskipped:All
+
+IF %ERRORLEVEL% NEQ 0 (
+    Echo Unit tests failed
+	EXIT /B %ERRORLEVEL%
+)
 
 REM publish
-%coveralls% --serviceName appveyor --opencover -i .\Coverage.xml
+IF NOT "%COVERALLS_REPO_TOKEN%"=="" %coveralls% --serviceName appveyor --opencover -i .\Coverage.xml
