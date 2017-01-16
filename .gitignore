@@ -19,3 +19,12 @@
 /tests/SimpleFixture.Tests/bin/Debug
 
 /.vs
+/src/SimpleFixture.xUnit/project.lock.json
+/src/SimpleFixture.xUnit
+/src/SimpleFixture.NSubstitute/project.lock.json
+/src/SimpleFixture.NSubstitute
+/src/SimpleFixture.Moq/project.lock.json
+/src/SimpleFixture.Moq
+/src/SimpleFixture.FakeItEasy/project.lock.json
+/src/SimpleFixture.FakeItEasy
+/src/SimpleFixture/project.lock.json
