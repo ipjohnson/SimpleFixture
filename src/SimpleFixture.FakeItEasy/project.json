@@ -19,5 +19,22 @@
         "System.Xml.Linq": ""
       }
     }
+  },
+  "packOptions": {
+    "licenseUrl": "https://github.com/ipjohnson/SimpleFixture/blob/master/License.md",
+    "projectUrl": "https://github.com/ipjohnson/SimpleFixture",
+    "releaseNotes": "This release is to retarget to .Net Standard 1.6 and .Net 4.5",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/ipjohnson/SimpleFixture"
+    },
+    "requireLicenseAcceptance": false,
+    "summary": "FakeItEasy convention for SimpleFixture",
+    "tags": [
+      "Test",
+      "Fixture",
+      "Data",
+      "Generation"
+    ]
   }
 }
