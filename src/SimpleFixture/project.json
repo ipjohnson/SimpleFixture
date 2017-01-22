@@ -16,6 +16,15 @@
         "System.Reflection.Extensions": "4.0.1"
       }
     },
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Data": "",
+        "System.Numerics": "",
+        "System.Runtime.Serialization": "",
+        "System.Xml": "",
+        "System.Xml.Linq": ""
+      }
+    },
     ".NETPortable,Version=v4.5,Profile=Profile259": {
       "frameworkAssemblies": {
         "Microsoft.CSharp": "",
@@ -43,7 +52,7 @@
   "packOptions": {
     "licenseUrl": "https://github.com/ipjohnson/SimpleFixture/blob/master/License.md",
     "projectUrl": "https://github.com/ipjohnson/SimpleFixture",
-    "releaseNotes": "This release is to retarget to .Net Standard 1.0 and PCL 259",
+    "releaseNotes": "This release is to retarget to .Net Standard 1.0, .Net 4.5 and PCL 259",
     "repository": {
       "type": "git",
       "url": "https://github.com/ipjohnson/SimpleFixture"
