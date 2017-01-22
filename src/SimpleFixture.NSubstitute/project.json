@@ -1,6 +1,6 @@
 {
   "version": "2.0.0-*",
-
+  "authors": ["Ian Johnson"],
   "dependencies": {
     "NSubstitute": "2.0.0-rc",
     "SimpleFixture": "2.0.0-*"
