@@ -9,7 +9,7 @@ assembly_info:
   file: '**\AssemblyInfo.*'
   assembly_version: '$(build_version).0'
   assembly_file_version: '$(build_version).{build}'
-  assembly_informational_version: '$(build_version)-Beta{build}'
+  assembly_informational_version: '$(build_version)'
 before_build:
  - cmd: cd src/SimpleFixture/
  - cmd: dotnet restore
@@ -30,11 +30,11 @@ build:
   publish_nuget_symbols: true
   verbosity: minimal
 after_build:
-- cmd: dotnet pack src/SimpleFixture/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture/project.json -o . -c Release
 - cmd: dotnet pack src/SimpleFixture.FakeItEasy/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
 - cmd: dotnet pack src/SimpleFixture.Moq/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
 - cmd: dotnet pack src/SimpleFixture.NSubstitute/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
-- cmd: dotnet pack src/SimpleFixture.xUnit/project.json -o . -c Release --version-suffix RC%APPVEYOR_BUILD_NUMBER%
+- cmd: dotnet pack src/SimpleFixture.xUnit/project.json -o . -c Release
 test_script:
 - cmd: cd tests/SimpleFixture.Tests/
 - cmd: CodeCoverageAppVeyor.cmd
