@@ -1,7 +1,7 @@
 SimpleFixture
 =============
 
-SimpleFixture is a portab.net library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases. It supports .Net, .Net Standard 1.0, and PCL Profile 259.
+SimpleFixture is a .net library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases. It supports .Net 4.5, .Net Standard 1.0, and PCL Profile 259.
 
 * **Locate** - Creates a new instance of the requested type. It does not populate public properies. 
 ```C#
