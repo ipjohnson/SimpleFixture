@@ -40,7 +40,8 @@ namespace SimpleFixture.NSubstitute
         /// <returns>generated data value</returns>
         public object GenerateData(DataRequest request)
         {
-            if (!request.RequestedType.GetTypeInfo().IsInterface)
+            if (!(request.RequestedType.GetTypeInfo().IsInterface || 
+                  request.RequestedType.GetTypeInfo().IsAbstract))
             {
                 return Convention.NoValue;
             }
