@@ -1,8 +1,8 @@
 ﻿{
-  "version": "2.0.0-*",
+  "version": "2.0.1-*",
   "authors": ["Ian Johnson"],
   "dependencies": {
-    "SimpleFixture": "2.0.0-*",
+    "SimpleFixture": "2.0.1-*",
     "xunit": "2.2.0-beta4-build3444",
     "NETStandard.Library": "1.6.0"
   },

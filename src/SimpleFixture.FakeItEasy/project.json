@@ -1,10 +1,10 @@
 {
-  "version": "2.0.0-*",
+  "version": "2.0.1-*",
   "authors": [ "Ian Johnson" ],
   "dependencies": {
     "FakeItEasy": "3.0.0-beta002-build000066",
     "NETStandard.Library": "1.6.0",
-    "SimpleFixture": "2.0.0-*"
+    "SimpleFixture": "2.0.1-*"
   },
 
   "frameworks": {
