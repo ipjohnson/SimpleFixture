@@ -25,7 +25,7 @@
   "packOptions": {
     "licenseUrl": "https://github.com/ipjohnson/SimpleFixture/blob/master/License.md",
     "projectUrl": "https://github.com/ipjohnson/SimpleFixture",
-    "releaseNotes": "This release is to retarget to .Net Standard 1.5 and .Net 4.5",
+    "releaseNotes": "https://github.com/ipjohnson/SimpleFixture/wiki/Release-Notes",
     "owners": [ "Ian Johnson" ],
     "repository": {
       "type": "git",
