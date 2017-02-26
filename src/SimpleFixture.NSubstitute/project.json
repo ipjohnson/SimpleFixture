@@ -1,9 +1,9 @@
 {
-  "version": "2.0.1-*",
+  "version": "2.0.2-*",
   "authors": ["Ian Johnson"],
   "dependencies": {
-    "NSubstitute": "2.0.0-rc",
-    "SimpleFixture": "2.0.1-*"
+    "NSubstitute": "2.0.1-rc",
+    "SimpleFixture": "2.0.2-*"
   },
 
   "frameworks": {

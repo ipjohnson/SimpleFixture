@@ -1,9 +1,9 @@
 ﻿{
-  "version": "2.0.1-*",
+  "version": "2.0.2-*",
   "authors": ["Ian Johnson"],
   "dependencies": {
-    "Moq": "4.6.38-alpha",
-    "SimpleFixture": "2.0.1-*"
+    "Moq": "4.7.0",
+    "SimpleFixture": "2.0.2-*"
   },
 
   "frameworks": {
