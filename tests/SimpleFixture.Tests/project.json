@@ -9,7 +9,8 @@
     "SimpleFixture.FakeItEasy": "2.0.2-*",
     "SimpleFixture.Moq": "2.0.2-*",
     "SimpleFixture.NSubstitute": "2.0.2-*",
-    "SimpleFixture.xUnit": "2.0.2-*"
+    "SimpleFixture.xUnit": "2.0.2-*",
+    "xunit":  "2.2.0"
   },
 
   "frameworks": {

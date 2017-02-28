@@ -3,7 +3,7 @@
   "authors": ["Ian Johnson"],
   "dependencies": {
     "SimpleFixture": "2.0.2-*",
-    "xunit": "2.2.0-beta4-build3444",
+    "xunit": "2.2.0",
     "NETStandard.Library": "1.6.0"
   },
 
