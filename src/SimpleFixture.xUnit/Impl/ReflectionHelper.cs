@@ -19,19 +19,13 @@ namespace SimpleFixture.xUnit.Impl
         {
             var returnList = new List<T>();
 
-            returnList.AddRange(methodInfo.GetCustomAttributes().Where(a => a is T).Select(a => a as T));
+            returnList.AddRange(methodInfo.GetCustomAttributes().OfType<T>());
 
-            if (returnList.Count == 0)
-            {
-                returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().Where(a => a is T).Select(a => a as T));
-            }
-
-            if (returnList.Count == 0)
-            {
-                returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().Where(a => a is T).Select(a => a as T));
-            }
-
+            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().OfType<T>());
+            
+            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
+            
             return returnList;
-        }        
+        }
     }
 }

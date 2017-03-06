@@ -3,7 +3,6 @@
 namespace SimpleFixture.Attributes
 {
     public class FreezeAttribute : Attribute
-
     {
         public virtual object Min { get; set; }
 

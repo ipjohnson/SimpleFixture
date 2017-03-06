@@ -1,10 +1,16 @@
 ﻿using SimpleFixture.Tests.Classes;
 using SimpleFixture.Tests.Classes.NestedNamespace;
 using System;
+using SimpleFixture.Attributes;
+using SimpleFixture.NSubstitute;
+using SimpleFixture.Tests.MockTests;
 using Xunit;
+using SimpleFixture.xUnit;
 
 namespace SimpleFixture.Tests.FixtureTests
 {
+
+    [SubFixtureInitialize]
     public class ExportTests
     {
         #region Export
@@ -60,7 +66,7 @@ namespace SimpleFixture.Tests.FixtureTests
         {
             var fixture = new Fixture();
 
-            fixture.ExportSingletonAs<ImplementInterfaceClass,IImplementInterfaceClass>();
+            fixture.ExportSingletonAs<ImplementInterfaceClass, IImplementInterfaceClass>();
 
             var instance = fixture.Locate<IImplementInterfaceClass>();
 
@@ -150,5 +156,30 @@ namespace SimpleFixture.Tests.FixtureTests
             Assert.Same(instance1, instance2);
         }
         #endregion
+
+        public class SomeInterface : ISomeInterface
+        {
+            public int SomeIntMethod()
+            {
+                return 15;
+            }
+        }
+
+        public interface IAnotherInterface
+        {
+            
+        }
+
+        [Theory]
+        [AutoData]
+        [Export(typeof(SomeInterface))]
+        public void ExportAttribute_Test(ImportSomeInterface import,IAnotherInterface anotherInterface )
+        {
+            Assert.NotNull(import);
+
+            Assert.Equal(15, import.SomeValue);
+
+            Assert.NotNull(anotherInterface);
+        }
     }
 }

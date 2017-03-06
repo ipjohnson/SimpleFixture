@@ -30,7 +30,7 @@
         {
             return _fixture.Return(r =>
                                    {
-                                       if (_isSingleton && _singleton != null)
+                                       if (_singleton != null)
                                        {
                                            return (TExport)_singleton;
                                        }

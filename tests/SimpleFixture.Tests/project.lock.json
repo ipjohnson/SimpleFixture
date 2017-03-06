@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETCoreApp,Version=v1.0": {
-      "Castle.Core/4.0.0-beta002": {
+      "Castle.Core/4.0.0": {
         "type": "package",
         "dependencies": {
           "System.AppContext": "4.1.0",
@@ -51,10 +51,10 @@
           "lib/netcoreapp1.0/dotnet-test-xunit.dll": {}
         }
       },
-      "FakeItEasy/3.0.0-beta002-build000066": {
+      "FakeItEasy/3.0.0": {
         "type": "package",
         "dependencies": {
-          "Castle.Core": "4.0.0-beta002",
+          "Castle.Core": "4.0.0",
           "Microsoft.Extensions.DependencyModel": "1.0.0",
           "System.Collections.Concurrent": "4.0.12",
           "System.Runtime.Loader": "4.0.0"
@@ -505,10 +505,10 @@
           }
         }
       },
-      "Moq/4.6.38-alpha": {
+      "Moq/4.7.0": {
         "type": "package",
         "dependencies": {
-          "Castle.Core": "4.0.0-beta001",
+          "Castle.Core": "4.0.0",
           "System.Collections": "4.0.11",
           "System.Collections.Concurrent": "4.0.12",
           "System.Diagnostics.Debug": "4.0.11",
@@ -619,10 +619,10 @@
           "lib/netstandard1.0/Newtonsoft.Json.dll": {}
         }
       },
-      "NSubstitute/2.0.0-rc": {
+      "NSubstitute/2.0.2": {
         "type": "package",
         "dependencies": {
-          "Castle.Core": "4.0.0-beta001",
+          "Castle.Core": "4.0.0",
           "Microsoft.CSharp": "4.0.1",
           "NETStandard.Library": "1.6.0",
           "System.Linq.Queryable": "4.0.1",
@@ -2628,11 +2628,11 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "xunit/2.2.0-beta4-build3444": {
+      "xunit/2.2.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.2.0-beta4-build3444]",
-          "xunit.core": "[2.2.0-beta4-build3444]"
+          "xunit.assert": "[2.2.0]",
+          "xunit.core": "[2.2.0]"
         }
       },
       "xunit.abstractions/2.0.1": {
@@ -2647,49 +2647,49 @@
           "lib/netstandard1.0/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.2.0-beta4-build3444": {
+      "xunit.assert/2.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0"
         },
         "compile": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
+          "lib/netstandard1.1/xunit.assert.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
+          "lib/netstandard1.1/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.2.0-beta4-build3444": {
+      "xunit.core/2.2.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.2.0-beta4-build3444]",
-          "xunit.extensibility.execution": "[2.2.0-beta4-build3444]"
+          "xunit.extensibility.core": "[2.2.0]",
+          "xunit.extensibility.execution": "[2.2.0]"
         }
       },
-      "xunit.extensibility.core/2.2.0-beta4-build3444": {
+      "xunit.extensibility.core/2.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
           "xunit.abstractions": "2.0.1"
         },
         "compile": {
-          "lib/netstandard1.0/xunit.core.dll": {}
+          "lib/netstandard1.1/xunit.core.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.0/xunit.core.dll": {}
+          "lib/netstandard1.1/xunit.core.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.2.0-beta4-build3444": {
+      "xunit.extensibility.execution/2.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "xunit.extensibility.core": "[2.2.0-beta4-build3444]"
+          "xunit.extensibility.core": "[2.2.0]"
         },
         "compile": {
-          "lib/netstandard1.0/xunit.execution.dotnet.dll": {}
+          "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.0/xunit.execution.dotnet.dll": {}
+          "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
       "xunit.runner.reporters/2.2.0-beta2-build3300": {
@@ -2719,7 +2719,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "SimpleFixture/2.0.1": {
+      "SimpleFixture/2.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
@@ -2738,13 +2738,13 @@
           "netstandard1.0/SimpleFixture.dll": {}
         }
       },
-      "SimpleFixture.FakeItEasy/2.0.1": {
+      "SimpleFixture.FakeItEasy/2.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "FakeItEasy": "3.0.0-beta002-build000066",
+          "FakeItEasy": "3.0.0",
           "NETStandard.Library": "1.6.0",
-          "SimpleFixture": "2.0.1"
+          "SimpleFixture": "2.0.2"
         },
         "compile": {
           "netstandard1.6/SimpleFixture.FakeItEasy.dll": {}
@@ -2753,12 +2753,12 @@
           "netstandard1.6/SimpleFixture.FakeItEasy.dll": {}
         }
       },
-      "SimpleFixture.Moq/2.0.1": {
+      "SimpleFixture.Moq/2.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.3",
         "dependencies": {
-          "Moq": "4.6.38-alpha",
-          "SimpleFixture": "2.0.1"
+          "Moq": "4.7.0",
+          "SimpleFixture": "2.0.2"
         },
         "compile": {
           "netstandard1.3/SimpleFixture.Moq.dll": {}
@@ -2767,12 +2767,12 @@
           "netstandard1.3/SimpleFixture.Moq.dll": {}
         }
       },
-      "SimpleFixture.NSubstitute/2.0.1": {
+      "SimpleFixture.NSubstitute/2.0.2": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
-          "NSubstitute": "2.0.0-rc",
-          "SimpleFixture": "2.0.1"
+          "NSubstitute": "2.0.2",
+          "SimpleFixture": "2.0.2"
         },
         "compile": {
           "netstandard1.5/SimpleFixture.NSubstitute.dll": {}
@@ -2781,24 +2781,24 @@
           "netstandard1.5/SimpleFixture.NSubstitute.dll": {}
         }
       },
-      "SimpleFixture.xUnit/2.0.1": {
+      "SimpleFixture.xUnit/2.0.2": {
         "type": "project",
-        "framework": ".NETStandard,Version=v1.0",
+        "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "SimpleFixture": "2.0.1",
-          "xunit": "2.2.0-beta4-build3444"
+          "SimpleFixture": "2.0.2",
+          "xunit": "2.2.0"
         },
         "compile": {
-          "netstandard1.0/SimpleFixture.xUnit.dll": {}
+          "netstandard1.1/SimpleFixture.xUnit.dll": {}
         },
         "runtime": {
-          "netstandard1.0/SimpleFixture.xUnit.dll": {}
+          "netstandard1.1/SimpleFixture.xUnit.dll": {}
         }
       }
     },
     ".NETFramework,Version=v4.5.1": {
-      "Castle.Core/3.3.3": {
+      "Castle.Core/4.0.0": {
         "type": "package",
         "compile": {
           "lib/net45/Castle.Core.dll": {}
@@ -2838,7 +2838,7 @@
           }
         }
       },
-      "FakeItEasy/3.0.0-beta002-build000066": {
+      "FakeItEasy/3.0.0": {
         "type": "package",
         "compile": {
           "lib/net40/FakeItEasy.dll": {}
@@ -2967,10 +2967,10 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Moq/4.6.38-alpha": {
+      "Moq/4.7.0": {
         "type": "package",
         "dependencies": {
-          "Castle.Core": "3.3.3"
+          "Castle.Core": "4.0.0"
         },
         "compile": {
           "lib/net45/Moq.dll": {}
@@ -3024,7 +3024,7 @@
           "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
-      "NSubstitute/2.0.0-rc": {
+      "NSubstitute/2.0.2": {
         "type": "package",
         "compile": {
           "lib/net45/NSubstitute.dll": {}
@@ -3504,11 +3504,11 @@
           "lib/net45/_._": {}
         }
       },
-      "xunit/2.2.0-beta4-build3444": {
+      "xunit/2.2.0": {
         "type": "package",
         "dependencies": {
-          "xunit.assert": "[2.2.0-beta4-build3444]",
-          "xunit.core": "[2.2.0-beta4-build3444]"
+          "xunit.assert": "[2.2.0]",
+          "xunit.core": "[2.2.0]"
         }
       },
       "xunit.abstractions/2.0.1": {
@@ -3520,44 +3520,49 @@
           "lib/net35/xunit.abstractions.dll": {}
         }
       },
-      "xunit.assert/2.2.0-beta4-build3444": {
+      "xunit.assert/2.2.0": {
         "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.0"
+        },
         "compile": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
+          "lib/netstandard1.1/xunit.assert.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.0/xunit.assert.dll": {}
+          "lib/netstandard1.1/xunit.assert.dll": {}
         }
       },
-      "xunit.core/2.2.0-beta4-build3444": {
+      "xunit.core/2.2.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.2.0-beta4-build3444]",
-          "xunit.extensibility.execution": "[2.2.0-beta4-build3444]"
+          "xunit.extensibility.core": "[2.2.0]",
+          "xunit.extensibility.execution": "[2.2.0]"
         }
       },
-      "xunit.extensibility.core/2.2.0-beta4-build3444": {
+      "xunit.extensibility.core/2.2.0": {
         "type": "package",
         "dependencies": {
+          "NETStandard.Library": "1.6.0",
           "xunit.abstractions": "2.0.1"
         },
         "compile": {
-          "lib/net45/xunit.core.dll": {}
+          "lib/netstandard1.1/xunit.core.dll": {}
         },
         "runtime": {
-          "lib/net45/xunit.core.dll": {}
+          "lib/netstandard1.1/xunit.core.dll": {}
         }
       },
-      "xunit.extensibility.execution/2.2.0-beta4-build3444": {
+      "xunit.extensibility.execution/2.2.0": {
         "type": "package",
         "dependencies": {
-          "xunit.extensibility.core": "[2.2.0-beta4-build3444]"
+          "NETStandard.Library": "1.6.0",
+          "xunit.extensibility.core": "[2.2.0]"
         },
         "compile": {
-          "lib/net45/xunit.execution.desktop.dll": {}
+          "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         },
         "runtime": {
-          "lib/net45/xunit.execution.desktop.dll": {}
+          "lib/netstandard1.1/xunit.execution.dotnet.dll": {}
         }
       },
       "xunit.runner.reporters/2.2.0-beta2-build3300": {
@@ -3584,7 +3589,7 @@
           "lib/net45/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "SimpleFixture/2.0.1": {
+      "SimpleFixture/2.0.2": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -3601,13 +3606,13 @@
           "net45/SimpleFixture.dll": {}
         }
       },
-      "SimpleFixture.FakeItEasy/2.0.1": {
+      "SimpleFixture.FakeItEasy/2.0.2": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
-          "FakeItEasy": "3.0.0-beta002-build000066",
+          "FakeItEasy": "3.0.0",
           "NETStandard.Library": "1.6.0",
-          "SimpleFixture": "2.0.1"
+          "SimpleFixture": "2.0.2"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -3623,12 +3628,12 @@
           "net45/SimpleFixture.FakeItEasy.dll": {}
         }
       },
-      "SimpleFixture.Moq/2.0.1": {
+      "SimpleFixture.Moq/2.0.2": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
-          "Moq": "4.6.38-alpha",
-          "SimpleFixture": "2.0.1"
+          "Moq": "4.7.0",
+          "SimpleFixture": "2.0.2"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -3644,12 +3649,12 @@
           "net45/SimpleFixture.Moq.dll": {}
         }
       },
-      "SimpleFixture.NSubstitute/2.0.1": {
+      "SimpleFixture.NSubstitute/2.0.2": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
-          "NSubstitute": "2.0.0-rc",
-          "SimpleFixture": "2.0.1"
+          "NSubstitute": "2.0.2",
+          "SimpleFixture": "2.0.2"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -3665,63 +3670,32 @@
           "net45/SimpleFixture.NSubstitute.dll": {}
         }
       },
-      "SimpleFixture.xUnit/2.0.1": {
+      "SimpleFixture.xUnit/2.0.2": {
         "type": "project",
-        "framework": ".NETFramework,Version=v4.5",
+        "framework": ".NETStandard,Version=v1.1",
         "dependencies": {
           "NETStandard.Library": "1.6.0",
-          "SimpleFixture": "2.0.1",
-          "xunit": "2.2.0-beta4-build3444"
+          "SimpleFixture": "2.0.2",
+          "xunit": "2.2.0"
         },
-        "frameworkAssemblies": [
-          "System.Data",
-          "System.Numerics",
-          "System.Runtime.Serialization",
-          "System.Xml",
-          "System.Xml.Linq"
-        ],
         "compile": {
-          "net45/SimpleFixture.xUnit.dll": {}
+          "netstandard1.1/SimpleFixture.xUnit.dll": {}
         },
         "runtime": {
-          "net45/SimpleFixture.xUnit.dll": {}
+          "netstandard1.1/SimpleFixture.xUnit.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "Castle.Core/3.3.3": {
-      "sha512": "tvVrLbHhtAGubUUDbEkH9JlivdlJOTI25u3hlyHpPxuJdTVi/yVQKWCYvGpafGPm7G1ibdWj4brqhtSQkAmN+g==",
+    "Castle.Core/4.0.0": {
+      "sha512": "iLINpMFc07bcb0d075AB0mcXV/MT8J8oyBarDSeyrLM03UoCVOuvYu87LI4511XHfy7XEhHtMDum5gt2s56xDg==",
       "type": "package",
-      "path": "Castle.Core/3.3.3",
-      "files": [
-        "ASL - Apache Software Foundation License.txt",
-        "BreakingChanges.txt",
-        "Castle.Core.3.3.3.nupkg.sha512",
-        "Castle.Core.nuspec",
-        "Changes.txt",
-        "License.txt",
-        "lib/net35/Castle.Core.dll",
-        "lib/net35/Castle.Core.xml",
-        "lib/net40-client/Castle.Core.dll",
-        "lib/net40-client/Castle.Core.xml",
-        "lib/net45/Castle.Core.dll",
-        "lib/net45/Castle.Core.xml",
-        "lib/sl4/Castle.Core.dll",
-        "lib/sl4/Castle.Core.xml",
-        "lib/sl5/Castle.Core.dll",
-        "lib/sl5/Castle.Core.xml",
-        "readme.txt"
-      ]
-    },
-    "Castle.Core/4.0.0-beta002": {
-      "sha512": "JrHG/4FXsV7+O8h5ytwU17yUzDbnFTrv0KNIVhQMFcSQ1tO1wo+qg6KtEcbqKLCMx/8M0CvEKHUMMH15NKrOOQ==",
-      "type": "package",
-      "path": "Castle.Core/4.0.0-beta002",
+      "path": "Castle.Core/4.0.0",
       "files": [
         "ASL - Apache Software Foundation License.txt",
         "CHANGELOG.md",
-        "Castle.Core.4.0.0-beta002.nupkg.sha512",
+        "Castle.Core.4.0.0.nupkg.sha512",
         "Castle.Core.nuspec",
         "LICENSE",
         "lib/net35/Castle.Core.dll",
@@ -3750,12 +3724,12 @@
         "runtimes/win7-x86/lib/net451/dotnet-test-xunit.exe"
       ]
     },
-    "FakeItEasy/3.0.0-beta002-build000066": {
-      "sha512": "PmiA6XFk1x99694cnrJJIFbGpePHQIVPC0L4vOUzRpcE54LAcWknM60+sjaar7WGp8rQ+iReFkwtdfiny5Q8EQ==",
+    "FakeItEasy/3.0.0": {
+      "sha512": "fB6u+v1s1LCrNYPknr4TEYCBa8VI5NiG9i9xkq2ODZ5s+hpWCLG21ckbZufIRVMCme2sfwdiFA8NF80qLovWaA==",
       "type": "package",
-      "path": "FakeItEasy/3.0.0-beta002-build000066",
+      "path": "FakeItEasy/3.0.0",
       "files": [
-        "FakeItEasy.3.0.0-beta002-build000066.nupkg.sha512",
+        "FakeItEasy.3.0.0.nupkg.sha512",
         "FakeItEasy.nuspec",
         "lib/net40/FakeItEasy.dll",
         "lib/net40/FakeItEasy.pdb",
@@ -4292,12 +4266,12 @@
         "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll"
       ]
     },
-    "Moq/4.6.38-alpha": {
-      "sha512": "avMAfImICo7K8kkSqZDnwS7qvwyyNzNDQQFtnsI4CxAgi+ESOLFr1j5ucAE2hGoG1k5A0B1+3zfNYhHkozW1EA==",
+    "Moq/4.7.0": {
+      "sha512": "EARB1hiT51yYWHynI+7FWOIZ9Lc3Pf83DlE3yROrgkiQ7xJy3+I52A5yMgvFe9GhOdXmXhBxZKApeOtWTV5MEQ==",
       "type": "package",
-      "path": "Moq/4.6.38-alpha",
+      "path": "Moq/4.7.0",
       "files": [
-        "Moq.4.6.38-alpha.nupkg.sha512",
+        "Moq.4.7.0.nupkg.sha512",
         "Moq.nuspec",
         "lib/net45/Moq.dll",
         "lib/net45/Moq.xml",
@@ -4340,15 +4314,15 @@
         "tools/install.ps1"
       ]
     },
-    "NSubstitute/2.0.0-rc": {
-      "sha512": "/EGcVrLZjLfKzrIN7rVVOjnnUwkMCFzdYFWshUkcjaii/I2+zR+botsBhm57tVPo0w9IWHOWolUFWlQh74jLyA==",
+    "NSubstitute/2.0.2": {
+      "sha512": "VBxhx4L2FBHpDOlQgMhpRxmzg7bJYiGDutqh+mxtLtZityvoBOzNP8jwEFKz0WjhKLdc9onXTyXwuPf3MnUzFA==",
       "type": "package",
-      "path": "NSubstitute/2.0.0-rc",
+      "path": "NSubstitute/2.0.2",
       "files": [
         "BreakingChanges.txt",
         "CHANGELOG.txt",
         "LICENSE.txt",
-        "NSubstitute.2.0.0-rc.nupkg.sha512",
+        "NSubstitute.2.0.2.nupkg.sha512",
         "NSubstitute.nuspec",
         "README.txt",
         "acknowledgements.txt",
@@ -9052,12 +9026,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "xunit/2.2.0-beta4-build3444": {
-      "sha512": "Gd981l3FGdxwnnOrrj495BMy/zb07ZITSTnLvryaxnqTsqNXRH12fqJ4aliqc2nCFBZBstMYzLznbBy/53QEZA==",
+    "xunit/2.2.0": {
+      "sha512": "DoB9o+x3erv1DGP+pSvrIC1pWg+23LeeG8nOGVldoF+qeWNqQbabc5jLfUWW4zLOsNZfvgHcmJIKuRcZMgoV+w==",
       "type": "package",
-      "path": "xunit/2.2.0-beta4-build3444",
+      "path": "xunit/2.2.0",
       "files": [
-        "xunit.2.2.0-beta4-build3444.nupkg.sha512",
+        "xunit.2.2.0.nupkg.sha512",
         "xunit.nuspec"
       ]
     },
@@ -9074,65 +9048,53 @@
         "xunit.abstractions.nuspec"
       ]
     },
-    "xunit.assert/2.2.0-beta4-build3444": {
-      "sha512": "ofTB1EEXB4A5hFbmvJHnjNGeazsyOsd8C2zfh/XJrCPKjdXXq/9TSD8xJn5JFUpO6PdArlS4bNAalhhijepjsw==",
+    "xunit.assert/2.2.0": {
+      "sha512": "OZ1HADp3tv48wK+mPxdOr4kYPn3Y1RACYCWkX0IogKIyZ8fwLeLspVk9KdHfhqXGITnTvlMcOw6PmdRAwrUreQ==",
       "type": "package",
-      "path": "xunit.assert/2.2.0-beta4-build3444",
+      "path": "xunit.assert/2.2.0",
       "files": [
-        "lib/netstandard1.0/xunit.assert.dll",
-        "lib/netstandard1.0/xunit.assert.pdb",
-        "lib/netstandard1.0/xunit.assert.xml",
-        "xunit.assert.2.2.0-beta4-build3444.nupkg.sha512",
+        "lib/netstandard1.1/xunit.assert.dll",
+        "lib/netstandard1.1/xunit.assert.xml",
+        "xunit.assert.2.2.0.nupkg.sha512",
         "xunit.assert.nuspec"
       ]
     },
-    "xunit.core/2.2.0-beta4-build3444": {
-      "sha512": "yGoZJbcxG2997f6Fy+2RNTRnW0Gz0lmFUUNLoa9RaXyQz/K/OsHXbSrOGMs7cxnXDfXMwjjrvDS1U4P34sOX1w==",
+    "xunit.core/2.2.0": {
+      "sha512": "wuGOHofSt4sR/ros6N6S8FI2L9uuP5YsbcxM2kXpcRplMoY1pSgfEZaIRZm3NqDL/JJ/FHEksTEYkvxpc9H4Rw==",
       "type": "package",
-      "path": "xunit.core/2.2.0-beta4-build3444",
+      "path": "xunit.core/2.2.0",
       "files": [
         "build/_desktop/xunit.execution.desktop.dll",
         "build/netstandard1.0/_._",
         "build/uap10.0/xunit.core.props",
-        "build/win81/xunit.core.props",
-        "build/wpa81/xunit.core.props",
-        "xunit.core.2.2.0-beta4-build3444.nupkg.sha512",
+        "xunit.core.2.2.0.nupkg.sha512",
         "xunit.core.nuspec"
       ]
     },
-    "xunit.extensibility.core/2.2.0-beta4-build3444": {
-      "sha512": "ISdMbAOe4SnsHMLejyZFWvTA/ZvrOxO/fo6GxCGRT6NufIUwa5K8Yinsav8pT2+c+6iWN9uNgsqnW3iR4takYg==",
+    "xunit.extensibility.core/2.2.0": {
+      "sha512": "2bT3sG8obWbRm45NewcV+Sr2K1whj88LnjQT7szJx1DcydgKR86ggV5rIZ5NccCWo2ctZMRb0QMYttVrhrG9Gw==",
       "type": "package",
-      "path": "xunit.extensibility.core/2.2.0-beta4-build3444",
+      "path": "xunit.extensibility.core/2.2.0",
       "files": [
-        "lib/net45/xunit.core.dll",
-        "lib/net45/xunit.core.dll.tdnet",
-        "lib/net45/xunit.core.pdb",
-        "lib/net45/xunit.core.xml",
-        "lib/net45/xunit.runner.tdnet.dll",
-        "lib/net45/xunit.runner.utility.desktop.dll",
-        "lib/netstandard1.0/xunit.core.dll",
-        "lib/netstandard1.0/xunit.core.dll.tdnet",
-        "lib/netstandard1.0/xunit.core.pdb",
-        "lib/netstandard1.0/xunit.core.xml",
-        "lib/netstandard1.0/xunit.runner.tdnet.dll",
-        "lib/netstandard1.0/xunit.runner.utility.desktop.dll",
-        "xunit.extensibility.core.2.2.0-beta4-build3444.nupkg.sha512",
+        "lib/netstandard1.1/xunit.core.dll",
+        "lib/netstandard1.1/xunit.core.dll.tdnet",
+        "lib/netstandard1.1/xunit.core.xml",
+        "lib/netstandard1.1/xunit.runner.tdnet.dll",
+        "lib/netstandard1.1/xunit.runner.utility.net452.dll",
+        "xunit.extensibility.core.2.2.0.nupkg.sha512",
         "xunit.extensibility.core.nuspec"
       ]
     },
-    "xunit.extensibility.execution/2.2.0-beta4-build3444": {
-      "sha512": "H4elREzKuTxHF1Nha4TXdI3DI/l2IMiIeRa9BTjwpEXkJ6G1kO1QHBQ6PQvotjk727d7zctODU1BgBNlfpMi4g==",
+    "xunit.extensibility.execution/2.2.0": {
+      "sha512": "4gjTrSUd/F6/pdsMsf+a1f1tcaUQnr59JvZQulmF8VwQbCh34ifie3iqriYyKyLmTQDUEJ/ZTPeZEDh0pxpTLA==",
       "type": "package",
-      "path": "xunit.extensibility.execution/2.2.0-beta4-build3444",
+      "path": "xunit.extensibility.execution/2.2.0",
       "files": [
-        "lib/net45/xunit.execution.desktop.dll",
-        "lib/net45/xunit.execution.desktop.pdb",
-        "lib/net45/xunit.execution.desktop.xml",
-        "lib/netstandard1.0/xunit.execution.dotnet.dll",
-        "lib/netstandard1.0/xunit.execution.dotnet.pdb",
-        "lib/netstandard1.0/xunit.execution.dotnet.xml",
-        "xunit.extensibility.execution.2.2.0-beta4-build3444.nupkg.sha512",
+        "lib/net452/xunit.execution.desktop.dll",
+        "lib/net452/xunit.execution.desktop.xml",
+        "lib/netstandard1.1/xunit.execution.dotnet.dll",
+        "lib/netstandard1.1/xunit.execution.dotnet.xml",
+        "xunit.extensibility.execution.2.2.0.nupkg.sha512",
         "xunit.extensibility.execution.nuspec"
       ]
     },
@@ -9165,27 +9127,27 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "SimpleFixture/2.0.1": {
+    "SimpleFixture/2.0.2": {
       "type": "project",
       "path": "../../src/SimpleFixture/project.json",
       "msbuildProject": "../../src/SimpleFixture/SimpleFixture.xproj"
     },
-    "SimpleFixture.FakeItEasy/2.0.1": {
+    "SimpleFixture.FakeItEasy/2.0.2": {
       "type": "project",
       "path": "../../src/SimpleFixture.FakeItEasy/project.json",
       "msbuildProject": "../../src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.xproj"
     },
-    "SimpleFixture.Moq/2.0.1": {
+    "SimpleFixture.Moq/2.0.2": {
       "type": "project",
       "path": "../../src/SimpleFixture.Moq/project.json",
       "msbuildProject": "../../src/SimpleFixture.Moq/SimpleFixture.Moq.xproj"
     },
-    "SimpleFixture.NSubstitute/2.0.1": {
+    "SimpleFixture.NSubstitute/2.0.2": {
       "type": "project",
       "path": "../../src/SimpleFixture.NSubstitute/project.json",
       "msbuildProject": "../../src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.xproj"
     },
-    "SimpleFixture.xUnit/2.0.1": {
+    "SimpleFixture.xUnit/2.0.2": {
       "type": "project",
       "path": "../../src/SimpleFixture.xUnit/project.json",
       "msbuildProject": "../../src/SimpleFixture.xUnit/SimpleFixture.xUnit.xproj"
@@ -9195,12 +9157,13 @@
     "": [
       "FluentAssertions >= 4.18.0",
       "NETStandard.Library >= 1.6.0",
-      "SimpleFixture >= 2.0.1-*",
-      "SimpleFixture.FakeItEasy >= 2.0.1-*",
-      "SimpleFixture.Moq >= 2.0.1-*",
-      "SimpleFixture.NSubstitute >= 2.0.1-*",
-      "SimpleFixture.xUnit >= 2.0.1-*",
-      "dotnet-test-xunit >= 2.2.0-preview2-build1029"
+      "SimpleFixture >= 2.0.2-*",
+      "SimpleFixture.FakeItEasy >= 2.0.2-*",
+      "SimpleFixture.Moq >= 2.0.2-*",
+      "SimpleFixture.NSubstitute >= 2.0.2-*",
+      "SimpleFixture.xUnit >= 2.0.2-*",
+      "dotnet-test-xunit >= 2.2.0-preview2-build1029",
+      "xunit >= 2.2.0"
     ],
     ".NETCoreApp,Version=v1.0": [
       "Microsoft.NETCore.App >= 1.0.0-*"
