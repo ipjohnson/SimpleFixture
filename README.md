@@ -22,7 +22,7 @@ var fixture = new Fixture();
 var instance = fixture.Generate<SomeClass>();
 ```
 
-###Return
+### Return
 
 It's useful sometimes to control what values are returned from the fixture. The Return method offers a way to specify what to return for a give type. Below are some examples.
 
@@ -55,7 +55,7 @@ fixture.Return(() => i++).WhenNamed(n => n.EndsWith("Id"));
 fixture.Return("SomeString").For<SomeClass>().WhenMatching(matchingMethod);
 
 ```
-###Export
+### Export
 Similar to a depenedency injection container you can specify an implementation for a particular interface
 
 ```C#
@@ -72,7 +72,7 @@ var instance = fixture.Locate<ISomeInterface>();
 Assert.InstanceOf<SomeClass>(instance);
 ```
 
-###Constraints
+### Constraints
 
 Sometimes it's useful to have more control over how an object is created. The generate method takes a constraints object allowing to specify min,max, and other options.
 ```C#
@@ -91,7 +91,7 @@ var instance = fixture.Generate<ImportSomeClass>(constraints: new { _Values = ne
 Assert.Same(someClass, instance.SomeClass);
 ```
 
-###Customization
+### Customization
 
 Customization offers you the ability to control how an object gets constructed and populated when Return and Constraints aren't enough. 
 
@@ -108,7 +108,7 @@ fixture.Customize<SomeOtherClass>().NewFactory<int,string>((i,s) = new SomeOther
 fixture.Customize<SomeClass>().Apply(x => x.Initialize());
 ```
 
-###Requested Name
+### Requested Name
 
 To help provide more context on how a type should be create you can provide a request name. Below are some example of currently supported request names for strings
 
@@ -131,7 +131,7 @@ var email = fixture.Generate<string>("EmailAddress", constraints: new { domain =
 var addressLine1 = fixture.Generate<string>("AddressLine1");
 ```
 
-###Freeze
+### Freeze
 Similar to Autofixture there is a Freeze method that Generates a new instance and sets it as a Return value.
 
 ```C#
@@ -143,7 +143,7 @@ Assert.Equal(randomInt, fixture.Generate<int>());
 int randomInt = fixture.Freeze<int>(value: i => i.For<SomeClass>());
 ```
 
-###Behavior
+### Behavior
 Behavior allows you to apply cross cutting logic to all objects created by the fixture. You can apply your logic to all objects or just to specific types.
 
 ```C#
@@ -154,7 +154,7 @@ fixture.Behavior.Add(i => SomeMethod(i));
 fixture.Behavior.Add<ISomeType>(i => i.SomeMethodOnISomeType());
 ```
 
-###Mocking
+### Mocking
 
 Currently Moq, NSubstitute and FakeItEasy are supported allowing you to automatically mock any missing interfaces
 ```C#
@@ -168,5 +168,5 @@ var fixture = new SubFixture();
 var fixture = new FakeFixture();
 ```
 
-###Builds
+### Builds
 [![Build status](https://ci.appveyor.com/api/projects/status/6ml6ubwk7v8u4h9m?svg=true)](https://ci.appveyor.com/project/ipjohnson/simplefixture) [![Coverage Status](https://coveralls.io/repos/github/ipjohnson/SimpleFixture/badge.svg?branch=master)](https://coveralls.io/github/ipjohnson/SimpleFixture?branch=master)
