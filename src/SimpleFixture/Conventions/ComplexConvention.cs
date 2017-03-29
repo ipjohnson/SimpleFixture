@@ -51,7 +51,8 @@ namespace SimpleFixture.Conventions
                 return _circularReferenceHandler.HandleCircularReference(request);
             }
 
-            if (request.RequestedType.GetTypeInfo().IsInterface)
+            if (request.RequestedType.GetTypeInfo().IsInterface ||
+                request.RequestedType.GetTypeInfo().IsAbstract)
             {
                 return Convention.NoValue;
             }
