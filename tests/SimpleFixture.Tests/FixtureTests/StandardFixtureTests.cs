@@ -14,13 +14,24 @@ namespace SimpleFixture.Tests.FixtureTests
 
             }
         }
-        
+
         [Fact]
         public void Fixture_Throws_Exception_When_No_Constructor_Found()
         {
             var fixture = new Fixture();
 
             Assert.Throws<Exception>(() => fixture.Generate<PrivateClass>());
+        }
+
+        [Fact]
+        public void Fixture_UseNonPublicConstructor()
+        {
+            var fixture = new Fixture(new DefaultFixtureConfiguration { UseNonPublicConstructors = true });
+
+            var instance = fixture.Generate<PrivateClass>();
+
+            Assert.NotNull(instance);
+            Assert.IsType<PrivateClass>(instance);
         }
 
         public struct MyStruct
@@ -48,9 +59,9 @@ namespace SimpleFixture.Tests.FixtureTests
             Assert.Throws<ArgumentNullException>(() => fixture.Generate((Type)null));
             Assert.Throws<ArgumentNullException>(() => fixture.Locate((Type)null));
             Assert.Throws<ArgumentNullException>(() => fixture.Populate(null));
-            Assert.Throws<ArgumentNullException>(() => fixture.Return((Func<DataRequest, ISomeInterface>) null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Return((Func<DataRequest, ISomeInterface>)null));
             Assert.Throws<ArgumentNullException>(() => fixture.ReturnIEnumerable((ISomeInterface[])null));
-            Assert.Throws<ArgumentNullException>(() => fixture.Add((IConvention) null));
+            Assert.Throws<ArgumentNullException>(() => fixture.Add((IConvention)null));
             Assert.Throws<ArgumentNullException>(() => fixture.Add((IFixtureCustomization)null));
         }
 
@@ -59,9 +70,9 @@ namespace SimpleFixture.Tests.FixtureTests
         {
             var fixture = new Fixture();
 
-            foreach (var variable in (IEnumerable) fixture)
+            foreach (var variable in (IEnumerable)fixture)
             {
-                
+
             }
         }
     }

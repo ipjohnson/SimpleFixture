@@ -2719,7 +2719,7 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "SimpleFixture/2.0.2": {
+      "SimpleFixture/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.0",
         "dependencies": {
@@ -2738,13 +2738,13 @@
           "netstandard1.0/SimpleFixture.dll": {}
         }
       },
-      "SimpleFixture.FakeItEasy/2.0.2": {
+      "SimpleFixture.FakeItEasy/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
           "FakeItEasy": "3.0.0",
           "NETStandard.Library": "1.6.0",
-          "SimpleFixture": "2.0.2"
+          "SimpleFixture": "2.0.3"
         },
         "compile": {
           "netstandard1.6/SimpleFixture.FakeItEasy.dll": {}
@@ -2753,12 +2753,12 @@
           "netstandard1.6/SimpleFixture.FakeItEasy.dll": {}
         }
       },
-      "SimpleFixture.Moq/2.0.2": {
+      "SimpleFixture.Moq/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.3",
         "dependencies": {
           "Moq": "4.7.0",
-          "SimpleFixture": "2.0.2"
+          "SimpleFixture": "2.0.3"
         },
         "compile": {
           "netstandard1.3/SimpleFixture.Moq.dll": {}
@@ -2767,12 +2767,12 @@
           "netstandard1.3/SimpleFixture.Moq.dll": {}
         }
       },
-      "SimpleFixture.NSubstitute/2.0.2": {
+      "SimpleFixture.NSubstitute/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.5",
         "dependencies": {
           "NSubstitute": "2.0.2",
-          "SimpleFixture": "2.0.2"
+          "SimpleFixture": "2.0.3"
         },
         "compile": {
           "netstandard1.5/SimpleFixture.NSubstitute.dll": {}
@@ -3589,7 +3589,7 @@
           "lib/net45/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "SimpleFixture/2.0.2": {
+      "SimpleFixture/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "frameworkAssemblies": [
@@ -3606,13 +3606,13 @@
           "net45/SimpleFixture.dll": {}
         }
       },
-      "SimpleFixture.FakeItEasy/2.0.2": {
+      "SimpleFixture.FakeItEasy/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
           "FakeItEasy": "3.0.0",
           "NETStandard.Library": "1.6.0",
-          "SimpleFixture": "2.0.2"
+          "SimpleFixture": "2.0.3"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -3628,12 +3628,12 @@
           "net45/SimpleFixture.FakeItEasy.dll": {}
         }
       },
-      "SimpleFixture.Moq/2.0.2": {
+      "SimpleFixture.Moq/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
           "Moq": "4.7.0",
-          "SimpleFixture": "2.0.2"
+          "SimpleFixture": "2.0.3"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -3649,12 +3649,12 @@
           "net45/SimpleFixture.Moq.dll": {}
         }
       },
-      "SimpleFixture.NSubstitute/2.0.2": {
+      "SimpleFixture.NSubstitute/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
           "NSubstitute": "2.0.2",
-          "SimpleFixture": "2.0.2"
+          "SimpleFixture": "2.0.3"
         },
         "frameworkAssemblies": [
           "System.Data",
@@ -9127,22 +9127,22 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "SimpleFixture/2.0.2": {
+    "SimpleFixture/2.0.3": {
       "type": "project",
       "path": "../../src/SimpleFixture/project.json",
       "msbuildProject": "../../src/SimpleFixture/SimpleFixture.xproj"
     },
-    "SimpleFixture.FakeItEasy/2.0.2": {
+    "SimpleFixture.FakeItEasy/2.0.3": {
       "type": "project",
       "path": "../../src/SimpleFixture.FakeItEasy/project.json",
       "msbuildProject": "../../src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.xproj"
     },
-    "SimpleFixture.Moq/2.0.2": {
+    "SimpleFixture.Moq/2.0.3": {
       "type": "project",
       "path": "../../src/SimpleFixture.Moq/project.json",
       "msbuildProject": "../../src/SimpleFixture.Moq/SimpleFixture.Moq.xproj"
     },
-    "SimpleFixture.NSubstitute/2.0.2": {
+    "SimpleFixture.NSubstitute/2.0.3": {
       "type": "project",
       "path": "../../src/SimpleFixture.NSubstitute/project.json",
       "msbuildProject": "../../src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.xproj"
@@ -9157,11 +9157,11 @@
     "": [
       "FluentAssertions >= 4.18.0",
       "NETStandard.Library >= 1.6.0",
-      "SimpleFixture >= 2.0.2-*",
-      "SimpleFixture.FakeItEasy >= 2.0.2-*",
-      "SimpleFixture.Moq >= 2.0.2-*",
-      "SimpleFixture.NSubstitute >= 2.0.2-*",
-      "SimpleFixture.xUnit >= 2.0.2-*",
+      "SimpleFixture >= 2.0.3-*",
+      "SimpleFixture.FakeItEasy >= 2.0.3-*",
+      "SimpleFixture.Moq >= 2.0.3-*",
+      "SimpleFixture.NSubstitute >= 2.0.3-*",
+      "SimpleFixture.xUnit >= 2.0.3-*",
       "dotnet-test-xunit >= 2.2.0-preview2-build1029",
       "xunit >= 2.2.0"
     ],

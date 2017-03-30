@@ -87,5 +87,10 @@ namespace SimpleFixture
         /// Configure how to handle circular references
         /// </summary>
         public CircularReferenceHandlingAlgorithm CircularReferenceHandling { get; set; }
+
+        /// <summary>
+        /// Use non pubic constructors, false by default
+        /// </summary>
+        public bool UseNonPublicConstructors { get; set; }
     }
 }

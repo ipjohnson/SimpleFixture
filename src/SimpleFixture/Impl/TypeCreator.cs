@@ -29,7 +29,7 @@ namespace SimpleFixture.Impl
                 return model.New(request);
             }
 
-            var constructorInfo = _selector.SelectConstructor(request.RequestedType);
+            var constructorInfo = _selector.SelectConstructor(request, request.RequestedType);
 
             if (constructorInfo == null)
             {

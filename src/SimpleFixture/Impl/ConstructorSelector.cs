@@ -7,12 +7,13 @@ namespace SimpleFixture.Impl
 {
     public interface IConstructorSelector
     {
-        ConstructorInfo SelectConstructor(Type type);
+        ConstructorInfo SelectConstructor(DataRequest request, Type type);
     }
 
     public class ConstructorSelector : IConstructorSelector
     {
-        public ConstructorInfo SelectConstructor(Type type)
+
+        public ConstructorInfo SelectConstructor(DataRequest request, Type type)
         {
             var constructors = new List<ConstructorInfo>();
 
@@ -22,8 +23,29 @@ namespace SimpleFixture.Impl
                                                  .DeclaredConstructors
                                                  .Where(c => c.IsPublic && !c.IsStatic));
 
+            var constructor = PickConstructorInfo(allConstructors, maxParameters, constructors);
+
+            if (constructor != null)
+            {
+                return constructor;
+            }
+
+            if (request.Fixture.Configuration.UseNonPublicConstructors)
+            {
+                allConstructors.AddRange(type.GetTypeInfo()
+                                                 .DeclaredConstructors
+                                                 .Where(c => !c.IsPublic && !c.IsStatic));
+
+                return PickConstructorInfo(allConstructors, maxParameters, constructors);
+            }
+
+            return null;
+        }
+
+        private static ConstructorInfo PickConstructorInfo(List<ConstructorInfo> allConstructors, int maxParameters, List<ConstructorInfo> constructors)
+        {
             allConstructors.Sort((x, y) => Comparer<int>.Default.Compare(y.GetParameters().Length,
-                                                                         x.GetParameters().Length));
+                x.GetParameters().Length));
 
 
             foreach (var info in allConstructors)
@@ -43,8 +65,9 @@ namespace SimpleFixture.Impl
             }
 
             constructors.Sort(
-                (x, y) => Comparer<int>.Default.Compare(y.GetParameters().Count(p => !p.ParameterType.GetTypeInfo().IsPrimitive),
-                                                       x.GetParameters().Count(p => !p.ParameterType.GetTypeInfo().IsPrimitive)));
+                (x, y) =>
+                    Comparer<int>.Default.Compare(y.GetParameters().Count(p => !p.ParameterType.GetTypeInfo().IsPrimitive),
+                        x.GetParameters().Count(p => !p.ParameterType.GetTypeInfo().IsPrimitive)));
 
             return constructors.FirstOrDefault();
         }
