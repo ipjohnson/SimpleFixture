@@ -12,7 +12,7 @@ assembly_info:
   assembly_file_version: '$(build_version).{build}'
   assembly_informational_version: '$(build_version)'
 before_build:
-- cmd: nuget restore src/SimpleFixture.sln
+- cmd: nuget restore SimpleFixture.sln
 build:
   project: SimpleFixture.sln
   publish_nuget: true
