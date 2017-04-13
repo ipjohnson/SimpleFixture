@@ -3,7 +3,7 @@ environment:
   Version: $(build_version)-Nightly%APPVEYOR_BUILD_NUMBER% 
   COVERALLS_REPO_TOKEN:
     secure: y0rSDEqwr4qPrtlqBPN+nuJ7XqeO2fvwjx88kYMriIiXmS/m3cBYBWYQ99SsWeQH
-version: $(build_version)-%APPVEYOR_BUILD_NUMBER% 
+version: $(build_version)-$(APPVEYOR_BUILD_NUMBER) 
 configuration: Release
 assembly_info:
   patch: true
