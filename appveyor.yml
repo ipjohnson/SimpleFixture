@@ -3,7 +3,7 @@ environment:
   version_suffix: Nightly%APPVEYOR_BUILD_NUMBER% 
   COVERALLS_REPO_TOKEN:
     secure: y0rSDEqwr4qPrtlqBPN+nuJ7XqeO2fvwjx88kYMriIiXmS/m3cBYBWYQ99SsWeQH
-version: $(build_version)-{build}
+Version: $(build_version)-$(version_suffix)
 configuration: Release
 assembly_info:
   patch: true
