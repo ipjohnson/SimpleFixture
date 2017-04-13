@@ -3,7 +3,7 @@ environment:
   Version: $(build_version)-Nightly%APPVEYOR_BUILD_NUMBER% 
   COVERALLS_REPO_TOKEN:
     secure: y0rSDEqwr4qPrtlqBPN+nuJ7XqeO2fvwjx88kYMriIiXmS/m3cBYBWYQ99SsWeQH
-version: $(build_version)-$(version_suffix)
+version: $(build_version)-%APPVEYOR_BUILD_NUMBER% 
 configuration: Release
 assembly_info:
   patch: true
@@ -23,6 +23,10 @@ test_script:
 - cmd: CodeCoverageAppVeyor.cmd
 after_build:
 - cmd: dotnet pack src/SimpleFixture/SimpleFixture.csproj -o ..\..\ --include-symbols --include-source
+- cmd: dotnet pack src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.csproj -o ..\..\ --include-symbols --include-source
+- cmd: dotnet pack src/SimpleFixture.Moq/SimpleFixture.Moq.csproj -o ..\..\ --include-symbols --include-source
+- cmd: dotnet pack src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.csproj -o ..\..\ --include-symbols --include-source
+- cmd: dotnet pack src/SimpleFixture.xUnit/SimpleFixture.xUnit.csproj -o ..\..\ --include-symbols --include-source
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
