@@ -22,7 +22,7 @@ test_script:
 - cmd: cd tests/SimpleFixture.Tests/
 - cmd: CodeCoverageAppVeyor.cmd
 after_build:
-- cmd: dotnet pack src/SimpleFixture/SimpleFixture.csproj -o .
+- cmd: dotnet pack src/SimpleFixture/SimpleFixture.csproj -o .\ --include-symbols --include-source
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
