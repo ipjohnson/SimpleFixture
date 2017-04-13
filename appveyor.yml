@@ -18,6 +18,9 @@ build:
   publish_nuget: true
   publish_nuget_symbols: true
   verbosity: minimal
+test_script:
+- cmd: cd tests/SimpleFixture.Tests/
+- cmd: CodeCoverageAppVeyor.cmd
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
