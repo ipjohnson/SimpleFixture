@@ -28,3 +28,11 @@
 /src/SimpleFixture.FakeItEasy/project.lock.json
 /src/SimpleFixture.FakeItEasy
 /src/SimpleFixture/project.lock.json
+/Backup
+/src/SimpleFixture/obj
+/src/SimpleFixture/obj/SimpleFixture.csproj.nuget.g.targets
+/src/SimpleFixture/obj/SimpleFixture.csproj.nuget.g.props
+/src/SimpleFixture/obj/project.assets.json
+/tests/SimpleFixture.Tests/obj/SimpleFixture.Tests.csproj.nuget.g.targets
+/tests/SimpleFixture.Tests/obj/SimpleFixture.Tests.csproj.nuget.g.props
+/tests/SimpleFixture.Tests/obj/project.assets.json

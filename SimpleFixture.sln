@@ -1,29 +1,28 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{31700D23-B152-445C-B0C2-E4BD328B11E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B7111DBF-37C7-46D6-ADFC-1FDAE200C334}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		global.json = global.json
 	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFixture", "src\SimpleFixture\SimpleFixture.xproj", "{1F5D5F00-12C3-4488-9F0F-E48B62E7B5D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{043668AB-F2BF-4752-807B-AC9C06F70527}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFixture.Tests", "tests\SimpleFixture.Tests\SimpleFixture.Tests.xproj", "{5B0D6A47-081B-40C5-98D5-438C69028DD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleFixture", "src\SimpleFixture\SimpleFixture.csproj", "{1F5D5F00-12C3-4488-9F0F-E48B62E7B5D2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFixture.FakeItEasy", "src\SimpleFixture.FakeItEasy\SimpleFixture.FakeItEasy.xproj", "{C59FF350-8E80-462B-A705-E7568ACFDE83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleFixture.Tests", "tests\SimpleFixture.Tests\SimpleFixture.Tests.csproj", "{5B0D6A47-081B-40C5-98D5-438C69028DD9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFixture.NSubstitute", "src\SimpleFixture.NSubstitute\SimpleFixture.NSubstitute.xproj", "{56C5D46F-667A-4E7B-83E4-C0F9AB82F203}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleFixture.FakeItEasy", "src\SimpleFixture.FakeItEasy\SimpleFixture.FakeItEasy.csproj", "{C59FF350-8E80-462B-A705-E7568ACFDE83}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFixture.Moq", "src\SimpleFixture.Moq\SimpleFixture.Moq.xproj", "{FC3DA59A-B9A3-4259-B152-3A21D27CDC56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleFixture.NSubstitute", "src\SimpleFixture.NSubstitute\SimpleFixture.NSubstitute.csproj", "{56C5D46F-667A-4E7B-83E4-C0F9AB82F203}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SimpleFixture.xUnit", "src\SimpleFixture.xUnit\SimpleFixture.xUnit.xproj", "{DB7205EA-9CB0-4B82-A0AB-164D40724A84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleFixture.Moq", "src\SimpleFixture.Moq\SimpleFixture.Moq.csproj", "{FC3DA59A-B9A3-4259-B152-3A21D27CDC56}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleFixture.xUnit", "src\SimpleFixture.xUnit\SimpleFixture.xUnit.csproj", "{DB7205EA-9CB0-4B82-A0AB-164D40724A84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
