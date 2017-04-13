@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>2.0.3</VersionPrefix>
+    <Authors>Ian Johnson</Authors>
+    <TargetFrameworks>netstandard1.5;net45</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>SimpleFixture.NSubstitute</AssemblyName>
+    <PackageId>SimpleFixture.NSubstitute</PackageId>
+    <PackageTags>Test;Fixture;Data;Generation</PackageTags>
+    <PackageReleaseNotes>https://github.com/ipjohnson/SimpleFixture/wiki/Release-Notes</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/ipjohnson/SimpleFixture</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ipjohnson/SimpleFixture/blob/master/License.md</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/ipjohnson/SimpleFixture</RepositoryUrl>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleFixture\SimpleFixture.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NSubstitute" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>
