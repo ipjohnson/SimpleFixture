@@ -27,6 +27,8 @@ after_build:
 - cmd: dotnet pack src/SimpleFixture.Moq/SimpleFixture.Moq.csproj -o ..\..\ --include-symbols --include-source
 - cmd: dotnet pack src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.csproj -o ..\..\ --include-symbols --include-source
 - cmd: dotnet pack src/SimpleFixture.xUnit/SimpleFixture.xUnit.csproj -o ..\..\ --include-symbols --include-source
+- cmd: dotnet pack src/SimpleFixture.MSTest/SimpleFixture.MSTest.csproj -o ..\..\ --include-symbols --include-source
+- cmd: dotnet pack src/SimpleFixture.NUnit/SimpleFixture.NUnit.csproj -o ..\..\ --include-symbols --include-source
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
