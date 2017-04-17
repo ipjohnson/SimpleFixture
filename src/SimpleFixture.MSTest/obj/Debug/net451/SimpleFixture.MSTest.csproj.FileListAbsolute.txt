@@ -1,0 +1,11 @@
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\SimpleFixture.MSTest.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\SimpleFixture.MSTest.pdb
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\SimpleFixture.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\SimpleFixture.pdb
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\bin\Debug\net451\SimpleFixture.xml
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\obj\Debug\net451\SimpleFixture.MSTest.csprojResolveAssemblyReference.cache
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\obj\Debug\net451\SimpleFixture.MSTest.AssemblyInfo.cs
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\obj\Debug\net451\SimpleFixture.MSTest.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.MSTest\obj\Debug\net451\SimpleFixture.MSTest.pdb

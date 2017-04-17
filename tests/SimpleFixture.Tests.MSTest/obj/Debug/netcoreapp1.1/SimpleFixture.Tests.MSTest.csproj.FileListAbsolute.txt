@@ -1,0 +1,17 @@
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.deps.json
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.runtimeconfig.json
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.runtimeconfig.dev.json
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.pdb
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\obj\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.AssemblyInfo.cs
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\obj\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\obj\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.pdb
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\obj\Debug\netcoreapp1.1\SimpleFixture.Tests.MSTest.csprojResolveAssemblyReference.cache
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.MSTest.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.MSTest.pdb
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.pdb
+C:\Users\ian\Source\Repos\SimpleFixture2017\tests\SimpleFixture.Tests.MSTest\bin\Debug\netcoreapp1.1\SimpleFixture.xml

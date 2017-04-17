@@ -1,0 +1,4 @@
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.NUnit\bin\Debug\netcoreapp1.1\SimpleFixture.NUnit.deps.json
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.NUnit\bin\Debug\netcoreapp1.1\SimpleFixture.NUnit.dll
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.NUnit\obj\Debug\netcoreapp1.1\SimpleFixture.NUnit.csprojResolveAssemblyReference.cache
+C:\Users\ian\Source\Repos\SimpleFixture2017\src\SimpleFixture.NUnit\obj\Debug\netcoreapp1.1\SimpleFixture.NUnit.AssemblyInfo.cs
