@@ -22,13 +22,13 @@ test_script:
 - cmd: cd tests/SimpleFixture.Tests/
 - cmd: CodeCoverageAppVeyor.cmd
 after_build:
-- cmd: msbuild /t:pack src/SimpleFixture/SimpleFixture.csproj /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
-- cmd: msbuild /t:pack src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
-- cmd: msbuild /t:pack src/SimpleFixture.Moq/SimpleFixture.Moq.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
-- cmd: msbuild /t:pack src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
-- cmd: msbuild /t:pack src/SimpleFixture.xUnit/SimpleFixture.xUnit.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
-- cmd: msbuild /t:pack src/SimpleFixture.MSTest/SimpleFixture.MSTest.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
-- cmd: msbuild /t:pack src/SimpleFixture.NUnit/SimpleFixture.NUnit.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=.\
+- cmd: msbuild /t:pack src/SimpleFixture/SimpleFixture.csproj /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
+- cmd: msbuild /t:pack src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
+- cmd: msbuild /t:pack src/SimpleFixture.Moq/SimpleFixture.Moq.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
+- cmd: msbuild /t:pack src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
+- cmd: msbuild /t:pack src/SimpleFixture.xUnit/SimpleFixture.xUnit.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
+- cmd: msbuild /t:pack src/SimpleFixture.MSTest/SimpleFixture.MSTest.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
+- cmd: msbuild /t:pack src/SimpleFixture.NUnit/SimpleFixture.NUnit.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
