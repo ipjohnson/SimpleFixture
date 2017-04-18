@@ -22,7 +22,7 @@ test_script:
 - cmd: cd tests/SimpleFixture.Tests/
 - cmd: CodeCoverageAppVeyor.cmd
 after_build:
-- cmd: .\tools\nuget.exe pack src/SimpleFixture/SimpleFixture.csproj -o ..\..\ -Symbols
+- cmd: msbuild /t:pack src/SimpleFixture/SimpleFixture.csproj /p:Configuration=Release /p:IncludeSymbols=true
 - cmd: .\tools\nuget.exe pack src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.csproj -o ..\..\ -Symbols
 - cmd: .\tools\nuget.exe pack src/SimpleFixture.Moq/SimpleFixture.Moq.csproj -o ..\..\ -Symbols
 - cmd: .\tools\nuget.exe pack src/SimpleFixture.NSubstitute/SimpleFixture.NSubstitute.csproj -o ..\..\ -Symbols
