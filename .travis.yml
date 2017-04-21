@@ -7,7 +7,7 @@ branches:
   - master
 before_install:
 - sed -i 's/<SignAssembly>true<\/SignAssembly>/<SignAssembly>false<\/SignAssembly>/' src/*/*.csproj
-- sed -i 's/<AssemblyOriginatorKeyFile>..\\..\\tools\\SimpleFixture.snk</AssemblyOriginatorKeyFile>//' src/*/*.csproj 
+- sed -i 's,<AssemblyOriginatorKeyFile>..\..\tools\SimpleFixture.snk</AssemblyOriginatorKeyFile>,,' src/*/*.csproj 
 install:
 - dotnet restore SimpleFixture.sln
 script:
