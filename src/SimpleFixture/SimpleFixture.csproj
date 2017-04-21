@@ -19,6 +19,7 @@
     <DebugType>full</DebugType>
     <SignAssembly>True</SignAssembly>
     <DelaySign>False</DelaySign>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <AssemblyOriginatorKeyFile>..\..\tools\SimpleFixture.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
