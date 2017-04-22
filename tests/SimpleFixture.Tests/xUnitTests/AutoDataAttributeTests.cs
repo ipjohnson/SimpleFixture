@@ -1,8 +1,10 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using SimpleFixture.Attributes;
 using SimpleFixture.Tests.Classes;
 //using SimpleFixture.xUnit;
 using System.Linq;
+using SimpleFixture.Conventions;
 using SimpleFixture.xUnit;
 using Xunit;
 
@@ -19,9 +21,18 @@ namespace SimpleFixture.Tests.xUnitTests
 
         [Theory]
         [AutoData]
-        public void AutoData_ProvidesGeneratedData(string firstName, int value)
+        public void AutoData_ProvidesData(string firstName, int value)
         {
-            firstName.All(char.IsLetter).Should().BeTrue();
+            firstName.Should().Be(StringConvention.LocateValue);
+            value.Should().Be(SimpleFixture.Conventions.IntConvention.LocateValue);
+        }
+
+        [Theory]
+        [AutoData]
+        public void AutoData_ProvidesGeneratedData([Generate]string firstName,[Generate] int value)
+        {
+            firstName.All(Char.IsLetter).Should().BeTrue();
+            firstName.Should().NotBe(StringConvention.LocateValue);
         }
 
         [Theory]
