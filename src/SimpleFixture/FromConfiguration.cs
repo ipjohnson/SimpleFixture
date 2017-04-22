@@ -7,7 +7,7 @@ namespace SimpleFixture
 {
     public class FromConfiguration
     {
-        private Fixture _fixture;
+        private readonly Fixture _fixture;
 
         public FromConfiguration(Fixture fixture)
         {
@@ -36,8 +36,8 @@ namespace SimpleFixture
 
     public class TypeMatchingConfiguration
     {
-        private ExportAllByInterfaceConvention _convention;
-        private List<Func<Type, Type, bool>> _filters;
+        private readonly ExportAllByInterfaceConvention _convention;
+        private readonly List<Func<Type, Type, bool>> _filters;
 
         public TypeMatchingConfiguration(ExportAllByInterfaceConvention convention)
         {

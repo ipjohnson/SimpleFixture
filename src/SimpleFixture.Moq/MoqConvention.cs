@@ -11,7 +11,7 @@ namespace SimpleFixture.Moq
     /// </summary>
     public class MoqConvention : IConvention
     {
-        private bool _defaultSingleton;
+        private readonly bool _defaultSingleton;
         private readonly Dictionary<Type, Mock> _mocks = new Dictionary<Type, Mock>();
 
         /// <summary>

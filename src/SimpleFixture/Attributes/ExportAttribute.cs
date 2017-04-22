@@ -12,7 +12,7 @@ namespace SimpleFixture.Attributes
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Assembly, AllowMultiple = true)]
     public class ExportAttribute : FixtureInitializationAttribute
     {
-        private Type _type;
+        private readonly Type _type;
 
         /// <summary>
         /// Default constuctor
@@ -45,7 +45,7 @@ namespace SimpleFixture.Attributes
             fixture.ExportAs<T, TInterface>();
         }
 
-        private static MethodInfo _exportInterface =
+        private static readonly MethodInfo _exportInterface =
             typeof(ExportAttribute).GetTypeInfo().DeclaredMethods.First(m => m.Name == "ExportInterface");
     }
 }

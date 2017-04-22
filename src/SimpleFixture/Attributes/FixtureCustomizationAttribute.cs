@@ -4,7 +4,7 @@ namespace SimpleFixture.Attributes
 {
     public class FixtureCustomizationAttribute : FixtureInitializationAttribute
     {
-        private Type[] _types;
+        private readonly Type[] _types;
 
         public FixtureCustomizationAttribute(params Type[] types)
         {

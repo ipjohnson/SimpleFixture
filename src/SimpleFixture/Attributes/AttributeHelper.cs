@@ -33,6 +33,31 @@ namespace SimpleFixture.Attributes
             return returnAttribute as T;
         }
 
+
+        /// <summary>
+        /// Get attribute on a method, looks on method, then class, then assembly
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parameterInfo"></param>
+        /// <returns></returns>
+        public static T GetAttribute<T>(ParameterInfo parameterInfo) where T : class
+        {
+            var attribute = parameterInfo.GetCustomAttributes().FirstOrDefault(a => a is T);
+
+            if (attribute != null)
+            {
+                return attribute as T;
+            }
+
+            var methodInfo = parameterInfo.Member;
+
+            var returnAttribute = methodInfo.GetCustomAttributes().FirstOrDefault(a => a is T) ??
+                                  (methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().FirstOrDefault(a => a is T) ??
+                                   methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().FirstOrDefault(a => a is T));
+
+            return returnAttribute as T;
+        }
+
         /// <summary>
         /// Gets attributes from method, class, then assembly
         /// </summary>
@@ -43,15 +68,47 @@ namespace SimpleFixture.Attributes
         {
             var returnList = new List<T>();
 
-            returnList.AddRange(methodInfo.GetCustomAttributes().OfType<T>());
+            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
 
             returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().OfType<T>());
 
-            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
+            returnList.AddRange(methodInfo.GetCustomAttributes().OfType<T>());
 
             return returnList;
         }
 
+        /// <summary>
+        /// Gets attributes from method, class, then assembly
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parameterInfo"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetAttributes<T>(ParameterInfo parameterInfo) where T : class
+        {
+            var returnList = new List<T>();
+
+            var methodInfo = parameterInfo.Member;
+
+            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
+
+            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().OfType<T>());
+
+            returnList.AddRange(methodInfo.GetCustomAttributes().OfType<T>());
+
+            returnList.AddRange(parameterInfo.GetCustomAttributes().OfType<T>());
+
+            return returnList;
+        }
+
+        public static object[] GetData(ParameterInfo parameterInfo)
+        { 
+            var fixture = CreateFixture(parameterInfo);
+
+            var value = GetValueForParameter(parameterInfo.Member as MethodInfo, parameterInfo, fixture,
+                new List<object>());
+
+            return new[] { value };
+        }
 
         /// <summary>Returns the data to be used to test the theory.</summary>
         /// <param name="testMethod">The method that is being tested</param>
@@ -66,92 +123,108 @@ namespace SimpleFixture.Attributes
 
             foreach (var parameter in testMethod.GetParameters())
             {
-                var found = false;
-                object parameterValue = null;
+                var parameterValue = GetValueForParameter(testMethod, parameter, fixture, externalParameters);
 
-                if (parameter.ParameterType == typeof(Fixture))
+                returnParameters.Add(parameterValue);
+            }
+
+            return returnParameters.ToArray();
+        }
+
+        /// <summary>
+        /// Get value for parameter
+        /// </summary>
+        /// <param name="testMethod"></param>
+        /// <param name="parameter"></param>
+        /// <param name="fixture"></param>
+        /// <param name="externalParameters"></param>
+        /// <returns></returns>
+        private static object GetValueForParameter(MethodInfo testMethod, ParameterInfo parameter, 
+            Fixture fixture, List<object> externalParameters)
+        {
+            var found = false;
+            object parameterValue = null;
+
+            if (parameter.ParameterType == typeof(Fixture))
+            {
+                return fixture;
+            }
+
+            parameterValue = ProvideValueForParameter(fixture, parameter);
+
+            if (parameterValue != null)
+            {
+                return parameterValue;
+            }
+
+            foreach (var attribute in parameter.GetCustomAttributes())
+            {
+                var methodAware = attribute as IMethodInfoAware;
+
+                if (methodAware != null)
                 {
-                    returnParameters.Add(fixture);
-                    continue;
+                    methodAware.Method = testMethod;
                 }
 
-                parameterValue = ProvideValueForParameter(fixture, parameter);
+                var memberAware = attribute as IParameterInfoAware;
 
-                if (parameterValue != null)
+                if (memberAware != null)
                 {
-                    returnParameters.Add(parameterValue);
-                    continue;
+                    memberAware.Parameter = parameter;
                 }
 
-                foreach (var attribute in parameter.GetCustomAttributes())
+                var freezeAttribute = attribute as FreezeAttribute;
+
+                if (freezeAttribute != null)
                 {
-                    var methodAware = attribute as IMethodInfoAware;
+                    parameterValue = FreezeValue(fixture, parameter, freezeAttribute);
+                    found = true;
+                }
+                else if (attribute is LocateAttribute)
+                {
+                    var locateAttribute = (LocateAttribute) attribute;
 
-                    if (methodAware != null)
+                    parameterValue = LocateValue(fixture, parameter, locateAttribute);
+                    found = true;
+                }
+                else if (attribute is GenerateAttribute)
+                {
+                    var generateAttribute = (GenerateAttribute) attribute;
+
+                    parameterValue = GenerateValue(fixture, parameter, generateAttribute);
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                if (externalParameters.Count > 0)
+                {
+                    if (externalParameters[0] == null)
                     {
-                        methodAware.Method = testMethod;
-                    }
-
-                    var memberAware = attribute as IParameterInfoAware;
-
-                    if (memberAware != null)
-                    {
-                        memberAware.Parameter = parameter;
-                    }
-
-                    var freezeAttribute = attribute as FreezeAttribute;
-
-                    if (freezeAttribute != null)
-                    {
-                        parameterValue = FreezeValue(fixture, parameter, freezeAttribute);
                         found = true;
+                        externalParameters.RemoveAt(0);
                     }
-                    else if (attribute is LocateAttribute)
+                    else if (parameter.ParameterType.GetTypeInfo()
+                                 .IsAssignableFrom(externalParameters[0].GetType().GetTypeInfo()) ||
+                             (parameter.ParameterType.IsByRef ||
+                              parameter.ParameterType == typeof(string)))
                     {
-                        var locateAttribute = (LocateAttribute)attribute;
-
-                        parameterValue = LocateValue(fixture, parameter, locateAttribute);
-                        found = true;
-                    }
-                    else if (attribute is GenerateAttribute)
-                    {
-                        var generateAttribute = (GenerateAttribute)attribute;
-
-                        parameterValue = GenerateValue(fixture, parameter, generateAttribute);
+                        parameterValue = externalParameters[0];
+                        externalParameters.RemoveAt(0);
                         found = true;
                     }
                 }
 
                 if (!found)
                 {
-                    if (externalParameters.Count > 0)
-                    {
-                        if (externalParameters[0] == null)
-                        {
-                            found = true;
-                            externalParameters.RemoveAt(0);
-                        }
-                        else if (parameter.ParameterType.GetTypeInfo().IsAssignableFrom(externalParameters[0].GetType().GetTypeInfo()) ||
-                               (parameter.ParameterType.IsByRef ||
-                                parameter.ParameterType == typeof(string)))
-                        {
-                            parameterValue = externalParameters[0];
-                            externalParameters.RemoveAt(0);
-                            found = true;
-                        }
-                    }
-
-                    if (!found)
-                    {
-                        parameterValue =
-                            fixture.Generate(new DataRequest(null, fixture, parameter.ParameterType, DependencyType.Root, parameter.Name, true, null, parameter));
-                    }
+                    parameterValue =
+                        fixture.Generate(new DataRequest(null, fixture, parameter.ParameterType, DependencyType.Root,
+                            parameter.Name, true, null, parameter));
                 }
-
-                returnParameters.Add(parameterValue);
             }
 
-            return returnParameters.ToArray();
+            return parameterValue;
         }
 
         /// <summary>
@@ -278,13 +351,34 @@ namespace SimpleFixture.Attributes
         /// </summary>
         /// <param name="testMethod"></param>
         /// <returns></returns>
-        private static Fixture CreateFixture(MethodInfo testMethod)
+        public static Fixture CreateFixture(MethodInfo testMethod)
         {
             var attribute = AttributeHelper.GetAttribute<FixtureCreationAttribute>(testMethod);
 
             var fixture = attribute != null ? attribute.CreateFixture() : new Fixture();
 
             var initializeAttributes = AttributeHelper.GetAttributes<FixtureInitializationAttribute>(testMethod);
+
+            foreach (var initializeAttribute in initializeAttributes)
+            {
+                initializeAttribute.Initialize(fixture);
+            }
+
+            return fixture;
+        }
+
+        /// <summary>
+        /// Create fixture for method
+        /// </summary>
+        /// <param name="parameterInfo"></param>
+        /// <returns></returns>
+        public static Fixture CreateFixture(ParameterInfo parameterInfo)
+        {
+            var attribute = AttributeHelper.GetAttribute<FixtureCreationAttribute>(parameterInfo);
+
+            var fixture = attribute != null ? attribute.CreateFixture() : new Fixture();
+
+            var initializeAttributes = AttributeHelper.GetAttributes<FixtureInitializationAttribute>(parameterInfo);
 
             foreach (var initializeAttribute in initializeAttributes)
             {

@@ -11,7 +11,7 @@ namespace SimpleFixture.Impl
 
     public class TypeFieldSelector : ITypeFieldSelector
     {
-        private IConstraintHelper _helper;
+        private readonly IConstraintHelper _helper;
 
         public TypeFieldSelector(IConstraintHelper helper)
         {

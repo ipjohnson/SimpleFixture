@@ -11,7 +11,7 @@ namespace SimpleFixture.Impl
 
     public class TypeCreator : ITypeCreator
     {
-        private IFixtureConfiguration _configuration;
+        private readonly IFixtureConfiguration _configuration;
         private readonly IConstraintHelper _constraintHelper;
         private readonly IConstructorSelector _selector;
 

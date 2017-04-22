@@ -11,8 +11,8 @@ namespace SimpleFixture.Impl
 
     public class TypePropertySelector : ITypePropertySelector
     {
-        private IFixtureConfiguration _configuration;
-        private IConstraintHelper _helper;
+        private readonly IFixtureConfiguration _configuration;
+        private readonly IConstraintHelper _helper;
 
         public TypePropertySelector(IFixtureConfiguration configuration, IConstraintHelper helper)
         {
