@@ -11,7 +11,9 @@
     <PackageLicenseUrl>https://github.com/ipjohnson/SimpleFixture/blob/master/License.md</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/ipjohnson/SimpleFixture</RepositoryUrl>
-    <AssemblyOriginatorKeyFile>..\..\tools\SimpleFixture.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>True</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' AND '$(APPVEYOR)' != 'True'">true</PublicSign>
+    <AssemblyOriginatorKeyFile>..\SimpleFixture.snk</AssemblyOriginatorKeyFile>
     <DebugType>full</DebugType>
   </PropertyGroup>
 

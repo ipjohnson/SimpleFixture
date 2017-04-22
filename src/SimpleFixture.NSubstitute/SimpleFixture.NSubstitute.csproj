@@ -15,8 +15,10 @@
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <AssemblyOriginatorKeyFile>..\..\tools\SimpleFixture.snk</AssemblyOriginatorKeyFile>
     <DebugType>full</DebugType>
+    <SignAssembly>True</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' AND '$(APPVEYOR)' != 'True'">true</PublicSign>
+    <AssemblyOriginatorKeyFile>..\SimpleFixture.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

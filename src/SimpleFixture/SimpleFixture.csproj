@@ -18,9 +18,8 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <DebugType>full</DebugType>
     <SignAssembly>True</SignAssembly>
-    <DelaySign>False</DelaySign>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' AND '$(APPVEYOR)' != 'True'">true</PublicSign>
-    <AssemblyOriginatorKeyFile>..\..\tools\SimpleFixture.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\SimpleFixture.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
 </Project>
