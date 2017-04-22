@@ -21,9 +21,9 @@ namespace SimpleFixture.Tests.xUnitTests
 
         [Theory]
         [AutoData]
-        public void AutoData_ProvidesData(string firstName, int value)
+        public void AutoData_ProvidesData(string someString, int value)
         {
-            firstName.Should().Be(StringConvention.LocateValue);
+            someString.Should().Be(StringConvention.LocateValue);
             value.Should().Be(SimpleFixture.Conventions.IntConvention.LocateValue);
         }
 
