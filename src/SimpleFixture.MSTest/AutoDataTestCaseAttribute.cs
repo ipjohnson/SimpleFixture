@@ -9,7 +9,7 @@ namespace SimpleFixture.MSTest
     /// <summary>
     /// MSTest attribute to create data for parameters
     /// </summary>
-    public class AutoDataTestCaseAttribute : DataTestMethodAttribute
+    public class AutoDataTestCaseAttribute : TestMethodAttribute
     {
         private readonly object[] _parameters;
 
