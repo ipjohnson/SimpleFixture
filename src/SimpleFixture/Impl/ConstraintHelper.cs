@@ -222,6 +222,8 @@ namespace SimpleFixture.Impl
 
             if (!returnValue || value == null)
             {
+                value = defaultValue;
+
                 return returnValue;
             }
 

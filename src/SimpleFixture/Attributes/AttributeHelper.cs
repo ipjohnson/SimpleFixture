@@ -220,7 +220,7 @@ namespace SimpleFixture.Attributes
                 {
                     parameterValue =
                         fixture.Generate(new DataRequest(null, fixture, parameter.ParameterType, DependencyType.Root,
-                            parameter.Name, true, null, parameter));
+                            parameter.Name, false, null, parameter));
                 }
             }
 
