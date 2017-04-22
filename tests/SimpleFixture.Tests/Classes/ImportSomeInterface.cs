@@ -2,7 +2,7 @@
 {
     public class ImportSomeInterface
     {
-        private ISomeInterface _someInterface;
+        private readonly ISomeInterface _someInterface;
 
         public ImportSomeInterface(ISomeInterface someInterface)
         {
