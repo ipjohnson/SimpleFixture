@@ -100,6 +100,11 @@ namespace SimpleFixture.Attributes
             return returnList;
         }
 
+        /// <summary>
+        /// Get data for parameter info
+        /// </summary>
+        /// <param name="parameterInfo"></param>
+        /// <returns></returns>
         public static object[] GetData(ParameterInfo parameterInfo)
         { 
             var fixture = CreateFixture(parameterInfo);
@@ -353,11 +358,22 @@ namespace SimpleFixture.Attributes
         /// <returns></returns>
         public static Fixture CreateFixture(MethodInfo testMethod)
         {
-            var attribute = AttributeHelper.GetAttribute<FixtureCreationAttribute>(testMethod);
+            var attribute = GetAttribute<IFixtureCreationAttribute>(testMethod);
 
-            var fixture = attribute != null ? attribute.CreateFixture() : new Fixture();
+            Fixture fixture;
 
-            var initializeAttributes = AttributeHelper.GetAttributes<FixtureInitializationAttribute>(testMethod);
+            if (attribute != null)
+            {
+                fixture = attribute.CreateFixture();
+            }
+            else
+            {
+                var configurationAttribute = GetAttribute<IFixtureConfigurationAttribute>(testMethod);
+
+                fixture = new Fixture(configurationAttribute?.ProvideConfiguration(testMethod));
+            }
+
+            var initializeAttributes = GetAttributes<IFixtureInitializationAttribute>(testMethod);
 
             foreach (var initializeAttribute in initializeAttributes)
             {
@@ -374,11 +390,11 @@ namespace SimpleFixture.Attributes
         /// <returns></returns>
         public static Fixture CreateFixture(ParameterInfo parameterInfo)
         {
-            var attribute = AttributeHelper.GetAttribute<FixtureCreationAttribute>(parameterInfo);
+            var attribute = GetAttribute<IFixtureCreationAttribute>(parameterInfo);
 
             var fixture = attribute != null ? attribute.CreateFixture() : new Fixture();
 
-            var initializeAttributes = AttributeHelper.GetAttributes<FixtureInitializationAttribute>(parameterInfo);
+            var initializeAttributes = GetAttributes<IFixtureInitializationAttribute>(parameterInfo);
 
             foreach (var initializeAttribute in initializeAttributes)
             {

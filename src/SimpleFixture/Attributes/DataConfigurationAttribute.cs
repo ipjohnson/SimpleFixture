@@ -3,8 +3,13 @@ using System.Reflection;
 
 namespace SimpleFixture.Attributes
 {
-    public abstract class DataConfigurationAttribute : Attribute
+    public interface IFixtureConfigurationAttribute
     {
-        public abstract DefaultFixtureConfiguration ProvideConfiguration(MethodInfo method);
+        IFixtureConfiguration ProvideConfiguration(MethodInfo method);
+    }
+
+    public abstract class DataConfigurationAttribute : Attribute, IFixtureConfigurationAttribute
+    {
+        public abstract IFixtureConfiguration ProvideConfiguration(MethodInfo method);
     }
 }
