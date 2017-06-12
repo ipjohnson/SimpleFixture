@@ -71,5 +71,21 @@ namespace SimpleFixture.Tests.xUnitTests
             someClass.Should().NotBeNull();
             value.Should().Be(8);
         }
+
+        public class SomeClass : ISomeInterface
+        {
+            public int SomeIntMethod()
+            {
+                return 5;
+            }
+        }
+
+        [Theory]
+        [AutoData(typeof(SomeClass))]
+        public void AutoData_MixInType(ISomeInterface interfaceInstance)
+        {
+            Assert.NotNull(interfaceInstance);
+            Assert.IsType<SomeClass>(interfaceInstance);
+        }
     }
 }

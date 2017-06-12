@@ -147,20 +147,13 @@ namespace SimpleFixture.Attributes
         private static object GetValueForParameter(MethodInfo testMethod, ParameterInfo parameter, 
             Fixture fixture, List<object> externalParameters)
         {
-            var found = false;
-            object parameterValue = null;
-
             if (parameter.ParameterType == typeof(Fixture))
             {
                 return fixture;
             }
 
-            parameterValue = ProvideValueForParameter(fixture, parameter);
-
-            if (parameterValue != null)
-            {
-                return parameterValue;
-            }
+            var found = false;
+            object parameterValue = null;
 
             foreach (var attribute in parameter.GetCustomAttributes())
             {
@@ -219,6 +212,16 @@ namespace SimpleFixture.Attributes
                         externalParameters.RemoveAt(0);
                         found = true;
                     }
+                    else if (externalParameters[0] is Type &&
+                             parameter.ParameterType.GetTypeInfo().IsAssignableFrom(((Type)externalParameters[0]).GetTypeInfo()))
+                    {
+                        var locateType = (Type) externalParameters[0];
+                        externalParameters.RemoveAt(0);
+                        found = true;
+                        parameterValue =
+                            fixture.Generate(new DataRequest(null, fixture, locateType, DependencyType.Root,
+                                parameter.Name, false, null, parameter));
+                    }
                 }
 
                 if (!found)
@@ -231,17 +234,7 @@ namespace SimpleFixture.Attributes
 
             return parameterValue;
         }
-
-        /// <summary>
-        /// Override to all inheriting class to provide data for a parameter
-        /// </summary>
-        /// <param name="fixture"></param>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
-        private static object ProvideValueForParameter(Fixture fixture, ParameterInfo parameter)
-        {
-            return null;
-        }
+       
 
         /// <summary>
         /// Generate value for parameter
