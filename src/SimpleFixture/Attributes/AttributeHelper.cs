@@ -106,7 +106,7 @@ namespace SimpleFixture.Attributes
         /// <param name="parameterInfo"></param>
         /// <returns></returns>
         public static object[] GetData(ParameterInfo parameterInfo)
-        { 
+        {
             var fixture = CreateFixture(parameterInfo);
 
             var value = GetValueForParameter(parameterInfo.Member as MethodInfo, parameterInfo, fixture,
@@ -123,6 +123,18 @@ namespace SimpleFixture.Attributes
         public static object[] GetData(MethodInfo testMethod, object[] parameters)
         {
             var fixture = CreateFixture(testMethod);
+
+            return GetData(fixture, testMethod, parameters);
+        }
+        
+        /// <summary>Returns the data to be used to test the theory.</summary>
+        /// <param name="fixture"></param>
+        /// <param name="testMethod">The method that is being tested</param>
+        /// <param name="parameters"></param>
+        /// <returns>One or more sets of theory data. Each invocation of the test method
+        /// is represented by a single object array.</returns>
+        public static object[] GetData(Fixture fixture, MethodInfo testMethod, object[] parameters)
+        {
             var returnParameters = new List<object>();
             var externalParameters = new List<object>(parameters);
 
@@ -144,7 +156,7 @@ namespace SimpleFixture.Attributes
         /// <param name="fixture"></param>
         /// <param name="externalParameters"></param>
         /// <returns></returns>
-        private static object GetValueForParameter(MethodInfo testMethod, ParameterInfo parameter, 
+        private static object GetValueForParameter(MethodInfo testMethod, ParameterInfo parameter,
             Fixture fixture, List<object> externalParameters)
         {
             if (parameter.ParameterType == typeof(Fixture))
@@ -180,14 +192,14 @@ namespace SimpleFixture.Attributes
                 }
                 else if (attribute is LocateAttribute)
                 {
-                    var locateAttribute = (LocateAttribute) attribute;
+                    var locateAttribute = (LocateAttribute)attribute;
 
                     parameterValue = LocateValue(fixture, parameter, locateAttribute);
                     found = true;
                 }
                 else if (attribute is GenerateAttribute)
                 {
-                    var generateAttribute = (GenerateAttribute) attribute;
+                    var generateAttribute = (GenerateAttribute)attribute;
 
                     parameterValue = GenerateValue(fixture, parameter, generateAttribute);
                     found = true;
@@ -215,7 +227,7 @@ namespace SimpleFixture.Attributes
                     else if (externalParameters[0] is Type &&
                              parameter.ParameterType.GetTypeInfo().IsAssignableFrom(((Type)externalParameters[0]).GetTypeInfo()))
                     {
-                        var locateType = (Type) externalParameters[0];
+                        var locateType = (Type)externalParameters[0];
                         externalParameters.RemoveAt(0);
                         found = true;
                         parameterValue =
@@ -234,7 +246,7 @@ namespace SimpleFixture.Attributes
 
             return parameterValue;
         }
-       
+
 
         /// <summary>
         /// Generate value for parameter
