@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard1.0;uap10.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard1.0;</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>SimpleFixture.MSTest</AssemblyName>
     <PackageId>SimpleFixture.MSTest</PackageId>

@@ -1,5 +1,5 @@
 environment:
-  build_version: 3.0.3
+  build_version: 3.0.4
   Version: $(build_version)-Nightly%APPVEYOR_BUILD_NUMBER%
   COVERALLS_REPO_TOKEN:
     secure: y0rSDEqwr4qPrtlqBPN+nuJ7XqeO2fvwjx88kYMriIiXmS/m3cBYBWYQ99SsWeQH
@@ -21,6 +21,7 @@ build:
 test_script:
 - cmd: cd tests/SimpleFixture.Tests/
 - cmd: CodeCoverageAppVeyor.cmd
+- sh: dotnet test tests/SimpleFixture.Tests/SimpleFixture.Tests.csproj
 after_build:
 - cmd: msbuild /t:pack src/SimpleFixture/SimpleFixture.csproj /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
 - cmd: msbuild /t:pack src/SimpleFixture.FakeItEasy/SimpleFixture.FakeItEasy.csproj  /p:Configuration=Release /p:IncludeSymbols=true /p:PackageOutputPath=..\..\
@@ -31,4 +32,6 @@ after_build:
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
-os: Visual Studio 2017
+image: 
+- Visual Studio 2017
+- Ubuntu

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <VersionPrefix>2.0.0</VersionPrefix>
     <TargetFrameworks>netcoreapp1.0;net452</TargetFrameworks>
+    <TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netcoreapp1.0;</TargetFrameworks>
     <AssemblyName>SimpleFixture.Tests</AssemblyName>
     <PackageId>SimpleFixture.Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
