@@ -1,7 +1,7 @@
 SimpleFixture
 =============
 
-SimpleFixture is a .net library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases. It supports .Net 4.5, .Net Standard 1.0, and PCL Profile 259.
+SimpleFixture is a .net library that helps provide test data for unit tests and integration tests. The fixture satisfies these three basic use cases. It supports .Net Standard 1.0, and PCL Profile 259.
 
 * **Locate** - Creates a new instance of the requested type. It does not populate public properies. 
 ```C#
@@ -169,4 +169,4 @@ var fixture = new FakeFixture();
 ```
 
 ### Builds
-[![Build status](https://ci.appveyor.com/api/projects/status/6ml6ubwk7v8u4h9m?svg=true)](https://ci.appveyor.com/project/ipjohnson/simplefixture) [![Build Status](https://travis-ci.org/ipjohnson/SimpleFixture.svg?branch=master)](https://travis-ci.org/ipjohnson/SimpleFixture) [![Coverage Status](https://coveralls.io/repos/github/ipjohnson/SimpleFixture/badge.svg?branch=master)](https://coveralls.io/github/ipjohnson/SimpleFixture?branch=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/6ml6ubwk7v8u4h9m?svg=true)](https://ci.appveyor.com/project/ipjohnson/simplefixture) [![Coverage Status](https://coveralls.io/repos/github/ipjohnson/SimpleFixture/badge.svg?branch=master)](https://coveralls.io/github/ipjohnson/SimpleFixture?branch=master)
