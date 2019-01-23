@@ -26,4 +26,3 @@ artifacts:
   name: SimpleFixture
 image: 
 - Visual Studio 2017
-- Ubuntu
