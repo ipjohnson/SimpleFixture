@@ -32,6 +32,7 @@ namespace SimpleFixture.Impl
             yield return new ByteConvention(dataGenerator, helper);
             yield return new CharConvention(dataGenerator, helper);
             yield return new DateTimeConvention(dataGenerator, helper);
+            yield return new DateTimeOffsetConvention(dataGenerator, helper);
             yield return new DecimalConvention(dataGenerator, helper);
             yield return new DelegateConvention(helper);
             yield return new DoubleConvention(dataGenerator, helper);
