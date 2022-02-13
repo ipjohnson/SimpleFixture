@@ -63,7 +63,7 @@ namespace SimpleFixture.FakeItEasy
             return returnValue;
         }
 
-        private T GenerateClosedFake<T>(DataRequest request, IConstraintHelper helper)
+        private T GenerateClosedFake<T>(DataRequest request, IConstraintHelper helper) where T : class
         {
             Action<IFakeOptions<T>> options = helper.GetValue<Action<IFakeOptions<T>>>(request.Constraints, null, "builderOptions");
 

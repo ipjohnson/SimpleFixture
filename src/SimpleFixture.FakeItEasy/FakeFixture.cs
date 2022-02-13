@@ -14,7 +14,7 @@ namespace SimpleFixture.FakeItEasy
             Add(new FakeConvention(defaultSingleton));
         }
 
-        public T Fake<T>(Action<T> arrange = null, Action<IFakeOptions<T>> options = null, bool? singleton = null)
+        public T Fake<T>(Action<T> arrange = null, Action<IFakeOptions<T>> options = null, bool? singleton = null) where T : class
         {
             T returnValue = Generate<T>(constraints: new
             {

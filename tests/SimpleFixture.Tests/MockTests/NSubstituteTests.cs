@@ -120,7 +120,7 @@ namespace SimpleFixture.Tests.MockTests
         [Theory]
         [AutoData]
         [SubFixtureInitialize]
-        public void SubFixtureInitializeAttribute(SomeImportingClass someImportingClass)
+        public void SubFixtureInitializeAttributeConcrete(SomeImportingClass someImportingClass)
         {
             Assert.NotNull(someImportingClass);
             Assert.NotNull(someImportingClass.DelegateValue);

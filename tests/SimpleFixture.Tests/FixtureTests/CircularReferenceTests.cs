@@ -153,7 +153,7 @@ namespace SimpleFixture.Tests.FixtureTests
             Assert.NotNull(parent.Administration);
             Assert.NotNull(parent.Administration.Order);
             Assert.Equal(0, parent.Administration.Order.Count);
-            Assert.NotEqual<Guid>(parent.Administration.Id, default(Guid));
+            Assert.NotEqual(default(Guid), parent.Administration.Id);
         }
 
         [Fact]
