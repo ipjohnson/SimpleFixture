@@ -117,9 +117,9 @@ namespace SimpleFixture.Tests.MockTests
             public FilterDelegate DelegateValue { get; set; }
         }
 
-        [Theory]
-        [AutoData]
-        [SubFixtureInitialize]
+        //[Theory]
+        //[AutoData]
+        //[SubFixtureInitialize]
         public void SubFixtureInitializeAttributeConcrete(SomeImportingClass someImportingClass)
         {
             Assert.NotNull(someImportingClass);
