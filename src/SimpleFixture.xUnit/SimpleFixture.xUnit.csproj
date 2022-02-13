@@ -18,6 +18,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <DebugType>full</DebugType>
     <SignAssembly>True</SignAssembly>
+	<IsPackable>True</IsPackable>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' AND '$(APPVEYOR)' != 'True'">true</PublicSign>
     <AssemblyOriginatorKeyFile>..\SimpleFixture.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
