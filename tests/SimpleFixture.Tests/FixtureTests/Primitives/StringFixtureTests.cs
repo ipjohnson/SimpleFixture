@@ -37,7 +37,7 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
 
             var stringValue = fixture.Generate<string>(constraints: new { preFix = "Hello" });
 
-            Assert.True(stringValue.StartsWith("Hello"));
+            Assert.StartsWith("Hello",stringValue);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
 
             var stringValue = fixture.Generate<string>(constraints: new { postFix = "World" });
 
-            Assert.True(stringValue.EndsWith("World"));
+            Assert.EndsWith("World", stringValue);
         }
 
         [Fact]
@@ -77,7 +77,7 @@ namespace SimpleFixture.Tests.FixtureTests.Primitives
 
             var stringValue = fixture.Generate<string>(constraints: new { stringType = StringType.LoremIpsum });
 
-            Assert.True(RandomDataGeneratorService.LoremIpsum.StartsWith(stringValue));
+            Assert.StartsWith(stringValue, RandomDataGeneratorService.LoremIpsum);
         }
     }
 }

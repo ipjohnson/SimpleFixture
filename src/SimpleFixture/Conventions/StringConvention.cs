@@ -13,7 +13,7 @@ namespace SimpleFixture.Conventions
         private readonly IRandomDataGeneratorService _dataGenerator;
 
         /// <summary>
-        /// value returned for lcoate
+        /// value returned for locate
         /// </summary>
         public static string LocateValue = "String";
 
