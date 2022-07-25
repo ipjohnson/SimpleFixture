@@ -30,7 +30,16 @@ namespace SimpleFixture.Attributes
                                 (methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().FirstOrDefault(a => a is T) ??
                                  methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().FirstOrDefault(a => a is T));
 
-            return returnAttribute as T;
+            if (returnAttribute is T attribute)
+            {
+                return attribute;
+            }
+
+            var complexAttribute = methodInfo.GetCustomAttributes().FirstOrDefault(a => a is IComplexAttribute) ??
+                                   (methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().FirstOrDefault(a => a is IComplexAttribute) ??
+                                    methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().FirstOrDefault(a => a is IComplexAttribute));
+
+            return complexAttribute?.GetType().GetCustomAttributes().FirstOrDefault(a => a is T) as T;
         }
 
 
@@ -42,11 +51,9 @@ namespace SimpleFixture.Attributes
         /// <returns></returns>
         public static T GetAttribute<T>(ParameterInfo parameterInfo) where T : class
         {
-            var attribute = parameterInfo.GetCustomAttributes().FirstOrDefault(a => a is T);
-
-            if (attribute != null)
+            if (parameterInfo.GetCustomAttributes().FirstOrDefault(a => a is T) is T attribute)
             {
-                return attribute as T;
+                return attribute;
             }
 
             var methodInfo = parameterInfo.Member;
@@ -55,24 +62,48 @@ namespace SimpleFixture.Attributes
                                   (methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().FirstOrDefault(a => a is T) ??
                                    methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().FirstOrDefault(a => a is T));
 
-            return returnAttribute as T;
+            attribute = returnAttribute as T;
+
+            if (attribute != null)
+            {
+                return attribute;
+            }
+
+            var complexAttribute = methodInfo.GetCustomAttributes().FirstOrDefault(a => a is IComplexAttribute) ??
+                                   (methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().FirstOrDefault(a => a is IComplexAttribute) ??
+                                    methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().FirstOrDefault(a => a is IComplexAttribute));
+
+            return complexAttribute?.GetType().GetCustomAttributes().FirstOrDefault(a => a is T) as T;
         }
 
         /// <summary>
         /// Gets attributes from method, class, then assembly
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="methodInfo"></param>
+        /// <param name="memberInfo"></param>
         /// <returns></returns>
-        public static IEnumerable<T> GetAttributes<T>(MethodInfo methodInfo) where T : class
+        public static IEnumerable<T> GetAttributes<T>(MemberInfo memberInfo) where T : class
         {
             var returnList = new List<T>();
 
-            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
+            var assemblyAttributes =
+                memberInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes();
 
-            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().OfType<T>());
+            returnList.AddRange(AddComplexAttributes<T>(assemblyAttributes));
 
-            returnList.AddRange(methodInfo.GetCustomAttributes().OfType<T>());
+            returnList.AddRange(memberInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
+
+            var classAttributes = memberInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().ToArray();
+
+            returnList.AddRange(AddComplexAttributes<T>(classAttributes));
+
+            returnList.AddRange(memberInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().OfType<T>());
+
+            var methodCustomAttributes = memberInfo.GetCustomAttributes().ToArray();
+
+            returnList.AddRange(AddComplexAttributes<T>(methodCustomAttributes));
+
+            returnList.AddRange(methodCustomAttributes.OfType<T>());
 
             return returnList;
         }
@@ -88,16 +119,33 @@ namespace SimpleFixture.Attributes
             var returnList = new List<T>();
 
             var methodInfo = parameterInfo.Member;
+            
+            returnList.AddRange(GetAttributes<T>(methodInfo));
 
-            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().Assembly.GetCustomAttributes().OfType<T>());
+            var parameterAttributes = parameterInfo.GetCustomAttributes().ToArray();
 
-            returnList.AddRange(methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes().OfType<T>());
-
-            returnList.AddRange(methodInfo.GetCustomAttributes().OfType<T>());
+            returnList.AddRange(AddComplexAttributes<T>(parameterAttributes));
 
             returnList.AddRange(parameterInfo.GetCustomAttributes().OfType<T>());
 
             return returnList;
+        }
+
+        private static IEnumerable<T> AddComplexAttributes<T>(IEnumerable<Attribute> getCustomAttributes) where T : class
+        {
+            foreach (var customAttribute in getCustomAttributes)
+            {
+                if (customAttribute is IComplexAttribute)
+                {
+                    foreach (var attribute in customAttribute.GetType().GetCustomAttributes())
+                    {
+                        if (attribute is T tAttribute)
+                        {
+                            yield return tAttribute;
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>

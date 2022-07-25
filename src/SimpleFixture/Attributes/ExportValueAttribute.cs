@@ -9,6 +9,7 @@ namespace SimpleFixture.Attributes
     /// <summary>
     /// Set a particular simple value through attribute
     /// </summary>
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class ExportValueAttribute : FixtureInitializationAttribute, IConvention
     {
         private readonly string _key;
