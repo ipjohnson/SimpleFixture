@@ -17,10 +17,6 @@ build:
   project: SimpleFixture.sln
   publish_nuget: true
   verbosity: minimal
-test_script:
-- cmd: cd tests/SimpleFixture.Tests/
-- cmd: CodeCoverageAppVeyor.cmd
-- sh: dotnet test tests/SimpleFixture.Tests/SimpleFixture.Tests.csproj
 artifacts:
 - path: SimpleFixture*.nupkg
   name: SimpleFixture
