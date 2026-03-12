@@ -1,9 +1,10 @@
-﻿using SimpleFixture.Attributes;
+using SimpleFixture.Attributes;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using Xunit;
 using Xunit.Sdk;
-using System;
+using Xunit.v3;
 
 namespace SimpleFixture.xUnit
 {
@@ -24,13 +25,20 @@ namespace SimpleFixture.xUnit
         }
 
         /// <summary>
-        /// 
+        /// Get data for xUnit theory
         /// </summary>
-        /// <param name="testMethod"></param>
-        /// <returns></returns>
-        public override IEnumerable<object[]> GetData(MethodInfo testMethod)
+        public override ValueTask<IReadOnlyCollection<ITheoryDataRow>> GetData(MethodInfo testMethod, DisposalTracker disposalTracker)
         {
-            yield return AttributeHelper.GetData(testMethod, _parameters);
+            IReadOnlyCollection<ITheoryDataRow> rows = new[]
+            {
+                ConvertDataRow(AttributeHelper.GetData(testMethod, _parameters))
+            };
+            return new ValueTask<IReadOnlyCollection<ITheoryDataRow>>(rows);
         }
-    }        
+
+        /// <summary>
+        /// Supports discovery enumeration
+        /// </summary>
+        public override bool SupportsDiscoveryEnumeration() => true;
+    }
 }
